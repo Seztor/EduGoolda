@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import dev.icerock.moko.resources.compose.localized
-import dev.icerock.moko.resources.desc.desc
+import dev.icerock.moko.resources.desc.strResDesc
+import ru.itmo.edugoolda.core.R
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
@@ -124,19 +125,22 @@ private fun StandardDialogPreview() {
     val dialogControl = remember {
         fakeStandardDialogControl(
             StandardDialogData(
-                title = "Текст заголовка".desc(),
-                message = "Вы уверены, что хотите удалить что-то там? Это действие приведет к необратимым последствиям и искревлению пространства времени. Этот маленький маневр обойдется нам в 52 года.".desc(),
-                dismissButton = DialogButton(
-                    text = "Нет".desc(),
-                    action = {}
-                ),
+                title = R.string.common_retry.strResDesc(),
+                message = R.string.error_no_internet_connection.strResDesc(),
                 confirmButton = DialogButton(
-                    text = "Да".desc(),
-                    action = {}
+                    text = R.string.common_retry.strResDesc(),
+                    action = { TODO() }
                 ),
+                /*
+                dismissButton = DialogButton(   // необязательный элемент, но там где нужно поставить - нужно поставить.
+                    text = "".desc(),
+                    action = {}
+                )
+                 */
             )
         )
     }
+
     AppTheme {
         StandardDialog(dialogControl = dialogControl)
     }
