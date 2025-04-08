@@ -120,7 +120,7 @@ private fun DialogButton(
 
 @Preview(showSystemUi = false)
 @Composable
-private fun DialogWindow() {
+private fun StandardDialogPreview() {
     val dialogControl = remember {
         fakeStandardDialogControl(
             StandardDialogData(
