@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
     <string name="common_retry">Обновить</string>
-    <string name="delete_group">Удаление группы</string>
-    <string name="delete_participant">Удаление участника</string>
-    <string name="delete_group_message">Вы уверены, что хотите удалить группу «%s»? Это действие приведет к удалению всех данных, связанных с этой группой.</string>
-    <string name="delete_participant_message">Вы уверены, что хотите удалить участника «%s» из группы «%s»? Это действие приведет к удалению прогресса выполнения заданий данным учеником.</string>
+    <!-- Errors -->
     <string name="error_unexpected">Что-то пошло не так. Лапки девелоперов уже щелкают по кнопкам.</string>
     <string name="error_no_internet_connection">Нет соединения с интернетом.</string>
     <string name="error_unauthorized">Необходимо авторизоваться в приложении</string>
