@@ -15,5 +15,4 @@ interface LoginCreateComponent {
         fun onLoggedIn()
         fun onNavigateToRegister()
     }
-
 }

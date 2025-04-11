@@ -16,7 +16,7 @@ class RealLoginCreateComponent(
     private val communication: LoginCreateComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val authRepository: AuthRepository
-): LoginCreateComponent, ComponentContext by componentContext {
+) : LoginCreateComponent, ComponentContext by componentContext {
     override val emailInputControl = InputControl(componentScope)
     override val passwordInputControl = InputControl(componentScope)
     override val isLoginProgress = MutableStateFlow(false)
@@ -38,6 +38,4 @@ class RealLoginCreateComponent(
     override fun onNavigateToRegisterClick() {
         communication.onNavigateToRegister()
     }
-
 }
-

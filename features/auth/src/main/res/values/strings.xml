@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_title">Вход EduGoolda</string>
+    <string name="login_email_hint">Почта</string>
+    <string name="login_password_hint">Пароль</string>
+    <string name="login_button_enter">Войти</string>
+    <string name="login_button_register">Зарегистрироваться</string>
+</resources>

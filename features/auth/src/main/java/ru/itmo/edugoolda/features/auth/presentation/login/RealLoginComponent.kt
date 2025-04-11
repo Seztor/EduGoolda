@@ -9,11 +9,10 @@ import ru.itmo.edugoolda.core.utils.toStateFlow
 import ru.itmo.edugoolda.features.auth.createLoginCreateComponent
 import ru.itmo.edugoolda.features.auth.presentation.create.login.LoginCreateComponent
 
-
 class RealLoginComponent(
     componentContext: ComponentContext,
     private val componentFactory: ComponentFactory
-): LoginComponent, ComponentContext by componentContext {
+) : LoginComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
 
     override val childStack = childStack(
