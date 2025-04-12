@@ -1,14 +1,18 @@
 package ru.itmo.edugoolda.features.auth.presentation.login
 
-import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
-import ru.itmo.edugoolda.features.auth.presentation.create.login.LoginCreateComponent
+import ru.mobileup.kmm_form_validation.control.InputControl
 
 interface LoginComponent {
+    val emailInputControl: InputControl
+    val passwordInputControl: InputControl
+    val isLoginProgress: StateFlow<Boolean>
 
-    val childStack: StateFlow<ChildStack<*, Child>>
+    fun onLoginClick()
+    fun onNavigateToRegisterClick()
 
-    sealed interface Child {
-        class Login(val instance: LoginCreateComponent) : Child
+    interface Communication {
+        fun onLoggedIn()
+        fun onNavigateToRegister()
     }
 }

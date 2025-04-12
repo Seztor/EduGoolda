@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,9 +27,9 @@ fun LoginUi(
     component: LoginComponent,
     modifier: Modifier = Modifier,
 ) {
-    val childStack by component.childStack.collectAsState()
     val email by remember { mutableStateOf("") }
     val password by remember { mutableStateOf("") }
+
     AppTheme {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
@@ -49,20 +48,20 @@ fun LoginUi(
             Spacer(modifier = Modifier.height(30.dp))
 
             AppTextField(
+                inputControl = component.emailInputControl,
                 placeholder = stringResource(id = R.string.login_email_hint),
-                inputControl = TODO(),
             )
 
             AppTextField(
+                inputControl = component.passwordInputControl,
                 placeholder = stringResource(id = R.string.login_email_hint),
-                inputControl = TODO()
             )
 
             Spacer(modifier = Modifier.height(60.dp))
 
             AppButton(
                 buttonType = ButtonType.Primary,
-                onClick = {},
+                onClick = { component.onLoginClick() },
             ) {
                 Text(
                     text = stringResource(id = R.string.login_button_enter),
@@ -73,7 +72,7 @@ fun LoginUi(
 
             AppButton(
                 buttonType = ButtonType.Secondary,
-                onClick = {},
+                onClick = { component.onNavigateToRegisterClick() },
             ) {
                 Text(
                     text = stringResource(id = R.string.login_button_register),
