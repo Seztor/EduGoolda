@@ -9,10 +9,10 @@ interface LoginComponent {
     val isLoginProgress: StateFlow<Boolean>
 
     fun onLoginClick()
-    fun onNavigateToRegisterClick()
+    fun onRegisterRequestClick()
 
     interface Communication {
         fun onLoggedIn()
-        fun onNavigateToRegister()
+        fun onRegisterRequest()
     }
 }

@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,14 +23,16 @@ import ru.itmo.edugoolda.data.user.api.UseRole
 import ru.itmo.edugoolda.features.auth.R
 
 @Composable
-fun LoginUi(
+fun RegisterUi(
     component: RegisterComponent,
     modifier: Modifier = Modifier,
 ) {
-    val selectedRole by component.selectedRole.collectAsState()
 
     AppTheme {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+        ) {
 
             Spacer(modifier = Modifier.height(30.dp))
 
@@ -74,7 +74,7 @@ fun LoginUi(
             ) {
                 UseRole.entries.forEach {
                     RoleItem(
-                        isSelected = it == selectedRole,
+                        isSelected = it == component.selectedRole.value,
                         selectedRole = it,
                         onClick = { component.onUserRoleSelect(it) }
                     )
@@ -113,7 +113,7 @@ fun RoleItem(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         RadioButton(
             selected = isSelected,

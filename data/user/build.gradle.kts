@@ -1,43 +1,46 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.convetion.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktorfit)
 }
 
 android {
     namespace = "ru.itmo.edugoolda.data.user"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
 }
 
 dependencies {
+    ksp(libs.ktorfit.ksp)
 
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    // Modules
+    implementation(project(":core"))
+
+    // Kotlin
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    // UI
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.accompanist)
+    implementation(libs.bundles.coil)
+
+    // DI
+    implementation(libs.koin)
+
+    // Logging
+    implementation(libs.logger.kermit)
+
+    // Network
+    implementation(libs.bundles.ktor)
+    implementation(libs.ktorfit.lib)
+
+    implementation(libs.form.validation)
+
+    // Architecture
+    implementation(libs.bundles.decompose)
+    implementation(libs.bundles.replica)
+    api(libs.moko.resources)
+    implementation(libs.moko.resourcesCompose)
 }

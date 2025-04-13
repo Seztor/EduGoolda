@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
+import ru.itmo.edugoolda.core.utils.safePush
 import ru.itmo.edugoolda.core.utils.toStateFlow
 import ru.itmo.edugoolda.features.auth.createLoginComponent
 import ru.itmo.edugoolda.features.auth.createRegisterComponent
@@ -30,8 +31,8 @@ class RealAuthComponent(
             TODO("Not yet implemented")
         }
 
-        override fun onNavigateToRegister() {
-            TODO("Not yet implemented")
+        override fun onRegisterRequest() {
+            navigation.safePush(Config.Register)
         }
 
         override fun onRegistered() {
@@ -65,6 +66,7 @@ class RealAuthComponent(
     sealed interface Config {
         @Serializable
         data object Login : Config
+        @Serializable
         data object Register : Config
     }
 }

@@ -35,7 +35,7 @@ class RealLoginComponent(
         }
     }
 
-    override fun onNavigateToRegisterClick() {
-        communication.onNavigateToRegister()
+    override fun onRegisterRequestClick() {
+        communication.onRegisterRequest()
     }
 }
