@@ -33,7 +33,8 @@ fun coreModule(backendUrl: String) = module {
         NetworkApiFactory(
             loggingEnabled = BuildConfig.DEBUG,
             backendUrl = backendUrl,
-            httpClientEngine = get()
+            httpClientEngine = get(),
+            interceptors = getAll()
         )
     }
     single(createdAtStart = true) { PermissionService(get(), get()) }

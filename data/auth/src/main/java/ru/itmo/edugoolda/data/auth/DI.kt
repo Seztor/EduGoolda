@@ -8,11 +8,15 @@ import ru.itmo.edugoolda.core.network.NetworkApiFactory
 import ru.itmo.edugoolda.data.auth.api.AuthRepository
 import ru.itmo.edugoolda.data.auth.internal.AuthInterceptor
 import ru.itmo.edugoolda.data.auth.internal.AuthRepositoryImpl
+import ru.itmo.edugoolda.data.auth.internal.createAuthApi
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensProvider
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensRefresher
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensStorage
 
 val dataAuthModule = module {
+    single {
+        get<NetworkApiFactory>().unauthorizedKtorfit.createAuthApi()
+    }
     singleOf(AuthTokensStorage::Base) binds arrayOf(
         AuthTokensStorage::class,
         AuthTokensProvider::class
@@ -21,5 +25,10 @@ val dataAuthModule = module {
         AuthRepository::class,
         AuthTokensRefresher::class
     )
-    singleOf(::AuthInterceptor) bind NetworkApiFactory.Interceptor::class
+    single {
+        AuthInterceptor(
+            authTokensRefresher = inject(),
+            authTokensProvider = get()
+        )
+    } bind NetworkApiFactory.Interceptor::class
 }

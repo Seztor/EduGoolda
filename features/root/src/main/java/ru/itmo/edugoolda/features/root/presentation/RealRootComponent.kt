@@ -16,12 +16,12 @@ class RealRootComponent(
     private val componentFactory: ComponentFactory
 ) : ComponentContext by componentContext, RootComponent {
 
-    private val navigation = StackNavigation<ChildConfig>()
+    private val navigation = StackNavigation<Config>()
 
     override val childStack = childStack(
         source = navigation,
-        initialConfiguration = TODO(),
-        serializer = ChildConfig.serializer(),
+        initialConfiguration = Config.Auth,
+        serializer = Config.serializer(),
         handleBackButton = true,
         childFactory = ::createChild
     ).toStateFlow(lifecycle)
@@ -31,10 +31,10 @@ class RealRootComponent(
     )
 
     private fun createChild(
-        config: ChildConfig,
+        config: Config,
         componentContext: ComponentContext
     ): RootComponent.Child = when (config) {
-        ChildConfig.Auth -> RootComponent.Child.Auth(
+        Config.Auth -> RootComponent.Child.Auth(
             componentFactory.createAuthComponent(
                 componentContext,
                 CommunicationResolver()
@@ -49,8 +49,8 @@ class RealRootComponent(
     }
 
     @Serializable
-    sealed interface ChildConfig {
+    sealed interface Config {
         @Serializable
-        data object Auth : ChildConfig
+        data object Auth : Config
     }
 }

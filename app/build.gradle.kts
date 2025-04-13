@@ -54,13 +54,21 @@ android {
         create("dev") {
             dimension = "backend"
             // TODO: include api endpoint
-            buildConfigField("String", "BACKEND_URL", "\"https://pokeapi.co/\"")
+            buildConfigField(
+                "String",
+                "BACKEND_URL",
+                "\"https://bba6jdgfhuki2mp051ap.containers.yandexcloud.net/\""
+            )
         }
 
         create("prod") {
             dimension = "backend"
             // TODO: include api endpoint
-            buildConfigField("String", "BACKEND_URL", "\"https://pokeapi.co/\"")
+            buildConfigField(
+                "String",
+                "BACKEND_URL",
+                "\"https://bba6jdgfhuki2mp051ap.containers.yandexcloud.net/\""
+            )
         }
     }
 

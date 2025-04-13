@@ -17,7 +17,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":data:auth"))
     implementation(project(":data:user"))
-    implementation(project(":features:auth"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
