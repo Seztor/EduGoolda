@@ -34,6 +34,7 @@ fun LoginUi(
             imageVector = Icons.Default.Star,
             contentDescription = "LoginIcon",
         )
+
         Text(
             text = stringResource(id = R.string.login_title),
             fontStyle = CustomTheme.typography.title.regular.fontStyle,
@@ -55,25 +56,15 @@ fun LoginUi(
         Spacer(modifier = Modifier.height(60.dp))
 
         AppButton(
+            text = stringResource(id = R.string.login_button_enter),
             buttonType = ButtonType.Primary,
             onClick = { component.onLoginClick() },
-        ) {
-            Text(
-                text = stringResource(id = R.string.login_button_enter),
-                fontStyle = CustomTheme.typography.body.regular.fontStyle,
-                fontSize = CustomTheme.typography.body.regular.fontSize
-            )
-        }
+        )
 
         AppButton(
+            text = stringResource(id = R.string.login_button_register),
             buttonType = ButtonType.Secondary,
             onClick = { component.onRegisterRequestClick() },
-        ) {
-            Text(
-                text = stringResource(id = R.string.login_button_register),
-                fontStyle = CustomTheme.typography.body.regular.fontStyle,
-                fontSize = CustomTheme.typography.body.regular.fontSize
-            )
-        }
+        )
     }
 }
