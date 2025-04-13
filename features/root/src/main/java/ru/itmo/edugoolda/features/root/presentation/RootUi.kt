@@ -28,6 +28,7 @@ fun RootUi(
 
     Children(childStack, modifier) { child ->
         when (val instance = child.instance) {
+            is RootComponent.Child.Auth -> TODO()
             else -> TODO()
         }
     }

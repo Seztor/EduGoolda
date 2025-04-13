@@ -8,6 +8,8 @@ import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.createMessageComponent
 import ru.itmo.edugoolda.core.utils.toStateFlow
+import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
+import ru.itmo.edugoolda.features.root.createAuthComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
@@ -31,10 +33,24 @@ class RealRootComponent(
     private fun createChild(
         config: ChildConfig,
         componentContext: ComponentContext
-    ): RootComponent.Child = TODO()
+    ): RootComponent.Child = when (config) {
+        ChildConfig.Auth -> RootComponent.Child.Auth(
+            componentFactory.createAuthComponent(
+                componentContext,
+                CommunicationResolver()
+            )
+        )
+    }
+
+    private inner class CommunicationResolver : AuthComponent.Communication {
+        override fun onAuthEnded() {
+            TODO("Not yet implemented")
+        }
+    }
 
     @Serializable
     sealed interface ChildConfig {
-        // TODO: Add configs
+        @Serializable
+        data object Auth : ChildConfig
     }
 }

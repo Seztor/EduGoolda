@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
@@ -31,77 +30,74 @@ fun RegisterUi(
     component: RegisterComponent,
     modifier: Modifier = Modifier,
 ) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
 
-    AppTheme {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
+        IconButton(
+            onClick = { component.onBackButtonClick() },
         ) {
-
-            IconButton(
-                onClick = { component.onBackButtonClick() },
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "ArrowBack"
-                )
-            }
-
-            Spacer(modifier = Modifier.height(30.dp))
-
-            Text(
-                text = stringResource(id = R.string.register_title),
-                fontStyle = CustomTheme.typography.title.regular.fontStyle,
-                fontSize = CustomTheme.typography.title.regular.fontSize
-            )
-
-            Spacer(modifier = Modifier.height(30.dp))
-
-            AppTextField(
-                headerText = stringResource(id = R.string.register_email_header_hint),
-                inputControl = component.emailInputControl,
-
-            )
-
-            AppTextField(
-                placeholder = stringResource(id = R.string.register_password_hint),
-                inputControl = component.passwordInputControl,
-            )
-
-            AppTextField(
-                placeholder = stringResource(id = R.string.register_username_header_hint),
-                inputControl = component.userNameInputControl,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
-                text = stringResource(id = R.string.register_title_role),
-                fontStyle = CustomTheme.typography.title.regular.fontStyle,
-                fontSize = CustomTheme.typography.title.regular.fontSize
-            )
-
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                UseRole.entries.forEach {
-                    RoleItem(
-                        isSelected = it == component.selectedRole.value,
-                        selectedRole = it,
-                        onClick = { component.onUserRoleSelect(it) }
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(50.dp))
-
-            AppButton(
-                text = stringResource(id = R.string.register_button_register),
-                buttonType = ButtonType.Primary,
-                onClick = { component.onRegisterClick() },
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "ArrowBack"
             )
         }
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(
+            text = stringResource(id = R.string.register_title),
+            fontStyle = CustomTheme.typography.title.regular.fontStyle,
+            fontSize = CustomTheme.typography.title.regular.fontSize
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        AppTextField(
+            headerText = stringResource(id = R.string.register_email_header_hint),
+            inputControl = component.emailInputControl,
+
+            )
+
+        AppTextField(
+            placeholder = stringResource(id = R.string.register_password_hint),
+            inputControl = component.passwordInputControl,
+        )
+
+        AppTextField(
+            placeholder = stringResource(id = R.string.register_username_header_hint),
+            inputControl = component.userNameInputControl,
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = stringResource(id = R.string.register_title_role),
+            fontStyle = CustomTheme.typography.title.regular.fontStyle,
+            fontSize = CustomTheme.typography.title.regular.fontSize
+        )
+
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            UseRole.entries.forEach {
+                RoleItem(
+                    isSelected = it == component.selectedRole.value,
+                    selectedRole = it,
+                    onClick = { component.onUserRoleSelect(it) }
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(50.dp))
+
+        AppButton(
+            text = stringResource(id = R.string.register_button_register),
+            buttonType = ButtonType.Primary,
+            onClick = { component.onRegisterClick() },
+        )
     }
 }
 
