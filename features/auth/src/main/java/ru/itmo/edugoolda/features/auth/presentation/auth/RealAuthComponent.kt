@@ -40,11 +40,7 @@ class RealAuthComponent(
             communication.onAuthEnded()
         }
 
-        override fun onNavigateToMainMenu() {
-            TODO("Not yet implemented")
-        }
-
-        override fun onBackButton() {
+        override fun onLoginRequest() {
             navigation.safePush(Config.Login)
         }
     }

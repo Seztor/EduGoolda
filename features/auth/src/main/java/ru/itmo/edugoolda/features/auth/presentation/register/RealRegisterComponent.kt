@@ -41,11 +41,7 @@ class RealRegisterComponent(
     }
 
     override fun onBackButtonClick() {
-        communication.onBackButton()
-    }
-
-    override fun onNavigateToMainMenuClick() {
-        communication.onNavigateToMainMenu()
+        communication.onLoginRequest()
     }
 
     override fun onUserRoleSelect(newRole: UseRole) {

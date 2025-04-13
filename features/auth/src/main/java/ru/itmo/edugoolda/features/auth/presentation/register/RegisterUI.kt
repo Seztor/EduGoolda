@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,9 +38,8 @@ fun RegisterUi(
             modifier = modifier
         ) {
 
-            AppButton(
-                buttonType = ButtonType.Primary,
-                onClick = { component.onRegisterClick() },
+            IconButton(
+                onClick = { component.onBackButtonClick() },
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
@@ -97,15 +97,10 @@ fun RegisterUi(
             Spacer(modifier = Modifier.height(50.dp))
 
             AppButton(
+                text = stringResource(id = R.string.register_button_register),
                 buttonType = ButtonType.Primary,
                 onClick = { component.onRegisterClick() },
-            ) {
-                Text(
-                    text = stringResource(id = R.string.register_button_register),
-                    fontStyle = CustomTheme.typography.body.regular.fontStyle,
-                    fontSize = CustomTheme.typography.body.regular.fontSize
-                )
-            }
+            )
         }
     }
 }
