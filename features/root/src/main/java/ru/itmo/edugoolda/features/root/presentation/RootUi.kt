@@ -15,6 +15,7 @@ import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.LocalSystemBarsSettings
 import ru.itmo.edugoolda.core.utils.accumulate
+import ru.itmo.edugoolda.features.auth.presentation.auth.AuthUi
 
 @Suppress("ModifierReused")
 @Composable
@@ -28,8 +29,7 @@ fun RootUi(
 
     Children(childStack, modifier) { child ->
         when (val instance = child.instance) {
-            is RootComponent.Child.Auth -> TODO()
-            else -> TODO()
+            is RootComponent.Child.Auth -> AuthUi(instance.instance)
         }
     }
 
