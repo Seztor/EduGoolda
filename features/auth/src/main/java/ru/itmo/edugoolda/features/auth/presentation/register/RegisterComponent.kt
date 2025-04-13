@@ -12,11 +12,13 @@ interface RegisterComponent {
     val isRegisterProgress: StateFlow<Boolean>
 
     fun onRegisterClick()
+    fun onBackButtonClick()
     fun onNavigateToMainMenuClick()
     fun onUserRoleSelect(newRole: UseRole)
 
     interface Communication {
         fun onRegistered()
         fun onNavigateToMainMenu()
+        fun onBackButton()
     }
 }

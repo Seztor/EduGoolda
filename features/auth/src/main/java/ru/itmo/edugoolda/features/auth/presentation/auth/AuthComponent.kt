@@ -13,4 +13,8 @@ interface AuthComponent {
         class Login(val instance: LoginComponent) : Child
         class Register(val instance: RegisterComponent) : Child
     }
+
+    interface Communication {
+        fun onAuthEnded()
+    }
 }

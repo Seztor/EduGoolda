@@ -40,6 +40,10 @@ class RealRegisterComponent(
         }
     }
 
+    override fun onBackButtonClick() {
+        communication.onBackButton()
+    }
+
     override fun onNavigateToMainMenuClick() {
         communication.onNavigateToMainMenu()
     }

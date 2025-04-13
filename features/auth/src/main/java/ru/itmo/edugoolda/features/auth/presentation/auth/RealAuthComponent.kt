@@ -14,6 +14,7 @@ import ru.itmo.edugoolda.features.auth.presentation.register.RegisterComponent
 
 class RealAuthComponent(
     componentContext: ComponentContext,
+    private val communication: AuthComponent.Communication,
     private val componentFactory: ComponentFactory
 ) : AuthComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
@@ -28,7 +29,7 @@ class RealAuthComponent(
 
     private inner class CommunicationResolver : LoginComponent.Communication, RegisterComponent.Communication {
         override fun onLoggedIn() {
-            TODO("Not yet implemented")
+            communication.onAuthEnded()
         }
 
         override fun onRegisterRequest() {
@@ -36,11 +37,15 @@ class RealAuthComponent(
         }
 
         override fun onRegistered() {
-            TODO("Not yet implemented")
+            communication.onAuthEnded()
         }
 
         override fun onNavigateToMainMenu() {
             TODO("Not yet implemented")
+        }
+
+        override fun onBackButton() {
+            navigation.safePush(Config.Login)
         }
     }
 
