@@ -9,15 +9,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import dev.icerock.moko.resources.compose.localized
+import dev.icerock.moko.resources.desc.strResDesc
+import ru.itmo.edugoolda.core.R
+import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
@@ -59,7 +64,7 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
                             fontSize = 15.sp,
                             lineHeight = 21.sp
                         ),
-                        color = CustomTheme.colors.text.primary
+                        color = CustomTheme.colors.text.secondary
                     )
                 }
             } else {
@@ -102,7 +107,7 @@ private fun DialogButton(
             fontSize = 15.sp,
             lineHeight = 18.sp
         ),
-        color = CustomTheme.colors.text.primary,
+        color = CustomTheme.colors.button.primary,
         textAlign = TextAlign.Center,
         modifier = modifier
             .clickable {
@@ -112,4 +117,31 @@ private fun DialogButton(
             .padding(4.dp)
             .widthIn(min = 60.dp)
     )
+}
+
+@Preview(showSystemUi = false)
+@Composable
+private fun StandardDialogPreview() {
+    val dialogControl = remember {
+        fakeStandardDialogControl(
+            StandardDialogData(
+                title = R.string.common_retry.strResDesc(),
+                message = R.string.error_no_internet_connection.strResDesc(),
+                confirmButton = DialogButton(
+                    text = R.string.common_retry.strResDesc(),
+                    action = { TODO() }
+                ),
+                /*
+                dismissButton = DialogButton(   // необязательный элемент, но там где нужно поставить - нужно поставить.
+                    text = "".desc(),
+                    action = {}
+                )
+                 */
+            )
+        )
+    }
+
+    AppTheme {
+        StandardDialog(dialogControl = dialogControl)
+    }
 }
