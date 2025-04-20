@@ -78,7 +78,7 @@ fun LoginUi(
             text = stringResource(id = R.string.login_button_register),
             buttonType = ButtonType.Secondary,
             onClick = { component.onRegisterRequestClick() },
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 38.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
         )
     }
 }

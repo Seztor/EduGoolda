@@ -105,7 +105,7 @@ fun RegisterUi(
             text = stringResource(id = R.string.register_button_register),
             buttonType = ButtonType.Primary,
             onClick = { component.onRegisterClick() },
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 38.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
         )
     }
 }
@@ -131,7 +131,6 @@ fun RoleItem(
         RadioButton(
             selected = isSelected,
             onClick = onClick,
-            modifier = Modifier.padding(end = 5.dp)
         )
         Text(text = text)
     }
