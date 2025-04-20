@@ -13,7 +13,11 @@ val AppTypography = CustomTypography(
     title = TitleTypography(
         regular = TextStyle(
             fontSize = 24.sp
-        )
+        ),
+        bold = TextStyle(
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        ),
     ),
     body = BodyTypography(
         regular = TextStyle(

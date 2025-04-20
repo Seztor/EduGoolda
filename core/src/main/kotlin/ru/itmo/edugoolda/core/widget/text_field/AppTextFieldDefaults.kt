@@ -107,7 +107,7 @@ object AppTextFieldDefaults {
             targetValue = when {
                 isError -> CustomTheme.colors.border.error
                 hasFocus -> CustomTheme.colors.border.primary
-                else -> Color.Transparent
+                else -> CustomTheme.colors.border.primary
             },
             label = "animated border color"
         )

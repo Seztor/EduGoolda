@@ -1,6 +1,5 @@
 package ru.itmo.edugoolda.features.auth.presentation.register
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,8 +34,11 @@ fun RegisterUi(
         modifier = modifier
     ) {
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         IconButton(
             onClick = { component.onBackButtonClick() },
+            modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
@@ -44,43 +46,49 @@ fun RegisterUi(
             )
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(37.dp))
 
         Text(
             text = stringResource(id = R.string.register_title),
-            fontStyle = CustomTheme.typography.title.regular.fontStyle,
-            fontSize = CustomTheme.typography.title.regular.fontSize
+            fontWeight = CustomTheme.typography.title.bold.fontWeight,
+            fontSize = CustomTheme.typography.title.bold.fontSize
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(75.dp))
 
         AppTextField(
-            headerText = stringResource(id = R.string.register_email_header_hint),
+            placeholder = stringResource(id = R.string.register_email_header_hint),
             inputControl = component.emailInputControl,
-
+            modifier = Modifier.padding(horizontal = 21.dp)
             )
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             placeholder = stringResource(id = R.string.register_password_hint),
             inputControl = component.passwordInputControl,
+            modifier = Modifier.padding(horizontal = 21.dp)
         )
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             placeholder = stringResource(id = R.string.register_username_header_hint),
             inputControl = component.userNameInputControl,
+            modifier = Modifier.padding(horizontal = 21.dp)
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(19.dp))
 
         Text(
             text = stringResource(id = R.string.register_title_role),
-            fontStyle = CustomTheme.typography.title.regular.fontStyle,
-            fontSize = CustomTheme.typography.title.regular.fontSize
+            fontWeight = CustomTheme.typography.title.bold.fontWeight,
+            fontSize = CustomTheme.typography.title.bold.fontSize,
+            modifier = Modifier.align(Alignment.Start).padding(start = 21.dp)
         )
 
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(start = 8.dp),
         ) {
             UseRole.entries.forEach {
                 RoleItem(
@@ -91,12 +99,13 @@ fun RegisterUi(
             }
         }
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
         AppButton(
             text = stringResource(id = R.string.register_button_register),
             buttonType = ButtonType.Primary,
             onClick = { component.onRegisterClick() },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 38.dp)
         )
     }
 }
@@ -122,7 +131,7 @@ fun RoleItem(
         RadioButton(
             selected = isSelected,
             onClick = onClick,
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 5.dp)
         )
         Text(text = text)
     }
