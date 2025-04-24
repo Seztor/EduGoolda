@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
+import kotlinx.coroutines.MainScope
 import org.koin.core.Koin
 import ru.itmo.edugoolda.core.BuildConfig
 import ru.itmo.edugoolda.core.ComponentFactory
@@ -11,6 +12,8 @@ import ru.itmo.edugoolda.core.KoinProvider
 import ru.itmo.edugoolda.core.debug_tools.DebugTools
 
 class App : Application(), KoinProvider {
+
+    private val scope = MainScope()
 
     override lateinit var koin: Koin
         private set
@@ -34,6 +37,7 @@ class App : Application(), KoinProvider {
             declare(this@App as Application)
             declare(this@App as Context)
             declare(ComponentFactory(this))
+            declare(scope)
             createEagerInstances()
         }
     }

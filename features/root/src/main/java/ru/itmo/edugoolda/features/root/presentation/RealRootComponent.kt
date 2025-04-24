@@ -8,18 +8,20 @@ import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.createMessageComponent
 import ru.itmo.edugoolda.core.utils.toStateFlow
+import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
+import ru.itmo.edugoolda.features.root.createAuthComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
     private val componentFactory: ComponentFactory
 ) : ComponentContext by componentContext, RootComponent {
 
-    private val navigation = StackNavigation<ChildConfig>()
+    private val navigation = StackNavigation<Config>()
 
     override val childStack = childStack(
         source = navigation,
-        initialConfiguration = TODO(),
-        serializer = ChildConfig.serializer(),
+        initialConfiguration = Config.Auth,
+        serializer = Config.serializer(),
         handleBackButton = true,
         childFactory = ::createChild
     ).toStateFlow(lifecycle)
@@ -29,12 +31,26 @@ class RealRootComponent(
     )
 
     private fun createChild(
-        config: ChildConfig,
+        config: Config,
         componentContext: ComponentContext
-    ): RootComponent.Child = TODO()
+    ): RootComponent.Child = when (config) {
+        Config.Auth -> RootComponent.Child.Auth(
+            componentFactory.createAuthComponent(
+                componentContext,
+                CommunicationResolver()
+            )
+        )
+    }
+
+    private inner class CommunicationResolver : AuthComponent.Communication {
+        override fun onAuthEnded() {
+            TODO("Not yet implemented")
+        }
+    }
 
     @Serializable
-    sealed interface ChildConfig {
-        // TODO: Add configs
+    sealed interface Config {
+        @Serializable
+        data object Auth : Config
     }
 }

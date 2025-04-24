@@ -15,6 +15,7 @@ dependencies {
 
     // Modules
     implementation(project(":core"))
+    implementation(project(":features:auth"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
