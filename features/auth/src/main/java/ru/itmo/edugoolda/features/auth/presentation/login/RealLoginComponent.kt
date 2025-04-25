@@ -26,9 +26,10 @@ class RealLoginComponent(
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isLoginProgress) {
+
                 authRepository.login(
-                    email = Email(emailInputControl.value.toString()),
-                    password = Password(passwordInputControl.value.toString())
+                    email = Email(emailInputControl.text.value),
+                    password = Password(passwordInputControl.text.value)
                 )
                 communication.onLoggedIn()
             }

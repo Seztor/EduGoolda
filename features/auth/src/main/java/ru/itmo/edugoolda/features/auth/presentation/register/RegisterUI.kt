@@ -32,6 +32,7 @@ fun RegisterUi(
     modifier: Modifier = Modifier,
 ) {
     val selectedRole by component.selectedRole.collectAsState()
+    val isRegisterProgress by component.isRegisterProgress.collectAsState()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -42,6 +43,7 @@ fun RegisterUi(
 
         IconButton(
             onClick = { component.onBackButtonClick() },
+            enabled = !isRegisterProgress,
             modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(
@@ -109,6 +111,7 @@ fun RegisterUi(
             text = stringResource(id = R.string.register_button_register),
             buttonType = ButtonType.Primary,
             onClick = { component.onRegisterClick() },
+            isLoading = isRegisterProgress,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
         )
     }
