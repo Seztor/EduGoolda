@@ -58,7 +58,7 @@ class RealRegisterComponent(
 
     private fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex(
-            "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
+            "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"
         )
         return email.matches(emailRegex)
     }
