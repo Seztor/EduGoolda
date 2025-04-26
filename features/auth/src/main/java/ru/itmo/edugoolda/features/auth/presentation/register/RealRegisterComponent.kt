@@ -9,7 +9,7 @@ import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.auth.api.AuthRepository
 import ru.itmo.edugoolda.data.auth.api.domain.Email
 import ru.itmo.edugoolda.data.auth.api.domain.Password
-import ru.itmo.edugoolda.data.user.api.UseRole
+import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealRegisterComponent(
@@ -21,7 +21,7 @@ class RealRegisterComponent(
     override val emailInputControl = InputControl(componentScope)
     override val passwordInputControl = InputControl(componentScope)
     override val userNameInputControl = InputControl(componentScope)
-    override val selectedRole = MutableStateFlow(UseRole.Teacher)
+    override val selectedRole = MutableStateFlow(UserRole.Teacher)
     override val isRegisterProgress = MutableStateFlow(false)
 
     override fun onRegisterClick() {
@@ -44,7 +44,7 @@ class RealRegisterComponent(
         communication.onLoginRequest()
     }
 
-    override fun onUserRoleSelect(newRole: UseRole) {
+    override fun onUserRoleSelect(newRole: UserRole) {
         selectedRole.value = newRole
     }
 }

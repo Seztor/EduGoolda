@@ -23,7 +23,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.user.api.UseRole
+import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.itmo.edugoolda.features.auth.R
 
 @Composable
@@ -88,13 +88,15 @@ fun RegisterUi(
             text = stringResource(id = R.string.register_title_role),
             fontWeight = CustomTheme.typography.title.bold.fontWeight,
             fontSize = CustomTheme.typography.title.bold.fontSize,
-            modifier = Modifier.align(Alignment.Start).padding(start = 21.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 21.dp)
         )
 
         Column(
             modifier = Modifier.padding(start = 8.dp),
         ) {
-            UseRole.entries.forEach {
+            UserRole.entries.forEach {
                 RoleItem(
                     isSelected = it == selectedRole,
                     selectedRole = it,
@@ -109,7 +111,10 @@ fun RegisterUi(
             text = stringResource(id = R.string.register_button_register),
             buttonType = ButtonType.Primary,
             onClick = { component.onRegisterClick() },
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 60.dp)
         )
     }
 }
@@ -117,14 +122,14 @@ fun RegisterUi(
 @Composable
 fun RoleItem(
     isSelected: Boolean,
-    selectedRole: UseRole,
+    selectedRole: UserRole,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val text = stringResource(
         when (selectedRole) {
-            UseRole.Teacher -> R.string.register_enum_string_teacher
-            UseRole.Student -> R.string.register_enum_string_student
+            UserRole.Teacher -> R.string.register_enum_string_teacher
+            UserRole.Student -> R.string.register_enum_string_student
         }
     )
 
