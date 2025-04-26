@@ -5,5 +5,5 @@ import ru.itmo.edugoolda.data.general.dataModule
 
 val allModules = listOf(
     dataModule,
-    coreModule(""), // TODO: Add BuildConfgi.BACKEND_URL
+    coreModule(BuildConfig.BACKEND_URL),
 )

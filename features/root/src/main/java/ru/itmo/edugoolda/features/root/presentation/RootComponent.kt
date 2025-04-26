@@ -3,6 +3,7 @@ package ru.itmo.edugoolda.features.root.presentation
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.message.presentation.MessageComponent
+import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
 
 /**
  * A root of a Decompose component tree.
@@ -16,6 +17,6 @@ interface RootComponent {
     val messageComponent: MessageComponent
 
     sealed interface Child {
-        // TODO: Add children
+        class Auth(val instance: AuthComponent) : Child
     }
 }
