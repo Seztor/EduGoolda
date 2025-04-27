@@ -13,5 +13,4 @@ val dataStudentGroupModule = module {
         get<NetworkApiFactory>().authorizedKtorfit.create()
     }
     singleOf(::StudentGroupsRepositoryImpl) bind StudentGroupRepository::class
-
 }
