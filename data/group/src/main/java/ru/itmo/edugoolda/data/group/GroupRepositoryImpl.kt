@@ -10,6 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 //        return "hello"
 //    }
 //}
-interface GroupRepository{
-
+interface GroupRepositoryImpl{
+    
 }
