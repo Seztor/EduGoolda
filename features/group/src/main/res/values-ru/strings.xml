@@ -3,4 +3,5 @@
     <string name="delete_participant">Удаление участника</string>
     <string name="delete_group_message">Вы уверены, что хотите удалить группу «%s»? Это действие приведет к удалению всех данных, связанных с этой группой.</string>
     <string name="delete_participant_message">Вы уверены, что хотите удалить участника «%s» из группы «%s»? Это действие приведет к удалению прогресса выполнения заданий данным учеником.</string>
+    <string name="search_students_group">Найти</string>
 </resources>
