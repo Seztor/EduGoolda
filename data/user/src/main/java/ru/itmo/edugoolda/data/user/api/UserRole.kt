@@ -1,6 +1,6 @@
 package ru.itmo.edugoolda.data.user.api
 
-enum class UseRole {
+enum class UserRole {
     Teacher,
     Student
 }
