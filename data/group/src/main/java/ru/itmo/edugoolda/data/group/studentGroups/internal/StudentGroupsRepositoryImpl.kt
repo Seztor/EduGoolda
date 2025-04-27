@@ -26,7 +26,14 @@ class StudentGroupsRepositoryImpl(
         idExtractor = { it.id },
         fetcher = object : PagedFetcher<StudentGroupInfo, PageWithTotalAmount<StudentGroupInfo>> {
             override suspend fun fetchFirstPage(): PageWithTotalAmount<StudentGroupInfo> {
-                val studentGroups = studentGroupsApi.getGroupsList(pageSize = PAGE_SIZE, 1).toDomain()
+                val studentGroups =
+                    studentGroupsApi.getGroupsList(
+                        query = null,
+                        subjectId = null,
+                        pageSize = PAGE_SIZE,
+                        page = 1
+                    ).toDomain()
+
                 return PageWithTotalAmount(
                     hasNextPage = studentGroups.total > PAGE_SIZE,
                     hasPreviousPage = false,
@@ -36,7 +43,12 @@ class StudentGroupsRepositoryImpl(
             }
 
             override suspend fun fetchNextPage(currentData: PagedData<StudentGroupInfo, PageWithTotalAmount<StudentGroupInfo>>): PageWithTotalAmount<StudentGroupInfo> {
-                val studentGroups = studentGroupsApi.getGroupsList(pageSize = PAGE_SIZE, currentData.pages.size + 1).toDomain()
+                val studentGroups = studentGroupsApi.getGroupsList(
+                    query = null,
+                    subjectId = null,
+                    pageSize = PAGE_SIZE,
+                    page = currentData.pages.size + 1
+                ).toDomain()
 
                 return PageWithTotalAmount(
                     hasNextPage = studentGroups.total > PAGE_SIZE * (currentData.pages.size + 1),
