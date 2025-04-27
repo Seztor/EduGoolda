@@ -1,14 +1,17 @@
 package ru.itmo.edugoolda.data.auth.internal
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import ru.itmo.edugoolda.data.auth.api.AuthRepository
 import ru.itmo.edugoolda.data.auth.api.AuthStatusProvider
 import ru.itmo.edugoolda.data.auth.api.domain.Email
 import ru.itmo.edugoolda.data.auth.api.domain.Password
 import ru.itmo.edugoolda.data.auth.internal.domain.AuthTokens
+import ru.itmo.edugoolda.data.auth.internal.dto.AuthResponse
 import ru.itmo.edugoolda.data.auth.internal.dto.LoginRequest
 import ru.itmo.edugoolda.data.auth.internal.dto.RefreshRequest
 import ru.itmo.edugoolda.data.auth.internal.dto.RegisterRequest
@@ -16,12 +19,15 @@ import ru.itmo.edugoolda.data.auth.internal.dto.toDomain
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensProvider
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensRefresher
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensStorage
+import ru.itmo.edugoolda.data.user.api.UserId
+import ru.itmo.edugoolda.data.user.api.UserInfoStore
 
 internal class AuthRepositoryImpl(
     private val api: AuthApi,
     private val tokensStorage: AuthTokensStorage,
     authTokensProvider: AuthTokensProvider,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
+    private val userInfoStore: UserInfoStore
 ) : AuthRepository, AuthTokensRefresher, AuthStatusProvider {
 
     override val isAuthorized = authTokensProvider.tokens
@@ -35,12 +41,7 @@ internal class AuthRepositoryImpl(
                 password = password.value
             )
         )
-        tokensStorage.save(
-            AuthTokens(
-                accessToken = response.accessToken,
-                refreshToken = response.refreshToken,
-            )
-        )
+        saveAuthData(response)
     }
 
     override suspend fun register(
@@ -57,12 +58,23 @@ internal class AuthRepositoryImpl(
                 role = role
             )
         )
-        tokensStorage.save(
-            AuthTokens(
-                accessToken = response.accessToken,
-                refreshToken = response.refreshToken,
-            )
-        )
+        saveAuthData(response)
+    }
+
+    private suspend fun saveAuthData(response: AuthResponse) {
+        coroutineScope {
+            launch {
+                userInfoStore.setUserId(UserId(response.userId))
+            }
+            launch {
+                tokensStorage.save(
+                    AuthTokens(
+                        accessToken = response.accessToken,
+                        refreshToken = response.refreshToken,
+                    )
+                )
+            }
+        }
     }
 
     override suspend fun refreshTokens(refreshToken: String): AuthTokens {

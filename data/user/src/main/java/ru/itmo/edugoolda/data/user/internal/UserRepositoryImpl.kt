@@ -25,6 +25,5 @@ class UserRepositoryImpl(
         fetcher = { key: UserId ->
             userApi.getUserProfile(key.value).toDomain()
         }
-
     )
 }
