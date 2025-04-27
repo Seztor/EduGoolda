@@ -23,7 +23,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.user.api.UseRole
+import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.itmo.edugoolda.features.auth.R
 
 @Composable
@@ -96,7 +96,7 @@ fun RegisterUi(
         Column(
             modifier = Modifier.padding(start = 8.dp),
         ) {
-            UseRole.entries.forEach {
+            UserRole.entries.forEach {
                 RoleItem(
                     isSelected = it == selectedRole,
                     selectedRole = it,
@@ -120,14 +120,14 @@ fun RegisterUi(
 @Composable
 fun RoleItem(
     isSelected: Boolean,
-    selectedRole: UseRole,
+    selectedRole: UserRole,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val text = stringResource(
         when (selectedRole) {
-            UseRole.Teacher -> R.string.register_enum_string_teacher
-            UseRole.Student -> R.string.register_enum_string_student
+            UserRole.Teacher -> R.string.register_enum_string_teacher
+            UserRole.Student -> R.string.register_enum_string_student
         }
     )
 
