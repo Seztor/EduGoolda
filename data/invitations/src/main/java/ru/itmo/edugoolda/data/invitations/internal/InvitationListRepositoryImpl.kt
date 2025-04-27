@@ -10,6 +10,7 @@ import ru.itmo.edugoolda.data.invitations.api.InvitationList
 import me.aartikov.replica.paged.PagedData
 import ru.itmo.edugoolda.data.invitations.api.InvitationListRepository
 import ru.itmo.edugoolda.data.invitations.internal.dto.toDomain
+import kotlin.time.Duration.Companion.minutes
 
 
 class InvitationListRepositoryImpl(
@@ -23,7 +24,7 @@ class InvitationListRepositoryImpl(
 
     override val invitationListReplica = replicaClient.createPagedReplica(
         name = "invitation list replica",
-        settings = PagedReplicaSettings(staleTime = null),
+        settings = PagedReplicaSettings(staleTime = 5.minutes),
         idExtractor = { it.id },
         fetcher = object : PagedFetcher<Invitation, PageWithTotalAmount<Invitation>> {
 
