@@ -16,6 +16,9 @@ dependencies {
     // Modules
     implementation(project(":core"))
 
+    // Data store
+    implementation(libs.data.store)
+
     // Kotlin
     implementation(libs.kotlinx.datetime)
     implementation(libs.coroutines.core)

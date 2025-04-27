@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.data.auth"
+    namespace = "ru.itmo.edugoolda.features.profile"
 }
 
 dependencies {

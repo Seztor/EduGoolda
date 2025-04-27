@@ -11,6 +11,8 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,6 +28,8 @@ fun LoginUi(
     component: LoginComponent,
     modifier: Modifier = Modifier,
 ) {
+    val isLoginProgress by component.isLoginProgress.collectAsState()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -69,6 +73,7 @@ fun LoginUi(
             text = stringResource(id = R.string.login_button_enter),
             buttonType = ButtonType.Primary,
             onClick = { component.onLoginClick() },
+            isLoading = isLoginProgress,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp)
         )
 
@@ -78,6 +83,7 @@ fun LoginUi(
             text = stringResource(id = R.string.login_button_register),
             buttonType = ButtonType.Secondary,
             onClick = { component.onRegisterRequestClick() },
+            isEnabled = !isLoginProgress,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
         )
     }
