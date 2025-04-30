@@ -5,6 +5,16 @@
     <string name="profile_bio_suggestion">Tell us about yourself</string>
     <string name="profile_email_header">Email</string>
 
+    <string name="profile_dropdown_edit">Edit my profile</string>
+    <string name="profile_dropdown_delete">Delete my profile</string>
+    <string name="profile_dropdown_logout">Log out</string>
+    
+    <string name="profile_dialog_delete_profile_header">Delete your profile</string>
+    <string name="profile_dialog_delete_profile_text">Are you sure you want to delete your profile? This action will lead to deleting all your data.</string>
+
+    <string name="profile_dialog_logout_header">Log out</string>
+    <string name="profile_dialog_logout_text">Are you sure you want to log out from your profile?</string>
+
     <string name="edit_profile_top_bar_text">Edit your profile</string>
     <string name="edit_profile_name_hint">Username</string>
     <string name="edit_profile_bio_hint">Bio</string>
