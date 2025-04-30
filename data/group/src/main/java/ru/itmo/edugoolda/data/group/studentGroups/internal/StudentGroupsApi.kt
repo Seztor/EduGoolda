@@ -4,7 +4,7 @@ import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Query
 import ru.itmo.edugoolda.data.group.studentGroups.internal.dto.StudentGroupsResponse
 
-interface StudentGroupsApi {
+internal interface StudentGroupsApi {
     @GET("/api/v1/groups")
     suspend fun getGroupsList(
         @Query("query") query: String?,

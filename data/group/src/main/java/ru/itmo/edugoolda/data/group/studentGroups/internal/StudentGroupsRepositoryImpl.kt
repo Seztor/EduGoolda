@@ -12,7 +12,7 @@ import ru.itmo.edugoolda.data.group.studentGroups.api.StudentGroups
 import ru.itmo.edugoolda.data.group.studentGroups.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
-class StudentGroupsRepositoryImpl(
+internal class StudentGroupsRepositoryImpl(
     replicaClient: ReplicaClient,
     studentGroupsApi: StudentGroupsApi,
 ) : StudentGroupRepository {

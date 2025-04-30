@@ -65,10 +65,9 @@ fun StudentGroupsUI(
                 ) {
                 items(data.groups) { item ->
                     GroupItem(
-                        { component.onGroupDetailRequestClick(item.id.value) },
+                        { component.onGroupDetailRequestClick(item.id) },
                         item.name,
-                        item.subjectName,
-                        item.id.value
+                        item.subjectName
                     )
                 }
                 if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
@@ -83,10 +82,9 @@ fun StudentGroupsUI(
 
 @Composable
 fun GroupItem(
-    onGroupItemClick: (String) -> Unit,
+    onGroupItemClick: () -> Unit,
     name: String,
     subjectName: String,
-    id: String,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -110,7 +108,7 @@ fun GroupItem(
             Spacer(modifier = Modifier.weight(1f))
 
             IconButton(
-                onClick = { onGroupItemClick(id) }
+                onClick = { onGroupItemClick() }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_forward),
@@ -133,7 +131,7 @@ fun GroupItem(
 fun PreviewGroupItem() {
     AppTheme {
         GroupItem(
-            {}, "Группа 1", "Math", "123"
+            {}, "Группа 1", "Math"
         )
     }
 }
