@@ -15,7 +15,6 @@ fun ComponentFactory.createGroupCreateComponent(
     return RealGroupCreateComponent(componentContext, communication, get(), get())
 }
 
-
 fun ComponentFactory.createStudentGroupComponent(
     componentContext: ComponentContext,
     communication: StudentGroupComponent.Communication,

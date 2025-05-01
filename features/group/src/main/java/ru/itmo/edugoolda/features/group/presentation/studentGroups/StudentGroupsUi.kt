@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,11 +38,12 @@ import ru.itmo.edugoolda.data.group.studentGroups.api.StudentGroups
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
-fun StudentGroupsUI(
+fun StudentGroupsUi(
     component: StudentGroupComponent,
     modifier: Modifier = Modifier,
 ) {
     val state by component.studentGroupState.collectAsState()
+
     PullRefreshLceWidget(
         state = state,
         onRefresh = component::onRefresh,
@@ -56,7 +59,15 @@ fun StudentGroupsUI(
             AppTextField(
                 inputControl = component.groupSearchInputControl,
                 placeholder = stringResource(R.string.search_students_group),
-                modifier = Modifier.padding(22.dp)
+                modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        tint = Color.Gray,
+                        contentDescription = "Group Icon",
+                        modifier = Modifier.size(25.dp)
+                    )
+                }
             )
 
             LazyColumn(
@@ -89,13 +100,13 @@ fun GroupItem(
 ) {
     Column(modifier = modifier) {
         Row(
-            modifier = Modifier.height(40.dp),
+            modifier = Modifier.height(60.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier.padding(start = 15.dp, end = 10.dp)
+                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
             )
 
             Text(
@@ -118,7 +129,7 @@ fun GroupItem(
         }
         Spacer(
             modifier = Modifier
-                .padding(start = 45.dp)
+                .padding(start = 40.dp, bottom = 5.dp)
                 .height(1.5.dp)
                 .background(Color.Gray)
                 .fillMaxWidth()
@@ -133,5 +144,13 @@ fun PreviewGroupItem() {
         GroupItem(
             {}, "Группа 1", "Math"
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StudentGroupsUIPreview() {
+    AppTheme {
+        StudentGroupsUi(component = FakeStudentGroupComponent())
     }
 }
