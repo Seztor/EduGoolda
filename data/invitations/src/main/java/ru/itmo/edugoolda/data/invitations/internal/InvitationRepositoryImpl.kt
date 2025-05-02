@@ -1,6 +1,5 @@
 package ru.itmo.edugoolda.data.invitations.internal
 
-
 import ru.itmo.edugoolda.data.invitations.api.InvitationRepository
 import ru.itmo.edugoolda.data.invitations.internal.dto.InvitationActionRequest
 
@@ -16,6 +15,4 @@ class InvitationRepositoryImpl(
         }
         api.action(invitationId, invitationActionRequest)
     }
-
-
 }

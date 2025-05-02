@@ -18,13 +18,11 @@ class InvitationsComponentImpl(
     ) : InvitationsComponent, ComponentContext by componentContext {
 
     private val invitationReplica = invitationListRepository.invitationListReplica
-    override val invitationState = invitationReplica.observe(this,errorHandler)
+    override val invitationState = invitationReplica.observe(this, errorHandler)
     override fun onAcceptClick(invitation: Invitation) {
         componentScope.safeLaunch(errorHandler) {
             invitationRepository.action(invitation.id, "accept")
         }
-
-
     }
 
     override fun onDeclineClick(invitation: Invitation) {
@@ -44,5 +42,4 @@ class InvitationsComponentImpl(
     override fun onLoadNext() {
         invitationReplica.loadNext()
     }
-
 }

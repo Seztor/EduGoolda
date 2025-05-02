@@ -7,6 +7,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
@@ -14,7 +15,10 @@ import ru.itmo.edugoolda.data.invitations.api.InvitationList
 import ru.itmo.edugoolda.core.widget.invitations.InvitationListItem
 
 @Composable
-fun InvitationsUi(component: InvitationsComponent) {
+fun InvitationsUi(
+    component: InvitationsComponent,
+    modifier: Modifier = Modifier
+) {
     val state by component.invitationState.collectAsState()
     PullRefreshLceWidget(
         state = state,
@@ -46,7 +50,5 @@ fun InvitationsUi(component: InvitationsComponent) {
                 }
             }
         }
-
-
     }
 }

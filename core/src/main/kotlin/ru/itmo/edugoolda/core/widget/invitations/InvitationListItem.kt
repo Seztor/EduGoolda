@@ -26,7 +26,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import ru.itmo.edugoolda.core.theme.AppTheme
 
-
 @Composable
 fun InvitationListItem(
     groupName: String,
@@ -43,30 +42,23 @@ fun InvitationListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(
-
-        ) {
-
+        Column {
             Text(
                 text = groupName,
                 style = CustomTheme.typography.body.regular
             )
-
             Spacer(modifier = Modifier.size(10.dp))
             Text(
                 text = studentName,
                 style = CustomTheme.typography.body.regular
             )
             Spacer(modifier = Modifier.size(10.dp))
-
             Text(
                 text = date,
                 style = CustomTheme.typography.caption.regular
             )
         }
-
-        Row( ) {
-
+        Row {
             IconButton(
                 onClick = onAcceptClick,
                 modifier = Modifier.size(24.dp)
@@ -74,9 +66,8 @@ fun InvitationListItem(
                 Icon(
                     imageVector = Icons.Default.Check,
                     contentDescription = "Apply"
-                    )
+                )
             }
-
             Spacer(modifier = Modifier.size(10.dp))
             IconButton(
                 onClick = onDeclineClick,
@@ -91,18 +82,16 @@ fun InvitationListItem(
     }
 }
 
-
-@Preview(showBackground = true  )
+@Preview(showBackground = true)
 @Composable
-fun StudentHeaderPreview() {
+private fun StudentHeaderPreview() {
     AppTheme {
         InvitationListItem(
             groupName = "Математика 7Б",
             studentName = "Иванов Василий",
             date = "19:47 15.04.24",
-            onAcceptClick = {  },
+            onAcceptClick = { },
             onDeclineClick = { }
         )
     }
-
 }

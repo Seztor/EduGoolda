@@ -2,7 +2,6 @@ package ru.itmo.edugoolda.data.invitations.internal
 
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Query
-import ru.itmo.edugoolda.data.invitations.api.InvitationList
 import ru.itmo.edugoolda.data.invitations.internal.dto.InvitationListResponse
 
 interface InvitationsApi {

@@ -12,7 +12,6 @@ import ru.itmo.edugoolda.data.invitations.api.InvitationListRepository
 import ru.itmo.edugoolda.data.invitations.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
-
 class InvitationListRepositoryImpl(
     replicaClient: ReplicaClient,
     private val api: InvitationsApi
@@ -60,5 +59,4 @@ class InvitationListRepositoryImpl(
             hasNextPage = it.hasNextPage
         )
     }
-
 }
