@@ -11,11 +11,10 @@ import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.data.invitations.api.InvitationList
-
+import ru.itmo.edugoolda.core.widget.invitations.InvitationListItem
 
 @Composable
-fun InvitationsUi(component: InvitationsComponent)
-{
+fun InvitationsUi(component: InvitationsComponent) {
     val state by component.invitationState.collectAsState()
     PullRefreshLceWidget(
         state = state,
@@ -31,9 +30,15 @@ fun InvitationsUi(component: InvitationsComponent)
         LazyColumn(
             state = lazyListState,
 
-        ) {
-            items(data.invitationList){
-                it.
+            ) {
+            items(data.invitationList) {
+                InvitationListItem(
+                    groupName = it.groupName,
+                    studentName = it.sender.name,
+                    date = it.date,
+                    onAcceptClick = { component.onAcceptClick(it) },
+                    onDeclineClick = { component.onAcceptClick(it) }
+                )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
                 item {

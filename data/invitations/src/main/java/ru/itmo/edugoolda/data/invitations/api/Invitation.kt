@@ -6,6 +6,8 @@ import ru.itmo.edugoolda.data.user.api.UserInfo
 
 data class Invitation (
     val id: String,
-    val sender: UserInfo
+    val groupName: String,
+    val sender: UserInfo,
+    val date: String
 
 )
