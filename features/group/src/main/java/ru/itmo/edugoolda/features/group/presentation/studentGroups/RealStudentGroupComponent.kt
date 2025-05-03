@@ -18,6 +18,7 @@ class RealStudentGroupComponent(
     override val groupSearchInputControl = InputControl(componentScope)
     private val studentGroupReplica = studentGroupRepository.studentGroupReplica
     override val studentGroupState = studentGroupReplica.observe(this, errorHandler)
+
     override fun onRefresh() {
         studentGroupReplica.refresh()
     }
@@ -31,8 +32,6 @@ class RealStudentGroupComponent(
     }
 
     override fun onGroupDetailRequestClick(id: StudentGroupId) {
-        componentScope.safeLaunch(errorHandler) {
-            communication.onGroupDetailsRequested(id)
-        }
+        communication.onGroupDetailsRequested(id)
     }
 }
