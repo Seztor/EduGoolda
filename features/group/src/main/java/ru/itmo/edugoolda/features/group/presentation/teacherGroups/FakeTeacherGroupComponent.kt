@@ -30,4 +30,8 @@ class FakeTeacherGroupComponent() : TeacherGroupComponent {
     override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) {
         TODO("Not yet implemented")
     }
+
+    override fun onGroupCreateRequestClick() {
+        TODO("Not yet implemented")
+    }
 }

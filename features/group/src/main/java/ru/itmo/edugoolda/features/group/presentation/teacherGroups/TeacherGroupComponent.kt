@@ -15,9 +15,11 @@ interface TeacherGroupComponent {
     fun onLoadNext()
     fun onGroupDetailRequestClick(id: GroupId)
     fun onGroupChangeFavouriteStatusRequestClick(id: GroupId)
+    fun onGroupCreateRequestClick()
 
     interface Communication {
         fun onGroupDetailsRequested(id: GroupId)
         fun onGroupChangeFavouriteStatusRequested(id: GroupId)
+        fun onGroupCreateRequested()
     }
 }

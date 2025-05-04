@@ -37,4 +37,8 @@ class RealTeacherGroupComponent(
     override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) {
         communication.onGroupChangeFavouriteStatusRequested(id)
     }
+
+    override fun onGroupCreateRequestClick() {
+        communication.onGroupCreateRequested()
+    }
 }

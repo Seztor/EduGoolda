@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -88,6 +89,19 @@ fun TeacherGroupsUi(
                         CircularProgressIndicator()
                     }
                 }
+            }
+
+            IconButton(
+                onClick = { component.onGroupCreateRequestClick() },
+                modifier = Modifier.align(Alignment.CenterHorizontally).size(70.dp)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.add_group),
+                    contentDescription = "Add Group Icon",
+                    modifier = Modifier.size(70.dp),
+                    tint = Color.Unspecified
+
+                )
             }
         }
     }
