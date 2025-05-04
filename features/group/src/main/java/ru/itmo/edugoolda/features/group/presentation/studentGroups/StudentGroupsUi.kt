@@ -34,7 +34,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.group.studentGroups.api.StudentGroups
+import ru.itmo.edugoolda.data.group.groupList.api.GroupList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -48,7 +48,7 @@ fun StudentGroupsUi(
         state = state,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick
-    ) { data: StudentGroups, _: Boolean ->
+    ) { data: GroupList, _: Boolean ->
         val lazyListState = rememberLazyListState()
         lazyListState.TriggerLoadNext(
             pagedState = state,

@@ -2,21 +2,20 @@ package ru.itmo.edugoolda.features.group.presentation.studentGroups
 
 import com.arkivanov.decompose.ComponentContext
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
-import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
-import ru.itmo.edugoolda.data.group.studentGroups.api.StudentGroupId
-import ru.itmo.edugoolda.data.group.studentGroups.api.StudentGroupRepository
+import ru.itmo.edugoolda.data.group.groupList.api.GroupId
+import ru.itmo.edugoolda.data.group.groupList.api.GroupRepository
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealStudentGroupComponent(
     componentContext: ComponentContext,
     private val communication: StudentGroupComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val studentGroupRepository: StudentGroupRepository,
+    private val groupRepository: GroupRepository,
 ) : StudentGroupComponent, ComponentContext by componentContext {
     override val groupSearchInputControl = InputControl(componentScope)
-    private val studentGroupReplica = studentGroupRepository.studentGroupReplica
+    private val studentGroupReplica = groupRepository.groupListReplica
     override val studentGroupState = studentGroupReplica.observe(this, errorHandler)
 
     override fun onRefresh() {
@@ -31,7 +30,7 @@ class RealStudentGroupComponent(
         studentGroupReplica.loadNext()
     }
 
-    override fun onGroupDetailRequestClick(id: StudentGroupId) {
+    override fun onGroupDetailRequestClick(id: GroupId) {
         communication.onGroupDetailsRequested(id)
     }
 }
