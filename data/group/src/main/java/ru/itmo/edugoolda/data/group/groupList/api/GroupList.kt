@@ -1,56 +1,56 @@
-package ru.itmo.edugoolda.data.group.studentGroups.api
+package ru.itmo.edugoolda.data.group.groupList.api
 
-data class StudentGroups(
-    val groups: List<StudentGroupInfo>,
+data class GroupList(
+    val groups: List<GroupItemInfo>,
     val hasNextPage: Boolean,
 ) {
     companion object {
-        val MOCK = StudentGroups(
+        val MOCK = GroupList(
             groups = listOf(
-                StudentGroupInfo(
-                    id = StudentGroupId("1"),
+                GroupItemInfo(
+                    id = GroupId("1"),
                     name = "Группа 1",
                     subjectName = "Математика",
                     ownerName = "Павел"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("2"),
+                GroupItemInfo(
+                    id = GroupId("2"),
                     name = "Группа 2",
                     subjectName = "Русский язык",
                     ownerName = "Антон"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("3"),
+                GroupItemInfo(
+                    id = GroupId("3"),
                     name = "Группа 3",
                     subjectName = "Информатика и ИКТ",
                     ownerName = "Володя"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("4"),
+                GroupItemInfo(
+                    id = GroupId("4"),
                     name = "Группа 4",
                     subjectName = "Литература",
                     ownerName = "Леха"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("5"),
+                GroupItemInfo(
+                    id = GroupId("5"),
                     name = "Группа 5",
                     subjectName = "Английский язык",
                     ownerName = "Леха"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("6"),
+                GroupItemInfo(
+                    id = GroupId("6"),
                     name = "Группа 6",
                     subjectName = "Японский язык",
                     ownerName = "Паша"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("7"),
+                GroupItemInfo(
+                    id = GroupId("7"),
                     name = "Группа 7",
                     subjectName = "Физкультура",
                     ownerName = "Гоша"
                 ),
-                StudentGroupInfo(
-                    id = StudentGroupId("8"),
+                GroupItemInfo(
+                    id = GroupId("8"),
                     name = "Группа 8",
                     subjectName = "Программирование",
                     ownerName = "Алексей"
