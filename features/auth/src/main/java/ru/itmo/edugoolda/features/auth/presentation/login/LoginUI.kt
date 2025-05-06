@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,7 +38,7 @@ fun LoginUi(
         Spacer(modifier = Modifier.height(164.dp))
 
         Icon(
-            imageVector = Icons.Default.Warning,
+            imageVector = Icons.Default.AccountBox,
             modifier = Modifier.size(100.dp),
             contentDescription = "LoginIcon",
         )

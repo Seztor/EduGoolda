@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_top_bar_text">Your profile</string>
+    <string name="profile_bio_header">Bio</string>
+    <string name="profile_bio_suggestion">Tell us about yourself</string>
+    <string name="profile_email_header">Email</string>
+
+    <string name="edit_profile_top_bar_text">Edit your profile</string>
+    <string name="edit_profile_name_hint">Username</string>
+    <string name="edit_profile_bio_hint">Bio</string>
+    <string name="edit_profile_email_hint">Email</string>
+    <string name="edit_profile_change_password_button">Change password</string>
+
+    <string name="edit_password_top_bar_text">Change password</string>
+    <string name="edit_password_old_password_label">Current password</string>
+    <string name="edit_password_new_password_label">New password</string>
+    <string name="edit_password_repeat_password_label">Repeat password</string>
+
+</resources>
