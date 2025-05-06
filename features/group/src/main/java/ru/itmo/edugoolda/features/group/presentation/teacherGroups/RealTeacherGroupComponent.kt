@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.group.presentation.studentGroups
+package ru.itmo.edugoolda.features.group.presentation.teacherGroups
 
 import com.arkivanov.decompose.ComponentContext
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
@@ -8,33 +8,33 @@ import ru.itmo.edugoolda.data.group.groupList.api.GroupId
 import ru.itmo.edugoolda.data.group.groupList.api.GroupRepository
 import ru.mobileup.kmm_form_validation.control.InputControl
 
-class RealStudentGroupComponent(
+class RealTeacherGroupComponent(
     componentContext: ComponentContext,
-    private val communication: StudentGroupComponent.Communication,
+    private val communication: TeacherGroupComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val groupRepository: GroupRepository,
-) : StudentGroupComponent, ComponentContext by componentContext {
+) : TeacherGroupComponent, ComponentContext by componentContext {
     override val groupSearchInputControl = InputControl(componentScope)
-    private val studentGroupReplica = groupRepository.groupListReplica
-    override val studentGroupState = studentGroupReplica.observe(this, errorHandler)
+    private val teacherGroupReplica = groupRepository.groupListReplica
+    override val teacherGroupState = teacherGroupReplica.observe(this, errorHandler)
 
     override fun onRefresh() {
-        studentGroupReplica.refresh()
+        teacherGroupReplica.refresh()
     }
 
     override fun onRetryClick() {
-        studentGroupReplica.revalidate()
+        teacherGroupReplica.revalidate()
     }
 
     override fun onLoadNext() {
-        studentGroupReplica.loadNext()
+        teacherGroupReplica.loadNext()
     }
 
     override fun onGroupDetailRequestClick(id: GroupId) {
         communication.onGroupDetailsRequested(id)
     }
 
-    override fun onGroupAddRequestClick() {
-        communication.onGroupAddRequested()
+    override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) {
+        communication.onGroupChangeFavouriteStatusRequested(id)
     }
 }

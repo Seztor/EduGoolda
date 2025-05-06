@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.group.presentation.studentGroups
+package ru.itmo.edugoolda.features.group.presentation.teacherGroups
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -7,9 +7,9 @@ import ru.itmo.edugoolda.data.group.groupList.api.GroupId
 import ru.itmo.edugoolda.data.group.groupList.api.GroupList
 import ru.mobileup.kmm_form_validation.control.InputControl
 
-class FakeStudentGroupComponent() : StudentGroupComponent {
+class FakeTeacherGroupComponent() : TeacherGroupComponent {
     override val groupSearchInputControl = InputControl(GlobalScope)
-    override val studentGroupState = MutableStateFlow(PagedState(data = GroupList.MOCK))
+    override val teacherGroupState = MutableStateFlow(PagedState(data = GroupList.MOCK))
 
     override fun onRefresh() {
         TODO("Not yet implemented")
@@ -27,7 +27,7 @@ class FakeStudentGroupComponent() : StudentGroupComponent {
         TODO("Not yet implemented")
     }
 
-    override fun onGroupAddRequestClick() {
+    override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) {
         TODO("Not yet implemented")
     }
 }

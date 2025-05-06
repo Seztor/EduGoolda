@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.group.presentation.studentGroups
+package ru.itmo.edugoolda.features.group.presentation.teacherGroups
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -38,11 +39,11 @@ import ru.itmo.edugoolda.data.group.groupList.api.GroupList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
-fun StudentGroupsUi(
-    component: StudentGroupComponent,
+fun TeacherGroupsUi(
+    component: TeacherGroupComponent,
     modifier: Modifier = Modifier,
 ) {
-    val state by component.studentGroupState.collectAsState()
+    val state by component.teacherGroupState.collectAsState()
 
     PullRefreshLceWidget(
         state = state,
@@ -75,10 +76,12 @@ fun StudentGroupsUi(
 
                 ) {
                 items(data.groups) { item ->
-                    StudentGroupItem(
+                    TeacherGroupItem(
                         { component.onGroupDetailRequestClick(item.id) },
+                        { component.onGroupChangeFavouriteStatusRequestClick(item.id) },
                         item.name,
-                        item.subjectName
+                        item.subjectName,
+                        item.isFavourite
                     )
                 }
                 if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
@@ -87,30 +90,17 @@ fun StudentGroupsUi(
                     }
                 }
             }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            IconButton(
-                onClick = { component.onGroupAddRequestClick() },
-                modifier = Modifier.align(Alignment.CenterHorizontally).size(80.dp)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.add_group),
-                    contentDescription = "Add Group Icon",
-                    modifier = Modifier.size(80.dp),
-                    tint = Color.Unspecified
-
-                )
-            }
         }
     }
 }
 
 @Composable
-fun StudentGroupItem(
+fun TeacherGroupItem(
     onGroupItemClick: () -> Unit,
+    onChangeFavourite: () -> Unit,
     name: String,
     subjectName: String,
+    isFavourite: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -134,7 +124,22 @@ fun StudentGroupItem(
             Spacer(modifier = Modifier.weight(1f))
 
             IconButton(
-                onClick = { onGroupItemClick() }
+                onClick = { onChangeFavourite() },
+                modifier = Modifier.size(35.dp)
+            ) {
+                Icon(
+                    painter = when (isFavourite) {
+                        true -> painterResource(R.drawable.favourite_pressed)
+                        false -> painterResource(R.drawable.favourite_unpressed)
+                    },
+                    contentDescription = "Group Icon Favorite",
+                    modifier = Modifier.size(width = 20.dp, height = 23.dp)
+                )
+            }
+
+            IconButton(
+                onClick = { onGroupItemClick() },
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp).size(35.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_forward),
@@ -156,16 +161,16 @@ fun StudentGroupItem(
 @Composable
 fun PreviewGroupItem() {
     AppTheme {
-        StudentGroupItem(
-            {}, "Группа 1", "Math"
+        TeacherGroupItem(
+            {}, {},"Группа 1", "Math", true
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun StudentGroupsUIPreview() {
+fun TeacherGroupsUIPreview() {
     AppTheme {
-        StudentGroupsUi(component = FakeStudentGroupComponent())
+        TeacherGroupsUi(component = FakeTeacherGroupComponent())
     }
 }

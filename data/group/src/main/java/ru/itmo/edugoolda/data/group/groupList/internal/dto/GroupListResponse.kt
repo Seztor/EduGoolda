@@ -22,12 +22,14 @@ internal data class GroupItemInfoDTO(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
     @SerialName("subject_name") val subjectName: String,
-    @SerialName("owner_name") val ownerName: String
+    @SerialName("owner_name") val ownerName: String,
+    @SerialName("is_favourite") val isFavourite: Boolean
 )
 
 internal fun GroupItemInfoDTO.toDomain(): GroupItemInfo = GroupItemInfo(
     id = GroupId(id),
     name = name,
     subjectName = subjectName,
-    ownerName = ownerName
+    ownerName = ownerName,
+    isFavourite = isFavourite
 )
