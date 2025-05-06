@@ -26,4 +26,8 @@ class FakeStudentGroupComponent() : StudentGroupComponent {
     override fun onGroupDetailRequestClick(id: GroupId) {
         TODO("Not yet implemented")
     }
+
+    override fun onGroupAddRequestClick() {
+        TODO("Not yet implemented")
+    }
 }

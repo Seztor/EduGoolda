@@ -33,4 +33,8 @@ class RealStudentGroupComponent(
     override fun onGroupDetailRequestClick(id: GroupId) {
         communication.onGroupDetailsRequested(id)
     }
+
+    override fun onGroupAddRequestClick() {
+        communication.onGroupAddRequested()
+    }
 }

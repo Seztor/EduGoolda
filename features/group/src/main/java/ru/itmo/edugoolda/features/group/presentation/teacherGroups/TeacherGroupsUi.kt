@@ -90,19 +90,6 @@ fun TeacherGroupsUi(
                     }
                 }
             }
-
-            IconButton(
-                onClick = { component.onGroupCreateRequestClick() },
-                modifier = Modifier.align(Alignment.CenterHorizontally).size(70.dp)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.add_group),
-                    contentDescription = "Add Group Icon",
-                    modifier = Modifier.size(70.dp),
-                    tint = Color.Unspecified
-
-                )
-            }
         }
     }
 }

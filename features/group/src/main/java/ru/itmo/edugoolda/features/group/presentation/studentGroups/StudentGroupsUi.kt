@@ -87,6 +87,21 @@ fun StudentGroupsUi(
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            IconButton(
+                onClick = { component.onGroupAddRequestClick() },
+                modifier = Modifier.align(Alignment.CenterHorizontally).size(80.dp)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.add_group),
+                    contentDescription = "Add Group Icon",
+                    modifier = Modifier.size(80.dp),
+                    tint = Color.Unspecified
+
+                )
+            }
         }
     }
 }
