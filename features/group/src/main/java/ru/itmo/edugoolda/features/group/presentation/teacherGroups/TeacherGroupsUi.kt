@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -44,33 +43,32 @@ fun TeacherGroupsUi(
     modifier: Modifier = Modifier,
 ) {
     val state by component.teacherGroupState.collectAsState()
-
-    PullRefreshLceWidget(
-        state = state,
-        onRefresh = component::onRefresh,
-        onRetryClick = component::onRetryClick
-    ) { data: GroupList, _: Boolean ->
-        val lazyListState = rememberLazyListState()
-        lazyListState.TriggerLoadNext(
-            pagedState = state,
-            hasNextPage = state.data?.hasNextPage == true,
-            callback = component::onLoadNext
+    Column(modifier = modifier) {
+        AppTextField(
+            inputControl = component.groupSearchInputControl,
+            placeholder = stringResource(R.string.search_students_group),
+            modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    tint = Color.Gray,
+                    contentDescription = "Group Icon",
+                    modifier = Modifier.size(25.dp)
+                )
+            }
         )
-        Column(modifier = modifier) {
-            AppTextField(
-                inputControl = component.groupSearchInputControl,
-                placeholder = stringResource(R.string.search_students_group),
-                modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        tint = Color.Gray,
-                        contentDescription = "Group Icon",
-                        modifier = Modifier.size(25.dp)
-                    )
-                }
-            )
 
+        PullRefreshLceWidget(
+            state = state,
+            onRefresh = component::onRefresh,
+            onRetryClick = component::onRetryClick
+        ) { data: GroupList, _: Boolean ->
+            val lazyListState = rememberLazyListState()
+            lazyListState.TriggerLoadNext(
+                pagedState = state,
+                hasNextPage = state.data?.hasNextPage == true,
+                callback = component::onLoadNext
+            )
             LazyColumn(
                 state = lazyListState,
 
@@ -111,7 +109,9 @@ fun TeacherGroupItem(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 10.dp)
+                    .size(27.dp)
             )
 
             Text(
@@ -139,7 +139,9 @@ fun TeacherGroupItem(
 
             IconButton(
                 onClick = { onGroupItemClick() },
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp).size(35.dp)
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+                    .size(35.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_forward),
@@ -162,7 +164,7 @@ fun TeacherGroupItem(
 fun PreviewGroupItem() {
     AppTheme {
         TeacherGroupItem(
-            {}, {},"Группа 1", "Math", true
+            {}, {}, "Группа 1", "Math", true
         )
     }
 }

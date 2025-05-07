@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import me.aartikov.replica.decompose.observe
-import me.aartikov.replica.paged.Page
 import me.aartikov.replica.single.Loadable
 import me.aartikov.replica.single.Replica
 import me.aartikov.replica.single.currentState
@@ -87,10 +86,3 @@ fun <T : Any, R : Any> LoadableState<T>.mapData(
 ): LoadableState<R> {
     return LoadableState(loading, data?.let { transform(it) }, error)
 }
-
-data class PageWithTotalAmount<T : Any>(
-    override val hasNextPage: Boolean,
-    override val hasPreviousPage: Boolean,
-    override val items: List<T>,
-    val total: Int
-) : Page<T>

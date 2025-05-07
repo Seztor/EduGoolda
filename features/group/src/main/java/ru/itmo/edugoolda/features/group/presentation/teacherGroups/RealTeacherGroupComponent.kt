@@ -5,17 +5,17 @@ import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.group.groupList.api.GroupId
-import ru.itmo.edugoolda.data.group.groupList.api.GroupRepository
+import ru.itmo.edugoolda.data.group.groupList.api.GroupListRepository
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealTeacherGroupComponent(
     componentContext: ComponentContext,
     private val communication: TeacherGroupComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val groupRepository: GroupRepository,
+    private val groupListRepository: GroupListRepository,
 ) : TeacherGroupComponent, ComponentContext by componentContext {
     override val groupSearchInputControl = InputControl(componentScope)
-    private val teacherGroupReplica = groupRepository.groupListReplica
+    private val teacherGroupReplica = groupListRepository.groupListReplica
     override val teacherGroupState = teacherGroupReplica.observe(this, errorHandler)
 
     override fun onRefresh() {

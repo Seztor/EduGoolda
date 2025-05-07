@@ -43,33 +43,32 @@ fun StudentGroupsUi(
     modifier: Modifier = Modifier,
 ) {
     val state by component.studentGroupState.collectAsState()
-
-    PullRefreshLceWidget(
-        state = state,
-        onRefresh = component::onRefresh,
-        onRetryClick = component::onRetryClick
-    ) { data: GroupList, _: Boolean ->
-        val lazyListState = rememberLazyListState()
-        lazyListState.TriggerLoadNext(
-            pagedState = state,
-            hasNextPage = state.data?.hasNextPage == true,
-            callback = component::onLoadNext
+    Column(modifier = modifier) {
+        AppTextField(
+            inputControl = component.groupSearchInputControl,
+            placeholder = stringResource(R.string.search_students_group),
+            modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    tint = Color.Gray,
+                    contentDescription = "Group Icon",
+                    modifier = Modifier.size(25.dp)
+                )
+            }
         )
-        Column(modifier = modifier) {
-            AppTextField(
-                inputControl = component.groupSearchInputControl,
-                placeholder = stringResource(R.string.search_students_group),
-                modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        tint = Color.Gray,
-                        contentDescription = "Group Icon",
-                        modifier = Modifier.size(25.dp)
-                    )
-                }
-            )
 
+        PullRefreshLceWidget(
+            state = state,
+            onRefresh = component::onRefresh,
+            onRetryClick = component::onRetryClick
+        ) { data: GroupList, _: Boolean ->
+            val lazyListState = rememberLazyListState()
+            lazyListState.TriggerLoadNext(
+                pagedState = state,
+                hasNextPage = state.data?.hasNextPage == true,
+                callback = component::onLoadNext
+            )
             LazyColumn(
                 state = lazyListState,
 
@@ -87,21 +86,22 @@ fun StudentGroupsUi(
                     }
                 }
             }
+        }
+        Spacer(modifier = Modifier.weight(1f))
 
-            Spacer(modifier = Modifier.weight(1f))
+        IconButton(
+            onClick = { component.onGroupAddRequestClick() },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(80.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.add_group),
+                contentDescription = "Add Group Icon",
+                modifier = Modifier.size(80.dp),
+                tint = Color.Unspecified
 
-            IconButton(
-                onClick = { component.onGroupAddRequestClick() },
-                modifier = Modifier.align(Alignment.CenterHorizontally).size(80.dp)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.add_group),
-                    contentDescription = "Add Group Icon",
-                    modifier = Modifier.size(80.dp),
-                    tint = Color.Unspecified
-
-                )
-            }
+            )
         }
     }
 }
@@ -121,7 +121,9 @@ fun StudentGroupItem(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 10.dp)
+                    .size(27.dp)
             )
 
             Text(
@@ -164,7 +166,7 @@ fun PreviewGroupItem() {
 
 @Preview(showBackground = true)
 @Composable
-fun StudentGroupsUIPreview() {
+fun StudentGroupsUiPreview() {
     AppTheme {
         StudentGroupsUi(component = FakeStudentGroupComponent())
     }

@@ -6,16 +6,17 @@ import me.aartikov.replica.paged.PagedData
 import me.aartikov.replica.paged.PagedFetcher
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
-import ru.itmo.edugoolda.data.group.groupList.api.GroupItemInfo
-import ru.itmo.edugoolda.data.group.groupList.api.GroupRepository
+import ru.itmo.edugoolda.data.group.groupInfo.api.GroupInfo
+import ru.itmo.edugoolda.data.group.groupList.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.groupList.api.GroupList
+import ru.itmo.edugoolda.data.group.groupInfo.internal.dto.toDomain
 import ru.itmo.edugoolda.data.group.groupList.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
-internal class GroupsRepositoryImpl(
+internal class GroupsListRepositoryImpl(
     replicaClient: ReplicaClient,
     groupListApi: GroupListApi,
-) : GroupRepository {
+) : GroupListRepository {
     companion object {
         private const val PAGE_SIZE = 20
     }
@@ -24,8 +25,8 @@ internal class GroupsRepositoryImpl(
         name = "group list replica",
         settings = PagedReplicaSettings(staleTime = 5.minutes),
         idExtractor = { it.id },
-        fetcher = object : PagedFetcher<GroupItemInfo, PageWithTotalAmount<GroupItemInfo>> {
-            override suspend fun fetchFirstPage(): PageWithTotalAmount<GroupItemInfo> {
+        fetcher = object : PagedFetcher<GroupInfo, PageWithTotalAmount<GroupInfo>> {
+            override suspend fun fetchFirstPage(): PageWithTotalAmount<GroupInfo> {
                 val groups =
                     groupListApi.getGroupsList(
                         query = null,
@@ -42,7 +43,7 @@ internal class GroupsRepositoryImpl(
                 )
             }
 
-            override suspend fun fetchNextPage(currentData: PagedData<GroupItemInfo, PageWithTotalAmount<GroupItemInfo>>): PageWithTotalAmount<GroupItemInfo> {
+            override suspend fun fetchNextPage(currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>): PageWithTotalAmount<GroupInfo> {
                 val groups = groupListApi.getGroupsList(
                     query = null,
                     subjectId = null,

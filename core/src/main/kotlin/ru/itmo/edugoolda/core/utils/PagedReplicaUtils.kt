@@ -71,5 +71,4 @@ data class PageWithTotalAmount<T : Any>(
     override val hasPreviousPage: Boolean,
     override val items: List<T>,
     val total: Int
-
 ) : Page<T>
