@@ -3,29 +3,30 @@ package ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.core.utils.PagedState
-import ru.itmo.edugoolda.data.group.groupInfo.api.GroupFullInfo
-import ru.itmo.edugoolda.data.group.groupInvitationData.api.GroupInvitationData
-import ru.itmo.edugoolda.data.group.groupList.api.GroupId
-import ru.itmo.edugoolda.data.group.groupOfStudentsList.api.GroupOfStudentsList
+import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
+import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationData
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
 import ru.itmo.edugoolda.data.user.api.UserId
 
 interface TeacherGroupDetailsComponent {
     val groupOfStudentsState: StateFlow<PagedState<GroupOfStudentsList>>
-    val groupInvitationDataState: StateFlow<GroupInvitationData>
+    val groupInvitationDataState: StateFlow<GroupInvitationData?>
     val groupInfoState: StateFlow<LoadableState<GroupFullInfo>>
     val isGettingCodeProgress: StateFlow<Boolean>
+    val isKickingMemberProgress: StateFlow<Boolean>
+    val isDeletingGroupProgress: StateFlow<Boolean>
 
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
     fun onReturnBackRequestClick()
-    fun onGroupDeleteRequestClick(id: GroupId)
-    fun onGroupMemberDeleteRequestClick(id: UserId)
-    fun onGroupCodeGenerateRequestClick(id: GroupId)
+    fun onGroupDeleteRequestClick()
+    fun onGroupMemberKickRequestClick(action: String, userId: UserId)
+    fun onGroupCodeGenerateRequestClick()
 
     interface Communication {
         fun onReturnBackRequested()
         fun onGroupDeleteRequested(id: GroupId)
-        fun onGroupMemberDeleteRequested(id: UserId)
     }
 }

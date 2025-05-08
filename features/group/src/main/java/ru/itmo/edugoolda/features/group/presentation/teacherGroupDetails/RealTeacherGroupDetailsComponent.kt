@@ -9,30 +9,37 @@ import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
-import ru.itmo.edugoolda.data.group.groupInfo.api.GroupFullInfoRepository
-import ru.itmo.edugoolda.data.group.groupInvitationData.api.GroupInvitationCode
-import ru.itmo.edugoolda.data.group.groupInvitationData.api.GroupInvitationData
-import ru.itmo.edugoolda.data.group.groupInvitationData.api.GroupInvitationDataRepository
-import ru.itmo.edugoolda.data.group.groupList.api.GroupId
-import ru.itmo.edugoolda.data.group.groupOfStudentsList.api.GroupOfStudentsRepository
+import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfoRepository
+import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationData
+import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationDataRepository
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
 import ru.itmo.edugoolda.data.user.api.UserId
 
 class RealTeacherGroupDetailsComponent(
+    private val groupId: GroupId,
     componentContext: ComponentContext,
     private val communication: TeacherGroupDetailsComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val repositoryGroupOfStudentsRepository: GroupOfStudentsRepository,
+    private val repositoryGroupOfStudents: GroupOfStudentsRepository,
     private val repositoryGroupFullInfo: GroupFullInfoRepository,
-    private val repositoryGroupInvitationDataRepository: GroupInvitationDataRepository
-    ) : TeacherGroupDetailsComponent, ComponentContext by componentContext {
-    private val groupOfStudentsReplica = repositoryGroupOfStudentsRepository.groupOfStudentsReplica.withKey(GroupId("text"))
+    private val repositoryGroupInvitationData: GroupInvitationDataRepository,
+    private val repositoryGroupList: GroupListRepository,
+) : TeacherGroupDetailsComponent, ComponentContext by componentContext {
+    private val groupOfStudentsReplica =
+        repositoryGroupOfStudents.groupOfStudentsReplica.withKey(groupId)
     override val groupOfStudentsState = groupOfStudentsReplica.observe(this, errorHandler)
 
-    private val groupInfoReplica = repositoryGroupFullInfo.groupInfoReplica.withKey(GroupId("text2"))
+    private val groupInfoReplica =
+        repositoryGroupFullInfo.groupInfoReplica.withKey(groupId)
     override val groupInfoState = groupInfoReplica.observe(this, errorHandler)
 
-    override val groupInvitationDataState = MutableStateFlow(GroupInvitationData(GroupInvitationCode(""), ""))
+    override val groupInvitationDataState: MutableStateFlow<GroupInvitationData?> =
+        MutableStateFlow(null)
     override val isGettingCodeProgress = MutableStateFlow(false)
+    override val isKickingMemberProgress = MutableStateFlow(false)
+    override val isDeletingGroupProgress = MutableStateFlow(false)
 
     override fun onRefresh() {
         groupOfStudentsReplica.refresh()
@@ -52,20 +59,34 @@ class RealTeacherGroupDetailsComponent(
         communication.onReturnBackRequested()
     }
 
-    override fun onGroupDeleteRequestClick(id: GroupId) {
-        communication.onGroupDeleteRequested(id)
+    override fun onGroupDeleteRequestClick() {
+        if (isDeletingGroupProgress.value) return
+
+        componentScope.safeLaunch(errorHandler) {
+            withProgress(isDeletingGroupProgress) {
+                repositoryGroupList.deleteGroup(groupId)
+            }
+            communication.onGroupDeleteRequested(groupId)
+        }
     }
 
-    override fun onGroupMemberDeleteRequestClick(id: UserId) {
-        communication.onGroupMemberDeleteRequested(id)
+    override fun onGroupMemberKickRequestClick(action: String, userId: UserId) {
+        if (isKickingMemberProgress.value) return
+
+        componentScope.safeLaunch(errorHandler) {
+            withProgress(isKickingMemberProgress) {
+                repositoryGroupOfStudents.kickStudentFromGroup(action, groupId, userId)
+            }
+        }
     }
 
-    override fun onGroupCodeGenerateRequestClick(id: GroupId) {
+    override fun onGroupCodeGenerateRequestClick() {
         if (isGettingCodeProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isGettingCodeProgress) {
-                val groupInvitationData = repositoryGroupInvitationDataRepository.getGroupInvitationData(id)
+                val groupInvitationData =
+                    repositoryGroupInvitationData.getGroupInvitationData(groupId)
                 groupInvitationDataState.value = groupInvitationData
             }
         }

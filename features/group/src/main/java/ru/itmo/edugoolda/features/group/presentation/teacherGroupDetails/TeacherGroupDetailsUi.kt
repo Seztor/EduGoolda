@@ -39,8 +39,8 @@ import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
-import ru.itmo.edugoolda.data.group.groupInfo.api.GroupFullInfo
-import ru.itmo.edugoolda.data.group.groupOfStudentsList.api.GroupOfStudentsList
+import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -87,72 +87,71 @@ fun TeacherGroupDetailsUi(
                 component.onRetryClick()
             },
         ) { data: GroupFullInfo, _: Boolean ->
-            Column {
-                Row(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .padding(horizontal = 20.dp),
-                    verticalAlignment = Alignment.CenterVertically
+            Row(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .padding(horizontal = 20.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Text(
+                    text = data.name,
+                    fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
+                    fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
+                    color = CustomTheme.colors.text.primary,
+                    modifier = Modifier.padding(10.dp)
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                IconButton(
+                    onClick = { component.onReturnBackRequestClick() },
+                    modifier = Modifier.size(40.dp)
                 ) {
-
-                    Text(
-                        text = data.name,
-                        fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
-                        fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
-                        color = CustomTheme.colors.text.primary,
-                        modifier = Modifier.padding(10.dp)
-                    )
-
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    IconButton(
-                        onClick = { component.onReturnBackRequestClick() },
-                        modifier = Modifier.size(40.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.rubbish_bin_icon),
-                            contentDescription = "Rubbish bin",
-                            modifier = Modifier.size(30.dp)
-                        )
-                    }
-                }
-
-                Row(
-                    modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 20.dp)
-                ) {
-                    AppButton(
-                        onClick = { component.onGroupCodeGenerateRequestClick(data.id) },
-                        text = stringResource(R.string.group_invitation_code),
-                        buttonType = ButtonType.Primary,
-                        modifier = Modifier
-                            .padding(end = 20.dp)
-                            .width(140.dp)
-                            .height(75.dp)
-                    )
-
-                    AppButton(
-                        onClick = {
-                            if (groupInvitationDataState.code.value.isNotEmpty()) {
-                                val clipboard =
-                                    context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                clipboard.setPrimaryClip(
-                                    ClipData.newPlainText(
-                                        "Group Code", groupInvitationDataState.code.value
-                                    )
-                                )
-                            }
-                        },
-                        text = when (groupInvitationDataState.code.value) {
-                            "" -> ""
-                            else -> groupInvitationDataState.code.value
-                        },
-                        buttonType = ButtonType.Secondary,
-                        modifier = Modifier
-                            .width(140.dp)
-                            .height(75.dp)
+                    Icon(
+                        painter = painterResource(R.drawable.rubbish_bin_icon),
+                        contentDescription = "Rubbish bin",
+                        modifier = Modifier.size(30.dp)
                     )
                 }
             }
+        }
+        Row(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 20.dp)
+        ) {
+            AppButton(
+                onClick = { component.onGroupCodeGenerateRequestClick() },
+                text = stringResource(R.string.group_invitation_code),
+                buttonType = ButtonType.Primary,
+                modifier = Modifier
+                    .padding(end = 20.dp)
+                    .width(140.dp)
+                    .height(75.dp)
+            )
+
+            AppButton(
+                onClick = {
+                    if (groupInvitationDataState != null) {
+                        val clipboard =
+                            context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        clipboard.setPrimaryClip(
+                            ClipData.newPlainText(
+                                "Group Code", groupInvitationDataState!!.code.value
+                            )
+                        )
+                    }
+                },
+                text = when (groupInvitationDataState) {
+                    null -> ""
+                    else -> groupInvitationDataState!!.code.value
+                },
+                buttonType = ButtonType.Secondary,
+                modifier = Modifier
+                    .width(140.dp)
+                    .height(75.dp)
+            )
         }
 
         Text(
@@ -181,7 +180,7 @@ fun TeacherGroupDetailsUi(
                 ) {
                 items(data.users) { item ->
                     GroupItem(
-                        { component.onGroupMemberDeleteRequestClick(item.id) },
+                        { component.onGroupMemberKickRequestClick("kick", item.id) },
                         item.name,
                     )
                 }

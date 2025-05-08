@@ -2,13 +2,13 @@ package ru.itmo.edugoolda.features.group.presentation.studentGroups
 
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.PagedState
-import ru.itmo.edugoolda.data.group.groupList.api.GroupId
-import ru.itmo.edugoolda.data.group.groupList.api.GroupList
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 interface StudentGroupComponent {
     val groupSearchInputControl: InputControl
-    val studentGroupState: StateFlow<PagedState<GroupList>>
+    val studentGroupState: StateFlow<PagedState<GroupInfoList>>
 
     fun onRefresh()
     fun onRetryClick()

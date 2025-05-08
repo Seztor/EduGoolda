@@ -34,7 +34,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.group.groupList.api.GroupList
+import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -62,7 +62,7 @@ fun TeacherGroupsUi(
             state = state,
             onRefresh = component::onRefresh,
             onRetryClick = component::onRetryClick
-        ) { data: GroupList, _: Boolean ->
+        ) { data: GroupInfoList, _: Boolean ->
             val lazyListState = rememberLazyListState()
             lazyListState.TriggerLoadNext(
                 pagedState = state,

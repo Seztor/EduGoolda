@@ -1,0 +1,67 @@
+package ru.itmo.edugoolda.data.group.group_list.internal
+
+import me.aartikov.replica.algebra.paged.map
+import me.aartikov.replica.client.ReplicaClient
+import me.aartikov.replica.paged.PagedData
+import me.aartikov.replica.paged.PagedFetcher
+import me.aartikov.replica.paged.PagedReplicaSettings
+import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
+import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
+import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
+import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
+import kotlin.time.Duration.Companion.minutes
+
+internal class GroupsListRepositoryImpl(
+    replicaClient: ReplicaClient,
+    private val groupListApi: GroupListApi,
+) : GroupListRepository {
+    companion object {
+        private const val PAGE_SIZE = 20
+    }
+
+    override val groupInfoListReplica = replicaClient.createPagedReplica(
+        name = "group list replica",
+        settings = PagedReplicaSettings(staleTime = 5.minutes),
+        idExtractor = { it.id },
+        fetcher = object : PagedFetcher<GroupInfo, PageWithTotalAmount<GroupInfo>> {
+            override suspend fun fetchFirstPage(): PageWithTotalAmount<GroupInfo> {
+                val groups =
+                    groupListApi.getGroupsList(
+                        query = null,
+                        subjectId = null,
+                        pageSize = PAGE_SIZE,
+                        page = 1
+                    ).toDomain()
+
+                return PageWithTotalAmount(
+                    hasNextPage = groups.total > PAGE_SIZE,
+                    hasPreviousPage = false,
+                    items = groups.groups,
+                    total = groups.total
+                )
+            }
+
+            override suspend fun fetchNextPage(currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>): PageWithTotalAmount<GroupInfo> {
+                val groups = groupListApi.getGroupsList(
+                    query = null,
+                    subjectId = null,
+                    pageSize = PAGE_SIZE,
+                    page = currentData.pages.size + 1
+                ).toDomain()
+
+                return PageWithTotalAmount(
+                    hasNextPage = groups.total > PAGE_SIZE * (currentData.pages.size + 1),
+                    hasPreviousPage = false,
+                    items = groups.groups,
+                    total = groups.total
+                )
+            }
+        }
+    ).map { GroupInfoList(it.items, it.hasNextPage) }
+
+    override suspend fun deleteGroup(groupId: GroupId) {
+        groupListApi.deleteGroup(groupId.value)
+    }
+}

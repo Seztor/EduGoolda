@@ -7,14 +7,14 @@ import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.withProgress
-import ru.itmo.edugoolda.data.group.createGroup.GroupRepositoryImpl
+import ru.itmo.edugoolda.data.group.create_group.GroupRepository
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealGroupCreateComponent(
     componentContext: ComponentContext,
     private val communication: GroupCreateComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val groupRepository: GroupRepositoryImpl,
+    private val groupRepository: GroupRepository,
 ) : GroupCreateComponent, ComponentContext by componentContext {
     override val nameInputControl = InputControl(componentScope)
     override val descriptionInputControl = InputControl(componentScope)
