@@ -41,6 +41,7 @@ import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
 import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -180,7 +181,7 @@ fun TeacherGroupDetailsUi(
                 ) {
                 items(data.users) { item ->
                     GroupItem(
-                        { component.onGroupMemberKickRequestClick("kick", item.id) },
+                        { component.onGroupMemberKickRequestClick(KickType.Kick, item.id) },
                         item.name,
                     )
                 }

@@ -4,8 +4,9 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import ru.itmo.edugoolda.core.network.NetworkApiFactory
-import ru.itmo.edugoolda.data.group.create_group.GroupRepository
-import ru.itmo.edugoolda.data.group.create_group.GroupRepositoryImpl
+import ru.itmo.edugoolda.data.group.create_group.api.GroupCreateRepository
+import ru.itmo.edugoolda.data.group.create_group.internal.GroupCreateApi
+import ru.itmo.edugoolda.data.group.create_group.internal.GroupCreateRepositoryImpl
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfoRepository
 import ru.itmo.edugoolda.data.group.group_info.internal.GroupFullInfoApi
 import ru.itmo.edugoolda.data.group.group_info.internal.GroupFullInfoRepositoryImpl
@@ -20,6 +21,9 @@ import ru.itmo.edugoolda.data.group.group_of_students_list.internal.GroupOfStude
 import ru.itmo.edugoolda.data.group.group_of_students_list.internal.GroupOfStudentsRepositoryImpl
 
 val dataGroupModule = module {
+    single<GroupCreateApi> {
+        get<NetworkApiFactory>().authorizedKtorfit.create()
+    }
     single<GroupListApi> {
         get<NetworkApiFactory>().authorizedKtorfit.create()
     }
@@ -33,7 +37,7 @@ val dataGroupModule = module {
         get<NetworkApiFactory>().authorizedKtorfit.create()
     }
 
-    singleOf(::GroupRepositoryImpl) bind GroupRepository::class
+    singleOf(::GroupCreateRepositoryImpl) bind GroupCreateRepository::class
     singleOf(::GroupsListRepositoryImpl) bind GroupListRepository::class
     singleOf(::GroupOfStudentsRepositoryImpl) bind GroupOfStudentsRepository::class
     singleOf(::GroupFullInfoRepositoryImpl) bind GroupFullInfoRepository::class

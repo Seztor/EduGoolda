@@ -11,6 +11,7 @@ import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
 import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
 import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.KickStudentRequest
 import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.toDomain
 import ru.itmo.edugoolda.data.user.api.UserId
@@ -74,12 +75,16 @@ internal class GroupOfStudentsRepositoryImpl(
     }
 
     override suspend fun kickStudentFromGroup(
-        action: String,
+        action: KickType,
         groupId: GroupId,
         studentId: UserId,
     ) {
+        val actionType = when (action) {
+            KickType.Kick -> "kick"
+            KickType.KickAndBan -> "kick_and_ban"
+        }
         val kickActionRequest = KickStudentRequest(
-            action,
+            actionType,
             groupId.value,
             studentId.value
         )

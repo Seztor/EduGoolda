@@ -15,6 +15,7 @@ import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationDat
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
 import ru.itmo.edugoolda.data.user.api.UserId
 
 class RealTeacherGroupDetailsComponent(
@@ -70,7 +71,7 @@ class RealTeacherGroupDetailsComponent(
         }
     }
 
-    override fun onGroupMemberKickRequestClick(action: String, userId: UserId) {
+    override fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) {
         if (isKickingMemberProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {

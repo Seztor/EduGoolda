@@ -7,6 +7,7 @@ import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
 import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationData
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
+import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
 import ru.itmo.edugoolda.data.user.api.UserId
 
 interface TeacherGroupDetailsComponent {
@@ -22,7 +23,7 @@ interface TeacherGroupDetailsComponent {
     fun onLoadNext()
     fun onReturnBackRequestClick()
     fun onGroupDeleteRequestClick()
-    fun onGroupMemberKickRequestClick(action: String, userId: UserId)
+    fun onGroupMemberKickRequestClick(action: KickType, userId: UserId)
     fun onGroupCodeGenerateRequestClick()
 
     interface Communication {

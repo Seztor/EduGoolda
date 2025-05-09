@@ -7,5 +7,5 @@ import ru.itmo.edugoolda.data.user.api.UserId
 interface GroupOfStudentsRepository {
     val groupOfStudentsReplica: KeyedPagedReplica<GroupId, GroupOfStudentsList>
 
-    suspend fun kickStudentFromGroup(action: String, groupId: GroupId, studentId: UserId)
+    suspend fun kickStudentFromGroup(action: KickType, groupId: GroupId, studentId: UserId)
 }
