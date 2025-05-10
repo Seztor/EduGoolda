@@ -56,7 +56,7 @@ fun TeacherGroupsUi(
             hasNextPage = state.data?.hasNextPage == true,
             callback = component::onLoadNext
         )
-        Column(modifier = modifier) {
+        Column {
             AppTextField(
                 inputControl = component.groupSearchInputControl,
                 placeholder = stringResource(R.string.search_students_group),

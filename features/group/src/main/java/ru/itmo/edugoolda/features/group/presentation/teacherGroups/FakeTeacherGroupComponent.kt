@@ -11,23 +11,13 @@ class FakeTeacherGroupComponent() : TeacherGroupComponent {
     override val groupSearchInputControl = InputControl(GlobalScope)
     override val teacherGroupState = MutableStateFlow(PagedState(data = GroupList.MOCK))
 
-    override fun onRefresh() {
-        TODO("Not yet implemented")
-    }
+    override fun onRefresh() = Unit
 
-    override fun onRetryClick() {
-        TODO("Not yet implemented")
-    }
+    override fun onRetryClick() = Unit
 
-    override fun onLoadNext() {
-        TODO("Not yet implemented")
-    }
+    override fun onLoadNext() = Unit
 
-    override fun onGroupDetailRequestClick(id: GroupId) {
-        TODO("Not yet implemented")
-    }
+    override fun onGroupDetailRequestClick(id: GroupId) = Unit
 
-    override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) {
-        TODO("Not yet implemented")
-    }
+    override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId) = Unit
 }
