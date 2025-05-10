@@ -7,18 +7,16 @@ import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.invitations.api.JoinRequest
 import ru.itmo.edugoolda.data.invitations.api.JoinRequestAction
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestListRepository
 import ru.itmo.edugoolda.data.invitations.api.JoinRequestRepository
 
 class JoinRequestsComponentImpl(
     componentContext: ComponentContext,
-    joinRequestListRepository: JoinRequestListRepository,
     private val errorHandler: ErrorHandler,
     private val joinRequestRepository: JoinRequestRepository,
 
     ) : JoinRequestsComponent, ComponentContext by componentContext {
 
-    private val invitationReplica = joinRequestListRepository.joinRequestListReplica
+    private val invitationReplica = joinRequestRepository.joinRequestListReplica
     override val joinRequestState = invitationReplica.observe(this, errorHandler)
     override fun onAcceptClick(joinRequest: JoinRequest) {
         componentScope.safeLaunch(errorHandler) {

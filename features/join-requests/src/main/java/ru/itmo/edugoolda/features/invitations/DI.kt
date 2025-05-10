@@ -8,5 +8,5 @@ import ru.itmo.edugoolda.features.invitations.presentation.JoinRequestsComponent
 fun ComponentFactory.createInvitationComponent(
     componentContext: ComponentContext,
 ): JoinRequestsComponentImpl {
-    return JoinRequestsComponentImpl(componentContext, get(), get(), get())
+    return JoinRequestsComponentImpl(componentContext, get(), get())
 }
