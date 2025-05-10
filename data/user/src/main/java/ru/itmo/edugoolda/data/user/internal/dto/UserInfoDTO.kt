@@ -2,7 +2,9 @@ package ru.itmo.edugoolda.data.user.internal.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
+import ru.itmo.edugoolda.data.user.internal.mappers.UserRoleMapper
 
 
 @Serializable
@@ -15,9 +17,9 @@ data class UserInfoDTO(
 )
 
 fun UserInfoDTO.toDomain(): UserInfo = UserInfo(
-    id = id,
+    id = UserId(id),
     name = name,
     email = email,
-    role = role,
+    role = UserRoleMapper.fromString(role),
     isDeleted = isDeleted
 )
