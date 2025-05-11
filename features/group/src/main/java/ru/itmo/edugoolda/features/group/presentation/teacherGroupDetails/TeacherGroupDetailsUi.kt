@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.aartikov.replica.paged.PagedLoadingStatus
@@ -58,13 +59,14 @@ fun TeacherGroupDetailsUi(
     Column(modifier = modifier) {
         Row(
             modifier = Modifier
-                .height(50.dp)
+                .height(70.dp)
                 .background(CustomTheme.colors.content.contentActive)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = { component.onReturnBackRequestClick() }
+                onClick = { component.onReturnBackRequestClick() },
+                Modifier.padding(top = 15.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_left_white),
@@ -75,7 +77,7 @@ fun TeacherGroupDetailsUi(
 
             Text(
                 text = stringResource(R.string.group_info_title),
-                modifier = Modifier.padding(start = 30.dp),
+                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
                 fontWeight = CustomTheme.typography.title.bold.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 color = CustomTheme.colors.text.invert
@@ -100,7 +102,10 @@ fun TeacherGroupDetailsUi(
                     fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
                     fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
                     color = CustomTheme.colors.text.primary,
-                    modifier = Modifier.padding(10.dp)
+                    modifier = Modifier.padding(top = 5.dp).width(270.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    softWrap = false
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
@@ -220,7 +225,10 @@ fun GroupItem(
                 text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically).width(260.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false
             )
 
             Spacer(modifier = Modifier.weight(1f))
