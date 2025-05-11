@@ -8,6 +8,7 @@ import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.create_group.api.GroupCreateRepository
+import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealGroupCreateComponent(
@@ -21,7 +22,7 @@ class RealGroupCreateComponent(
     override val subjectsList = MutableStateFlow(listOf("1","2","3"))
     override val isCreationProgress = MutableStateFlow(false)
     override val isCreationButtonEnabled = computed(nameInputControl.text, String::isNotBlank)
-    override val selectedSubject = MutableStateFlow(subjectsList.value[0])
+    override val selectedSubject = MutableStateFlow(SubjectId("123"))
 
     override fun onCreateClick() {
         if (isCreationProgress.value) return
@@ -33,7 +34,7 @@ class RealGroupCreateComponent(
                     name = nameInputControl.text.value,
                     description = descriptionInputControl.text.value
                 )
-                communication.onGroupCreated(id)
+                communication.onGroupCreated(id.id.value)
             }
         }
     }
@@ -43,6 +44,6 @@ class RealGroupCreateComponent(
     }
 
     override fun onSubjectSelect(subject: String) {
-        selectedSubject.value = subject
+        selectedSubject.value = SubjectId(subject)
     }
 }

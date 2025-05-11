@@ -9,12 +9,12 @@ import ru.itmo.edugoolda.data.auth.internal.dto.RefreshResponse
 import ru.itmo.edugoolda.data.auth.internal.dto.RegisterRequest
 
 internal interface AuthApi {
-    @POST("/api/v1/register")
+    @POST("api/v1/auth/register")
     suspend fun register(@Body request: RegisterRequest): AuthResponse
 
-    @POST("/api/v1/login")
+    @POST("api/v1/auth/login")
     suspend fun login(@Body request: LoginRequest): AuthResponse
 
-    @POST("/api/v1/refresh")
+    @POST("api/v1/auth/refresh")
     suspend fun refresh(@Body request: RefreshRequest): RefreshResponse
 }

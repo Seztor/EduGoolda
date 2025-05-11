@@ -10,3 +10,5 @@ internal data class RegisterRequest(
     @SerialName("name") val name: String,
     @SerialName("role") val role: String,
 )
+
+

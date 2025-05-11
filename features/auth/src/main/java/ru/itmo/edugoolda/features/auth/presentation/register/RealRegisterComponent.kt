@@ -38,7 +38,7 @@ class RealRegisterComponent(
                         email = Email(emailInputControl.text.value),
                         password = Password(passwordInputControl.text.value),
                         name = userNameInputControl.text.value,
-                        role = selectedRole.value.name
+                        role = selectedRole.value
                     )
                     communication.onRegistered()
                 }

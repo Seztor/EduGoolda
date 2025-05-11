@@ -9,13 +9,13 @@ import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.GroupOfS
 import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.KickStudentRequest
 
 internal interface GroupOfStudentsApi {
-    @GET("/api/v1/group/{groupId}/students")
+    @GET("api/v1/group/{groupId}/students")
     suspend fun getStudentsList(
         @Path("groupId") id: String,
         @Query("page_size") pageSize: Int,
         @Query("page") page: Int
     ): GroupOfStudentsResponse
 
-    @POST("/api/v1/group/kick")
+    @POST("api/v1/group/kick")
     suspend fun kickStudentFromGroup(@Body request: KickStudentRequest)
 }
