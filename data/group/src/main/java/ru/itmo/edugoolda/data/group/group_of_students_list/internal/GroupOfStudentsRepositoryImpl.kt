@@ -26,7 +26,7 @@ internal class GroupOfStudentsRepositoryImpl(
         private const val PAGE_SIZE = 20
     }
 
-    override val groupOfStudentsReplica: KeyedPagedReplica<GroupId, GroupOfStudentsList> = replicaClient.createKeyedPagedReplica(
+    private val _groupOfStudentsReplica = replicaClient.createKeyedPagedReplica(
         name = "students list replica",
         childName = {
             "child $it"
@@ -70,7 +70,9 @@ internal class GroupOfStudentsRepositoryImpl(
                 )
             }
         }
-    ).map { _, data ->
+    )
+
+    override val groupOfStudentsReplica = _groupOfStudentsReplica.map { _, data ->
         GroupOfStudentsList(data.items, data.hasNextPage)
     }
 
@@ -89,5 +91,18 @@ internal class GroupOfStudentsRepositoryImpl(
             studentId.value
         )
         groupOfStudentsApi.kickStudentFromGroup(kickActionRequest)
+        _groupOfStudentsReplica.mutateData(
+            key = groupId,
+            transform = { pages ->
+                pages.map { page ->
+                    page.copy(
+                        hasNextPage = page.hasNextPage,
+                        hasPreviousPage = page.hasPreviousPage,
+                        items = page.items.filter { it.id != studentId },
+                        total = page.total
+                    )
+                }
+            }
+        )
     }
 }
