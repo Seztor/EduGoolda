@@ -27,6 +27,8 @@ internal interface AuthTokensStorage {
         override suspend fun save(tokens: AuthTokens) {
             storage.putString(ACCESS_TOKEN_KEY, tokens.accessToken)
             storage.putString(REFRESH_TOKEN_KEY, tokens.refreshToken)
+
+            this.tokens.value = tokens
         }
 
         private suspend fun getTokens(): AuthTokens? {

@@ -4,7 +4,6 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.message.presentation.MessageComponent
 import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
-import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupComponent
 
 /**
  * A root of a Decompose component tree.
@@ -19,6 +18,5 @@ interface RootComponent {
 
     sealed interface Child {
         class Auth(val instance: AuthComponent) : Child
-        class GroupList(val instance: TeacherGroupComponent) : Child
     }
 }

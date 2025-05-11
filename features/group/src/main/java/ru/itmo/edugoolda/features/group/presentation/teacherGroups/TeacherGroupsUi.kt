@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.aartikov.replica.paged.PagedLoadingStatus
@@ -109,16 +111,27 @@ fun TeacherGroupItem(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier
-                    .padding(start = 15.dp, end = 10.dp)
-                    .size(27.dp)
+                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
             )
 
             Text(
-                text = "$name, $subjectName",
+                text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically).width(150.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false
+            )
+
+            Text(
+                text = ", $subjectName",
+                fontWeight = CustomTheme.typography.body.regular.fontWeight,
+                fontSize = CustomTheme.typography.body.regular.fontSize,
+                modifier = Modifier.align(Alignment.CenterVertically).width(100.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -139,9 +152,7 @@ fun TeacherGroupItem(
 
             IconButton(
                 onClick = { onGroupItemClick() },
-                modifier = Modifier
-                    .padding(start = 10.dp, end = 10.dp)
-                    .size(35.dp)
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp).size(35.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_forward),
@@ -164,7 +175,7 @@ fun TeacherGroupItem(
 fun PreviewGroupItem() {
     AppTheme {
         TeacherGroupItem(
-            {}, {}, "Группа 1", "Math", true
+            {}, {},"Группа 1", "Math", true
         )
     }
 }
