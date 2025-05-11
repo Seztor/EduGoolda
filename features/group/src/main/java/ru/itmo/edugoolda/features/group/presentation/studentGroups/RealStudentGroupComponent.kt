@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.features.group.presentation.studentGroups
 
 import com.arkivanov.decompose.ComponentContext
+import me.aartikov.replica.algebra.paged.withKey
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
@@ -15,7 +16,7 @@ class RealStudentGroupComponent(
     private val groupListRepository: GroupListRepository,
 ) : StudentGroupComponent, ComponentContext by componentContext {
     override val groupSearchInputControl = InputControl(componentScope)
-    private val studentGroupReplica = groupListRepository.groupInfoListReplica
+    private val studentGroupReplica = groupListRepository.groupInfoListReplica.withKey(groupSearchInputControl.text)
     override val studentGroupState = studentGroupReplica.observe(this, errorHandler)
 
     override fun onRefresh() {

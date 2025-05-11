@@ -36,8 +36,7 @@ class RealTeacherGroupDetailsComponent(
         repositoryGroupFullInfo.groupInfoReplica.withKey(groupId)
     override val groupInfoState = groupInfoReplica.observe(this, errorHandler)
 
-    override val groupInvitationDataState: MutableStateFlow<GroupInvitationData?> =
-        MutableStateFlow(null)
+    override val groupInvitationDataState: MutableStateFlow<GroupInvitationData?> = MutableStateFlow(null)
     override val isGettingCodeProgress = MutableStateFlow(false)
     override val isKickingMemberProgress = MutableStateFlow(false)
     override val isDeletingGroupProgress = MutableStateFlow(false)

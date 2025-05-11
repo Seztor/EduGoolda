@@ -1,15 +1,17 @@
 package ru.itmo.edugoolda.data.group.group_list.internal
 
+import kotlinx.coroutines.flow.StateFlow
 import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
+import me.aartikov.replica.keyed_paged.KeyedPagedFetcher
+import me.aartikov.replica.keyed_paged.KeyedPagedReplicaSettings
 import me.aartikov.replica.paged.PagedData
-import me.aartikov.replica.paged.PagedFetcher
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
-import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
+import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
@@ -21,15 +23,21 @@ internal class GroupsListRepositoryImpl(
         private const val PAGE_SIZE = 20
     }
 
-    override val groupInfoListReplica = replicaClient.createPagedReplica(
+    override val groupInfoListReplica = replicaClient.createKeyedPagedReplica(
         name = "group list replica",
-        settings = PagedReplicaSettings(staleTime = 5.minutes),
+        childName = {
+            "child $it"
+        },
+        settings = KeyedPagedReplicaSettings(maxCount = 10),
         idExtractor = { it.id },
-        fetcher = object : PagedFetcher<GroupInfo, PageWithTotalAmount<GroupInfo>> {
-            override suspend fun fetchFirstPage(): PageWithTotalAmount<GroupInfo> {
+        childSettings = {
+            PagedReplicaSettings(staleTime = 5.minutes)
+        },
+        fetcher = object : KeyedPagedFetcher<String, GroupInfo, PageWithTotalAmount<GroupInfo>> {
+            override suspend fun fetchFirstPage(key: String): PageWithTotalAmount<GroupInfo> {
                 val groups =
                     groupListApi.getGroupsList(
-                        query = null,
+                        query = key,
                         subjectId = null,
                         pageSize = PAGE_SIZE,
                         page = 1
@@ -43,9 +51,12 @@ internal class GroupsListRepositoryImpl(
                 )
             }
 
-            override suspend fun fetchNextPage(currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>): PageWithTotalAmount<GroupInfo> {
+            override suspend fun fetchNextPage(
+                key: String,
+                currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>
+            ): PageWithTotalAmount<GroupInfo> {
                 val groups = groupListApi.getGroupsList(
-                    query = null,
+                    query = key,
                     subjectId = null,
                     pageSize = PAGE_SIZE,
                     page = currentData.pages.size + 1
@@ -59,7 +70,9 @@ internal class GroupsListRepositoryImpl(
                 )
             }
         }
-    ).map { GroupInfoList(it.items, it.hasNextPage) }
+    ).map { _, data ->
+        GroupInfoList(data.items, data.hasNextPage)
+    }
 
     override suspend fun deleteGroup(groupId: GroupId) {
         groupListApi.deleteGroup(groupId.value)
