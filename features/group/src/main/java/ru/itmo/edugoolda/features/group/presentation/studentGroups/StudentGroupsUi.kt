@@ -47,7 +47,7 @@ fun StudentGroupsUi(
         AppTextField(
             inputControl = component.groupSearchInputControl,
             placeholder = stringResource(R.string.search_students_group),
-            modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
+            modifier = Modifier.padding(horizontal = 20.dp).padding(top = 35.dp, bottom = 15.dp),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
