@@ -15,35 +15,35 @@ data class GroupOfStudentsList(
                     id = UserId("1"),
                     name = "Павел",
                     email = "USER1@mail.ru",
-                    role = UserRole.Student.name,
+                    role = UserRole.Student,
                     isDeleted = false
                 ),
                 UserInfo(
                     id = UserId("2"),
                     name = "Серега",
                     email = "USER2@mail.ru",
-                    role = UserRole.Student.name,
+                    role = UserRole.Student,
                     isDeleted = false
                 ),
                 UserInfo(
                     id = UserId("3"),
                     name = "Иван",
                     email = "USER3@mail.ru",
-                    role = UserRole.Student.name,
+                    role = UserRole.Student,
                     isDeleted = false
                 ),
                 UserInfo(
                     id = UserId("4"),
                     name = "Леха",
                     email = "USER4@mail.ru",
-                    role = UserRole.Student.name,
+                    role = UserRole.Student,
                     isDeleted = false
                 ),
                 UserInfo(
                     id = UserId("5"),
                     name = "Гоша",
                     email = "USER5@mail.ru",
-                    role = UserRole.Student.name,
+                    role = UserRole.Student,
                     isDeleted = false
                 )
             ),

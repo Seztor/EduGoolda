@@ -9,7 +9,7 @@ import ru.itmo.edugoolda.data.invitations.internal.JoinRequestRepositoryImpl
 
 val dataInvitationsModule = module {
     single<JoinRequestApi> {
-        get<NetworkApiFactory>().authorizedKtorfit.createInvitationApi()
+        get<NetworkApiFactory>().authorizedKtorfit.create()
     }
     singleOf(::JoinRequestRepositoryImpl) bind JoinRequestRepositoryImpl::class
 }

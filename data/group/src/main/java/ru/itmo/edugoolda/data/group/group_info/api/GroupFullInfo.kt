@@ -32,7 +32,7 @@ data class GroupFullInfo(
                 id = UserId("1234"),
                 name = "Pavel",
                 email = "pavel@gmail.com",
-                role = UserRole.Teacher.name,
+                role = UserRole.Teacher,
                 isDeleted = false
             ),
             studentsCount = 5,
