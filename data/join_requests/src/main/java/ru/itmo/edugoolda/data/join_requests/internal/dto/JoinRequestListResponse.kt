@@ -1,12 +1,12 @@
-package ru.itmo.edugoolda.data.invitations.internal.dto
+package ru.itmo.edugoolda.data.join_requests.internal.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-import ru.itmo.edugoolda.data.invitations.api.JoinRequest
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestId
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
 
-import ru.itmo.edugoolda.data.invitations.internal.domain.JoinRequestListWithTotal
+import ru.itmo.edugoolda.data.join_requests.internal.domain.JoinRequestListWithTotal
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 

@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.invitations.presentation
+package ru.itmo.edugoolda.features.join_requests.presentation
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestList
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 import ru.itmo.edugoolda.core.widget.invitations.InvitationListItem
 
 @Composable

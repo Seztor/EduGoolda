@@ -1,18 +1,18 @@
-package ru.itmo.edugoolda.data.invitations.internal
+package ru.itmo.edugoolda.data.join_requests.internal
 
 import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
 import me.aartikov.replica.paged.PagedFetcher
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
-import ru.itmo.edugoolda.data.invitations.api.JoinRequest
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestList
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 import me.aartikov.replica.paged.PagedData
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestAction
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestId
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestRepository
-import ru.itmo.edugoolda.data.invitations.internal.dto.JoinRequestResponseRequest
-import ru.itmo.edugoolda.data.invitations.internal.dto.toDomain
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
+import ru.itmo.edugoolda.data.join_requests.internal.dto.JoinRequestResponseRequest
+import ru.itmo.edugoolda.data.join_requests.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
 class JoinRequestRepositoryImpl(

@@ -1,9 +1,9 @@
-package ru.itmo.edugoolda.features.invitations.presentation
+package ru.itmo.edugoolda.features.join_requests.presentation
 
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.PagedState
-import ru.itmo.edugoolda.data.invitations.api.JoinRequest
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestList
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 
 interface JoinRequestsComponent {
     val joinRequestState: StateFlow<PagedState<JoinRequestList>>

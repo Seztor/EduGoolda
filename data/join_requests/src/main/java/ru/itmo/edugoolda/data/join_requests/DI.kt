@@ -1,11 +1,11 @@
-package ru.itmo.edugoolda.data.invitations
+package ru.itmo.edugoolda.data.join_requests
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import ru.itmo.edugoolda.core.network.NetworkApiFactory
-import ru.itmo.edugoolda.data.invitations.internal.JoinRequestApi
-import ru.itmo.edugoolda.data.invitations.internal.JoinRequestRepositoryImpl
+import ru.itmo.edugoolda.data.join_requests.internal.JoinRequestApi
+import ru.itmo.edugoolda.data.join_requests.internal.JoinRequestRepositoryImpl
 
 val dataInvitationsModule = module {
     single<JoinRequestApi> {

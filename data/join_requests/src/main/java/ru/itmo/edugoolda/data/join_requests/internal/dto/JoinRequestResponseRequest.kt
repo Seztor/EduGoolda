@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.data.invitations.internal.dto
+package ru.itmo.edugoolda.data.join_requests.internal.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.data.invitations.api
+package ru.itmo.edugoolda.data.join_requests.api
 
 
 data class JoinRequestList (

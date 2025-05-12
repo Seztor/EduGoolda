@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.features.invitations"
+    namespace = "ru.itmo.edugoolda.features.join_requests"
 }
 
 dependencies {
@@ -16,6 +16,7 @@ dependencies {
     // Modules
     implementation(project(":core"))
     implementation(project(":data:join_requests"))
+    implementation(project(":data:user"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
