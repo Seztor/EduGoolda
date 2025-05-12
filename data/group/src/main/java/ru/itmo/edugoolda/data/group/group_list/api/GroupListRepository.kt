@@ -6,4 +6,5 @@ interface GroupListRepository {
     val groupInfoListReplica: KeyedPagedReplica<String, GroupInfoList>
 
     suspend fun deleteGroup(groupId: GroupId)
+    suspend fun changeFavouriteStatus(id: GroupId, isFavourite: Boolean)
 }

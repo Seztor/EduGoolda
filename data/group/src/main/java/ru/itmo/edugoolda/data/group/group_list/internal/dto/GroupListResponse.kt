@@ -33,3 +33,8 @@ internal fun GroupInfoDTO.toDomain(): GroupInfo = GroupInfo(
     ownerName = ownerName,
     isFavourite = isFavourite
 )
+
+@Serializable
+internal data class ChangeFavouriteRequest(
+    @SerialName("is_favourite") val isFavourite: Boolean
+)

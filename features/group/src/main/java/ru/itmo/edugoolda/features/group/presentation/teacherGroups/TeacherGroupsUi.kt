@@ -78,7 +78,7 @@ fun TeacherGroupsUi(
                 items(data.groups) { item ->
                     TeacherGroupItem(
                         { component.onGroupDetailRequestClick(item.id) },
-                        { component.onGroupChangeFavouriteStatusRequestClick(item.id) },
+                        { component.onGroupChangeFavouriteStatusRequestClick(item.id, !item.isFavourite) },
                         item.name,
                         item.subjectName,
                         item.isFavourite

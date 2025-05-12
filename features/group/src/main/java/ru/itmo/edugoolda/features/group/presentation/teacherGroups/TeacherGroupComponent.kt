@@ -9,15 +9,15 @@ import ru.mobileup.kmm_form_validation.control.InputControl
 interface TeacherGroupComponent {
     val groupSearchInputControl: InputControl
     val teacherGroupState: StateFlow<PagedState<GroupInfoList>>
+    val isChangingFavouriteStatus: StateFlow<Boolean>
 
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
     fun onGroupDetailRequestClick(id: GroupId)
-    fun onGroupChangeFavouriteStatusRequestClick(id: GroupId)
+    fun onGroupChangeFavouriteStatusRequestClick(id: GroupId, isFavourite: Boolean)
 
     interface Communication {
         fun onGroupDetailsRequested(id: GroupId)
-        fun onGroupChangeFavouriteStatusRequested(id: GroupId)
     }
 }

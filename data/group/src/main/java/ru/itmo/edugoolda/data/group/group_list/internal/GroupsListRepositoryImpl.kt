@@ -12,6 +12,7 @@ import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
 import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
+import ru.itmo.edugoolda.data.group.group_list.internal.dto.ChangeFavouriteRequest
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
 import kotlin.time.Duration.Companion.minutes
 
@@ -76,5 +77,9 @@ internal class GroupsListRepositoryImpl(
 
     override suspend fun deleteGroup(groupId: GroupId) {
         groupListApi.deleteGroup(groupId.value)
+    }
+
+    override suspend fun changeFavouriteStatus(id: GroupId, isFavourite: Boolean) {
+        groupListApi.changeGroupFavouriteStatus(id.value, ChangeFavouriteRequest(isFavourite))
     }
 }

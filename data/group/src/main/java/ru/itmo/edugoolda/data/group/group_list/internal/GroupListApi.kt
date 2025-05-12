@@ -1,9 +1,12 @@
 package ru.itmo.edugoolda.data.group.group_list.internal
 
+import de.jensklingenberg.ktorfit.http.Body
 import de.jensklingenberg.ktorfit.http.DELETE
 import de.jensklingenberg.ktorfit.http.GET
+import de.jensklingenberg.ktorfit.http.PUT
 import de.jensklingenberg.ktorfit.http.Path
 import de.jensklingenberg.ktorfit.http.Query
+import ru.itmo.edugoolda.data.group.group_list.internal.dto.ChangeFavouriteRequest
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupListResponse
 
 internal interface GroupListApi {
@@ -17,4 +20,10 @@ internal interface GroupListApi {
 
     @DELETE("api/v1/group/{groupId}")
     suspend fun deleteGroup(@Path("groupId") groupId: String)
+
+    @PUT("api/v1/group/{groupId}/set_is_favourite")
+    suspend fun changeGroupFavouriteStatus(
+        @Path("groupId") groupId: String,
+        @Body request: ChangeFavouriteRequest
+    )
 }
