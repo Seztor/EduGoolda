@@ -4,8 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import org.koin.core.component.get
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
-import ru.itmo.edugoolda.features.group.presentation.create.GroupCreateComponent
-import ru.itmo.edugoolda.features.group.presentation.create.RealGroupCreateComponent
+import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
+import ru.itmo.edugoolda.features.group.presentation.createGroup.RealGroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.RealStudentGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.RealTeacherGroupDetailsComponent
@@ -16,7 +16,7 @@ import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupC
 fun ComponentFactory.createGroupCreateComponent(
     componentContext: ComponentContext,
     communication: GroupCreateComponent.Communication,
-): GroupCreateComponent {
+): RealGroupCreateComponent {
     return RealGroupCreateComponent(componentContext, communication, get(), get())
 }
 

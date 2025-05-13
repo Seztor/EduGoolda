@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_info.api.GroupSubject
+import ru.itmo.edugoolda.data.group.group_info.api.GroupSubjectsList
 import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
@@ -49,4 +50,13 @@ internal data class GroupSubjectDTO(
 internal fun GroupSubjectDTO.toDomain(): GroupSubject = GroupSubject(
     id = SubjectId(id),
     name = name
+)
+
+@Serializable
+internal data class GroupSubjectsListDTO(
+    @SerialName("subjects") val subjects: List<GroupSubjectDTO>
+)
+
+internal fun GroupSubjectsListDTO.toDomain() : GroupSubjectsList = GroupSubjectsList(
+    subjects = subjects.map { it.toDomain() }
 )

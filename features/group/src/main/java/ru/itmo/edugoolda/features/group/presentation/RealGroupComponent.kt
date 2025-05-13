@@ -6,8 +6,9 @@ import com.arkivanov.decompose.router.stack.childStack
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.utils.toStateFlow
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.features.group.createGroupCreateComponent
-import ru.itmo.edugoolda.features.group.presentation.create.GroupCreateComponent
+import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
 
 class RealGroupComponent(
     componentContext: ComponentContext,
@@ -24,7 +25,7 @@ class RealGroupComponent(
     ).toStateFlow(lifecycle)
 
     private inner class CommunicationResolver : GroupCreateComponent.Communication {
-        override fun onGroupCreated(id: String) {
+        override fun onGroupCreated(id: GroupId) {
             TODO("Not yet implemented")
         }
 
