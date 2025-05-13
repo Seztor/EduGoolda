@@ -14,7 +14,7 @@ interface TeacherGroupComponent {
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
-    fun onGroupDetailRequestClick(id: GroupId)
+    fun onGroupDetailsRequestClick(id: GroupId)
     fun onGroupChangeFavouriteStatusRequestClick(id: GroupId, isFavourite: Boolean)
 
     interface Communication {

@@ -36,7 +36,7 @@ class RealTeacherGroupComponent(
         teacherGroupReplica.loadNext()
     }
 
-    override fun onGroupDetailRequestClick(id: GroupId) {
+    override fun onGroupDetailsRequestClick(id: GroupId) {
         communication.onGroupDetailsRequested(id)
     }
 

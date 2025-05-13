@@ -13,7 +13,7 @@ interface StudentGroupComponent {
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
-    fun onGroupDetailRequestClick(id: GroupId)
+    fun onGroupDetailsRequestClick(id: GroupId)
     fun onGroupAddRequestClick()
 
     interface Communication {
