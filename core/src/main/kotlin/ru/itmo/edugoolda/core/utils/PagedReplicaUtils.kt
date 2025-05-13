@@ -65,11 +65,11 @@ fun <T : Any> Paged<T>.toPagedState(): PagedState<T> {
         error = error?.exception?.errorMessage
     )
 }
-//
-//data class PageWithTotalAmount<T : Any>(
-//    override val hasNextPage: Boolean,
-//    override val hasPreviousPage: Boolean,
-//    override val items: List<T>,
-//    val total: Int
-//
-//) : Page<T>
+
+data class PageWithTotalAmount<T : Any>(
+    override val hasNextPage: Boolean,
+    override val hasPreviousPage: Boolean,
+    override val items: List<T>,
+    val total: Int
+
+) : Page<T>
