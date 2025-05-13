@@ -75,7 +75,7 @@ fun StudentGroupsUi(
                 ) {
                 items(data.groups) { item ->
                     StudentGroupItem(
-                        { component.onGroupDetailRequestClick(item.id) },
+                        { component.onGroupDetailsRequestClick(item.id) },
                         item.name,
                         item.subjectName
                     )
