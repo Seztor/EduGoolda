@@ -19,7 +19,7 @@ class FakeTeacherGroupComponent() : TeacherGroupComponent {
 
     override fun onLoadNext() = Unit
 
-    override fun onGroupDetailRequestClick(id: GroupId) = Unit
+    override fun onGroupDetailsRequestClick(id: GroupId) = Unit
 
     override fun onGroupChangeFavouriteStatusRequestClick(id: GroupId, isFavourite: Boolean) = Unit
 }
