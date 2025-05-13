@@ -7,4 +7,9 @@
     <string name="group_info_title">Information about group</string>
     <string name="group_invitation_code">Generate invitation code</string>
     <string name="group_members_title">Members</string>
+    <string name="group_owner_title">Owner</string>
+    <string name="group_description_title">Description</string>
+    <string name="group_count_members_title">Number of members</string>
+    <string name="group_description_null">unfortunately, it\'s empty here</string>
+    <string name="group_subject_title">Subject name</string>
 </resources>

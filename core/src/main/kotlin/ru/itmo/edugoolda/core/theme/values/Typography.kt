@@ -25,8 +25,13 @@ val AppTypography = CustomTypography(
     ),
     body = BodyTypography(
         regular = TextStyle(
-            fontSize = 16.sp
-        )
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal
+        ),
+        bold = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        ),
     ),
     caption = CaptionTypography(
         regular = TextStyle(

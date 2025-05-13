@@ -104,4 +104,8 @@ internal class GroupStudentsRepositoryImpl(
             }
         )
     }
+
+    override suspend fun leaveFromGroup(groupId: GroupId) {
+        TODO("MAKE FUNCTION FOR LEAVING FROM GROUP")
+    }
 }
