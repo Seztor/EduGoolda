@@ -95,12 +95,12 @@ fun StudentGroupDetailsUi(
 
                     IconButton(
                         onClick = { component.onReturnBackRequestClick() },
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(37.dp)
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.rubbish_bin_icon),
                             contentDescription = "Rubbish bin",
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier.size(27.dp)
                         )
                     }
                 }
