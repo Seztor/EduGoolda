@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.features.home"
+    namespace = "ru.itmo.edugoolda.data.invitations"
 }
 
 dependencies {
@@ -15,8 +15,6 @@ dependencies {
 
     // Modules
     implementation(project(":core"))
-    implementation(project(":data:join-requests"))
-    implementation(project(":data:solutions"))
     implementation(project(":data:user"))
 
     // Kotlin

@@ -1,0 +1,9 @@
+<resources>
+    <string name="solutions">Результаты решений</string>
+    <string name="logo">EduGoolda</string>
+    <string name="all_solutions">Все решения</string>
+    <string name="join_requests">Заявки на вступление в группу</string>
+    <string name="all_join_requests">Все заявки</string>
+    <string name="lessons">Ближайшие уроки</string>
+    <string name="go_to_schedule">Перейти в расписание</string>
+</resources>

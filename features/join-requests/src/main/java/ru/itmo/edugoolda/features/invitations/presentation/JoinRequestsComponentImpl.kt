@@ -1,6 +1,10 @@
 package ru.itmo.edugoolda.features.invitations.presentation
 
 import com.arkivanov.decompose.ComponentContext
+import me.aartikov.replica.algebra.normal.combine
+import me.aartikov.replica.algebra.normal.map
+import me.aartikov.replica.algebra.paged.map
+import me.aartikov.replica.algebra.paged.toReplica
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
@@ -18,6 +22,12 @@ class JoinRequestsComponentImpl(
 
     private val invitationReplica = joinRequestRepository.joinRequestListReplica
     override val joinRequestState = invitationReplica.observe(this, errorHandler)
+    val a = null
+    val mainJoinRequestsReplica = invitationReplica.toReplica().map { v -> v.joinRequestList.take(3)}
+    val mainStateReplica = combine(
+        mainJoinRequestsReplica,
+        invitationReplica.toReplica()
+    ) {mainJoinRequests, inv -> listOf(mainJoinRequests, inv) }
     override fun onAcceptClick(joinRequest: JoinRequest) {
         componentScope.safeLaunch(errorHandler) {
             joinRequestRepository.respondToJoinRequest(joinRequest.id, JoinRequestAction.Accept)
