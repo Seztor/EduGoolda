@@ -4,5 +4,6 @@ data class GroupItemInfo(
     val id: GroupId,
     val name: String,
     val subjectName: String,
-    val ownerName: String
+    val ownerName: String,
+    val isFavourite: Boolean
 )

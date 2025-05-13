@@ -7,6 +7,8 @@ import ru.itmo.edugoolda.features.group.presentation.create.GroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.create.RealGroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.RealStudentGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.teacherGroups.RealTeacherGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupComponent
 
 fun ComponentFactory.createGroupCreateComponent(
     componentContext: ComponentContext,
@@ -21,3 +23,12 @@ fun ComponentFactory.createStudentGroupComponent(
 ): RealStudentGroupComponent {
     return RealStudentGroupComponent(componentContext, communication, get(), get())
 }
+
+fun ComponentFactory.createTeacherGroupComponent(
+    componentContext: ComponentContext,
+    communication: TeacherGroupComponent.Communication,
+): RealTeacherGroupComponent {
+    return RealTeacherGroupComponent(componentContext, communication, get(), get())
+}
+
+
