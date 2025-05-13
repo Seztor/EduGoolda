@@ -1,14 +1,14 @@
-package ru.itmo.edugoolda.data.group.group_of_students_list.internal
+package ru.itmo.edugoolda.data.group.group_students_list.internal
 
 import de.jensklingenberg.ktorfit.http.Body
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.Path
 import de.jensklingenberg.ktorfit.http.Query
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.GroupOfStudentsResponse
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.KickStudentRequest
+import ru.itmo.edugoolda.data.group.group_students_list.internal.dto.GroupOfStudentsResponse
+import ru.itmo.edugoolda.data.group.group_students_list.internal.dto.KickStudentRequest
 
-internal interface GroupOfStudentsApi {
+internal interface GroupStudentsApi {
     @GET("api/v1/group/{groupId}/students")
     suspend fun getStudentsList(
         @Path("groupId") id: String,

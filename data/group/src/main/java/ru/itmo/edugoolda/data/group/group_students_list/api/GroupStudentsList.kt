@@ -1,15 +1,15 @@
-package ru.itmo.edugoolda.data.group.group_of_students_list.api
+package ru.itmo.edugoolda.data.group.group_students_list.api
 
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.itmo.edugoolda.data.user.api.UserId
 
-data class GroupOfStudentsList(
+data class GroupStudentsList(
     val users: List<UserInfo>,
     val hasNextPage: Boolean,
 ) {
     companion object {
-        val MOCK = GroupOfStudentsList(
+        val MOCK = GroupStudentsList(
             users = listOf(
                 UserInfo(
                     id = UserId("1"),

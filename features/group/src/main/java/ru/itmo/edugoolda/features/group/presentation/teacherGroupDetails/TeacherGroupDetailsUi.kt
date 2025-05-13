@@ -41,8 +41,8 @@ import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
+import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsList
+import ru.itmo.edugoolda.data.group.group_students_list.api.KickType
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -172,7 +172,7 @@ fun TeacherGroupDetailsUi(
             state = groupOfStudentsState,
             onRefresh = component::onRefresh,
             onRetryClick = component::onRetryClick
-        ) { data: GroupOfStudentsList, _: Boolean ->
+        ) { data: GroupStudentsList, _: Boolean ->
             val lazyListState = rememberLazyListState()
             lazyListState.TriggerLoadNext(
                 pagedState = groupOfStudentsState,

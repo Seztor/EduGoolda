@@ -17,7 +17,6 @@ data class GroupFullInfo(
     val newSolutionsCount: Int,
     val tasksCount: Int,
     val isActive: Boolean,
-    val createdAt: String
 ) {
     companion object {
         val MOCK = GroupFullInfo(
@@ -41,7 +40,6 @@ data class GroupFullInfo(
             newSolutionsCount = 2,
             tasksCount = 3,
             isActive = true,
-            createdAt = "10/06/2002"
         )
     }
 }

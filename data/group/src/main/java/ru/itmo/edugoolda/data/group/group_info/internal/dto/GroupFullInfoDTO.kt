@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.data.group.group_info.internal.dto
 
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
@@ -22,7 +23,7 @@ internal data class GroupFullInfoDTO(
     @SerialName("new_solutions_count") val newSolutionsCount: Int,
     @SerialName("tasks_count") val tasksCount: Int,
     @SerialName("is_active") val isActive: Boolean,
-    @SerialName("created_at") val createdAt: String
+    @SerialName("created_at") val createdAt: LocalDateTime
 )
 
 internal fun GroupFullInfoDTO.toDomain(): GroupFullInfo = GroupFullInfo(
@@ -37,7 +38,6 @@ internal fun GroupFullInfoDTO.toDomain(): GroupFullInfo = GroupFullInfo(
     newSolutionsCount = newSolutionsCount,
     tasksCount = tasksCount,
     isActive = isActive,
-    createdAt = createdAt
 )
 
 @Serializable

@@ -16,9 +16,9 @@ import ru.itmo.edugoolda.data.group.group_invitation_data.internal.GroupInvitati
 import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.group_list.internal.GroupListApi
 import ru.itmo.edugoolda.data.group.group_list.internal.GroupsListRepositoryImpl
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.GroupOfStudentsApi
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.GroupOfStudentsRepositoryImpl
+import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsRepository
+import ru.itmo.edugoolda.data.group.group_students_list.internal.GroupStudentsApi
+import ru.itmo.edugoolda.data.group.group_students_list.internal.GroupStudentsRepositoryImpl
 
 val dataGroupModule = module {
     single<GroupCreateApi> {
@@ -27,7 +27,7 @@ val dataGroupModule = module {
     single<GroupListApi> {
         get<NetworkApiFactory>().authorizedKtorfit.create()
     }
-    single<GroupOfStudentsApi> {
+    single<GroupStudentsApi> {
         get<NetworkApiFactory>().authorizedKtorfit.create()
     }
     single<GroupFullInfoApi> {
@@ -39,7 +39,7 @@ val dataGroupModule = module {
 
     singleOf(::GroupCreateRepositoryImpl) bind GroupCreateRepository::class
     singleOf(::GroupsListRepositoryImpl) bind GroupListRepository::class
-    singleOf(::GroupOfStudentsRepositoryImpl) bind GroupOfStudentsRepository::class
+    singleOf(::GroupStudentsRepositoryImpl) bind GroupStudentsRepository::class
     singleOf(::GroupFullInfoRepositoryImpl) bind GroupFullInfoRepository::class
     singleOf(::GroupInvitationDataRepositoryImpl) bind GroupInvitationDataRepository::class
 }

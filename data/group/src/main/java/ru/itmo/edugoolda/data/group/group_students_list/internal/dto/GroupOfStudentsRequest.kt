@@ -1,8 +1,8 @@
-package ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto
+package ru.itmo.edugoolda.data.group.group_students_list.internal.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.domain.GroupOfStudentsListWithTotal
+import ru.itmo.edugoolda.data.group.group_students_list.internal.domain.GroupOfStudentsListWithTotal
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 

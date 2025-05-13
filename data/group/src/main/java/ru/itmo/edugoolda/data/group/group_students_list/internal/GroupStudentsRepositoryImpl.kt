@@ -1,27 +1,26 @@
-package ru.itmo.edugoolda.data.group.group_of_students_list.internal
+package ru.itmo.edugoolda.data.group.group_students_list.internal
 
 import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
 import me.aartikov.replica.keyed_paged.KeyedPagedFetcher
-import me.aartikov.replica.keyed_paged.KeyedPagedReplica
 import me.aartikov.replica.keyed_paged.KeyedPagedReplicaSettings
 import me.aartikov.replica.paged.PagedData
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsList
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.KickStudentRequest
-import ru.itmo.edugoolda.data.group.group_of_students_list.internal.dto.toDomain
+import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsList
+import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsRepository
+import ru.itmo.edugoolda.data.group.group_students_list.api.KickType
+import ru.itmo.edugoolda.data.group.group_students_list.internal.dto.KickStudentRequest
+import ru.itmo.edugoolda.data.group.group_students_list.internal.dto.toDomain
 import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import kotlin.time.Duration.Companion.minutes
 
-internal class GroupOfStudentsRepositoryImpl(
+internal class GroupStudentsRepositoryImpl(
     replicaClient: ReplicaClient,
-    private val groupOfStudentsApi: GroupOfStudentsApi,
-) : GroupOfStudentsRepository {
+    private val groupStudentsApi: GroupStudentsApi,
+) : GroupStudentsRepository {
     companion object {
         private const val PAGE_SIZE = 20
     }
@@ -38,7 +37,7 @@ internal class GroupOfStudentsRepositoryImpl(
         },
         fetcher = object : KeyedPagedFetcher<GroupId, UserInfo, PageWithTotalAmount<UserInfo>> {
             override suspend fun fetchFirstPage(key: GroupId): PageWithTotalAmount<UserInfo> {
-                val users = groupOfStudentsApi.getStudentsList(
+                val users = groupStudentsApi.getStudentsList(
                     id = key.value,
                     pageSize = PAGE_SIZE,
                     page = 1,
@@ -56,7 +55,7 @@ internal class GroupOfStudentsRepositoryImpl(
                 key: GroupId,
                 currentData: PagedData<UserInfo, PageWithTotalAmount<UserInfo>>,
             ): PageWithTotalAmount<UserInfo> {
-                val users = groupOfStudentsApi.getStudentsList(
+                val users = groupStudentsApi.getStudentsList(
                     id = key.value,
                     pageSize = PAGE_SIZE,
                     page = currentData.pages.size + 1
@@ -73,7 +72,7 @@ internal class GroupOfStudentsRepositoryImpl(
     )
 
     override val groupOfStudentsReplica = _groupOfStudentsReplica.map { _, data ->
-        GroupOfStudentsList(data.items, data.hasNextPage)
+        GroupStudentsList(data.items, data.hasNextPage)
     }
 
     override suspend fun kickStudentFromGroup(
@@ -90,7 +89,7 @@ internal class GroupOfStudentsRepositoryImpl(
             groupId.value,
             studentId.value
         )
-        groupOfStudentsApi.kickStudentFromGroup(kickActionRequest)
+        groupStudentsApi.kickStudentFromGroup(kickActionRequest)
         _groupOfStudentsReplica.mutateData(
             key = groupId,
             transform = { pages ->

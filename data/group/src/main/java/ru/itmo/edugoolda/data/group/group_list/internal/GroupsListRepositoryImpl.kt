@@ -24,7 +24,7 @@ internal class GroupsListRepositoryImpl(
         private const val PAGE_SIZE = 20
     }
 
-    override val groupInfoListReplica = replicaClient.createKeyedPagedReplica(
+    private val _groupInfoListReplica = replicaClient.createKeyedPagedReplica(
         name = "group list replica",
         childName = {
             "child $it"
@@ -54,7 +54,7 @@ internal class GroupsListRepositoryImpl(
 
             override suspend fun fetchNextPage(
                 key: String,
-                currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>
+                currentData: PagedData<GroupInfo, PageWithTotalAmount<GroupInfo>>,
             ): PageWithTotalAmount<GroupInfo> {
                 val groups = groupListApi.getGroupsList(
                     query = key,
@@ -71,7 +71,9 @@ internal class GroupsListRepositoryImpl(
                 )
             }
         }
-    ).map { _, data ->
+    )
+
+    override val groupInfoListReplica = _groupInfoListReplica.map { _, data ->
         GroupInfoList(data.items, data.hasNextPage)
     }
 
@@ -81,5 +83,23 @@ internal class GroupsListRepositoryImpl(
 
     override suspend fun changeFavouriteStatus(id: GroupId, isFavourite: Boolean) {
         groupListApi.changeGroupFavouriteStatus(id.value, ChangeFavouriteRequest(isFavourite))
+        _groupInfoListReplica.onEachPagedReplica {
+            mutateData { pages ->
+                pages.map { page: PageWithTotalAmount<GroupInfo> ->
+                    page.copy(
+                        hasNextPage = page.hasNextPage,
+                        hasPreviousPage = page.hasPreviousPage,
+                        items = page.items.map { item ->
+                            if (item.id == id) {
+                                item.copy(isFavourite = isFavourite)
+                            } else {
+                                item
+                            }
+                        },
+                        total = page.total
+                    )
+                }
+            }
+        }
     }
 }

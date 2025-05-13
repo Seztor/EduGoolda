@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.data.group.group_of_students_list.internal.domain
+package ru.itmo.edugoolda.data.group.group_students_list.internal.domain
 
 import ru.itmo.edugoolda.data.user.api.UserInfo
 

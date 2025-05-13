@@ -14,8 +14,8 @@ import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationDat
 import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationDataRepository
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.GroupOfStudentsRepository
-import ru.itmo.edugoolda.data.group.group_of_students_list.api.KickType
+import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsRepository
+import ru.itmo.edugoolda.data.group.group_students_list.api.KickType
 import ru.itmo.edugoolda.data.user.api.UserId
 
 class RealTeacherGroupDetailsComponent(
@@ -23,7 +23,7 @@ class RealTeacherGroupDetailsComponent(
     componentContext: ComponentContext,
     private val communication: TeacherGroupDetailsComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val repositoryGroupOfStudents: GroupOfStudentsRepository,
+    private val repositoryGroupOfStudents: GroupStudentsRepository,
     private val repositoryGroupFullInfo: GroupFullInfoRepository,
     private val repositoryGroupInvitationData: GroupInvitationDataRepository,
     private val repositoryGroupList: GroupListRepository,
