@@ -7,6 +7,7 @@ data class StandardDialogData(
     val title: StringDesc,
     val message: StringDesc? = null,
     val confirmButton: DialogButton,
+    val confirmButtonSecondary: DialogButton? = null,
     val dismissButton: DialogButton? = null,
     val dismissableByUser: Boolean = true
 ) {

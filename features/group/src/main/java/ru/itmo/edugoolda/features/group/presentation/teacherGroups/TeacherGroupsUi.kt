@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.aartikov.replica.paged.PagedLoadingStatus
@@ -35,7 +36,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.group.groupList.api.GroupList
+import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -44,41 +45,40 @@ fun TeacherGroupsUi(
     modifier: Modifier = Modifier,
 ) {
     val state by component.teacherGroupState.collectAsState()
-
-    PullRefreshLceWidget(
-        state = state,
-        onRefresh = component::onRefresh,
-        onRetryClick = component::onRetryClick
-    ) { data: GroupList, _: Boolean ->
-        val lazyListState = rememberLazyListState()
-        lazyListState.TriggerLoadNext(
-            pagedState = state,
-            hasNextPage = state.data?.hasNextPage == true,
-            callback = component::onLoadNext
+    Column(modifier = modifier) {
+        AppTextField(
+            inputControl = component.groupSearchInputControl,
+            placeholder = stringResource(R.string.search_students_group),
+            modifier = Modifier.padding(horizontal = 20.dp).padding(top = 35.dp, bottom = 15.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    tint = Color.Gray,
+                    contentDescription = "Group Icon",
+                    modifier = Modifier.size(25.dp)
+                )
+            }
         )
-        Column {
-            AppTextField(
-                inputControl = component.groupSearchInputControl,
-                placeholder = stringResource(R.string.search_students_group),
-                modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        tint = Color.Gray,
-                        contentDescription = "Group Icon",
-                        modifier = Modifier.size(25.dp)
-                    )
-                }
-            )
 
+        PullRefreshLceWidget(
+            state = state,
+            onRefresh = component::onRefresh,
+            onRetryClick = component::onRetryClick
+        ) { data: GroupInfoList, _: Boolean ->
+            val lazyListState = rememberLazyListState()
+            lazyListState.TriggerLoadNext(
+                pagedState = state,
+                hasNextPage = state.data?.hasNextPage == true,
+                callback = component::onLoadNext
+            )
             LazyColumn(
                 state = lazyListState,
 
                 ) {
                 items(data.groups) { item ->
                     TeacherGroupItem(
-                        { component.onGroupDetailRequestClick(item.id) },
-                        { component.onGroupChangeFavouriteStatusRequestClick(item.id) },
+                        { component.onGroupDetailsRequestClick(item.id) },
+                        { component.onGroupChangeFavouriteStatusRequestClick(item.id, !item.isFavourite) },
                         item.name,
                         item.subjectName,
                         item.isFavourite
@@ -115,10 +115,23 @@ fun TeacherGroupItem(
             )
 
             Text(
-                text = "$name, $subjectName",
+                text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically).width(150.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false
+            )
+
+            Text(
+                text = ", $subjectName",
+                fontWeight = CustomTheme.typography.body.regular.fontWeight,
+                fontSize = CustomTheme.typography.body.regular.fontSize,
+                modifier = Modifier.align(Alignment.CenterVertically).width(100.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false
             )
 
             Spacer(modifier = Modifier.weight(1f))

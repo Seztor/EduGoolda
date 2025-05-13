@@ -18,6 +18,10 @@ val AppTypography = CustomTypography(
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         ),
+        boldSmallerSize = TextStyle(
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        ),
     ),
     body = BodyTypography(
         regular = TextStyle(

@@ -4,4 +4,7 @@
     <string name="delete_group_message">Are you sure you want to delete the group «%s»? This action will delete all data associated with this group.</string>
     <string name="delete_participant_message">Are you sure you want to delete participant «%s» from group «%s»? This action will result in the deletion of the student\'s assignment progress.</string>
     <string name="search_students_group">Search</string>
+    <string name="group_info_title">Information about group</string>
+    <string name="group_invitation_code">Generate invitation code</string>
+    <string name="group_members_title">Members</string>
 </resources>
