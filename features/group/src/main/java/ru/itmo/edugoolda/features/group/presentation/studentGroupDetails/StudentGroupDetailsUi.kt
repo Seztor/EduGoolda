@@ -104,6 +104,7 @@ fun StudentGroupDetailsUi(
                         )
                     }
                 }
+
                 Row(
                     modifier = Modifier
                         .padding(top = 20.dp)
@@ -126,6 +127,7 @@ fun StudentGroupDetailsUi(
                         softWrap = false
                     )
                 }
+
                 Row(
                     modifier = Modifier
                         .padding(top = 15.dp)
@@ -155,6 +157,27 @@ fun StudentGroupDetailsUi(
                         .padding(horizontal = 20.dp)
                 ) {
                     Text(
+                        text = "${stringResource(R.string.group_count_members_title)}: ",
+                        fontWeight = CustomTheme.typography.body.bold.fontWeight,
+                        fontSize = CustomTheme.typography.body.bold.fontSize,
+                        color = CustomTheme.colors.text.primary,
+                    )
+                    Text(
+                        text = data.studentsCount.toString(),
+                        fontWeight = CustomTheme.typography.body.regular.fontWeight,
+                        fontSize = CustomTheme.typography.body.regular.fontSize,
+                        color = CustomTheme.colors.text.primary,
+                        maxLines = 8,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+
+                Row(
+                    modifier = Modifier
+                        .padding(top = 15.dp)
+                        .padding(horizontal = 20.dp)
+                ) {
+                    Text(
                         text = "${stringResource(R.string.group_description_title)}: ",
                         fontWeight = CustomTheme.typography.body.bold.fontWeight,
                         fontSize = CustomTheme.typography.body.bold.fontSize,
@@ -173,33 +196,8 @@ fun StudentGroupDetailsUi(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-
-                Row(
-                    modifier = Modifier
-                        .padding(top = 15.dp)
-                        .padding(horizontal = 20.dp)
-                ) {
-                    Text(
-                        text = "${stringResource(R.string.group_count_members_title)}: ",
-                        fontWeight = CustomTheme.typography.body.bold.fontWeight,
-                        fontSize = CustomTheme.typography.body.bold.fontSize,
-                        color = CustomTheme.colors.text.primary,
-                    )
-                    Text(
-                        text = data.studentsCount.toString(),
-                        fontWeight = CustomTheme.typography.body.regular.fontWeight,
-                        fontSize = CustomTheme.typography.body.regular.fontSize,
-                        color = CustomTheme.colors.text.primary,
-                        maxLines = 8,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
-
-
             }
         }
-
-
     }
 }
 
