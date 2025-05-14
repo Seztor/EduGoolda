@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.aartikov.replica.paged.PagedLoadingStatus
+import ru.itmo.edugoolda.core.dialog.standard.StandardDialog
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
@@ -55,6 +56,9 @@ fun TeacherGroupDetailsUi(
     val groupInfoState by component.groupInfoState.collectAsState()
 
     val context = LocalContext.current
+
+    StandardDialog(component.dialogDeleteGroup)
+    StandardDialog(component.dialogKickMember)
 
     Column(modifier = modifier) {
         Row(
@@ -111,7 +115,7 @@ fun TeacherGroupDetailsUi(
                 Spacer(modifier = Modifier.weight(1f))
 
                 IconButton(
-                    onClick = { component.onReturnBackRequestClick() },
+                    onClick = { component.onDialogDeleteGroup() },
                     modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
@@ -186,7 +190,7 @@ fun TeacherGroupDetailsUi(
                 ) {
                 items(data.users) { item ->
                     GroupItem(
-                        { component.onGroupMemberKickRequestClick(KickType.Kick, item.id) },
+                        { component.onDialogKickMember(KickType.Kick, item.id) },
                         item.name,
                     )
                 }

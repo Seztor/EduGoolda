@@ -3,6 +3,7 @@
     <string name="delete_participant">Delete participant</string>
     <string name="delete_group_message">Are you sure you want to delete the group «%s»? This action will delete all data associated with this group.</string>
     <string name="delete_participant_message">Are you sure you want to delete participant «%s» from group «%s»? This action will result in the deletion of the student\'s assignment progress.</string>
+    <string name="delete_participant_message_secondary">Are you sure you want to delete participant from group «%s»? This action will result in the deletion of the student\'s assignment progress.</string>
     <string name="search_students_group">Search</string>
     <string name="group_info_title">Information about group</string>
     <string name="group_invitation_code">Generate invitation code</string>
@@ -14,6 +15,6 @@
     <string name="group_subject_title">Subject name</string>
     <string name="quit_group_title">Quit group</string>
     <string name="quit_group_message">Are you sure you want to leave the «%s» group?</string>
-    <string name="quit_group_confirm">Yes</string>
-    <string name="quit_group_dismiss">Cancel</string>
+    <string name="group_confirm">Yes</string>
+    <string name="group_dismiss">Cancel</string>
 </resources>

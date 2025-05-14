@@ -1,15 +1,16 @@
 package ru.itmo.edugoolda.features.group.presentation.studentGroupDetails
 
 import com.arkivanov.decompose.ComponentContext
+import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import me.aartikov.replica.algebra.normal.withKey
 import ru.itmo.edugoolda.core.dialog.standard.DialogButton
-import ru.itmo.edugoolda.core.dialog.standard.StandardDialogControl
 import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
 import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
+import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
@@ -57,19 +58,21 @@ class RealStudentGroupDetailsComponent(
     }
 
     override fun onDialogQuitRequest() {
+        if (groupInfoState.value.data == null) return
+
         dialogQuit.show(
             StandardDialogData(
                 title = R.string.quit_group_title.strResDesc(),
-                message = R.string.quit_group_message.strResDesc(),
+                message = StringDesc.ResourceFormatted(R.string.quit_group_message, groupInfoState.value.data!!.name),
                 confirmButton = DialogButton(
-                    text = R.string.quit_group_confirm.strResDesc(),
+                    text = R.string.group_confirm.strResDesc(),
                     action = {
                         onGroupQuitRequestClick()
                         dialogQuit.dismiss()
                     }
                 ),
                 dismissButton = DialogButton(
-                    text = R.string.quit_group_confirm.strResDesc(),
+                    text = R.string.group_dismiss.strResDesc(),
                     action = {
                         dialogQuit.dismiss()
                     }
