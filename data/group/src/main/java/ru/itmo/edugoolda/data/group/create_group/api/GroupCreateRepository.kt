@@ -6,6 +6,6 @@ import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 
 interface GroupCreateRepository {
     suspend fun createGroup(name: String, description: String, selectedSubject: SubjectId): GroupFullInfo
-    suspend fun getSubjectIdByName(name: String) : SubjectId
-    suspend fun createSubject(name: String) : GroupSubject
+    suspend fun getSubjectIdByName(name: String): SubjectId
+    suspend fun createSubject(name: String): GroupSubject
 }

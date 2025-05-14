@@ -57,6 +57,6 @@ internal data class GroupSubjectsListDTO(
     @SerialName("subjects") val subjects: List<GroupSubjectDTO>
 )
 
-internal fun GroupSubjectsListDTO.toDomain() : GroupSubjectsList = GroupSubjectsList(
+internal fun GroupSubjectsListDTO.toDomain(): GroupSubjectsList = GroupSubjectsList(
     subjects = subjects.map { it.toDomain() }
 )

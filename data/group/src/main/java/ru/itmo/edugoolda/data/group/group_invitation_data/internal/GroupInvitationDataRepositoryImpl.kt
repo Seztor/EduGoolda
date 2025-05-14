@@ -14,7 +14,7 @@ internal class GroupInvitationDataRepositoryImpl(
         return groupInvitationDataApi.getGroupInvitationData(groupId.value).toDomain()
     }
 
-    override suspend fun sendRequestJoinGroup(code: GroupInvitationCode) : GroupId {
+    override suspend fun sendRequestJoinGroup(code: GroupInvitationCode): GroupId {
         val actionRequest = JoinGroupDTORequest(code = code.value)
         return groupInvitationDataApi.sendRequestJoinGroup(actionRequest).toDomain()
     }

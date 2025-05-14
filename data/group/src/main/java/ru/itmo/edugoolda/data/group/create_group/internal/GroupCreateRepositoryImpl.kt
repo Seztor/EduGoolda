@@ -33,11 +33,9 @@ internal class GroupCreateRepositoryImpl(
 
         if (foundSubject != null) {
             return foundSubject.id
-        }
-        else {
+        } else {
             val createdSubject = createSubject(name)
             return createdSubject.id
         }
     }
-
 }

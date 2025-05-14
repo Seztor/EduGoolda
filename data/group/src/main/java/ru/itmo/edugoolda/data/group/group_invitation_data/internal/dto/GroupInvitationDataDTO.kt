@@ -27,7 +27,6 @@ internal data class JoinGroupResponse(
     @SerialName("group_id") val groupId: String
 )
 
-internal fun JoinGroupResponse.toDomain() : GroupId = GroupId(
+internal fun JoinGroupResponse.toDomain(): GroupId = GroupId(
     value = groupId
 )
-

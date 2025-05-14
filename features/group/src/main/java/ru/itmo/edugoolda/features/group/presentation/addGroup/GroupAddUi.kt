@@ -79,10 +79,7 @@ fun GroupAddUi(
         )
 
         Spacer(modifier = Modifier.weight(0.35f))
-
-
     }
-
 }
 
 

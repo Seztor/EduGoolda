@@ -8,6 +8,7 @@ import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.create_group.api.GroupCreateRepository
+import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealGroupCreateComponent(
@@ -27,6 +28,7 @@ class RealGroupCreateComponent(
 
     override fun onCreateClick() {
         if (isCreationProgress.value) return
+
         componentScope.safeLaunch(errorHandler) {
             withProgress(isCreationProgress) {
                 val subjectId =
@@ -36,13 +38,12 @@ class RealGroupCreateComponent(
                     description = descriptionInputControl.text.value,
                     selectedSubject = subjectId
                 ).id
-                communication.onGroupCreated(groupId)
+                communication.onGroupCreated()
             }
         }
     }
 
     override fun onCancelClick() {
-        communication.onCancel()
+        communication.onCancelGroupCreation()
     }
-
 }

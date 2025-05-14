@@ -14,8 +14,8 @@ internal interface GroupCreateApi {
     suspend fun createGroup(@Body request: CreateGroupRequest): GroupFullInfoDTO
 
     @POST("/api/v1/subject")
-    suspend fun createSubject(@Body request: CreateSubjectRequest) : GroupSubjectDTO
+    suspend fun createSubject(@Body request: CreateSubjectRequest): GroupSubjectDTO
 
     @GET("/api/v1/subjects")
-    suspend fun getSubjects() : GroupSubjectsListDTO
+    suspend fun getSubjects(): GroupSubjectsListDTO
 }
