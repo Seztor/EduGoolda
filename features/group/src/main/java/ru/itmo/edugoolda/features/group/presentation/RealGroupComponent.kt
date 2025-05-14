@@ -43,26 +43,26 @@ class RealGroupComponent(
             navigation.pop()
         }
 
-        override fun onCancel() {
+        override fun onCancelGroupCreation() {
             navigation.pop()
         }
 
         override fun onGroupDetailsRequested(id: GroupId) {
-            navigation.safePush(Config.TeacherGroupDetails)
+            navigation.safePush(Config.TeacherGroupDetails(id))
         }
 
         override fun onReturnBackRequested() {
             navigation.pop()
         }
 
-        override fun onGroupDeleteRequested() {
+        override fun onGroupDeleted() {
             navigation.pop()
         }
     }
 
     private inner class StudentCommunicationResolver : StudentGroupComponent.Communication, StudentGroupDetailsComponent.Communication, GroupAddComponent.Communication {
         override fun onGroupDetailsRequested(id: GroupId) {
-            navigation.safePush(Config.StudentGroupDetails)
+            navigation.safePush(Config.StudentGroupDetails(id))
         }
 
         override fun onGroupAddRequested() {
@@ -73,7 +73,7 @@ class RealGroupComponent(
             navigation.pop()
         }
 
-        override fun onGroupQuitRequested() {
+        override fun onGroupQuited() {
             navigation.pop()
         }
 
@@ -81,7 +81,7 @@ class RealGroupComponent(
             navigation.pop()
         }
 
-        override fun onCancel() {
+        override fun onCancelGroupAdding() {
             navigation.pop()
         }
     }
