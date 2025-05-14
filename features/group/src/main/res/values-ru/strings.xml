@@ -7,4 +7,9 @@
     <string name="group_info_title">Информация о группе</string>
     <string name="group_invitation_code">Получить код приглашения</string>
     <string name="group_members_title">Участники</string>
+    <string name="group_creation_title">Создание группы</string>
+    <string name="group_create_button">Создать</string>
+    <string name="group_textfield_name">Название</string>
+    <string name="group_textfield_description">Описание</string>
+    <string name="group_textfield_subject">Название предмета</string>
 </resources>
