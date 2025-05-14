@@ -18,4 +18,7 @@ internal interface GroupStudentsApi {
 
     @POST("api/v1/group/kick")
     suspend fun kickStudentFromGroup(@Body request: KickStudentRequest)
+
+    @POST("api/v1/group/{groupId}/leave")
+    suspend fun leaveFromGroup(@Path("groupId") id: String)
 }
