@@ -17,7 +17,8 @@ data class TitleTypography(
 )
 
 data class BodyTypography(
-    val regular: TextStyle
+    val regular: TextStyle,
+    val bold: TextStyle
 )
 
 data class CaptionTypography(

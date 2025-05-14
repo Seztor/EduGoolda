@@ -1,6 +1,5 @@
 package ru.itmo.edugoolda.data.group.group_list.internal
 
-import kotlinx.coroutines.flow.StateFlow
 import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
 import me.aartikov.replica.keyed_paged.KeyedPagedFetcher
