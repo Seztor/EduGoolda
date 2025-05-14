@@ -33,7 +33,6 @@ class RealStudentGroupDetailsComponent(
     override val isQuitingGroupProgress = MutableStateFlow(false)
     override val dialogQuit = standardDialogControl("quit")
 
-
     override fun onRefresh() {
         groupInfoReplica.refresh()
     }

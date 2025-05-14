@@ -18,9 +18,8 @@ interface TeacherGroupDetailsComponent {
     val isGettingCodeProgress: StateFlow<Boolean>
     val isKickingMemberProgress: StateFlow<Boolean>
     val isDeletingGroupProgress: StateFlow<Boolean>
-    val dialogDeleteGroup : StandardDialogControl
-    val dialogKickMember : StandardDialogControl
-
+    val dialogDeleteGroup: StandardDialogControl
+    val dialogKickMember: StandardDialogControl
 
     fun onRefresh()
     fun onRetryClick()

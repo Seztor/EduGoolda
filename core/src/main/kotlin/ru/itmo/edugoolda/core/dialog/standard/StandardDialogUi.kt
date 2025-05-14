@@ -79,7 +79,6 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
                 )
             },
 
-
             dismissButton = data.dismissButton?.let { dismissButton ->
                 {
                     DialogButton(

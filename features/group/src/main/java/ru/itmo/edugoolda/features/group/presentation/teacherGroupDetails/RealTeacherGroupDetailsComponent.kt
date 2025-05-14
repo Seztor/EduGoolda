@@ -50,7 +50,6 @@ class RealTeacherGroupDetailsComponent(
     override val dialogDeleteGroup = standardDialogControl("delete group")
     override val dialogKickMember = standardDialogControl("kick member")
 
-
     override fun onRefresh() {
         groupOfStudentsReplica.refresh()
         groupInfoReplica.refresh()

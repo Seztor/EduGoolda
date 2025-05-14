@@ -1,8 +1,6 @@
 package ru.itmo.edugoolda.features.group.presentation.studentGroupDetails
 
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import ru.itmo.edugoolda.core.dialog.standard.StandardDialogControl
 import ru.itmo.edugoolda.core.dialog.standard.fakeStandardDialogControl
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
