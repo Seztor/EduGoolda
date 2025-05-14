@@ -8,4 +8,5 @@ interface GroupStudentsRepository {
     val groupOfStudentsReplica: KeyedPagedReplica<GroupId, GroupStudentsList>
 
     suspend fun kickStudentFromGroup(action: KickType, groupId: GroupId, studentId: UserId)
+    suspend fun leaveFromGroup(groupId: GroupId)
 }

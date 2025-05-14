@@ -3,8 +3,26 @@
     <string name="delete_participant">Delete participant</string>
     <string name="delete_group_message">Are you sure you want to delete the group «%s»? This action will delete all data associated with this group.</string>
     <string name="delete_participant_message">Are you sure you want to delete participant «%s» from group «%s»? This action will result in the deletion of the student\'s assignment progress.</string>
+    <string name="delete_participant_message_secondary">Are you sure you want to delete participant from group «%s»? This action will result in the deletion of the student\'s assignment progress.</string>
     <string name="search_students_group">Search</string>
     <string name="group_info_title">Information about group</string>
     <string name="group_invitation_code">Generate invitation code</string>
     <string name="group_members_title">Members</string>
+    <string name="group_add_title">Group adding</string>
+    <string name="group_textfield_code">Invitation code</string>
+    <string name="group_add_group_button">Add group</string>
+    <string name="group_owner_title">Owner</string>
+    <string name="group_description_title">Description</string>
+    <string name="group_count_members_title">Number of members</string>
+    <string name="group_description_null">unfortunately, it\'s empty here</string>
+    <string name="group_subject_title">Subject name</string>
+    <string name="quit_group_title">Quit group</string>
+    <string name="quit_group_message">Are you sure you want to leave the «%s» group?</string>
+    <string name="group_confirm">Yes</string>
+    <string name="group_dismiss">Cancel</string>
+    <string name="group_creation_title">Create group</string>
+    <string name="group_create_button">Create</string>
+    <string name="group_textfield_name">Name</string>
+    <string name="group_textfield_description">Description</string>
+    <string name="group_textfield_subject">Subject name</string>
 </resources>

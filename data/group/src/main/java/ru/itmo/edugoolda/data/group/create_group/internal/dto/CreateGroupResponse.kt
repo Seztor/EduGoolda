@@ -9,3 +9,8 @@ internal data class CreateGroupRequest(
     @SerialName("description") val description: String?,
     @SerialName("subject_id") val subjectId: String
 )
+
+@Serializable
+internal data class CreateSubjectRequest(
+    @SerialName("name") val name: String
+)

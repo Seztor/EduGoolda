@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails
 
 import kotlinx.coroutines.flow.StateFlow
+import ru.itmo.edugoolda.core.dialog.standard.StandardDialogControl
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.core.utils.PagedState
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
@@ -17,17 +18,19 @@ interface TeacherGroupDetailsComponent {
     val isGettingCodeProgress: StateFlow<Boolean>
     val isKickingMemberProgress: StateFlow<Boolean>
     val isDeletingGroupProgress: StateFlow<Boolean>
+    val dialogDeleteGroup: StandardDialogControl
+    val dialogKickMember: StandardDialogControl
 
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
     fun onReturnBackRequestClick()
-    fun onGroupDeleteRequestClick()
-    fun onGroupMemberKickRequestClick(action: KickType, userId: UserId)
     fun onGroupCodeGenerateRequestClick()
+    fun onDialogDeleteGroup()
+    fun onDialogKickMember(action: KickType, userId: UserId)
 
     interface Communication {
         fun onReturnBackRequested()
-        fun onGroupDeleteRequested()
+        fun onGroupDeleted()
     }
 }

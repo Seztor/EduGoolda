@@ -1,11 +1,17 @@
 package ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails
 
 import com.arkivanov.decompose.ComponentContext
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import me.aartikov.replica.algebra.normal.withKey
 import me.aartikov.replica.algebra.paged.withKey
+import ru.itmo.edugoolda.core.dialog.standard.DialogButton
+import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
+import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
+import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
@@ -17,6 +23,7 @@ import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.itmo.edugoolda.data.group.group_students_list.api.GroupStudentsRepository
 import ru.itmo.edugoolda.data.group.group_students_list.api.KickType
 import ru.itmo.edugoolda.data.user.api.UserId
+import ru.itmo.edugoolda.features.group.R
 
 class RealTeacherGroupDetailsComponent(
     private val groupId: GroupId,
@@ -40,6 +47,8 @@ class RealTeacherGroupDetailsComponent(
     override val isGettingCodeProgress = MutableStateFlow(false)
     override val isKickingMemberProgress = MutableStateFlow(false)
     override val isDeletingGroupProgress = MutableStateFlow(false)
+    override val dialogDeleteGroup = standardDialogControl("delete group")
+    override val dialogKickMember = standardDialogControl("kick member")
 
     override fun onRefresh() {
         groupOfStudentsReplica.refresh()
@@ -59,18 +68,18 @@ class RealTeacherGroupDetailsComponent(
         communication.onReturnBackRequested()
     }
 
-    override fun onGroupDeleteRequestClick() {
+    private fun onGroupDeleteRequestClick() {
         if (isDeletingGroupProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isDeletingGroupProgress) {
                 repositoryGroupList.deleteGroup(groupId)
             }
-            communication.onGroupDeleteRequested()
+            communication.onGroupDeleted()
         }
     }
 
-    override fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) {
+    private fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) {
         if (isKickingMemberProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
@@ -90,5 +99,59 @@ class RealTeacherGroupDetailsComponent(
                 groupInvitationDataState.value = groupInvitationData
             }
         }
+    }
+
+    override fun onDialogDeleteGroup() {
+        val data = groupInfoState.value.data ?: return
+        dialogDeleteGroup.show(
+            StandardDialogData(
+                title = R.string.delete_group.strResDesc(),
+                message = StringDesc.ResourceFormatted(
+                    R.string.delete_group_message,
+                    data.name
+                ),
+                confirmButton = DialogButton(
+                    text = R.string.group_confirm.strResDesc(),
+                    action = {
+                        onGroupDeleteRequestClick()
+                        dialogDeleteGroup.dismiss()
+                    }
+                ),
+                dismissButton = DialogButton(
+                    text = R.string.group_dismiss.strResDesc(),
+                    action = {
+                        dialogDeleteGroup.dismiss()
+                    }
+                ),
+                dismissableByUser = true
+            )
+        )
+    }
+
+    override fun onDialogKickMember(action: KickType, userId: UserId) {
+        val data = groupInfoState.value.data ?: return
+        dialogKickMember.show(
+            StandardDialogData(
+                title = R.string.delete_participant.strResDesc(),
+                message = StringDesc.ResourceFormatted(
+                    R.string.delete_participant_message_secondary,
+                    data.name
+                ),
+                confirmButton = DialogButton(
+                    text = R.string.group_confirm.strResDesc(),
+                    action = {
+                        onGroupMemberKickRequestClick(action, userId)
+                        dialogDeleteGroup.dismiss()
+                    }
+                ),
+                dismissButton = DialogButton(
+                    text = R.string.group_dismiss.strResDesc(),
+                    action = {
+                        dialogDeleteGroup.dismiss()
+                    }
+                ),
+                dismissableByUser = true
+            )
+        )
     }
 }

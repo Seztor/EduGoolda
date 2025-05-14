@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.group.presentation.create
+package ru.itmo.edugoolda.features.group.presentation.createGroup
 
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,31 +19,31 @@ class RealGroupCreateComponent(
 ) : GroupCreateComponent, ComponentContext by componentContext {
     override val nameInputControl = InputControl(componentScope)
     override val descriptionInputControl = InputControl(componentScope)
-    override val subjectsList = MutableStateFlow(listOf("1","2","3"))
+    override val subjectInputControl = InputControl(componentScope)
     override val isCreationProgress = MutableStateFlow(false)
-    override val isCreationButtonEnabled = computed(nameInputControl.text, String::isNotBlank)
-    override val selectedSubject = MutableStateFlow(SubjectId("123"))
+    override val isCreationButtonEnabled =
+        computed(nameInputControl.text, subjectInputControl.text) { text, subject ->
+            text.isNotBlank() && subject.isNotBlank()
+        }
 
     override fun onCreateClick() {
         if (isCreationProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isCreationProgress) {
-                val id = groupCreateRepository.createGroup(
-                    selectedSubject = selectedSubject.value,
+                val subjectId =
+                    groupCreateRepository.getSubjectIdByName(subjectInputControl.text.value)
+                val groupId = groupCreateRepository.createGroup(
                     name = nameInputControl.text.value,
-                    description = descriptionInputControl.text.value
-                )
+                    description = descriptionInputControl.text.value,
+                    selectedSubject = subjectId
+                ).id
                 communication.onGroupCreated()
             }
         }
     }
 
     override fun onCancelClick() {
-        communication.onCancel()
-    }
-
-    override fun onSubjectSelect(subject: String) {
-        selectedSubject.value = SubjectId(subject)
+        communication.onCancelGroupCreation()
     }
 }

@@ -3,11 +3,11 @@ package ru.itmo.edugoolda.features.group.presentation
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.features.group.presentation.addGroup.GroupAddComponent
-import ru.itmo.edugoolda.features.group.presentation.create.GroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroupDetails.StudentGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.TeacherGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
 
 interface GroupComponent {
 

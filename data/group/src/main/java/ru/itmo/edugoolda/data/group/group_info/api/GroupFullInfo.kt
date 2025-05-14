@@ -22,14 +22,14 @@ data class GroupFullInfo(
         val MOCK = GroupFullInfo(
             id = GroupId("1"),
             name = "Group 1",
-            description = "Top Math Group",
+            description = "",
             subject = GroupSubject(
                 id = SubjectId("12345"),
                 name = "Math"
             ),
             owner = UserInfo(
                 id = UserId("1234"),
-                name = "Pavel",
+                name = "Pavel Pavlovich Pavelovich",
                 email = "pavel@gmail.com",
                 role = UserRole.Teacher,
                 isDeleted = false

@@ -6,7 +6,6 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
-import ru.itmo.edugoolda.core.utils.getChild
 import ru.itmo.edugoolda.core.utils.safePush
 import ru.itmo.edugoolda.core.utils.toStateFlow
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
@@ -17,7 +16,7 @@ import ru.itmo.edugoolda.features.group.createStudentGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.createTeacherGroupComponent
 import ru.itmo.edugoolda.features.group.createTeacherGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.addGroup.GroupAddComponent
-import ru.itmo.edugoolda.features.group.presentation.create.GroupCreateComponent
+import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroupDetails.StudentGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.TeacherGroupDetailsComponent
