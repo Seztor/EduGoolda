@@ -15,6 +15,5 @@ class FakeStudentGroupDetailsComponent() : StudentGroupDetailsComponent {
     override fun onRetryClick() = Unit
 
     override fun onReturnBackRequestClick() = Unit
-    override fun onGroupQuitRequestClick() = Unit
     override fun onDialogQuitRequest() = Unit
 }

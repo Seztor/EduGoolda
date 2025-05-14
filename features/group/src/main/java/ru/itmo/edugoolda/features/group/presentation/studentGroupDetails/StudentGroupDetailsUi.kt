@@ -186,11 +186,7 @@ fun StudentGroupDetailsUi(
                         color = CustomTheme.colors.text.primary,
                     )
                     Text(
-                        text = if (!data.description.isNullOrEmpty()) {
-                            data.description!!
-                        } else {
-                            stringResource(R.string.group_description_null)
-                        },
+                        text = data.description ?: stringResource(R.string.group_description_null),
                         fontWeight = CustomTheme.typography.body.regular.fontWeight,
                         fontSize = CustomTheme.typography.body.regular.fontSize,
                         color = CustomTheme.colors.text.primary,

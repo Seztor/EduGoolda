@@ -45,14 +45,14 @@ class RealStudentGroupDetailsComponent(
         communication.onReturnBackRequested()
     }
 
-    override fun onGroupQuitRequestClick() {
+    private fun onGroupQuitRequestClick() {
         if (isQuitingGroupProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isQuitingGroupProgress) {
                 repositoryGroupOfStudents.leaveFromGroup(groupId)
             }
-            communication.onGroupQuitRequested()
+            communication.onGroupQuited()
         }
     }
 

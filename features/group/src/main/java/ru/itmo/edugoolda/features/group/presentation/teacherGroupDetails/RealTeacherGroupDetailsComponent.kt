@@ -68,7 +68,7 @@ class RealTeacherGroupDetailsComponent(
         communication.onReturnBackRequested()
     }
 
-    override fun onGroupDeleteRequestClick() {
+    private fun onGroupDeleteRequestClick() {
         if (isDeletingGroupProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
@@ -79,7 +79,7 @@ class RealTeacherGroupDetailsComponent(
         }
     }
 
-    override fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) {
+    private fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) {
         if (isKickingMemberProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
@@ -102,12 +102,10 @@ class RealTeacherGroupDetailsComponent(
     }
 
     override fun onDialogDeleteGroup() {
-        if (groupInfoState.value.data == null) return
-
         dialogDeleteGroup.show(
             StandardDialogData(
                 title = R.string.delete_group.strResDesc(),
-                message = StringDesc.ResourceFormatted(R.string.delete_group_message, groupInfoState.value.data!!.name),
+                message = StringDesc.ResourceFormatted(R.string.delete_group_message, groupInfoState.value.data?.name ?: return),
                 confirmButton = DialogButton(
                     text = R.string.group_confirm.strResDesc(),
                     action = {
@@ -127,12 +125,11 @@ class RealTeacherGroupDetailsComponent(
     }
 
     override fun onDialogKickMember(action: KickType, userId: UserId) {
-        if (groupInfoState.value.data == null) return
 
         dialogKickMember.show(
             StandardDialogData(
                 title = R.string.delete_participant.strResDesc(),
-                message = StringDesc.ResourceFormatted(R.string.delete_participant_message_secondary, groupInfoState.value.data!!.name),
+                message = StringDesc.ResourceFormatted(R.string.delete_participant_message_secondary, groupInfoState.value.data?.name ?: return),
                 confirmButton = DialogButton(
                     text = R.string.group_confirm.strResDesc(),
                     action = {

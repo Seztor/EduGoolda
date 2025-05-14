@@ -21,19 +21,10 @@ class FakeTeacherGroupDetailsComponent() : TeacherGroupDetailsComponent {
     override val dialogKickMember = fakeStandardDialogControl()
 
     override fun onRefresh() = Unit
-
     override fun onRetryClick() = Unit
-
     override fun onLoadNext() = Unit
-
     override fun onReturnBackRequestClick() = Unit
-
-    override fun onGroupDeleteRequestClick() = Unit
-
-    override fun onGroupMemberKickRequestClick(action: KickType, userId: UserId) = Unit
-
     override fun onGroupCodeGenerateRequestClick() = Unit
     override fun onDialogDeleteGroup() = Unit
-
     override fun onDialogKickMember(action: KickType, userId: UserId) = Unit
 }

@@ -13,11 +13,10 @@ interface StudentGroupDetailsComponent {
     fun onRefresh()
     fun onRetryClick()
     fun onReturnBackRequestClick()
-    fun onGroupQuitRequestClick()
     fun onDialogQuitRequest()
 
     interface Communication {
         fun onReturnBackRequested()
-        fun onGroupQuitRequested()
+        fun onGroupQuited()
     }
 }

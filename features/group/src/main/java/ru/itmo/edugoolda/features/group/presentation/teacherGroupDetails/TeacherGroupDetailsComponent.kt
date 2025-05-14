@@ -25,8 +25,6 @@ interface TeacherGroupDetailsComponent {
     fun onRetryClick()
     fun onLoadNext()
     fun onReturnBackRequestClick()
-    fun onGroupDeleteRequestClick()
-    fun onGroupMemberKickRequestClick(action: KickType, userId: UserId)
     fun onGroupCodeGenerateRequestClick()
     fun onDialogDeleteGroup()
     fun onDialogKickMember(action: KickType, userId: UserId)
