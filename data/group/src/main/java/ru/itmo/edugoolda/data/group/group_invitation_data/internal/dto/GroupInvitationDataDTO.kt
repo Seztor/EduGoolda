@@ -18,16 +18,16 @@ internal fun GroupInvitationDataDTO.toDomain(): GroupInvitationData = GroupInvit
 )
 
 @Serializable
-internal data class RequestJoinGroupDTO(
+internal data class JoinGroupDTORequest(
     @SerialName("code") val code: String
 )
 
 @Serializable
-internal data class ResponseJoinGroup(
+internal data class JoinGroupResponse(
     @SerialName("group_id") val groupId: String
 )
 
-internal fun ResponseJoinGroup.toDomain() : GroupId = GroupId(
+internal fun JoinGroupResponse.toDomain() : GroupId = GroupId(
     value = groupId
 )
 

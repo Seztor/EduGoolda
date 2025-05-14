@@ -1,7 +1,6 @@
 package ru.itmo.edugoolda.features.group.presentation.addGroup
 
 import kotlinx.coroutines.flow.StateFlow
-import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 interface GroupAddComponent {
@@ -14,6 +13,6 @@ interface GroupAddComponent {
 
     interface Communication {
         fun onGroupAdded()
-        fun onCancel()
+        fun onCancelGroupAdding()
     }
 }
