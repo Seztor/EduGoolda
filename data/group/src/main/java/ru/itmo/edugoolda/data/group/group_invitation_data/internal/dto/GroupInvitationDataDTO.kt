@@ -23,11 +23,11 @@ internal data class RequestJoinGroupDTO(
 )
 
 @Serializable
-internal data class RequestJoinGroupResponse(
+internal data class ResponseJoinGroup(
     @SerialName("group_id") val groupId: String
 )
 
-internal fun RequestJoinGroupResponse.toDomain() : GroupId = GroupId(
+internal fun ResponseJoinGroup.toDomain() : GroupId = GroupId(
     value = groupId
 )
 
