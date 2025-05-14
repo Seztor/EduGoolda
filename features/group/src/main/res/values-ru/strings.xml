@@ -8,6 +8,9 @@
     <string name="group_info_title">Информация о группе</string>
     <string name="group_invitation_code">Получить код приглашения</string>
     <string name="group_members_title">Участники</string>
+    <string name="group_add_title">Добавление группы</string>
+    <string name="group_textfield_code">Код приглашения</string>
+    <string name="group_add_group_button">Добавить группу</string>
     <string name="group_owner_title">Владелец</string>
     <string name="group_description_title">Описание</string>
     <string name="group_count_members_title">Количество участников</string>
