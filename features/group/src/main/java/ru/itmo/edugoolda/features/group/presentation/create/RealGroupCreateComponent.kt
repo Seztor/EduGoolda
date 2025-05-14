@@ -34,7 +34,7 @@ class RealGroupCreateComponent(
                     name = nameInputControl.text.value,
                     description = descriptionInputControl.text.value
                 )
-                communication.onGroupCreated(id.id.value)
+                communication.onGroupCreated()
             }
         }
     }

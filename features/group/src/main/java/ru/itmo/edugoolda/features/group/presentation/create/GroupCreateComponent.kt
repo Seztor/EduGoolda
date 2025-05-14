@@ -17,7 +17,7 @@ interface GroupCreateComponent {
     fun onSubjectSelect(subject: String)
 
     interface Communication {
-        fun onGroupCreated(id: String)
+        fun onGroupCreated()
         fun onCancel()
     }
 }

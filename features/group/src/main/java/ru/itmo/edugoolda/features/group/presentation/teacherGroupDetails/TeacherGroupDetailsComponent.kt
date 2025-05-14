@@ -28,6 +28,6 @@ interface TeacherGroupDetailsComponent {
 
     interface Communication {
         fun onReturnBackRequested()
-        fun onGroupDeleteRequested(id: GroupId)
+        fun onGroupDeleteRequested()
     }
 }

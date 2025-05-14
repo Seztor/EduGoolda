@@ -66,7 +66,7 @@ class RealTeacherGroupDetailsComponent(
             withProgress(isDeletingGroupProgress) {
                 repositoryGroupList.deleteGroup(groupId)
             }
-            communication.onGroupDeleteRequested(groupId)
+            communication.onGroupDeleteRequested()
         }
     }
 
