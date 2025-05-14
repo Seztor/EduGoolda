@@ -7,4 +7,7 @@
     <string name="group_info_title">Information about group</string>
     <string name="group_invitation_code">Generate invitation code</string>
     <string name="group_members_title">Members</string>
+    <string name="group_add_title">Group adding</string>
+    <string name="group_textfield_code">Invitation code</string>
+    <string name="group_add_group_button">Add group</string>
 </resources>
