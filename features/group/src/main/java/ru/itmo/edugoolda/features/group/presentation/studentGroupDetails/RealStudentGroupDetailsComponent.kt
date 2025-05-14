@@ -57,12 +57,14 @@ class RealStudentGroupDetailsComponent(
     }
 
     override fun onDialogQuitRequest() {
-        if (groupInfoState.value.data == null) return
-
+        val data = groupInfoState.value.data ?: return
         dialogQuit.show(
             StandardDialogData(
                 title = R.string.quit_group_title.strResDesc(),
-                message = StringDesc.ResourceFormatted(R.string.quit_group_message, groupInfoState.value.data!!.name),
+                message = StringDesc.ResourceFormatted(
+                    R.string.quit_group_message,
+                    data.name
+                ),
                 confirmButton = DialogButton(
                     text = R.string.group_confirm.strResDesc(),
                     action = {

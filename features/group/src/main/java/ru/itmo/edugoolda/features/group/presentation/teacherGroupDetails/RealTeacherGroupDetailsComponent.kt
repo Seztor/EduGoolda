@@ -75,7 +75,7 @@ class RealTeacherGroupDetailsComponent(
             withProgress(isDeletingGroupProgress) {
                 repositoryGroupList.deleteGroup(groupId)
             }
-            communication.onGroupDeleteRequested(groupId)
+            communication.onGroupDeleted()
         }
     }
 
@@ -102,10 +102,14 @@ class RealTeacherGroupDetailsComponent(
     }
 
     override fun onDialogDeleteGroup() {
+        val data = groupInfoState.value.data ?: return
         dialogDeleteGroup.show(
             StandardDialogData(
                 title = R.string.delete_group.strResDesc(),
-                message = StringDesc.ResourceFormatted(R.string.delete_group_message, groupInfoState.value.data?.name ?: return),
+                message = StringDesc.ResourceFormatted(
+                    R.string.delete_group_message,
+                    data.name
+                ),
                 confirmButton = DialogButton(
                     text = R.string.group_confirm.strResDesc(),
                     action = {
@@ -125,11 +129,14 @@ class RealTeacherGroupDetailsComponent(
     }
 
     override fun onDialogKickMember(action: KickType, userId: UserId) {
-
+        val data = groupInfoState.value.data ?: return
         dialogKickMember.show(
             StandardDialogData(
                 title = R.string.delete_participant.strResDesc(),
-                message = StringDesc.ResourceFormatted(R.string.delete_participant_message_secondary, groupInfoState.value.data?.name ?: return),
+                message = StringDesc.ResourceFormatted(
+                    R.string.delete_participant_message_secondary,
+                    data.name
+                ),
                 confirmButton = DialogButton(
                     text = R.string.group_confirm.strResDesc(),
                     action = {
