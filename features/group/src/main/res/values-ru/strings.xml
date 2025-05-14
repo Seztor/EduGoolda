@@ -17,4 +17,9 @@
     <string name="quit_group_message">Вы уверенны, что ходите выйти из группы «%s»?</string>
     <string name="group_confirm">Да</string>
     <string name="group_dismiss">Отменить</string>
+    <string name="group_creation_title">Создание группы</string>
+    <string name="group_create_button">Создать</string>
+    <string name="group_textfield_name">Название</string>
+    <string name="group_textfield_description">Описание</string>
+    <string name="group_textfield_subject">Название предмета</string>
 </resources>
