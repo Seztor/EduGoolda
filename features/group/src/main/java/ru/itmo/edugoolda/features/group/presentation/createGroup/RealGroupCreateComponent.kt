@@ -35,14 +35,14 @@ class RealGroupCreateComponent(
                     name = nameInputControl.text.value,
                     description = descriptionInputControl.text.value,
                     selectedSubject = subjectId
-                ).id
-                communication.onGroupCreated(groupId)
+                )
+                communication.onGroupCreated()
             }
         }
     }
 
     override fun onCancelClick() {
-        communication.onCancel()
+        communication.onCancelGroupCreation()
     }
 
 }
