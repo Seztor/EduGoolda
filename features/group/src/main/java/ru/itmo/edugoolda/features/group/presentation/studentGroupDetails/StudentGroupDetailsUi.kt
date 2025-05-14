@@ -23,6 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.itmo.edugoolda.core.dialog.standard.StandardDialog
+import ru.itmo.edugoolda.core.dialog.standard.StandardDialogControl
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
@@ -35,6 +37,7 @@ fun StudentGroupDetailsUi(
     modifier: Modifier = Modifier,
 ) {
     val groupInfoState by component.groupInfoState.collectAsState()
+    StandardDialog(component.dialogQuit)
 
     Column(modifier = modifier) {
         Row(
@@ -94,7 +97,7 @@ fun StudentGroupDetailsUi(
                     Spacer(modifier = Modifier.weight(1f))
 
                     IconButton(
-                        onClick = { component.onReturnBackRequestClick() },
+                        onClick = { component.onDialogQuitRequest() },
                         modifier = Modifier.size(37.dp)
                     ) {
                         Icon(
