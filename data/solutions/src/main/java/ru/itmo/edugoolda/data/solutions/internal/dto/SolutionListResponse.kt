@@ -22,12 +22,14 @@ fun SolutionListResponse.toDomain(): SolutionListWithTotal = SolutionListWithTot
 @Serializable
 data class SolutionDTO(
     @SerialName("id") val id: String,
+    @SerialName("lesson_name") val lessonName: String,
     @SerialName("sender") val sender: UserInfoDTO,
     @SerialName("date") val date: String
 )
 
 fun SolutionDTO.toDomain(): Solution = Solution(
     id = SolutionId(id),
+    lessonName = lessonName,
     sender = sender.toDomain(),
     date = date
 )

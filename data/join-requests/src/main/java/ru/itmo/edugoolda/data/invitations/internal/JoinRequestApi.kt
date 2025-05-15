@@ -10,8 +10,7 @@ import ru.itmo.edugoolda.data.invitations.internal.dto.JoinRequestListResponse
 
 interface JoinRequestApi {
     @POST("/api/v1/join_request/{requestUuid}")
-    suspend fun respondToJoinRequest(@Path("requestUuid") requestId: String, @Body request: JoinRequestResponseRequest )
-
+    suspend fun respondToJoinRequest(@Path("requestUuid") requestId: String, @Body request: JoinRequestResponseRequest)
 
     @GET("/api/v1/join_requests/<GROUP_UUID>")
     suspend fun getInvitationList(

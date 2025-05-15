@@ -10,12 +10,14 @@ import ru.itmo.edugoolda.features.home.presentation.teacher.HomeTeacherComponent
 
 fun ComponentFactory.createHomeTeacherComponent(
     componentContext: ComponentContext,
+    communication: HomeTeacherComponent.Communication
 ): HomeTeacherComponent {
-    return HomeTeacherComponentImpl(componentContext, get(), get(), get())
-}
-fun ComponentFactory.createHomeStudentComponent(
-    componentContext: ComponentContext,
-): HomeStudentComponent {
-    return HomeStudentComponentImpl(componentContext, get(), get(), get())
+    return HomeTeacherComponentImpl(componentContext, communication, get(), get(), get())
 }
 
+fun ComponentFactory.createHomeStudentComponent(
+    componentContext: ComponentContext,
+    communication: HomeStudentComponent.Communication
+): HomeStudentComponent {
+    return HomeStudentComponentImpl(componentContext, communication, get(), get(), get())
+}

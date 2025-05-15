@@ -6,7 +6,6 @@ import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import ru.itmo.edugoolda.data.user.internal.mappers.UserRoleMapper
 
-
 @Serializable
 data class UserInfoDTO(
     @SerialName("id") val id: String,

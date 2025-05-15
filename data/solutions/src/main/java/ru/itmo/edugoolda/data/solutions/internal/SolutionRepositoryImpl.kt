@@ -20,9 +20,6 @@ class SolutionRepositoryImpl(
     companion object {
         private const val PAGE_SIZE = 20
     }
-
-
-
     override val solutionListReplica = replicaClient.createPagedReplica(
         name = "invitation list replica",
         settings = PagedReplicaSettings(staleTime = 5.minutes),
