@@ -1,6 +1,8 @@
 package ru.itmo.edugoolda.features.home.presentation.student
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,6 +20,7 @@ import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestStudentListItem
 import ru.itmo.edugoolda.core.widget.solutions.SolutionListItem
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
+
 @Composable
 fun HomeStudentUi(
     component: HomeStudentComponent,
@@ -72,8 +75,8 @@ fun HomeStudentUi(
             }
 
             // Solutions List
-            Column {
-                data.solutions.take(3).forEach {
+            LazyColumn {
+                items(data.solutions.take(3)) {
                     SolutionListItem(
                         lessonName = it.lessonName,
                         studentName = it.sender.name,
@@ -127,8 +130,8 @@ fun HomeStudentUi(
             }
 
             // Request list
-            Column {
-                data.joinRequests.take(3).forEach {
+            LazyColumn {
+                items(data.joinRequests.take(3)) {
                     JoinRequestStudentListItem(
                         groupName = it.groupName,
                         date = it.date

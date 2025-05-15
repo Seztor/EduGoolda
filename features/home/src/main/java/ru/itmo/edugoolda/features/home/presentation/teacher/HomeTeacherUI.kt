@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -85,8 +87,8 @@ fun HomeTeacherUi(
             }
 
             // Solutions List
-            Column {
-                data.solutions.take(3).forEach {
+            LazyColumn {
+                items(data.solutions.take(3)) {
                     SolutionListItem(
                         lessonName = it.lessonName,
                         studentName = it.sender.name,
@@ -140,8 +142,8 @@ fun HomeTeacherUi(
             }
 
             // Request list
-            Column {
-                data.joinRequests.take(3).forEach {
+            LazyColumn {
+                items(data.joinRequests.take(3)) {
                     JoinRequestTeacherListItem(
                         groupName = it.groupName,
                         studentName = it.sender.name,
