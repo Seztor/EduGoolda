@@ -28,13 +28,13 @@ internal class AuthInterceptor(
         val accessToken = authTokensProvider.tokens.value?.accessToken
 
         if (accessToken != null) {
-            request.headers[AUTHORIZATION_HEADER] = accessToken
+            request.headers[AUTHORIZATION_HEADER] = "Bearer $accessToken"
         }
 
         val call = sender.execute(request)
 
         return if (accessToken != null && call.response.status == HttpStatusCode.Unauthorized) {
-            request.headers[AUTHORIZATION_HEADER] = getNewAccessToken(accessToken)
+            request.headers[AUTHORIZATION_HEADER] = "Bearer ${getNewAccessToken(accessToken)}"
             sender.execute(request)
         } else {
             call

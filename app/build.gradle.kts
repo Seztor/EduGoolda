@@ -57,7 +57,7 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"https://bba6jdgfhuki2mp051ap.containers.yandexcloud.net/\""
+                "\"https://edugoolda.ru.tuna.am/\""
             )
         }
 
@@ -67,7 +67,7 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"https://bba6jdgfhuki2mp051ap.containers.yandexcloud.net/\""
+                "\"https://edugoolda.ru.tuna.am/\""
             )
         }
     }

@@ -34,7 +34,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
-import ru.itmo.edugoolda.data.group.groupList.api.GroupList
+import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
 import ru.itmo.edugoolda.features.group.R
 
 @Composable
@@ -43,40 +43,39 @@ fun StudentGroupsUi(
     modifier: Modifier = Modifier,
 ) {
     val state by component.studentGroupState.collectAsState()
-
-    PullRefreshLceWidget(
-        state = state,
-        onRefresh = component::onRefresh,
-        onRetryClick = component::onRetryClick
-    ) { data: GroupList, _: Boolean ->
-        val lazyListState = rememberLazyListState()
-        lazyListState.TriggerLoadNext(
-            pagedState = state,
-            hasNextPage = state.data?.hasNextPage == true,
-            callback = component::onLoadNext
+    Column(modifier = modifier) {
+        AppTextField(
+            inputControl = component.groupSearchInputControl,
+            placeholder = stringResource(R.string.search_students_group),
+            modifier = Modifier.padding(horizontal = 20.dp).padding(top = 35.dp, bottom = 15.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    tint = Color.Gray,
+                    contentDescription = "Group Icon",
+                    modifier = Modifier.size(25.dp)
+                )
+            }
         )
-        Column(modifier = modifier) {
-            AppTextField(
-                inputControl = component.groupSearchInputControl,
-                placeholder = stringResource(R.string.search_students_group),
-                modifier = Modifier.padding(horizontal = 20.dp, 15.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        tint = Color.Gray,
-                        contentDescription = "Group Icon",
-                        modifier = Modifier.size(25.dp)
-                    )
-                }
-            )
 
+        PullRefreshLceWidget(
+            state = state,
+            onRefresh = component::onRefresh,
+            onRetryClick = component::onRetryClick
+        ) { data: GroupInfoList, _: Boolean ->
+            val lazyListState = rememberLazyListState()
+            lazyListState.TriggerLoadNext(
+                pagedState = state,
+                hasNextPage = state.data?.hasNextPage == true,
+                callback = component::onLoadNext
+            )
             LazyColumn(
                 state = lazyListState,
 
                 ) {
                 items(data.groups) { item ->
-                    GroupItem(
-                        { component.onGroupDetailRequestClick(item.id) },
+                    StudentGroupItem(
+                        { component.onGroupDetailsRequestClick(item.id) },
                         item.name,
                         item.subjectName
                     )
@@ -88,11 +87,27 @@ fun StudentGroupsUi(
                 }
             }
         }
+        Spacer(modifier = Modifier.weight(1f))
+
+        IconButton(
+            onClick = { component.onGroupAddRequestClick() },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(80.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.add_group),
+                contentDescription = "Add Group Icon",
+                modifier = Modifier.size(80.dp),
+                tint = Color.Unspecified
+
+            )
+        }
     }
 }
 
 @Composable
-fun GroupItem(
+fun StudentGroupItem(
     onGroupItemClick: () -> Unit,
     name: String,
     subjectName: String,
@@ -106,7 +121,9 @@ fun GroupItem(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 10.dp)
+                    .size(27.dp)
             )
 
             Text(
@@ -141,7 +158,7 @@ fun GroupItem(
 @Composable
 fun PreviewGroupItem() {
     AppTheme {
-        GroupItem(
+        StudentGroupItem(
             {}, "Группа 1", "Math"
         )
     }
@@ -149,7 +166,7 @@ fun PreviewGroupItem() {
 
 @Preview(showBackground = true)
 @Composable
-fun StudentGroupsUIPreview() {
+fun StudentGroupsUiPreview() {
     AppTheme {
         StudentGroupsUi(component = FakeStudentGroupComponent())
     }

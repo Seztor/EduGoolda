@@ -21,6 +21,7 @@ import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensRefresher
 import ru.itmo.edugoolda.data.auth.internal.tokens.AuthTokensStorage
 import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfoStore
+import ru.itmo.edugoolda.data.user.api.UserRole
 
 internal class AuthRepositoryImpl(
     private val api: AuthApi,
@@ -48,14 +49,18 @@ internal class AuthRepositoryImpl(
         email: Email,
         password: Password,
         name: String,
-        role: String
+        role: UserRole
     ) {
+        val roleType = when (role) {
+            UserRole.Teacher -> "teacher"
+            UserRole.Student -> "student"
+        }
         val response = api.register(
             RegisterRequest(
                 email = email.value,
                 password = password.value,
                 name = name,
-                role = role
+                role = roleType
             )
         )
         saveAuthData(response)

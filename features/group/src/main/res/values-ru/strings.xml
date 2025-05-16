@@ -3,5 +3,26 @@
     <string name="delete_participant">Удаление участника</string>
     <string name="delete_group_message">Вы уверены, что хотите удалить группу «%s»? Это действие приведет к удалению всех данных, связанных с этой группой.</string>
     <string name="delete_participant_message">Вы уверены, что хотите удалить участника «%s» из группы «%s»? Это действие приведет к удалению прогресса выполнения заданий данным учеником.</string>
+    <string name="delete_participant_message_secondary">Вы уверены, что хотите удалить участника из группы «%s»? Это действие приведет к удалению прогресса выполнения заданий данным учеником.</string>
     <string name="search_students_group">Найти</string>
+    <string name="group_info_title">Информация о группе</string>
+    <string name="group_invitation_code">Получить код приглашения</string>
+    <string name="group_members_title">Участники</string>
+    <string name="group_add_title">Добавление группы</string>
+    <string name="group_textfield_code">Код приглашения</string>
+    <string name="group_add_group_button">Добавить группу</string>
+    <string name="group_owner_title">Владелец</string>
+    <string name="group_description_title">Описание</string>
+    <string name="group_count_members_title">Количество участников</string>
+    <string name="group_description_null">к сожалению, тут пусто</string>
+    <string name="group_subject_title">Название предмета</string>
+    <string name="quit_group_title">Выход из группы</string>
+    <string name="quit_group_message">Вы уверенны, что ходите выйти из группы «%s»?</string>
+    <string name="group_confirm">Да</string>
+    <string name="group_dismiss">Отменить</string>
+    <string name="group_creation_title">Создание группы</string>
+    <string name="group_create_button">Создать</string>
+    <string name="group_textfield_name">Название</string>
+    <string name="group_textfield_description">Описание</string>
+    <string name="group_textfield_subject">Название предмета</string>
 </resources>

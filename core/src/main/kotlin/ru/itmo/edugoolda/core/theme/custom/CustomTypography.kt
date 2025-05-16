@@ -12,11 +12,13 @@ data class CustomTypography(
 
 data class TitleTypography(
     val regular: TextStyle,
-    val bold: TextStyle
+    val bold: TextStyle,
+    val boldSmallerSize: TextStyle
 )
 
 data class BodyTypography(
-    val regular: TextStyle
+    val regular: TextStyle,
+    val bold: TextStyle
 )
 
 data class CaptionTypography(

@@ -13,6 +13,8 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.plugin
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 
 /**
@@ -65,13 +67,16 @@ class NetworkApiFactory(
 
             defaultRequest {
                 url(backendUrl)
+                contentType(ContentType.Application.Json)
             }
 
             setupErrorConverter()
         }.apply {
-            interceptors.forEach { interceptor ->
-                plugin(HttpSend).intercept {
-                    interceptor.intercept(this, it)
+            if (authorized) {
+                interceptors.forEach { interceptor ->
+                    plugin(HttpSend).intercept {
+                        interceptor.intercept(this, it)
+                    }
                 }
             }
         }
