@@ -70,14 +70,6 @@ fun StudentLessonDetailsUi(
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 color = CustomTheme.colors.text.invert
             )
-
-            Text(
-                text = stringResource(R.string.student_lesson_details_title),
-                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
-                fontWeight = CustomTheme.typography.title.bold.fontWeight,
-                fontSize = CustomTheme.typography.body.regular.fontSize,
-                color = CustomTheme.colors.text.invert
-            )
         }
 
         PullRefreshLceWidget(
@@ -237,7 +229,7 @@ fun MessageItemPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun GroupAddUiPreview() {
+fun StudentLessonDetailsUiPreview() {
     AppTheme {
         StudentLessonDetailsUi(component = FakeStudentLessonDetailsComponent())
     }

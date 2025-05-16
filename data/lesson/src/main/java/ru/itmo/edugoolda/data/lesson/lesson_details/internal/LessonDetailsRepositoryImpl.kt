@@ -18,6 +18,22 @@ internal class LessonDetailsRepositoryImpl(
     private val lessonDetailsApi: LessonDetailsApi
 ) : LessonDetailsRepository {
 
+    private val _lessonTeacherDetailsReplica = replicaClient.createKeyedReplica(
+        name = "teacher lesson details replica",
+        childName = {
+            "child $it"
+        },
+        settings = KeyedReplicaSettings(maxCount = 10),
+        childSettings = {
+            ReplicaSettings(staleTime = 5.minutes)
+        },
+        fetcher = { key: LessonId ->
+            lessonDetailsApi.getLessonTeacherDetails(key.value)
+        }
+    )
+
+    override val lessonTeacherDetailsReplica = _lessonTeacherDetailsReplica.map { _, data -> data.toDomain() }
+
     private val _lessonStudentDetailsReplica = replicaClient.createKeyedReplica(
         name = "student lesson details replica",
         childName = {
@@ -33,6 +49,7 @@ internal class LessonDetailsRepositoryImpl(
     )
 
     override val lessonStudentDetailsReplica = _lessonStudentDetailsReplica.map { _, data -> data.toDomain() }
+
 
     private val _solutionTeacherDetailsReplica = replicaClient.createKeyedReplica(
         name = "teacher solution details replica",
@@ -69,5 +86,9 @@ internal class LessonDetailsRepositoryImpl(
         )
         lessonDetailsApi.setSolutionStatus(solutionId.value, actionRequest)
         _solutionTeacherDetailsReplica.refresh(solutionId)
+    }
+
+    override suspend fun deleteLessonTeacher(lessonId: LessonId) {
+        lessonDetailsApi.deleteLessonTeacher(lessonId.value)
     }
 }
