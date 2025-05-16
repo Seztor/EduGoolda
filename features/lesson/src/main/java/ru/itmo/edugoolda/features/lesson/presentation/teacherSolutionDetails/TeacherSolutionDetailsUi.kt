@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails
+package ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,17 +32,19 @@ import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
+import ru.itmo.edugoolda.core.widget.button.AppButton
+import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionDetails
 import ru.itmo.edugoolda.features.lesson.R
 
 @Composable
-fun StudentLessonDetailsUi(
-    component: StudentLessonDetailsComponent,
+fun TeacherSolutionDetailsUi(
+    component: TeacherSolutionDetailsComponent,
     modifier: Modifier = Modifier,
 ) {
-    val studentLessonDetailsState by component.lessonStudentDetailsState.collectAsState()
+    val solutionTeacherDetailsState by component.solutionTeacherDetailsState.collectAsState()
 
     Column(modifier = modifier) {
         Row(
@@ -64,15 +66,7 @@ fun StudentLessonDetailsUi(
             }
 
             Text(
-                text = stringResource(R.string.student_lesson_details_title),
-                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
-                fontWeight = CustomTheme.typography.title.bold.fontWeight,
-                fontSize = CustomTheme.typography.body.regular.fontSize,
-                color = CustomTheme.colors.text.invert
-            )
-
-            Text(
-                text = stringResource(R.string.student_lesson_details_title),
+                text = stringResource(R.string.teacher_solution_details_title),
                 modifier = Modifier.padding(start = 30.dp, top = 15.dp),
                 fontWeight = CustomTheme.typography.title.bold.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
@@ -81,43 +75,41 @@ fun StudentLessonDetailsUi(
         }
 
         PullRefreshLceWidget(
-            state = studentLessonDetailsState,
+            state = solutionTeacherDetailsState,
             onRefresh = component::onRefresh,
             onRetryClick = component::onRetryClick
-        ) { data: LessonStudentDetails, _: Boolean ->
+        ) { data: SolutionDetails, _: Boolean ->
             Column {
+
                 Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .padding(horizontal = 20.dp)
-                        .padding(top = 20.dp)
+                        .padding(top = 15.dp)
                 ) {
-                    Column {
-                        Text(
-                            text = data.name,
-                            fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
-                            fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
-                            modifier = Modifier.width(220.dp),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            softWrap = false
-                        )
-                        if (data.status == LessonStatus.Reviewed) {
-                            Text(
-                                text = "(${stringResource(R.string.lesson_checked_status)})",
-                                fontWeight = CustomTheme.typography.body.regular.fontWeight,
-                                fontSize = CustomTheme.typography.body.regular.fontSize,
-                                modifier = Modifier.width(230.dp)
-                            )
-                        }
-                    }
-
                     Text(
-                        text = "${stringResource(R.string.lesson_deadline_title)}:\n${data.deadline}",
-                        fontWeight = CustomTheme.typography.body.bold.fontWeight,
-                        fontSize = CustomTheme.typography.body.bold.fontSize,
-                        modifier = Modifier.width(100.dp),
+                        text = data.lesson.name,
+                        fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
+                        fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
+                        modifier = Modifier.width(220.dp),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        softWrap = false
+                    )
+
+                    AppButton(
+                        onClick = { component.onSetSolutionStatus(
+                            when (data.status) {
+                                LessonStatus.Pending -> LessonStatus.Reviewed
+                                LessonStatus.Reviewed -> LessonStatus.Pending
+                            }
+                        ) },
+                        buttonType = ButtonType.Primary,
+                        text = when (data.status) {
+                            LessonStatus.Pending -> stringResource(R.string.solution_button_change_checked_type_to_reviewed)
+                            LessonStatus.Reviewed -> stringResource(R.string.solution_button_change_checked_type_to_pending)
+                        }
                     )
                 }
 
@@ -131,7 +123,8 @@ fun StudentLessonDetailsUi(
                         .padding(top = 15.dp)
                 )
                 Text(
-                    text = data.description ?: stringResource(R.string.lesson_description_null),
+                    text = data.lesson.description
+                        ?: stringResource(R.string.lesson_description_null),
                     fontWeight = CustomTheme.typography.body.regular.fontWeight,
                     fontSize = CustomTheme.typography.body.regular.fontSize,
                     color = CustomTheme.colors.text.primary,
@@ -140,29 +133,27 @@ fun StudentLessonDetailsUi(
                         .padding(top = 3.dp)
                 )
 
-                if (data.isEstimatable and (data.status == LessonStatus.Pending)) {
-                    Row(
-                        modifier = Modifier
-                            .padding(horizontal = 20.dp)
-                            .padding(top = 15.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        AppTextField(
-                            inputControl = component.replyInputControl,
-                            placeholder = "${stringResource(id = R.string.lesson_placeholder_reply)}...",
-                            modifier = Modifier.weight(weight = 0.8f)
-                        )
+                Row(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                        .padding(top = 15.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    AppTextField(
+                        inputControl = component.replyInputControl,
+                        placeholder = "${stringResource(id = R.string.lesson_placeholder_reply)}...",
+                        modifier = Modifier.weight(weight = 0.8f)
+                    )
 
-                        IconButton(
-                            onClick = { component.onSendCommentClick(component.replyInputControl.text.value) },
-                            modifier = Modifier.size(45.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Send,
-                                contentDescription = "send message",
-                                modifier = Modifier.size(33.dp)
-                            )
-                        }
+                    IconButton(
+                        onClick = { component.onSendCommentClick(component.replyInputControl.text.value) },
+                        modifier = Modifier.size(45.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Send,
+                            contentDescription = "send message",
+                            modifier = Modifier.size(33.dp)
+                        )
                     }
                 }
 
@@ -174,8 +165,8 @@ fun StudentLessonDetailsUi(
                             item.author.name,
                             item.message,
                             when (item.author.id) {
-                                data.teacher.id -> Arrangement.Start
-                                else -> Arrangement.End
+                                data.lesson.teacher.id -> Arrangement.End
+                                else -> Arrangement.Start
                             },
                         )
                     }
@@ -239,6 +230,6 @@ fun MessageItemPreview() {
 @Composable
 fun GroupAddUiPreview() {
     AppTheme {
-        StudentLessonDetailsUi(component = FakeStudentLessonDetailsComponent())
+        TeacherSolutionDetailsUi(component = FakeTeacherSolutionDetailsComponent())
     }
 }

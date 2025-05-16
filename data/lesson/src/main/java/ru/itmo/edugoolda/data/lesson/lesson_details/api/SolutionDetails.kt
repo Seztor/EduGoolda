@@ -9,38 +9,37 @@ import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import ru.itmo.edugoolda.data.user.api.UserRole
 
-data class LessonStudentDetails(
-    val id: LessonId,
-    val name: String,
-    val description: String?,
-    val teacher: UserInfo,
-    val deadline: String,
-    val groups: List<GroupInfo>,
+data class SolutionDetails(
+    val id: SolutionId,
+    val lesson: LessonGeneralDetails,
     val messages: List<SolutionMessage>,
     val status: LessonStatus,
-    val isEstimatable: Boolean,
 ) {
     companion object {
-        val MOCK = LessonStudentDetails(
-            id = LessonId("1"),
-            name = "Lesson 1",
-            description = "DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS",
-            teacher = UserInfo(
-                id = UserId("1"),
-                name = "Pavel",
-                email = "pavel@mail.ru",
-                role = UserRole.Teacher,
-                isDeleted = false
-            ),
-            deadline = formatInstantToDateTimeString(Clock.System.now()),
-            groups = listOf(
-                GroupInfo(
-                    id = GroupId("1"),
-                    name = "Group 1",
-                    subjectName = "Math",
-                    ownerName = "Pavel",
-                    isFavourite = false
-                )
+        val MOCK = SolutionDetails(
+            id = SolutionId("1"),
+            lesson = LessonGeneralDetails(
+                id = LessonId("1"),
+                name = "Lesson 1",
+                description = "DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS DO THIS",
+                teacher = UserInfo(
+                    id = UserId("1"),
+                    name = "Pavel",
+                    email = "pavel@mail.ru",
+                    role = UserRole.Teacher,
+                    isDeleted = false
+                ),
+                deadline = formatInstantToDateTimeString(Clock.System.now()),
+                groups = listOf(
+                    GroupInfo(
+                        id = GroupId("1"),
+                        name = "Group 1",
+                        subjectName = "Math",
+                        ownerName = "Pavel",
+                        isFavourite = false
+                    )
+                ),
+                isEstimatable = true
             ),
             messages = listOf(
                 SolutionMessage(
@@ -80,8 +79,7 @@ data class LessonStudentDetails(
                     ),
                 )
             ),
-            status = LessonStatus.Reviewed,
-            isEstimatable = true
+            status = LessonStatus.Reviewed
         )
     }
 }

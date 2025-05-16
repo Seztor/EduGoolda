@@ -4,5 +4,9 @@ import me.aartikov.replica.keyed.KeyedReplica
 
 interface LessonDetailsRepository {
     val lessonStudentDetailsReplica: KeyedReplica<LessonId, LessonStudentDetails>
-    suspend fun sendMessage(lessonId: LessonId, message: String)
+    val solutionTeacherDetailsReplica: KeyedReplica<SolutionId, SolutionDetails>
+
+    suspend fun sendMessageByStudent(lessonId: LessonId, message: String)
+    suspend fun sendMessageByTeacher(solutionId: SolutionId, message: String)
+    suspend fun setSolutionStatus(solutionId: SolutionId, status: LessonStatus)
 }

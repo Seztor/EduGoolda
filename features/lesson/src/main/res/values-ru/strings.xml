@@ -4,4 +4,8 @@
     <string name="lesson_description_null">к сожалению, тут ничего нет</string>
     <string name="lesson_placeholder_reply">Сообщение</string>
     <string name="lesson_deadline_title">Дедлайн</string>
+    <string name="teacher_solution_details_title">Информация о решении</string>
+    <string name="lesson_checked_status">Решение закрыто, как проверенное</string>
+    <string name="solution_button_change_checked_type_to_reviewed">Установить, как проверенное</string>
+    <string name="solution_button_change_checked_type_to_pending">Установить, как ожидает проверки</string>
 </resources>

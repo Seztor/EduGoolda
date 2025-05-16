@@ -39,7 +39,7 @@ class RealStudentLessonDetailsComponent(
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isSendingMessageProgress) {
-                lessonDetailsRepository.sendMessage(lessonId, message)
+                lessonDetailsRepository.sendMessageByStudent(lessonId, message)
             }
         }
     }
