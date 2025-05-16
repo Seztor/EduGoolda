@@ -39,12 +39,12 @@ class RealTeacherSolutionDetailsComponent(
         solutionTeacherDetailsReplica.revalidate()
     }
 
-    override fun onSendCommentClick(message: String) {
+    override fun onSendCommentClick() {
         if (isSendingMessageProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isSendingMessageProgress) {
-                lessonDetailsRepository.sendMessageByTeacher(solutionId, message)
+                lessonDetailsRepository.sendMessageByTeacher(solutionId, replyInputControl.text.value)
             }
         }
     }

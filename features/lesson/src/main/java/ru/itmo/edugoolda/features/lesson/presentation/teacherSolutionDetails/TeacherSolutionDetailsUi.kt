@@ -146,7 +146,7 @@ fun TeacherSolutionDetailsUi(
                     )
 
                     IconButton(
-                        onClick = { component.onSendCommentClick(component.replyInputControl.text.value) },
+                        onClick = { component.onSendCommentClick() },
                         modifier = Modifier.size(45.dp)
                     ) {
                         Icon(

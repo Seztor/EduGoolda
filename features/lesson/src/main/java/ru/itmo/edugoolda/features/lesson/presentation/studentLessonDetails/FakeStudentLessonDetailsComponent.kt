@@ -16,7 +16,7 @@ class FakeStudentLessonDetailsComponent : StudentLessonDetailsComponent {
 
     override fun onRetryClick() = Unit
 
-    override fun onSendCommentClick(message: String) = Unit
+    override fun onSendCommentClick() = Unit
 
     override fun onReturnBackClick() = Unit
 }

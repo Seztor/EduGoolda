@@ -15,7 +15,7 @@ interface TeacherSolutionDetailsComponent {
 
     fun onRefresh()
     fun onRetryClick()
-    fun onSendCommentClick(message: String)
+    fun onSendCommentClick()
     fun onSetSolutionStatus(status: LessonStatus)
     fun onReturnBackClick()
 

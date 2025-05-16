@@ -17,7 +17,7 @@ class FakeTeacherSolutionDetailsComponent : TeacherSolutionDetailsComponent {
 
     override fun onRefresh() = Unit
     override fun onRetryClick() = Unit
-    override fun onSendCommentClick(message: String) = Unit
+    override fun onSendCommentClick() = Unit
     override fun onSetSolutionStatus(status: LessonStatus) = Unit
     override fun onReturnBackClick() = Unit
 }

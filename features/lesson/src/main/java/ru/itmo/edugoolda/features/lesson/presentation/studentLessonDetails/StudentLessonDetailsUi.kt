@@ -140,7 +140,7 @@ fun StudentLessonDetailsUi(
                         .padding(top = 3.dp)
                 )
 
-                if (data.isEstimatable and (data.status == LessonStatus.Pending)) {
+                if (data.isEstimatable && data.status == LessonStatus.Pending) {
                     Row(
                         modifier = Modifier
                             .padding(horizontal = 20.dp)
@@ -154,7 +154,7 @@ fun StudentLessonDetailsUi(
                         )
 
                         IconButton(
-                            onClick = { component.onSendCommentClick(component.replyInputControl.text.value) },
+                            onClick = { component.onSendCommentClick() },
                             modifier = Modifier.size(45.dp)
                         ) {
                             Icon(
