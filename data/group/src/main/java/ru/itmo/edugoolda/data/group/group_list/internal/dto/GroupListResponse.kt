@@ -18,7 +18,7 @@ internal fun GroupListResponse.toDomain(): GroupListWithTotal = GroupListWithTot
 )
 
 @Serializable
-internal data class GroupInfoDTO(
+data class GroupInfoDTO(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
     @SerialName("subject_name") val subjectName: String,
@@ -26,7 +26,7 @@ internal data class GroupInfoDTO(
     @SerialName("is_favourite") val isFavourite: Boolean
 )
 
-internal fun GroupInfoDTO.toDomain(): GroupInfo = GroupInfo(
+fun GroupInfoDTO.toDomain(): GroupInfo = GroupInfo(
     id = GroupId(id),
     name = name,
     subjectName = subjectName,

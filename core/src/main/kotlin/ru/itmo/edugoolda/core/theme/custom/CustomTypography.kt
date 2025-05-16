@@ -18,6 +18,8 @@ data class TitleTypography(
 
 data class BodyTypography(
     val regular: TextStyle,
+    val regular13: TextStyle,
+    val regular15: TextStyle,
     val bold: TextStyle
 )
 

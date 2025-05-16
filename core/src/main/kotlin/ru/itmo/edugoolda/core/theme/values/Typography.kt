@@ -28,6 +28,14 @@ val AppTypography = CustomTypography(
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal
         ),
+        regular13 = TextStyle(
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Normal
+        ),
+        regular15 = TextStyle(
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Normal
+        ),
         bold = TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold

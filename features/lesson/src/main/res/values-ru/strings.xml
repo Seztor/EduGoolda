@@ -1,0 +1,7 @@
+<resources>
+    <string name="student_lesson_details_title">Информация об уроке</string>
+    <string name="lesson_desription_title">Описание</string>
+    <string name="lesson_description_null">к сожалению, тут ничего нет</string>
+    <string name="lesson_placeholder_reply">Сообщение</string>
+    <string name="lesson_deadline_title">Дедлайн</string>
+</resources>

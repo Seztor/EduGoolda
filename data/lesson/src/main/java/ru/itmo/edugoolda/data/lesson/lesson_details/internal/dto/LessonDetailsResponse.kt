@@ -1,0 +1,78 @@
+package ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto
+
+import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupInfoDTO
+import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessage
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
+import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
+import ru.itmo.edugoolda.data.user.internal.dto.toDomain
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
+import kotlinx.datetime.toLocalDateTime
+import java.time.format.DateTimeFormatter
+
+
+@Serializable
+internal data class LessonStudentDetailsResponse(
+    @SerialName("id") val id: String,
+    @SerialName("name") val name: String,
+    @SerialName("description") val description: String?,
+    @SerialName("teacher") val teacher: UserInfoDTO,
+    @SerialName("deadline") val deadline: Instant,
+    @SerialName("groups") val groups: List<GroupInfoDTO>,
+    @SerialName("messages") val messages: List<SolutionMessageDTO>,
+    @SerialName("status") val status: String,
+    @SerialName("is_estimatable") val isEstimatable: Boolean
+)
+
+internal fun LessonStudentDetailsResponse.toDomain() : LessonStudentDetails = LessonStudentDetails(
+    id = LessonId(id),
+    name = name,
+    description = description,
+    teacher = teacher.toDomain(),
+    deadline = formatInstantToDateTimeString(deadline),
+    groups = groups.map { it.toDomain() },
+    messages = messages.map { it.toDomain() },
+    status = when (status) {
+        "reviewed" -> LessonStatus.Reviewed
+        else -> LessonStatus.Pending
+    },
+    isEstimatable = isEstimatable,
+)
+
+internal fun formatInstantToDateTimeString(instant: Instant): String {
+    val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+    val date = localDateTime.date
+    val dateString = "${date.dayOfMonth.toString().padStart(2,'0')}.${date.monthNumber.toString().padStart(2,'0')}.${date.year}"
+    val time = localDateTime.time
+    val timeString = "${time.hour.toString().padStart(2,'0')}:${time.minute.toString().padStart(2,'0')}"
+    return "$timeString $dateString"
+}
+
+@Serializable
+internal data class SolutionMessageDTO(
+    @SerialName("id") val id: String,
+    @SerialName("sent_at") val sentAt: Instant,
+    @SerialName("message") val message: String,
+    @SerialName("author") val author: UserInfoDTO
+)
+
+internal fun SolutionMessageDTO.toDomain() : SolutionMessage = SolutionMessage(
+    id = SolutionMessageId(id),
+    sentAt = sentAt,
+    message = message,
+    author = author.toDomain()
+)
+
+@Serializable
+internal data class SendMessageRequest(
+    @SerialName("message") val message: String
+)

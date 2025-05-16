@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.data.general"
+    namespace = "ru.itmo.edugoolda.features.lesson"
 }
 
 dependencies {
@@ -15,7 +15,6 @@ dependencies {
 
     // Modules
     implementation(project(":core"))
-    implementation(project(":data:auth"))
     implementation(project(":data:group"))
     implementation(project(":data:user"))
     implementation(project(":data:lesson"))
