@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="student_lesson_details_title">Lesson information</string>
+    <string name="lesson_desription_title">Description</string>
+    <string name="lesson_description_null">unfortunately, it\'s empty here</string>
+    <string name="lesson_placeholder_reply">Message</string>
+    <string name="lesson_deadline_title">Deadline</string>
+</resources>

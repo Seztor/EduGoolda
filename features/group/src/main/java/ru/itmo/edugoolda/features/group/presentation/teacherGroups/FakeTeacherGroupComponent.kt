@@ -2,7 +2,6 @@ package ru.itmo.edugoolda.features.group.presentation.teacherGroups
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.PagedState
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
