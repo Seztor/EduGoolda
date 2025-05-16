@@ -12,7 +12,7 @@ import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
-import ru.itmo.edugoolda.core.widget.invitations.InvitationListItem
+import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestTeacherListItem
 
 @Composable
 fun JoinRequestsUi(
