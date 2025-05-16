@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.data.invitations"
+    namespace = "ru.itmo.edugoolda.data.solutions"
 }
 
 dependencies {

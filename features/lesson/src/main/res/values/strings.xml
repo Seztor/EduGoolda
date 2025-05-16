@@ -5,4 +5,8 @@
     <string name="lesson_description_null">unfortunately, it\'s empty here</string>
     <string name="lesson_placeholder_reply">Message</string>
     <string name="lesson_deadline_title">Deadline</string>
+    <string name="teacher_solution_details_title">Solution information</string>
+    <string name="lesson_checked_status">Solution is closed as checked</string>
+    <string name="solution_button_change_checked_type_to_reviewed">Set up as reviewed</string>
+    <string name="solution_button_change_checked_type_to_pending">Set up as pending</string>
 </resources>

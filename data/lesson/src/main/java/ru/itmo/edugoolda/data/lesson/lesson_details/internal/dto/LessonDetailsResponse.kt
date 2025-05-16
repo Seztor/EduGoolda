@@ -7,16 +7,19 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupInfoDTO
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonGeneralDetails
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionDetails
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessage
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 
 @Serializable
-internal data class LessonStudentDetailsResponse(
+internal data class LessonStudentDetailsDTO(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
     @SerialName("description") val description: String?,
@@ -28,7 +31,7 @@ internal data class LessonStudentDetailsResponse(
     @SerialName("is_estimatable") val isEstimatable: Boolean
 )
 
-internal fun LessonStudentDetailsResponse.toDomain(): LessonStudentDetails = LessonStudentDetails(
+internal fun LessonStudentDetailsDTO.toDomain(): LessonStudentDetails = LessonStudentDetails(
     id = LessonId(id),
     name = name,
     description = description,
@@ -70,4 +73,46 @@ internal fun SolutionMessageDTO.toDomain(): SolutionMessage = SolutionMessage(
 @Serializable
 internal data class SendMessageRequest(
     @SerialName("message") val message: String
+)
+
+internal data class SolutionDetailsDTO(
+    @SerialName("id") val id: String,
+    @SerialName("lesson") val lesson: LessonGeneralDetailsDTO,
+    @SerialName("messages") val messages: List<SolutionMessageDTO>,
+    @SerialName("status") val status: String,
+)
+
+internal data class LessonGeneralDetailsDTO(
+    @SerialName("id") val id: String,
+    @SerialName("name") val name: String,
+    @SerialName("description") val description: String?,
+    @SerialName("teacher") val teacher: UserInfoDTO,
+    @SerialName("deadline") val deadline: Instant,
+    @SerialName("groups") val groups: List<GroupInfoDTO>,
+    @SerialName("is_estimatable") val isEstimatable: Boolean,
+)
+
+internal fun SolutionDetailsDTO.toDomain(): SolutionDetails = SolutionDetails(
+    id = SolutionId(id),
+    lesson = lesson.toDomain(),
+    messages = messages.map { it.toDomain() },
+    status = when (status) {
+        "reviewed" -> LessonStatus.Reviewed
+        else -> LessonStatus.Pending
+    }
+)
+
+internal fun LessonGeneralDetailsDTO.toDomain(): LessonGeneralDetails = LessonGeneralDetails(
+    id = LessonId(id),
+    name = name,
+    description = description,
+    teacher = teacher.toDomain(),
+    deadline = formatInstantToDateTimeString(deadline),
+    groups = groups.map { it.toDomain() },
+    isEstimatable = isEstimatable
+)
+
+@Serializable
+internal data class SetSolutionStatusRequest(
+    @SerialName("status") val status: String
 )

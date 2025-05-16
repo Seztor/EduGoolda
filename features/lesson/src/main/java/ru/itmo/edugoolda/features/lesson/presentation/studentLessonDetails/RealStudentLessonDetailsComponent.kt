@@ -34,12 +34,12 @@ class RealStudentLessonDetailsComponent(
         lessonStudentDetailsReplica.revalidate()
     }
 
-    override fun onSendCommentClick(message: String) {
+    override fun onSendCommentClick() {
         if (isSendingMessageProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isSendingMessageProgress) {
-                lessonDetailsRepository.sendMessage(lessonId, message)
+                lessonDetailsRepository.sendMessageByStudent(lessonId, replyInputControl.text.value)
             }
         }
     }

@@ -13,7 +13,7 @@ interface StudentLessonDetailsComponent {
 
     fun onRefresh()
     fun onRetryClick()
-    fun onSendCommentClick(message: String)
+    fun onSendCommentClick()
     fun onReturnBackClick()
 
     interface Communication {
