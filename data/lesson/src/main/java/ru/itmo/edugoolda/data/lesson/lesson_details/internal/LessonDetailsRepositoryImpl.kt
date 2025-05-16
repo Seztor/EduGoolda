@@ -36,5 +36,4 @@ internal class LessonDetailsRepositoryImpl(
         lessonDetailsApi.sendMessageByStudent(lessonId.value, SendMessageRequest(message))
         _lessonStudentDetailsReplica.refresh(lessonId)
     }
-
 }

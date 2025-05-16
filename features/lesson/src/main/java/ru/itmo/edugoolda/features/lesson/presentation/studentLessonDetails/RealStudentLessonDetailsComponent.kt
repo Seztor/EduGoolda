@@ -9,7 +9,6 @@ import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
-import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationCode
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonDetailsRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.mobileup.kmm_form_validation.control.InputControl
@@ -35,7 +34,6 @@ class RealStudentLessonDetailsComponent(
         lessonStudentDetailsReplica.revalidate()
     }
 
-
     override fun onSendCommentClick(message: String) {
         if (isSendingMessageProgress.value) return
 
@@ -49,5 +47,4 @@ class RealStudentLessonDetailsComponent(
     override fun onReturnBackClick() {
         communication.onReturnBackStudentLessonDetails()
     }
-
 }

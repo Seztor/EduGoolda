@@ -7,5 +7,3 @@ data class UserInfo(
     val role: UserRole,
     val isDeleted: Boolean
 )
-
-

@@ -1,6 +1,8 @@
 package ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupInfoDTO
@@ -12,13 +14,6 @@ import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessage
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.format.DateTimeFormat
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
-import kotlinx.datetime.toLocalDateTime
-import java.time.format.DateTimeFormatter
-
 
 @Serializable
 internal data class LessonStudentDetailsResponse(
@@ -33,7 +28,7 @@ internal data class LessonStudentDetailsResponse(
     @SerialName("is_estimatable") val isEstimatable: Boolean
 )
 
-internal fun LessonStudentDetailsResponse.toDomain() : LessonStudentDetails = LessonStudentDetails(
+internal fun LessonStudentDetailsResponse.toDomain(): LessonStudentDetails = LessonStudentDetails(
     id = LessonId(id),
     name = name,
     description = description,
@@ -65,7 +60,7 @@ internal data class SolutionMessageDTO(
     @SerialName("author") val author: UserInfoDTO
 )
 
-internal fun SolutionMessageDTO.toDomain() : SolutionMessage = SolutionMessage(
+internal fun SolutionMessageDTO.toDomain(): SolutionMessage = SolutionMessage(
     id = SolutionMessageId(id),
     sentAt = sentAt,
     message = message,

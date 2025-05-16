@@ -9,7 +9,6 @@ import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import ru.itmo.edugoolda.data.user.api.UserRole
 
-
 data class LessonStudentDetails(
     val id: LessonId,
     val name: String,

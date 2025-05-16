@@ -29,18 +29,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
-import kotlinx.datetime.toLocalDateTime
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
 import ru.itmo.edugoolda.features.lesson.R
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.format.DateTimeFormat
 
 @Composable
 fun StudentLessonDetailsUi(
@@ -77,8 +71,6 @@ fun StudentLessonDetailsUi(
             )
         }
 
-
-
         PullRefreshLceWidget(
             state = studentLessonDetailsState,
             onRefresh = component::onRefresh,
@@ -108,7 +100,6 @@ fun StudentLessonDetailsUi(
                         modifier = Modifier.width(100.dp),
                     )
                 }
-
 
                 Text(
                     text = "${stringResource(R.string.lesson_desription_title)}:",
@@ -174,7 +165,6 @@ fun StudentLessonDetailsUi(
     }
 }
 
-
 @Composable
 fun MessageItem(
     authorName: String,
@@ -224,7 +214,6 @@ fun MessageItemPreview() {
         MessageItem(authorName = "Pavel", text = "Привет, меня зовут Паша!", Arrangement.Start)
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
