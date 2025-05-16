@@ -4,5 +4,5 @@ import me.aartikov.replica.paged.PagedReplica
 
 interface JoinRequestRepository {
     suspend fun respondToJoinRequest(joinRequestId: JoinRequestId, action: JoinRequestAction)
-    val joinRequestListReplica : PagedReplica<JoinRequestList>
+    val joinRequestListReplica: PagedReplica<JoinRequestList>
 }

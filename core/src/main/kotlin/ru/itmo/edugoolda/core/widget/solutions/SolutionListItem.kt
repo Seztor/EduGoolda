@@ -1,7 +1,4 @@
-package ru.itmo.edugoolda.core.widget.invitations
-
-import androidx.compose.material3.IconButton
-import androidx.compose.ui.tooling.preview.Preview
+package ru.itmo.edugoolda.core.widget.solutions
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,30 +6,26 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-
-import ru.itmo.edugoolda.core.theme.custom.CustomTheme
-
-import androidx.compose.material3.Icon
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.theme.AppTheme
+import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
-fun InvitationListItem(
-    groupName: String,
+fun SolutionListItem(
+    lessonName: String,
     studentName: String,
     date: String,
-    onAcceptClick: () -> Unit,
-    onDeclineClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -44,7 +37,7 @@ fun InvitationListItem(
     ) {
         Column {
             Text(
-                text = groupName,
+                text = lessonName,
                 style = CustomTheme.typography.body.regular
             )
             Spacer(modifier = Modifier.size(10.dp))
@@ -60,22 +53,13 @@ fun InvitationListItem(
         }
         Row {
             IconButton(
-                onClick = onAcceptClick,
-                modifier = Modifier.size(24.dp)
+                onClick = onClick,
+                modifier = Modifier.size(40.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Check,
+                    modifier = Modifier.size(40.dp),
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = "Apply"
-                )
-            }
-            Spacer(modifier = Modifier.size(10.dp))
-            IconButton(
-                onClick = onDeclineClick,
-                modifier = Modifier.size(24.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Deny"
                 )
             }
         }
@@ -86,12 +70,11 @@ fun InvitationListItem(
 @Composable
 private fun StudentHeaderPreview() {
     AppTheme {
-        InvitationListItem(
-            groupName = "Математика 7Б",
+        SolutionListItem(
+            lessonName = "Введение в геометрию",
             studentName = "Иванов Василий",
             date = "19:47 15.04.24",
-            onAcceptClick = { },
-            onDeclineClick = { }
+            onClick = { },
         )
     }
 }
