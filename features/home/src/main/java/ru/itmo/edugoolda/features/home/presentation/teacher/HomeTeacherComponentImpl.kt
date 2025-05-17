@@ -11,7 +11,7 @@ import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
-import ru.itmo.edugoolda.data.solutions.api.Solution
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 
 class HomeTeacherComponentImpl(
@@ -28,7 +28,7 @@ class HomeTeacherComponentImpl(
     private val mainStateReplica = combine(
         joinRequestsReplica,
         solutionsReplica
-    ) { joinRequests, solutions -> HomeTeacherViewData(joinRequests.joinRequestList, solutions.solutionList) }
+    ) { joinRequests, solutions -> HomeTeacherViewData(joinRequests.joinRequestList, solutions.solutionInfoList) }
     override val mainState = mainStateReplica.observe(this, errorHandler)
 
     override fun onAcceptClick(joinRequest: JoinRequest) {
@@ -43,8 +43,8 @@ class HomeTeacherComponentImpl(
         }
     }
 
-    override fun onSolutionClick(solution: Solution) {
-        communication.onSolutionDetailsRequested(solution.id)
+    override fun onSolutionClick(solutionId: SolutionId) {
+        communication.onSolutionDetailsRequested(solutionId)
     }
 
     override fun onAllSolutionsClick() {

@@ -1,9 +1,9 @@
 package ru.itmo.edugoolda.data.home.api
 
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
-import ru.itmo.edugoolda.data.solutions.api.Solution
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
 
 data class HomeStudentViewData(
     val joinRequests: List<JoinRequest>,
-    val solutions: List<Solution>, // TODO Change List<Solution> to List<Lessons>
+    val lessonInfoList: List<LessonInfo>
 )
