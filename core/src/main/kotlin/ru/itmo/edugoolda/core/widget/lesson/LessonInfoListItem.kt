@@ -51,17 +51,15 @@ fun LessonInfoListItem(
                 style = CustomTheme.typography.caption.regular
             )
         }
-        Row {
-            IconButton(
-                onClick = onClick,
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(
-                    modifier = Modifier.size(40.dp),
-                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = "Apply"
-                )
-            }
+        IconButton(
+            onClick = onClick,
+            modifier = Modifier.size(40.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(40.dp),
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "Apply"
+            )
         }
     }
 }
