@@ -39,7 +39,7 @@ import ru.itmo.edugoolda.features.group.R
 
 @Composable
 fun StudentGroupsUi(
-    component: StudentGroupComponent,
+    component: StudentGroupsComponent,
     modifier: Modifier = Modifier,
 ) {
     val state by component.studentGroupState.collectAsState()
@@ -47,7 +47,9 @@ fun StudentGroupsUi(
         AppTextField(
             inputControl = component.groupSearchInputControl,
             placeholder = stringResource(R.string.search_students_group),
-            modifier = Modifier.padding(horizontal = 20.dp).padding(top = 35.dp, bottom = 15.dp),
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .padding(top = 35.dp, bottom = 15.dp),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -156,7 +158,7 @@ fun StudentGroupItem(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGroupItem() {
+private fun PreviewGroupItem() {
     AppTheme {
         StudentGroupItem(
             {}, "Группа 1", "Math"
@@ -166,8 +168,8 @@ fun PreviewGroupItem() {
 
 @Preview(showBackground = true)
 @Composable
-fun StudentGroupsUiPreview() {
+private fun StudentGroupsUiPreview() {
     AppTheme {
-        StudentGroupsUi(component = FakeStudentGroupComponent())
+        StudentGroupsUi(component = FakeStudentGroupsComponent())
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_top_bar_text">Ваш профиль</string>
+    <string name="profile_bio_header">Биография</string>
+    <string name="profile_bio_suggestion">Расскажите о себе</string>
+    <string name="profile_email_header">Почта</string>
+    <string name="edit_profile_top_bar_text">Изменить профиль</string>
+    <string name="edit_profile_name_hint">Имя пользователя</string>
+    <string name="edit_profile_bio_hint">Биография</string>
+    <string name="edit_profile_email_hint">Почта</string>
+    <string name="edit_profile_change_password_button">Изменить пароль</string>
+    <string name="edit_password_top_bar_text">Изменить пароль</string>
+    <string name="edit_password_old_password_label">Текущий пароль</string>
+    <string name="edit_password_new_password_label">Новый пароль</string>
+    <string name="edit_password_repeat_password_label">Повторите пароль</string>
+    <string name="profile_role_header">Роль</string>
+    <string name="profile_role_teacher">Преподаватель</string>
+    <string name="profile_role_student">Ученик</string>
+</resources>

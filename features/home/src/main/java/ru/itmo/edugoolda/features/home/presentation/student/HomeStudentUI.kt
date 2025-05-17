@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.R
+import ru.itmo.edugoolda.features.home.R as homeR
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.button.AppButton
@@ -31,7 +32,6 @@ import ru.itmo.edugoolda.core.widget.button.ButtonType
 import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestStudentListItem
 import ru.itmo.edugoolda.core.widget.lesson.LessonInfoStudentListItem
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
-import ru.itmo.edugoolda.features.home.R as homeR
 
 @Composable
 fun HomeStudentUi(

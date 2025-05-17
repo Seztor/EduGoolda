@@ -1,5 +1,4 @@
 <resources>
-
     <string name="student_lesson_details_title">Lesson information</string>
     <string name="lesson_desription_title">Description</string>
     <string name="lesson_description_null">unfortunately, it\'s empty here</string>
@@ -9,4 +8,8 @@
     <string name="lesson_checked_status">Solution is closed as checked</string>
     <string name="solution_button_change_checked_type_to_reviewed">Set up as reviewed</string>
     <string name="solution_button_change_checked_type_to_pending">Set up as pending</string>
+    <string name="delete_lesson">Delete lesson</string>
+    <string name="delete_lesson_message">Are you sure you want to delete the lesson «%s»? This action will delete all data associated with this lesson.</string>
+    <string name="lesson_confirm">Yes</string>
+    <string name="lesson_dismiss">Cancel</string>
 </resources>

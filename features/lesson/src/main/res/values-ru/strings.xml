@@ -8,4 +8,8 @@
     <string name="lesson_checked_status">Решение закрыто, как проверенное</string>
     <string name="solution_button_change_checked_type_to_reviewed">Установить, как проверенное</string>
     <string name="solution_button_change_checked_type_to_pending">Установить, как ожидает проверки</string>
+    <string name="delete_lesson">Удаление урока</string>
+    <string name="delete_lesson_message">Вы уверены, что хотите удалить урок «%s»? Это действие приведет к удалению всех данных, связанных с этим уроком.</string>
+    <string name="lesson_confirm">Да</string>
+    <string name="lesson_dismiss">Отменить</string>
 </resources>

@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
 
 interface HomeStudentComponent {
     val mainState: StateFlow<LoadableState<HomeStudentViewData>>

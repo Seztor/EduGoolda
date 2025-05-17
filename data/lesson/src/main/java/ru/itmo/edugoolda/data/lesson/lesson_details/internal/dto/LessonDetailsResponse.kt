@@ -9,14 +9,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupInfoDTO
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonFullDetails
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonGeneralDetails
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionDetails
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessage
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 import java.time.format.DateTimeFormatter
@@ -107,7 +108,7 @@ internal fun LessonGeneralDetailsDTO.toDomain(): LessonGeneralDetails = LessonGe
     name = name,
     description = description,
     teacher = teacher.toDomain(),
-    deadline = deadline.toCurrentLocalDateTime().defaultFormat(),
+    deadline = deadline,
     groups = groups.map { it.toDomain() },
     isEstimatable = isEstimatable
 )
@@ -115,4 +116,29 @@ internal fun LessonGeneralDetailsDTO.toDomain(): LessonGeneralDetails = LessonGe
 @Serializable
 internal data class SetSolutionStatusRequest(
     @SerialName("status") val status: String
+)
+
+@Serializable
+internal data class LessonFullDetailsDTO(
+    @SerialName("id") val id: String,
+    @SerialName("name") val name: String,
+    @SerialName("description") val description: String?,
+    @SerialName("teacher") val teacher: UserInfoDTO,
+    @SerialName("deadline") val deadline: Instant,
+    @SerialName("opens_at") val opensAt: Instant,
+    @SerialName("groups") val groups: List<GroupInfoDTO>,
+    @SerialName("solutions_count") val solutionsCount: Int,
+    @SerialName("is_estimatable") val isEstimatable: Boolean
+)
+
+internal fun LessonFullDetailsDTO.toDomain(): LessonFullDetails = LessonFullDetails(
+    id = LessonId(id),
+    name = name,
+    description = description,
+    teacher = teacher.toDomain(),
+    deadline = deadline,
+    opensAt = opensAt,
+    groups = groups.map { it.toDomain() },
+    solutionsCount = solutionsCount,
+    isEstimatable = isEstimatable
 )

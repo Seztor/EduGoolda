@@ -4,8 +4,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
-import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.defaultFormat
-import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.toCurrentLocalDateTime
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.api.UserId
 import ru.itmo.edugoolda.data.user.api.UserInfo
 import ru.itmo.edugoolda.data.user.api.UserRole
@@ -30,7 +29,7 @@ data class SolutionDetails(
                     role = UserRole.Teacher,
                     isDeleted = false
                 ),
-                deadline = Clock.System.now().toCurrentLocalDateTime().defaultFormat(),
+                deadline = Clock.System.now(),
                 groups = listOf(
                     GroupInfo(
                         id = GroupId("1"),

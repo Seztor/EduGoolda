@@ -35,6 +35,7 @@ import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
+import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.formatInstantToDateTimeString
 import ru.itmo.edugoolda.features.lesson.R
 
 @Composable
@@ -62,14 +63,6 @@ fun StudentLessonDetailsUi(
                     tint = Color.Unspecified
                 )
             }
-
-            Text(
-                text = stringResource(R.string.student_lesson_details_title),
-                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
-                fontWeight = CustomTheme.typography.title.bold.fontWeight,
-                fontSize = CustomTheme.typography.body.regular.fontSize,
-                color = CustomTheme.colors.text.invert
-            )
 
             Text(
                 text = stringResource(R.string.student_lesson_details_title),
@@ -114,7 +107,7 @@ fun StudentLessonDetailsUi(
                     }
 
                     Text(
-                        text = "${stringResource(R.string.lesson_deadline_title)}:\n${data.deadline}",
+                        text = "${stringResource(R.string.lesson_deadline_title)}:\n${formatInstantToDateTimeString(data.deadline)}",
                         fontWeight = CustomTheme.typography.body.bold.fontWeight,
                         fontSize = CustomTheme.typography.body.bold.fontSize,
                         modifier = Modifier.width(100.dp),
@@ -190,9 +183,10 @@ fun MessageItem(
     authorName: String,
     text: String,
     alignType: Arrangement.Horizontal,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 6.dp, start = 10.dp, end = 10.dp),
         horizontalArrangement = alignType
@@ -229,7 +223,7 @@ fun MessageItem(
 
 @Preview(showBackground = true)
 @Composable
-fun MessageItemPreview() {
+private fun MessageItemPreview() {
     AppTheme {
         MessageItem(authorName = "Pavel", text = "Привет, меня зовут Паша!", Arrangement.Start)
     }
@@ -237,7 +231,7 @@ fun MessageItemPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun GroupAddUiPreview() {
+private fun StudentLessonDetailsUiPreview() {
     AppTheme {
         StudentLessonDetailsUi(component = FakeStudentLessonDetailsComponent())
     }

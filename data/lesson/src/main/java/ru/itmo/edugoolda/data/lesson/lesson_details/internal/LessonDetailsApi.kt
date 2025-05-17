@@ -1,10 +1,12 @@
 package ru.itmo.edugoolda.data.lesson.lesson_details.internal
 
 import de.jensklingenberg.ktorfit.http.Body
+import de.jensklingenberg.ktorfit.http.DELETE
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.PUT
 import de.jensklingenberg.ktorfit.http.Path
+import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.LessonFullDetailsDTO
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.LessonStudentDetailsDTO
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.SendMessageRequest
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.SetSolutionStatusRequest
@@ -34,4 +36,10 @@ internal interface LessonDetailsApi {
         @Path("solutionId") solutionId: String,
         @Body status: SetSolutionStatusRequest,
     )
+
+    @GET("api/v1/lesson/{lessonId}")
+    suspend fun getLessonTeacherDetails(@Path("lessonId") lessonId: String): LessonFullDetailsDTO
+
+    @DELETE("api/v1/lesson/{lessonId}")
+    suspend fun deleteLessonTeacher(@Path("lessonId") lessonId: String)
 }
