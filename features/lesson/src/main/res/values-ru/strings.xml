@@ -12,4 +12,12 @@
     <string name="delete_lesson_message">Вы уверены, что хотите удалить урок «%s»? Это действие приведет к удалению всех данных, связанных с этим уроком.</string>
     <string name="lesson_confirm">Да</string>
     <string name="lesson_dismiss">Отменить</string>
+    <string name="lesson_create_title">Создание урока</string>
+    <string name="lesson_placeholder_lesson_name">Название</string>
+    <string name="lesson_placeholder_lesson_description">Описание</string>
+    <string name="lesson_create_button">Создать урок</string>
+    <string name="lesson_create_type_informational">Информационный</string>
+    <string name="lesson_create_type_practical">Практический</string>
+    <string name="lesson_create_type_title">Тип урока</string>
+    <string name="lesson_add_group_button">Добавить группу</string>
 </resources>

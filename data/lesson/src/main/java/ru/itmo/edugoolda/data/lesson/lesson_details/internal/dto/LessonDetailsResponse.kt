@@ -28,7 +28,7 @@ internal data class LessonStudentDetailsDTO(
     @SerialName("name") val name: String,
     @SerialName("description") val description: String?,
     @SerialName("teacher") val teacher: UserInfoDTO,
-    @SerialName("deadline") val deadline: Instant,
+    @SerialName("deadline") val deadline: Instant?,
     @SerialName("groups") val groups: List<GroupInfoDTO>,
     @SerialName("messages") val messages: List<SolutionMessageDTO>,
     @SerialName("status") val status: String,
@@ -88,7 +88,7 @@ internal data class LessonGeneralDetailsDTO(
     @SerialName("name") val name: String,
     @SerialName("description") val description: String?,
     @SerialName("teacher") val teacher: UserInfoDTO,
-    @SerialName("deadline") val deadline: Instant,
+    @SerialName("deadline") val deadline: Instant?,
     @SerialName("groups") val groups: List<GroupInfoDTO>,
     @SerialName("is_estimatable") val isEstimatable: Boolean,
 )
@@ -124,8 +124,8 @@ internal data class LessonFullDetailsDTO(
     @SerialName("name") val name: String,
     @SerialName("description") val description: String?,
     @SerialName("teacher") val teacher: UserInfoDTO,
-    @SerialName("deadline") val deadline: Instant,
-    @SerialName("opens_at") val opensAt: Instant,
+    @SerialName("deadline") val deadline: Instant?,
+    @SerialName("opens_at") val opensAt: Instant?,
     @SerialName("groups") val groups: List<GroupInfoDTO>,
     @SerialName("solutions_count") val solutionsCount: Int,
     @SerialName("is_estimatable") val isEstimatable: Boolean
