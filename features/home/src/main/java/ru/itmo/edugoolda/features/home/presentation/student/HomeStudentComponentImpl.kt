@@ -6,7 +6,7 @@ import me.aartikov.replica.algebra.paged.toReplica
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestRepository
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 import ru.itmo.edugoolda.data.solutions.api.Solution
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 
