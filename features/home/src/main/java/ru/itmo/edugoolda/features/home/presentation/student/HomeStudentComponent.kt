@@ -3,19 +3,19 @@ package ru.itmo.edugoolda.features.home.presentation.student
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
-import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
 
 interface HomeStudentComponent {
     val mainState: StateFlow<LoadableState<HomeStudentViewData>>
 
-    fun onSolutionClick(solutionInfo: SolutionInfo)
+    fun onLessonClick(lessonInfo: LessonInfo)
     fun onAllSolutionsClick()
     fun onAllJoinRequestsClick()
     fun onRefresh()
     fun onRetryClick()
 
     interface Communication {
-        fun onSolutionDetailsRequested(solutionInfo: SolutionInfo)
+        fun onLessonDetailsRequested(lessonInfo: LessonInfo)
         fun onAllSolutionsRequested()
         fun onAllJoinRequestsRequested()
     }

@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":data:home"))
     implementation(project(":data:join_requests"))
     implementation(project(":data:solutions"))
+    implementation(project(":data:lesson"))
     implementation(project(":data:user"))
 
     // Kotlin

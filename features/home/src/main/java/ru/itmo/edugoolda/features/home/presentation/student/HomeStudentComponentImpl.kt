@@ -7,33 +7,33 @@ import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
-import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
-import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
 
 class HomeStudentComponentImpl(
     componentContext: ComponentContext,
     private val communication: HomeStudentComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val joinRequestRepository: JoinRequestRepository,
-    solutionRepository: SolutionRepository,
+    lessonInfoRepository: LessonInfoRepository,
 
     ) : HomeStudentComponent, ComponentContext by componentContext {
 
     private val joinRequestsReplica = joinRequestRepository.joinRequestListReplica.toReplica()
-    private val solutionsReplica = solutionRepository.solutionListReplica.toReplica()
+    private val solutionsReplica = lessonInfoRepository.lessonInfoListReplica.toReplica()
     private val mainStateReplica = combine(
         joinRequestsReplica,
         solutionsReplica
     ) { joinRequests, solutions ->
         HomeStudentViewData(
             joinRequests.joinRequestList,
-            solutions.solutionInfoList
+            solutions.lessonInfoList
         )
     }
     override val mainState = mainStateReplica.observe(this, errorHandler)
 
-    override fun onSolutionClick(solutionInfo: SolutionInfo) {
-        communication.onSolutionDetailsRequested(solutionInfo)
+    override fun onLessonClick(lessonInfo: LessonInfo) {
+        communication.onLessonDetailsRequested(lessonInfo)
     }
 
     override fun onAllSolutionsClick() {
