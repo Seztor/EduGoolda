@@ -110,19 +110,14 @@ fun ProfileUI(
                         modifier = Modifier.padding(start = 6.dp)
                     )
                 }
-
-
-
             }
         }
-
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun ProfileUIPreview() {
+private fun ProfileUIPreview() {
     AppTheme {
         ProfileUI(component = FakeProfileComponent())
     }

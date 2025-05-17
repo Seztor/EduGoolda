@@ -67,20 +67,26 @@ fun GroupCreateUi(
         AppTextField(
             inputControl = component.nameInputControl,
             placeholder = stringResource(id = R.string.group_textfield_name),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(top = 40.dp, bottom = 30.dp)
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(top = 40.dp, bottom = 30.dp)
         )
 
         AppTextField(
             inputControl = component.descriptionInputControl,
             placeholder = stringResource(id = R.string.group_textfield_description),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 30.dp),
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 30.dp),
             minLines = 6
         )
 
         AppTextField(
             inputControl = component.subjectInputControl,
             placeholder = stringResource(id = R.string.group_textfield_subject),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 30.dp),
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 30.dp),
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -95,15 +101,12 @@ fun GroupCreateUi(
                     .align(Alignment.CenterHorizontally),
                 isEnabled = isCreationButtonEnabled
         )
-
-
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun GroupCreateUiPreview() {
+private fun GroupCreateUiPreview() {
     AppTheme {
         GroupCreateUi(component = FakeGroupCreateComponent())
     }

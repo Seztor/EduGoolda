@@ -201,7 +201,7 @@ fun StudentGroupDetailsUi(
 
 @Preview(showBackground = true)
 @Composable
-fun TeacherGroupDetailsUiPreview() {
+private fun TeacherGroupDetailsUiPreview() {
     AppTheme {
         StudentGroupDetailsUi(component = FakeStudentGroupDetailsComponent())
     }

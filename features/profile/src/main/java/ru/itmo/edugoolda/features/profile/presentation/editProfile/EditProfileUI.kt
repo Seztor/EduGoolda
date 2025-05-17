@@ -17,7 +17,7 @@ import ru.itmo.edugoolda.features.profile.R
 @Composable
 fun EditProfileUI(
     component: EditProfileComponent,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -33,7 +33,6 @@ fun EditProfileUI(
             label = stringResource(id = R.string.edit_profile_name_hint),
             placeholder = stringResource(id = R.string.edit_profile_name_hint),
             inputControl = component.nameInputControl,
-            modifier = modifier,
         )
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -42,18 +41,16 @@ fun EditProfileUI(
             label = stringResource(id = R.string.edit_profile_bio_hint),
             placeholder = stringResource(id = R.string.edit_profile_bio_hint),
             inputControl = component.bioInputControl,
-            modifier = modifier,
         )
 
         Spacer(modifier = Modifier.height(12.dp))
-        HorizontalDivider(modifier = modifier, thickness = 2.dp, color = Color.LightGray)
+        HorizontalDivider(thickness = 2.dp, color = Color.LightGray)
         Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             label = stringResource(R.string.edit_profile_email_hint),
             placeholder = stringResource(id = R.string.edit_profile_email_hint),
             inputControl = component.emailInputControl,
-            modifier = modifier,
         )
     }
 }

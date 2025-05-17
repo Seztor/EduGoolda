@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_tab_home">Home</string>
+    <string name="main_tab_lessons">Lessons</string>
+    <string name="main_tab_groups">Groups</string>
+    <string name="main_tab_profile">Profile</string>
+    <string name="main_tab_create">Create</string>
+    <string name="main_tab_create_lesson">Create lesson</string>
+    <string name="main_tab_create_group">Create group</string>
+</resources>

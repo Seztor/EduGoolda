@@ -25,10 +25,10 @@ class RealGroupAddComponent(
         if (isAddingProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
-            withProgress(isAddingProgress) {
+            val groupId = withProgress(isAddingProgress) {
                 groupInvitationDataRepository.sendRequestJoinGroup(GroupInvitationCode(codeInputControl.text.value))
             }
-            communication.onGroupAdded()
+            communication.onGroupAdded(groupId)
         }
     }
 

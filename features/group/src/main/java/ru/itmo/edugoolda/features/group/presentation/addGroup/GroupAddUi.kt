@@ -69,7 +69,10 @@ fun GroupAddUi(
         AppTextField(
             inputControl = component.codeInputControl,
             placeholder = stringResource(id = R.string.group_textfield_code),
-            modifier = Modifier.padding(top = 40.dp, bottom = 20.dp).width(200.dp).align(Alignment.CenterHorizontally)
+            modifier = Modifier
+                .padding(top = 40.dp, bottom = 20.dp)
+                .width(200.dp)
+                .align(Alignment.CenterHorizontally)
         )
 
         AppButton(
@@ -87,10 +90,9 @@ fun GroupAddUi(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun GroupAddUiPreview() {
+private fun GroupAddUiPreview() {
     AppTheme {
         GroupAddUi(component = FakeGroupAddComponent())
     }

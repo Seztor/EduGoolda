@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_tab_home">Главная</string>
+    <string name="main_tab_lessons">Уроки</string>
+    <string name="main_tab_groups">Группы</string>
+    <string name="main_tab_profile">Профиль</string>
+    <string name="main_tab_create">Создать</string>
+    <string name="main_tab_create_lesson">Создать урок</string>
+    <string name="main_tab_create_group">Создать группу</string>
+</resources>

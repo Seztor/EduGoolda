@@ -128,10 +128,9 @@ fun TeacherLessonDetailsUi(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun TeacherLessonDetailsUiPreview() {
+private fun TeacherLessonDetailsUiPreview() {
     AppTheme {
         TeacherLessonDetailsUi(component = FakeTeacherLessonDetailsComponent())
     }

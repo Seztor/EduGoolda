@@ -13,9 +13,9 @@ import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionDetails
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessage
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 

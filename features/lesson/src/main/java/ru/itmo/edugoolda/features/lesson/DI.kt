@@ -7,29 +7,55 @@ import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.CreateLessonComponent
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.RealCreateLessonComponent
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealStudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.RealTeacherLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.TeacherLessonDetailsComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.RealTeacherSolutionDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.TeacherSolutionDetailsComponent
 
-fun ComponentFactory.createStudentLessonDetailsComponent(
-    lessonId: LessonId,
+fun ComponentFactory.createLessonsComponent(
     componentContext: ComponentContext,
+    initialConfiguration: LessonsComponent.InitialConfiguration,
+    communication: LessonsComponent.Communication
+): LessonsComponent {
+    return RealLessonsComponent(
+        componentContext,
+        initialConfiguration,
+        communication,
+        get()
+    )
+}
+
+fun ComponentFactory.createStudentLessonDetailsComponent(
+    componentContext: ComponentContext,
+    lessonId: LessonId,
     communication: StudentLessonDetailsComponent.Communication,
 ): RealStudentLessonDetailsComponent {
-    return RealStudentLessonDetailsComponent(lessonId, componentContext, communication, get(), get())
+    return RealStudentLessonDetailsComponent(
+        lessonId,
+        componentContext,
+        communication,
+        get(),
+        get()
+    )
 }
 
 fun ComponentFactory.createTeacherSolutionDetailsComponent(
-    solutionId: SolutionId,
     componentContext: ComponentContext,
+    solutionId: SolutionId,
     communication: TeacherSolutionDetailsComponent.Communication,
 ): RealTeacherSolutionDetailsComponent {
-    return RealTeacherSolutionDetailsComponent(solutionId, componentContext, communication, get(), get())
+    return RealTeacherSolutionDetailsComponent(
+        solutionId,
+        componentContext,
+        communication,
+        get(),
+        get()
+    )
 }
 
 fun ComponentFactory.createTeacherLessonListInfoComponent(
@@ -40,11 +66,17 @@ fun ComponentFactory.createTeacherLessonListInfoComponent(
 }
 
 fun ComponentFactory.createTeacherLessonDetailsComponent(
-    lessonId: LessonId,
     componentContext: ComponentContext,
+    lessonId: LessonId,
     communication: TeacherLessonDetailsComponent.Communication,
 ): RealTeacherLessonDetailsComponent {
-    return RealTeacherLessonDetailsComponent(lessonId, componentContext, communication, get(), get())
+    return RealTeacherLessonDetailsComponent(
+        lessonId,
+        componentContext,
+        communication,
+        get(),
+        get()
+    )
 }
 
 fun ComponentFactory.createLessonCreateComponent(
