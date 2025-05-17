@@ -10,7 +10,7 @@ import ru.itmo.edugoolda.data.group.group_info.internal.dto.GroupSubjectDTO
 import ru.itmo.edugoolda.data.group.group_info.internal.dto.GroupSubjectsListDTO
 
 internal interface GroupCreateApi {
-    @POST("api/v1/group/")
+    @POST("api/v1/group")
     suspend fun createGroup(@Body request: CreateGroupRequest): GroupFullInfoDTO
 
     @POST("api/v1/subject")
