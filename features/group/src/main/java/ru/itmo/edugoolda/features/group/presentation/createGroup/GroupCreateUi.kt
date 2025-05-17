@@ -12,6 +12,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +33,8 @@ fun GroupCreateUi(
     component: GroupCreateComponent,
     modifier: Modifier = Modifier,
 ) {
+
+    val isCreationButtonEnabled by component.isCreationButtonEnabled.collectAsState()
 
     Column(modifier = modifier) {
         Row(
@@ -94,7 +98,8 @@ fun GroupCreateUi(
                 modifier = Modifier
                     .padding(bottom = 30.dp)
                     .width(200.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                isEnabled = isCreationButtonEnabled
         )
     }
 }

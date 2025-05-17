@@ -15,7 +15,7 @@ data class LessonStudentDetails(
     val name: String,
     val description: String?,
     val teacher: UserInfo,
-    val deadline: String,
+    val deadline: Instant?,
     val groups: List<GroupInfo>,
     val messages: List<SolutionMessage>,
     val status: LessonStatus,

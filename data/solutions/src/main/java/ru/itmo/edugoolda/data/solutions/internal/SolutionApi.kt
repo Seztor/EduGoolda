@@ -6,7 +6,7 @@ import ru.itmo.edugoolda.data.solutions.internal.dto.SolutionInfoListResponse
 
 interface SolutionApi {
 
-    @GET("/api/v1/solutions")
+    @GET("api/v1/solutions")
     suspend fun getSolutionList(
         @Query("page_size") pageSize: Int,
         @Query("page") page: Int,

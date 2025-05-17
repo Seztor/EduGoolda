@@ -8,4 +8,14 @@ data class GroupInfo(
     val subjectName: String,
     val ownerName: String,
     val isFavourite: Boolean
-)
+) {
+    companion object {
+        val MOCK = GroupInfo(
+            id = GroupId("1"),
+            name = "Group 1",
+            subjectName = "Math",
+            ownerName = "Pavel",
+            isFavourite = false
+        )
+    }
+}
