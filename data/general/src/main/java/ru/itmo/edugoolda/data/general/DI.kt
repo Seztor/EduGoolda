@@ -6,6 +6,7 @@ import ru.itmo.edugoolda.data.group.dataGroupModule
 import ru.itmo.edugoolda.data.join_requests.dataInvitationsModule
 import ru.itmo.edugoolda.data.user.dataUserModule
 import ru.itmo.edugoolda.data.lesson.dataLessonModule
+import ru.itmo.edugoolda.data.solutions.solutionsModule
 
 val dataModule = module {
     includes(
@@ -13,6 +14,7 @@ val dataModule = module {
         dataInvitationsModule,
         dataUserModule,
         dataGroupModule,
-        dataLessonModule
+        dataLessonModule,
+        solutionsModule
     )
 }

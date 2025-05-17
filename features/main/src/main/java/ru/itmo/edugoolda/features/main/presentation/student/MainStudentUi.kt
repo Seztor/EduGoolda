@@ -13,7 +13,7 @@ import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.widget.bottom_bar.CustomBottomBar
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupsUi
 import ru.itmo.edugoolda.features.home.presentation.student.HomeStudentUi
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListUi
+import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentUi
 import ru.itmo.edugoolda.features.profile.presentation.viewProfile.ProfileUI
 
 @Composable
@@ -31,7 +31,7 @@ fun MainStudentUi(
                 when (val instance = it.instance) {
                     is MainStudentComponent.Child.Groups -> StudentGroupsUi(instance.component)
                     is MainStudentComponent.Child.Home -> HomeStudentUi(instance.component)
-                    is MainStudentComponent.Child.Lessons -> LessonInfoListUi(instance.component)
+                    is MainStudentComponent.Child.Lessons -> LessonInfoListStudentUi(instance.component)
                     is MainStudentComponent.Child.Profile -> ProfileUI(instance.component)
                 }
             }

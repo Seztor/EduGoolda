@@ -12,6 +12,7 @@ android {
 
 dependencies {
     implementation(project(":data:join_requests"))
+    implementation(project(":data:solutions"))
     ksp(libs.ktorfit.ksp)
 
     // Modules

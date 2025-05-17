@@ -10,9 +10,8 @@ class SolutionListComponentImpl(
     componentContext: ComponentContext,
     private val communication: SolutionListComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val solutionRepository: SolutionRepository,
-
-    ) : SolutionListComponent, ComponentContext by componentContext {
+    private val solutionRepository: SolutionRepository
+) : SolutionListComponent, ComponentContext by componentContext {
 
     private val solutionReplica = solutionRepository.solutionListReplica
     override val solutionState = solutionReplica.observe(this, errorHandler)

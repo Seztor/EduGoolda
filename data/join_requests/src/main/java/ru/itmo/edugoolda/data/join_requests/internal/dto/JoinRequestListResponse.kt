@@ -12,7 +12,7 @@ import ru.itmo.edugoolda.data.user.internal.dto.toDomain
 
 @Serializable
 data class JoinRequestListResponse(
-    @SerialName("request") val joinRequestList: List<JoinRequestDTO>,
+    @SerialName("requests") val joinRequestList: List<JoinRequestDTO>,
     @SerialName("total") val total: Int,
 )
 

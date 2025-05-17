@@ -14,6 +14,7 @@ dependencies {
     implementation(project(":data:group"))
     implementation(project(":data:solutions"))
     implementation(project(":data:user"))
+    implementation(project(":data:lesson"))
     ksp(libs.ktorfit.ksp)
 
     // Modules

@@ -11,6 +11,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:user"))
     ksp(libs.ktorfit.ksp)
 
     // Modules

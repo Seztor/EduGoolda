@@ -23,6 +23,7 @@ import ru.itmo.edugoolda.core.utils.safePush
 import ru.itmo.edugoolda.core.utils.toStateFlow
 import ru.itmo.edugoolda.data.auth.api.AuthStatusProvider
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.api.UserInfoStore
 import ru.itmo.edugoolda.data.user.api.UserRole
@@ -149,6 +150,10 @@ class RealRootComponent(
             navigation.pop()
         }
 
+        override fun onSolutionDetails(solutionId: SolutionId) {
+
+        }
+
         override fun authRequired() {
             navigation.replaceAll(Config.Auth)
         }
@@ -231,6 +236,10 @@ class RealRootComponent(
 
         override fun onEditLessonRequested() {
             // TODO: in future
+        }
+
+        override fun onLessonDetailsRequested(lessonId: LessonId) {
+
         }
     }
 

@@ -4,12 +4,13 @@ import com.arkivanov.decompose.ComponentContext
 import org.koin.core.component.get
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.CreateLessonComponent
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.RealCreateLessonComponent
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealStudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
+import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponent
+import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.RealTeacherLessonDetailsComponent
@@ -26,7 +27,8 @@ fun ComponentFactory.createLessonsComponent(
         componentContext,
         initialConfiguration,
         communication,
-        get()
+        get(),
+        get(),
     )
 }
 
@@ -84,4 +86,16 @@ fun ComponentFactory.createLessonCreateComponent(
     communication: CreateLessonComponent.Communication,
 ): RealCreateLessonComponent {
     return RealCreateLessonComponent(componentContext, communication, get(), get())
+}
+
+fun ComponentFactory.createLessonInfoListStudentComponent(
+    componentContext: ComponentContext,
+    communication: LessonInfoListStudentComponent.Communication
+): LessonInfoListStudentComponent {
+    return LessonInfoListStudentComponentImpl(
+        componentContext,
+        communication,
+        get(),
+        get(),
+    )
 }

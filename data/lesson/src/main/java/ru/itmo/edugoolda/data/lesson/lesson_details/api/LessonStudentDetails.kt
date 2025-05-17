@@ -33,7 +33,7 @@ data class LessonStudentDetails(
                 role = UserRole.Teacher,
                 isDeleted = false
             ),
-            deadline = Clock.System.now().toCurrentLocalDateTime().defaultFormat(),
+            deadline = Clock.System.now(),
             groups = listOf(
                 GroupInfo(
                     id = GroupId("1"),
