@@ -37,7 +37,7 @@ internal fun LessonStudentDetailsDTO.toDomain(): LessonStudentDetails = LessonSt
     name = name,
     description = description,
     teacher = teacher.toDomain(),
-    deadline = formatInstantToDateTimeString(deadline),
+    deadline = deadline,
     groups = groups.map { it.toDomain() },
     messages = messages.map { it.toDomain() },
     status = when (status) {
@@ -47,7 +47,7 @@ internal fun LessonStudentDetailsDTO.toDomain(): LessonStudentDetails = LessonSt
     isEstimatable = isEstimatable,
 )
 
-internal fun formatInstantToDateTimeString(instant: Instant): String {
+fun formatInstantToDateTimeString(instant: Instant): String {
     val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
     val date = localDateTime.date
     val dateString = "${date.dayOfMonth.toString().padStart(2,'0')}.${date.monthNumber.toString().padStart(2,'0')}.${date.year}"
@@ -108,7 +108,7 @@ internal fun LessonGeneralDetailsDTO.toDomain(): LessonGeneralDetails = LessonGe
     name = name,
     description = description,
     teacher = teacher.toDomain(),
-    deadline = formatInstantToDateTimeString(deadline),
+    deadline = deadline,
     groups = groups.map { it.toDomain() },
     isEstimatable = isEstimatable
 )
@@ -136,8 +136,8 @@ internal fun LessonFullDetailsDTO.toDomain(): LessonFullDetails = LessonFullDeta
     name = name,
     description = description,
     teacher = teacher.toDomain(),
-    deadline = formatInstantToDateTimeString(deadline),
-    opensAt = formatInstantToDateTimeString(opensAt),
+    deadline = deadline,
+    opensAt = opensAt,
     groups = groups.map { it.toDomain() },
     solutionsCount = solutionsCount,
     isEstimatable = isEstimatable
