@@ -11,6 +11,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:solutions"))
     ksp(libs.ktorfit.ksp)
 
     // Modules

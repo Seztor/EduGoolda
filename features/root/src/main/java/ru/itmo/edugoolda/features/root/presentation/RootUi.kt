@@ -16,6 +16,11 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.LocalSystemBarsSettings
 import ru.itmo.edugoolda.core.utils.accumulate
 import ru.itmo.edugoolda.features.auth.presentation.auth.AuthUi
+import ru.itmo.edugoolda.features.group.GroupUi
+import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsUi
+import ru.itmo.edugoolda.features.lesson.LessonsUi
+import ru.itmo.edugoolda.features.main.presentation.student.MainStudentUi
+import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherUi
 
 @Suppress("ModifierReused")
 @Composable
@@ -30,6 +35,11 @@ fun RootUi(
     Children(childStack, modifier) { child ->
         when (val instance = child.instance) {
             is RootComponent.Child.Auth -> AuthUi(instance.instance)
+            is RootComponent.Child.StudentMain -> MainStudentUi(instance.instance)
+            is RootComponent.Child.TeacherMain -> MainTeacherUi(instance.instance)
+            is RootComponent.Child.Group -> GroupUi(instance.instance)
+            is RootComponent.Child.JoinRequests -> JoinRequestsUi(instance.instance)
+            is RootComponent.Child.Lessons -> LessonsUi(instance.instance)
         }
     }
 

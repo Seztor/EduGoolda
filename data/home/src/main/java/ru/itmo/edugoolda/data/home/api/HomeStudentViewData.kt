@@ -1,6 +1,6 @@
 package ru.itmo.edugoolda.data.home.api
 
-import ru.itmo.edugoolda.data.invitations.api.JoinRequest
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
 import ru.itmo.edugoolda.data.solutions.api.Solution
 
 data class HomeStudentViewData(

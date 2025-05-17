@@ -11,55 +11,68 @@ import ru.itmo.edugoolda.core.utils.toStateFlow
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.features.group.createGroupAddComponent
 import ru.itmo.edugoolda.features.group.createGroupCreateComponent
-import ru.itmo.edugoolda.features.group.createStudentGroupComponent
 import ru.itmo.edugoolda.features.group.createStudentGroupDetailsComponent
-import ru.itmo.edugoolda.features.group.createTeacherGroupComponent
+import ru.itmo.edugoolda.features.group.createStudentGroupsComponent
 import ru.itmo.edugoolda.features.group.createTeacherGroupDetailsComponent
+import ru.itmo.edugoolda.features.group.createTeacherGroupsComponent
+import ru.itmo.edugoolda.features.group.presentation.GroupComponent.InitialConfiguration
 import ru.itmo.edugoolda.features.group.presentation.addGroup.GroupAddComponent
 import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroupDetails.StudentGroupDetailsComponent
-import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupsComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.TeacherGroupDetailsComponent
-import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupsComponent
 
 class RealGroupComponent(
     componentContext: ComponentContext,
+    initialConfiguration: InitialConfiguration,
+    private val communication: GroupComponent.Communication,
     private val componentFactory: ComponentFactory,
 ) : GroupComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
 
     override val childStack = childStack(
         source = navigation,
-        initialConfiguration = Config.CreateGroup,
+        initialConfiguration = when (initialConfiguration) {
+            InitialConfiguration.AddGroup -> Config.AddGroup
+            InitialConfiguration.CreateGroup -> Config.CreateGroup
+            is InitialConfiguration.StudentGroupDetails -> Config.StudentGroupDetails(
+                initialConfiguration.groupId
+            )
+
+            InitialConfiguration.StudentGroupsList -> Config.StudentGroupsList
+            is InitialConfiguration.TeacherGroupDetails -> Config.TeacherGroupDetails(
+                initialConfiguration.groupId
+            )
+
+            InitialConfiguration.TeacherGroupsList -> Config.TeacherGroupsList
+        },
         serializer = Config.serializer(),
         handleBackButton = true,
         childFactory = ::createChild
     ).toStateFlow(lifecycle)
 
-    private inner class TeacherCommunicationResolver : GroupCreateComponent.Communication,
-        TeacherGroupComponent.Communication, TeacherGroupDetailsComponent.Communication {
-        override fun onGroupCreated() {
-            navigation.pop()
-        }
-
-        override fun onCancelGroupCreation() {
-            navigation.pop()
-        }
-
+    private inner class TeacherCommunicationResolver :
+        GroupCreateComponent.Communication,
+        TeacherGroupsComponent.Communication,
+        TeacherGroupDetailsComponent.Communication {
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(Config.TeacherGroupDetails(id))
         }
 
-        override fun onReturnBackRequested() {
-            navigation.pop()
+        override fun onGroupCreated(id: GroupId) {
+            navigation.safePush(Config.TeacherGroupDetails(id))
         }
 
-        override fun onGroupDeleted() {
-            navigation.pop()
-        }
+        override fun onCancelGroupCreation() = goBack()
+        override fun onReturnBackRequested() = goBack()
+        override fun onGroupDeleted() = goBack()
     }
 
-    private inner class StudentCommunicationResolver : StudentGroupComponent.Communication, StudentGroupDetailsComponent.Communication, GroupAddComponent.Communication {
+    private inner class StudentCommunicationResolver :
+        StudentGroupsComponent.Communication,
+        StudentGroupDetailsComponent.Communication,
+        GroupAddComponent.Communication {
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(Config.StudentGroupDetails(id))
         }
@@ -68,21 +81,18 @@ class RealGroupComponent(
             navigation.safePush(Config.AddGroup)
         }
 
-        override fun onReturnBackRequested() {
-            navigation.pop()
+        override fun onGroupAdded(groupId: GroupId) {
+            navigation.safePush(Config.StudentGroupDetails(groupId))
         }
 
-        override fun onGroupQuited() {
-            navigation.pop()
-        }
+        override fun onReturnBackRequested() = goBack()
+        override fun onGroupQuited() = goBack()
+        override fun onCancelGroupAdding() = navigation.pop()
+    }
 
-        override fun onGroupAdded() {
-            navigation.pop()
-        }
-
-        override fun onCancelGroupAdding() {
-            navigation.pop()
-        }
+    private fun goBack() = when {
+        childStack.value.items.size == 1 -> communication.onCancel()
+        else -> navigation.pop()
     }
 
     private fun createChild(
@@ -105,7 +115,7 @@ class RealGroupComponent(
         )
 
         Config.TeacherGroupsList -> GroupComponent.Child.TeacherGroupsList(
-            componentFactory.createTeacherGroupComponent(
+            componentFactory.createTeacherGroupsComponent(
                 componentContext,
                 TeacherCommunicationResolver()
             )
@@ -127,7 +137,7 @@ class RealGroupComponent(
         )
 
         Config.StudentGroupsList -> GroupComponent.Child.StudentGroupsList(
-            componentFactory.createStudentGroupComponent(
+            componentFactory.createStudentGroupsComponent(
                 componentContext,
                 StudentCommunicationResolver()
             )

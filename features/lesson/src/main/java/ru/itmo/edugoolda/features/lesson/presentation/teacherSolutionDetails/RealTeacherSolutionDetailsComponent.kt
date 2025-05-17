@@ -14,7 +14,7 @@ import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonDetailsRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionDetails
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.mobileup.kmm_form_validation.control.InputControl
 
 class RealTeacherSolutionDetailsComponent(

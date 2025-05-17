@@ -4,18 +4,33 @@ import com.arkivanov.decompose.ComponentContext
 import org.koin.core.component.get
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.features.group.presentation.GroupComponent
+import ru.itmo.edugoolda.features.group.presentation.RealGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.addGroup.GroupAddComponent
 import ru.itmo.edugoolda.features.group.presentation.addGroup.RealGroupAddComponent
 import ru.itmo.edugoolda.features.group.presentation.createGroup.GroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.createGroup.RealGroupCreateComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroupDetails.RealStudentGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.studentGroupDetails.StudentGroupDetailsComponent
-import ru.itmo.edugoolda.features.group.presentation.studentGroups.RealStudentGroupComponent
-import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.studentGroups.RealStudentGroupsComponent
+import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupsComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.RealTeacherGroupDetailsComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroupDetails.TeacherGroupDetailsComponent
-import ru.itmo.edugoolda.features.group.presentation.teacherGroups.RealTeacherGroupComponent
-import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupComponent
+import ru.itmo.edugoolda.features.group.presentation.teacherGroups.RealTeacherGroupsComponent
+import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupsComponent
+
+fun ComponentFactory.createGroupComponent(
+    componentContext: ComponentContext,
+    communication: GroupComponent.Communication,
+    config: GroupComponent.InitialConfiguration
+): GroupComponent {
+    return RealGroupComponent(
+        componentContext,
+        config,
+        communication,
+        get()
+    )
+}
 
 fun ComponentFactory.createGroupCreateComponent(
     componentContext: ComponentContext,
@@ -24,18 +39,18 @@ fun ComponentFactory.createGroupCreateComponent(
     return RealGroupCreateComponent(componentContext, communication, get(), get())
 }
 
-fun ComponentFactory.createStudentGroupComponent(
+fun ComponentFactory.createStudentGroupsComponent(
     componentContext: ComponentContext,
-    communication: StudentGroupComponent.Communication,
-): RealStudentGroupComponent {
-    return RealStudentGroupComponent(componentContext, communication, get(), get())
+    communication: StudentGroupsComponent.Communication,
+): RealStudentGroupsComponent {
+    return RealStudentGroupsComponent(componentContext, communication, get(), get())
 }
 
-fun ComponentFactory.createTeacherGroupComponent(
+fun ComponentFactory.createTeacherGroupsComponent(
     componentContext: ComponentContext,
-    communication: TeacherGroupComponent.Communication,
-): RealTeacherGroupComponent {
-    return RealTeacherGroupComponent(componentContext, communication, get(), get())
+    communication: TeacherGroupsComponent.Communication,
+): RealTeacherGroupsComponent {
+    return RealTeacherGroupsComponent(componentContext, communication, get(), get())
 }
 
 fun ComponentFactory.createTeacherGroupDetailsComponent(

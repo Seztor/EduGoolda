@@ -1,7 +1,6 @@
 package ru.itmo.edugoolda.core.widget.bottom_bar
 
 import android.annotation.SuppressLint
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,23 +27,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.icerock.moko.resources.compose.localized
+import dev.icerock.moko.resources.desc.Raw
+import dev.icerock.moko.resources.desc.StringDesc
 import ru.itmo.edugoolda.core.R
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
-data class BottomBarItem(
-    val title: String,
-    @DrawableRes val iconResId: Int
-)
-
 @Composable
-fun CustomBottomBar(
-    items: List<BottomBarItem>,
-    selectedItemIndex: Int,
-    onItemClick: (Int) -> Unit,
+fun <T> CustomBottomBar(
+    items: Iterable<T>,
+    selectedItem: T,
+    getString: (T) -> StringDesc,
+    getIcon: (T) -> Int,
+    onItemClick: (T) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -58,12 +56,14 @@ fun CustomBottomBar(
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            items.forEachIndexed { index, item ->
+            items.forEach { item ->
                 BottomBarItem(
                     item = item,
-                    isSelected = index == selectedItemIndex,
-                    onClick = { onItemClick(index) },
-                    modifier = Modifier.weight(.1f)
+                    isSelected = item == selectedItem,
+                    onClick = { onItemClick(item) },
+                    modifier = Modifier.weight(.1f),
+                    getString = getString,
+                    getIcon = getIcon,
                 )
             }
         }
@@ -71,8 +71,10 @@ fun CustomBottomBar(
 }
 
 @Composable
-private fun BottomBarItem(
-    item: BottomBarItem,
+private fun <T> BottomBarItem(
+    item: T,
+    getString: (T) -> StringDesc,
+    getIcon: (T) -> Int,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -86,13 +88,13 @@ private fun BottomBarItem(
         verticalArrangement = Arrangement.Top
     ) {
         Icon(
-            painter = painterResource(id = item.iconResId),
-            contentDescription = item.title,
+            painter = painterResource(id = getIcon(item)),
+            contentDescription = null,
             tint = if (isSelected) CustomTheme.colors.content.contentActive else CustomTheme.colors.content.contentTertiary,
             modifier = Modifier.size(24.dp)
         )
         Text(
-            text = item.title,
+            text = getString(item).localized(),
             color = if (isSelected) CustomTheme.colors.content.contentPrimary else CustomTheme.colors.content.contentTertiary,
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
@@ -107,18 +109,20 @@ private fun BottomBarItem(
 private fun CustomBottomBarPreview() {
     AppTheme {
         val items = listOf(
-            BottomBarItem("Home", R.drawable.ic_24_heart),
-            BottomBarItem("Search", R.drawable.ic_24_heart),
-            BottomBarItem("Profile", R.drawable.ic_24_heart),
-            BottomBarItem("Settings", R.drawable.ic_24_heart)
+            Pair("Home", R.drawable.ic_24_heart),
+            Pair("Search", R.drawable.ic_24_heart),
+            Pair("Profile", R.drawable.ic_24_heart),
+            Pair("Settings", R.drawable.ic_24_heart)
         )
         var selectedItem by remember { mutableIntStateOf(0) }
         CustomBottomBar(
             items = items,
-            selectedItemIndex = selectedItem,
-            onItemClick = { index ->
-                selectedItem = index
+            selectedItem = items[selectedItem],
+            onItemClick = { item ->
+                selectedItem = items.indexOf(item)
             },
+            getString = { StringDesc.Raw(it.first) },
+            getIcon = { it.second },
             modifier = Modifier,
         )
     }

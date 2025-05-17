@@ -3,10 +3,11 @@ package ru.itmo.edugoolda.features.join_requests
 import com.arkivanov.decompose.ComponentContext
 import org.koin.core.component.get
 import ru.itmo.edugoolda.core.ComponentFactory
+import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsComponent
 import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsComponentImpl
 
-fun ComponentFactory.createInvitationComponent(
+fun ComponentFactory.createJoinRequestsComponent(
     componentContext: ComponentContext,
-): JoinRequestsComponentImpl {
+): JoinRequestsComponent {
     return JoinRequestsComponentImpl(componentContext, get(), get())
 }
