@@ -31,7 +31,7 @@ class RealCreateLessonComponent(
 
 
     override fun onCreateLesson() {
-        if (isCreatingLessonProgress.value) return
+        if (isCreatingLessonProgress.value || !isCreateLessonButtonEnabled.value) return
 
         componentScope.safeLaunch(errorHandler) {
             withProgress(isCreatingLessonProgress) {
@@ -46,7 +46,7 @@ class RealCreateLessonComponent(
                     deadline = null,
                     opensAt = null
                 )
-                communication.onLessonCreated()
+                communication.onLessonCreated(lessonFullDefault.id)
             }
         }
     }

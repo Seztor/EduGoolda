@@ -97,9 +97,9 @@ fun CreateLessonUi(
             modifier = Modifier.padding(start = 8.dp, top = 8.dp),
         ) {
             LessonType.entries.forEach {
-                LessonType(
+                LessonTypeItem(
                     isSelected = it == selectedType,
-                    selectedRole = it,
+                    lessonType = it,
                     onClick = { component.onLessonTypeSelect(it) }
                 )
             }
@@ -145,14 +145,14 @@ fun CreateLessonUi(
 }
 
 @Composable
-fun LessonType(
+fun LessonTypeItem(
     isSelected: Boolean,
-    selectedRole: LessonType,
+    lessonType: LessonType,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val text = stringResource(
-        when (selectedRole) {
+        when (lessonType) {
             LessonType.Informational -> R.string.lesson_create_type_informational
             LessonType.Practical -> R.string.lesson_create_type_practical
         }
@@ -220,13 +220,13 @@ fun GroupItem(
 
 @Preview(showBackground = true)
 @Composable
-fun RoleItemUiPreview() {
+fun LessonTypeItemUiPreview() {
     AppTheme {
-        LessonType(
+        LessonTypeItem(
             isSelected = true,
             onClick = {},
             modifier = Modifier,
-            selectedRole = LessonType.Practical
+            lessonType = LessonType.Practical
         )
     }
 }
