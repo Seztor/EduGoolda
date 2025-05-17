@@ -1,11 +1,15 @@
 package ru.itmo.edugoolda.data.auth
 
+import org.koin.core.module.dsl.binds
+import org.koin.core.module.dsl.createdAtStart
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.withOptions
 import org.koin.dsl.bind
 import org.koin.dsl.binds
 import org.koin.dsl.module
 import ru.itmo.edugoolda.core.network.NetworkApiFactory
 import ru.itmo.edugoolda.data.auth.api.AuthRepository
+import ru.itmo.edugoolda.data.auth.api.AuthStatusProvider
 import ru.itmo.edugoolda.data.auth.internal.AuthInterceptor
 import ru.itmo.edugoolda.data.auth.internal.AuthRepositoryImpl
 import ru.itmo.edugoolda.data.auth.internal.createAuthApi
@@ -17,14 +21,25 @@ val dataAuthModule = module {
     single {
         get<NetworkApiFactory>().unauthorizedKtorfit.createAuthApi()
     }
-    singleOf(AuthTokensStorage::Base) binds arrayOf(
-        AuthTokensStorage::class,
-        AuthTokensProvider::class
-    )
-    singleOf(::AuthRepositoryImpl) binds arrayOf(
-        AuthRepository::class,
-        AuthTokensRefresher::class
-    )
+    singleOf(AuthTokensStorage::Base) withOptions {
+        createdAtStart()
+        binds(
+            listOf(
+                AuthTokensStorage::class,
+                AuthTokensProvider::class
+            )
+        )
+    }
+    singleOf(::AuthRepositoryImpl) withOptions {
+        createdAtStart()
+        binds(
+            listOf(
+                AuthRepository::class,
+                AuthTokensRefresher::class,
+                AuthStatusProvider::class,
+            )
+        )
+    }
     single {
         AuthInterceptor(
             authTokensRefresher = inject(),

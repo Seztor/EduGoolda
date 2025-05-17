@@ -7,9 +7,11 @@ import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
 import ru.itmo.edugoolda.features.auth.presentation.auth.RealAuthComponent
 import ru.itmo.edugoolda.features.root.presentation.RealRootComponent
 import ru.itmo.edugoolda.features.root.presentation.RootComponent
+import ru.itmo.edugoolda.features.root.presentation.start.RealStartComponent
+import ru.itmo.edugoolda.features.root.presentation.start.StartComponent
 
 fun ComponentFactory.createRootComponent(componentContext: ComponentContext): RootComponent {
-    return RealRootComponent(componentContext, get(), get())
+    return RealRootComponent(componentContext, get(), get(), get())
 }
 
 fun ComponentFactory.createAuthComponent(
@@ -17,4 +19,17 @@ fun ComponentFactory.createAuthComponent(
     communication: AuthComponent.Communication,
 ): AuthComponent {
     return RealAuthComponent(componentContext, communication, get())
+}
+
+fun ComponentFactory.createStartComponent(
+    componentContext: ComponentContext,
+    communication: StartComponent.Communication,
+): StartComponent {
+    return RealStartComponent(
+        componentContext,
+        communication,
+        get(),
+        get(),
+        get(),
+    )
 }

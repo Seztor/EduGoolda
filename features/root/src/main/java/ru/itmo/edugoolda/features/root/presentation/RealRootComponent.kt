@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.root.presentation
 
+import android.provider.DocumentsContract.Root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -9,14 +10,18 @@ import com.arkivanov.decompose.router.stack.replaceAll
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.createMessageComponent
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.safePush
 import ru.itmo.edugoolda.core.utils.toStateFlow
+import ru.itmo.edugoolda.data.auth.api.AuthStatusProvider
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.api.UserInfoStore
@@ -32,18 +37,35 @@ import ru.itmo.edugoolda.features.main.createMainTeacherComponent
 import ru.itmo.edugoolda.features.main.presentation.student.MainStudentComponent
 import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherComponent
 import ru.itmo.edugoolda.features.root.createAuthComponent
+import ru.itmo.edugoolda.features.root.createStartComponent
+import ru.itmo.edugoolda.features.root.presentation.start.StartComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
     private val componentFactory: ComponentFactory,
-    userInfoStore: UserInfoStore
+    userInfoStore: UserInfoStore,
+    authStatusProvider: AuthStatusProvider,
 ) : ComponentContext by componentContext, RootComponent {
+
+    private val userRole =
+        userInfoStore.getUserRole().stateIn(componentScope, SharingStarted.Eagerly, null)
 
     private val navigation = StackNavigation<Config>()
 
+    init {
+        authStatusProvider
+            .isAuthorized
+            .onEach {
+                if (!it) {
+                    navigation.safePush(Config.Auth)
+                }
+            }
+            .launchIn(componentScope)
+    }
+
     override val childStack = childStack(
         source = navigation,
-        initialConfiguration = Config.Auth,
+        initialConfiguration = Config.Start,
         serializer = Config.serializer(),
         handleBackButton = true,
         childFactory = ::createChild
@@ -97,14 +119,19 @@ class RealRootComponent(
                 GeneralCommunicationResolver()
             )
         )
-    }
 
-    private val userRole =
-        userInfoStore.getUserRole().stateIn(componentScope, SharingStarted.Eagerly, null)
+        Config.Start -> RootComponent.Child.Start(
+            componentFactory.createStartComponent(
+                componentContext,
+                GeneralCommunicationResolver()
+            )
+        )
+    }
 
     private inner class GeneralCommunicationResolver :
         AuthComponent.Communication,
         LessonsComponent.Communication,
+        StartComponent.Communication,
         GroupComponent.Communication {
         override fun onAuthEnded() {
             componentScope.launch {
@@ -120,6 +147,18 @@ class RealRootComponent(
 
         override fun onCancel() {
             navigation.pop()
+        }
+
+        override fun authRequired() {
+            navigation.replaceAll(Config.Auth)
+        }
+
+        override fun teacherDetailsRequired() {
+            navigation.safePush(Config.MainTeacher)
+        }
+
+        override fun studentDetailsRequired() {
+            navigation.safePush(Config.MainStudent)
         }
     }
 
@@ -218,5 +257,8 @@ class RealRootComponent(
 
         @Serializable
         data object JoinRequests : Config
+
+        @Serializable
+        data object Start : Config
     }
 }

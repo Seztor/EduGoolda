@@ -9,6 +9,7 @@ import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsCompone
 import ru.itmo.edugoolda.features.lesson.LessonsComponent
 import ru.itmo.edugoolda.features.main.presentation.student.MainStudentComponent
 import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherComponent
+import ru.itmo.edugoolda.features.root.presentation.start.StartComponent
 
 /**
  * A root of a Decompose component tree.
@@ -28,5 +29,6 @@ interface RootComponent {
         class Group(val instance: GroupComponent) : Child
         class JoinRequests(val instance: JoinRequestsComponent) : Child
         class Lessons(val instance: LessonsComponent) : Child
+        class Start(val instance: StartComponent) : Child
     }
 }

@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":features:group"))
     implementation(project(":features:join_requests"))
     implementation(project(":features:lesson"))
+    implementation(project(":data:auth"))
     ksp(libs.ktorfit.ksp)
 
     // Modules

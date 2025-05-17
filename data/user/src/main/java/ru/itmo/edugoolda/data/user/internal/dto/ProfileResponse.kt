@@ -13,13 +13,13 @@ data class ProfileResponse(
     @SerialName("email") val email: String,
     @SerialName("role") val role: String,
     @SerialName("is_deleted") val isDeleted: Boolean,
-    @SerialName("bio") val bio: String
+    @SerialName("bio") val bio: String?
 )
 
 fun ProfileResponse.toDomain(): Profile = Profile(
     name = name,
     email = email,
-    bio = bio,
+    bio = bio.orEmpty(),
     role = UserRoleMapper.fromString(role),
     id = UserId(id),
 )
