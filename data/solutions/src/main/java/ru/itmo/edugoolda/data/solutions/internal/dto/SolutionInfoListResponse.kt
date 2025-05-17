@@ -1,7 +1,9 @@
 package ru.itmo.edugoolda.data.solutions.internal.dto
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,6 +12,7 @@ import ru.itmo.edugoolda.data.solutions.internal.domain.SolutionListWithTotal
 import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
+import java.time.format.DateTimeFormatter
 
 @Serializable
 data class SolutionInfoListResponse(
@@ -29,18 +32,17 @@ data class SolutionInfoDTO(
     @SerialName("student") val student: UserInfoDTO,
     @SerialName("status") val status: String
 )
-internal fun formatInstantToDateTimeString(instant: Instant): String {
-    val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-    val date = localDateTime.date
-    val dateString = "${date.dayOfMonth.toString().padStart(2,'0')}.${date.monthNumber.toString().padStart(2,'0')}.${date.year}"
-    val time = localDateTime.time
-    val timeString = "${time.hour.toString().padStart(2,'0')}:${time.minute.toString().padStart(2,'0')}"
-    return "$timeString $dateString"
-}
+
+fun Instant.toCurrentLocalDateTime() = toLocalDateTime(TimeZone.currentSystemDefault())
+
+fun LocalDateTime.defaultFormat() = toJavaLocalDateTime().format(
+    DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy")
+)
+
 
 fun SolutionInfoDTO.toDomain(): SolutionInfo = SolutionInfo(
     id = SolutionId(id),
-    sentAt = formatInstantToDateTimeString(sentAt),
+    sentAt = sentAt.toCurrentLocalDateTime().defaultFormat(),
     student = student.toDomain(),
     status = status
 )

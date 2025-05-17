@@ -7,6 +7,7 @@ import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.solutions.api.SolutionInfoList
 import me.aartikov.replica.paged.PagedData
+import me.aartikov.replica.paged.PagedReplica
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 import ru.itmo.edugoolda.data.solutions.internal.dto.toDomain
 import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
@@ -20,7 +21,7 @@ class SolutionRepositoryImpl(
     companion object {
         private const val PAGE_SIZE = 20
     }
-    val solutionInfoListReplica = replicaClient.createPagedReplica(
+    override val solutionListReplica = replicaClient.createPagedReplica(
         name = "invitation list replica",
         settings = PagedReplicaSettings(staleTime = 5.minutes),
         idExtractor = { it.id },
