@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.data.auth.internal.tokens
 
+import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import ru.itmo.edugoolda.core.settings.SettingsFactory
@@ -25,10 +26,10 @@ internal interface AuthTokensStorage {
         override suspend fun clear() = storage.clear()
 
         override suspend fun save(tokens: AuthTokens) {
+            this.tokens.value = tokens
+
             storage.putString(ACCESS_TOKEN_KEY, tokens.accessToken)
             storage.putString(REFRESH_TOKEN_KEY, tokens.refreshToken)
-
-            this.tokens.value = tokens
         }
 
         private suspend fun getTokens(): AuthTokens? {
@@ -40,7 +41,9 @@ internal interface AuthTokensStorage {
 
         override val tokens = MutableStateFlow(
             runBlocking {
-                getTokens()
+                getTokens().also {
+                    Log.d("TAGOLOLOLO", "$it: ")
+                }
             }
         )
     }

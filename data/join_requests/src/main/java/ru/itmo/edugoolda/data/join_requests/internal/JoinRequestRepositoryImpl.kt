@@ -18,7 +18,6 @@ import kotlin.time.Duration.Companion.minutes
 class JoinRequestRepositoryImpl(
     replicaClient: ReplicaClient,
     private val api: JoinRequestApi
-
 ) : JoinRequestRepository {
     companion object {
         private const val PAGE_SIZE = 20

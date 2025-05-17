@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.data.auth.internal
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -27,9 +28,10 @@ internal class AuthRepositoryImpl(
     private val api: AuthApi,
     private val tokensStorage: AuthTokensStorage,
     authTokensProvider: AuthTokensProvider,
-    coroutineScope: CoroutineScope,
     private val userInfoStore: UserInfoStore
 ) : AuthRepository, AuthTokensRefresher, AuthStatusProvider {
+
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override val isAuthorized = authTokensProvider.tokens
         .map { it != null }
@@ -91,6 +93,15 @@ internal class AuthRepositoryImpl(
     }
 
     override suspend fun refreshTokens(refreshToken: String): AuthTokens {
-        return api.refresh(RefreshRequest(refreshToken)).toDomain()
+        val response = api.refresh(RefreshRequest(refreshToken)).toDomain()
+
+        tokensStorage.save(
+            AuthTokens(
+                accessToken = response.accessToken,
+                refreshToken = response.refreshToken,
+            )
+        )
+
+        return response
     }
 }

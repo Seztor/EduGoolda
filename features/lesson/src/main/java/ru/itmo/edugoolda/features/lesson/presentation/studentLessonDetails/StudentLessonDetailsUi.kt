@@ -35,7 +35,6 @@ import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStudentDetails
-import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.formatInstantToDateTimeString
 import ru.itmo.edugoolda.features.lesson.R
 
 @Composable

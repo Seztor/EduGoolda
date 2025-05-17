@@ -21,6 +21,7 @@ import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsUi
 import ru.itmo.edugoolda.features.lesson.LessonsUi
 import ru.itmo.edugoolda.features.main.presentation.student.MainStudentUi
 import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherUi
+import ru.itmo.edugoolda.features.root.presentation.start.StartUi
 
 @Suppress("ModifierReused")
 @Composable
@@ -40,6 +41,7 @@ fun RootUi(
             is RootComponent.Child.Group -> GroupUi(instance.instance)
             is RootComponent.Child.JoinRequests -> JoinRequestsUi(instance.instance)
             is RootComponent.Child.Lessons -> LessonsUi(instance.instance)
+            is RootComponent.Child.Start -> StartUi(instance.instance)
         }
     }
 

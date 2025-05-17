@@ -5,9 +5,10 @@ import androidx.annotation.StringRes
 import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.features.group.presentation.studentGroups.StudentGroupsComponent
 import ru.itmo.edugoolda.features.home.presentation.student.HomeStudentComponent
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
+import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponent
 import ru.itmo.edugoolda.features.main.R
 import ru.itmo.edugoolda.features.profile.presentation.viewProfile.ProfileComponent
 import ru.itmo.edugoolda.core.R as CoreR
@@ -31,7 +32,7 @@ interface MainStudentComponent {
 
     sealed interface Child {
         data class Home(val component: HomeStudentComponent) : Child
-        data class Lessons(val component: LessonInfoListComponent) : Child
+        data class Lessons(val component: LessonInfoListStudentComponent) : Child
         data class Groups(val component: StudentGroupsComponent) : Child
         data class Profile(val component: ProfileComponent) : Child
     }
@@ -44,5 +45,7 @@ interface MainStudentComponent {
         fun onAllJoinRequestsRequested()
 
         fun onEditLessonRequested()
+
+        fun onLessonDetailsRequested(lessonId: LessonId)
     }
 }

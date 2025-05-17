@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -54,7 +55,8 @@ fun MainTeacherUi(
                 getString = { it.titleResId.strResDesc() },
                 getIcon = { it.iconResId },
                 onItemClick = component::onTabClick,
-                selectedItem = selectedTab
+                selectedItem = selectedTab,
+                modifier = Modifier.navigationBarsPadding()
             )
         }
     )

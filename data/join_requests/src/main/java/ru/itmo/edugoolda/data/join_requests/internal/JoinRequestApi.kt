@@ -15,7 +15,7 @@ interface JoinRequestApi {
         @Body request: JoinRequestResponseRequest
     )
 
-    @GET("api/v1/join_requests/<GROUP_UUID>")
+    @GET("api/v1/join_requests")
     suspend fun getInvitationList(
         @Query("page_size") pageSize: Int,
         @Query("page") page: Int

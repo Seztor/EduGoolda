@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.data.user.internal
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import me.aartikov.replica.client.ReplicaClient
@@ -15,9 +16,10 @@ import kotlin.time.Duration.Companion.minutes
 class UserRepositoryImpl(
     replicaClient: ReplicaClient,
     userApi: UserApi,
-    userInfoStore: UserInfoStore,
-    coroutineScope: CoroutineScope
+    userInfoStore: UserInfoStore
 ) : UserRepository {
+
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private val currentUserId = userInfoStore.getUserId()
         .stateIn(coroutineScope, SharingStarted.Eagerly, null)

@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter
 
 @Serializable
 data class SolutionInfoListResponse(
-    @SerialName("request") val solutionList: List<SolutionInfoDTO>,
+    @SerialName("solutions") val solutionList: List<SolutionInfoDTO>,
     @SerialName("total") val total: Int,
 )
 
