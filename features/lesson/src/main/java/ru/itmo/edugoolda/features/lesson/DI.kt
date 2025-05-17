@@ -9,6 +9,8 @@ import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealS
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponentImpl
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.RealTeacherLessonDetailsComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.TeacherLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.RealTeacherSolutionDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.TeacherSolutionDetailsComponent
 
@@ -33,4 +35,10 @@ fun ComponentFactory.createTeacherLessonListInfoComponent(
     communication: LessonInfoListComponent.Communication,
 ): LessonInfoListComponent {
     return LessonInfoListComponentImpl(componentContext, communication,  get(), get())
+fun ComponentFactory.createTeacherLessonDetailsComponent(
+    lessonId: LessonId,
+    componentContext: ComponentContext,
+    communication: TeacherLessonDetailsComponent.Communication,
+): RealTeacherLessonDetailsComponent {
+    return RealTeacherLessonDetailsComponent(lessonId, componentContext, communication, get(), get())
 }
