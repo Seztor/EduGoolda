@@ -40,8 +40,8 @@ fun LessonInfoListTeacherUi(
                 LessonInfoTeacherListItem(
                     name = it.name,
                     createdAt = it.createdAt,
-                    onEditClick = { component.onEditClick(it) },
-                    onDeleteClick = { component.onDeleteClick(it) }
+                    onEditClick = { component.onEditClick(it.id) },
+                    onDeleteClick = { component.onDeleteClick(it.id) }
                 )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {

@@ -92,7 +92,7 @@ fun HomeTeacherUi(
                     SolutionListItem(
                         studentName = it.student.name,
                         sentAt = it.status,
-                        onClick = { component.onSolutionClick(it) }
+                        onClick = { component.onSolutionClick(it.id) }
                     )
                 }
             }

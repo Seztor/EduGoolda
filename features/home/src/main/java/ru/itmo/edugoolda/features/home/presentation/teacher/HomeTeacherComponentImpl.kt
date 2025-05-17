@@ -11,7 +11,7 @@ import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
-import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 
 class HomeTeacherComponentImpl(
@@ -43,8 +43,8 @@ class HomeTeacherComponentImpl(
         }
     }
 
-    override fun onSolutionClick(solutionInfo: SolutionInfo) {
-        communication.onSolutionDetailsRequested(solutionInfo)
+    override fun onSolutionClick(solutionId: SolutionId) {
+        communication.onSolutionDetailsRequested(solutionId)
     }
 
     override fun onAllSolutionsClick() {

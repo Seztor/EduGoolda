@@ -40,7 +40,7 @@ fun LessonInfoListStudentUi(
                 LessonInfoStudentListItem(
                     name = it.name,
                     createdAt = it.createdAt,
-                    onClick = { component.onLessonClick(it) }
+                    onClick = { component.onLessonClick(it.id) }
                 )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {

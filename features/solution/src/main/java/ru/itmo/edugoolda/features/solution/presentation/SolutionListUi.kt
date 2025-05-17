@@ -39,7 +39,7 @@ fun SolutionListUi(
                 SolutionListItem(
                     studentName = it.student.name,
                     sentAt = it.sentAt,
-                    onClick = { component.onSolutionClick(it) }
+                    onClick = { component.onSolutionClick(it.id) }
                 )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
