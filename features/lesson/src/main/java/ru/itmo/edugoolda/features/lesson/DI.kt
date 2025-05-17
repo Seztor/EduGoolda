@@ -5,6 +5,8 @@ import org.koin.core.component.get
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
+import ru.itmo.edugoolda.features.lesson.presentation.createLesson.CreateLessonComponent
+import ru.itmo.edugoolda.features.lesson.presentation.createLesson.RealCreateLessonComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealStudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
@@ -35,10 +37,19 @@ fun ComponentFactory.createTeacherLessonListInfoComponent(
     communication: LessonInfoListComponent.Communication,
 ): LessonInfoListComponent {
     return LessonInfoListComponentImpl(componentContext, communication,  get(), get())
+}
+
 fun ComponentFactory.createTeacherLessonDetailsComponent(
     lessonId: LessonId,
     componentContext: ComponentContext,
     communication: TeacherLessonDetailsComponent.Communication,
 ): RealTeacherLessonDetailsComponent {
     return RealTeacherLessonDetailsComponent(lessonId, componentContext, communication, get(), get())
+}
+
+fun ComponentFactory.createLessonCreateComponent(
+    componentContext: ComponentContext,
+    communication: CreateLessonComponent.Communication,
+): RealCreateLessonComponent {
+    return RealCreateLessonComponent(componentContext, communication, get(), get())
 }
