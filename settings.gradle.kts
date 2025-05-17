@@ -49,4 +49,6 @@ include(":features:join_requests")
 include(":features:lesson")
 include(":data:lesson")
 include(":data:solutions")
+include(":features:solution")
+
 include(":features:main")

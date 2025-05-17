@@ -1,8 +1,8 @@
 package ru.itmo.edugoolda.data.solutions.internal.domain
 
-import ru.itmo.edugoolda.data.solutions.api.Solution
+import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
 
 data class SolutionListWithTotal(
-    val solutionList: List<Solution>,
+    val solutionInfoList: List<SolutionInfo>,
     val total: Int
 )

@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList
+package ru.itmo.edugoolda.features.solution.presentation
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,21 +11,21 @@ import androidx.compose.ui.Modifier
 import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
-import ru.itmo.edugoolda.core.widget.lesson.LessonInfoTeacherListItem
+import ru.itmo.edugoolda.core.widget.solutions.SolutionListItem
+import ru.itmo.edugoolda.data.solutions.api.SolutionInfoList
 
 @Composable
-fun LessonInfoListUi(
-    component: LessonInfoListComponent,
+fun SolutionListUi(
+    component: SolutionListComponent,
     modifier: Modifier = Modifier
 ) {
-    val state by component.lessonInfoState.collectAsState()
+    val state by component.solutionState.collectAsState()
     PullRefreshLceWidget(
         state = state,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick,
         modifier = modifier
-    ) { data: LessonInfoList, _: Boolean ->
+    ) { data: SolutionInfoList, _: Boolean ->
         val lazyListState = rememberLazyListState()
         lazyListState.TriggerLoadNext(
             pagedState = state,
@@ -34,14 +34,12 @@ fun LessonInfoListUi(
         )
         LazyColumn(
             state = lazyListState,
-
             ) {
-            items(data.lessonInfoList) {
-                LessonInfoTeacherListItem(
-                    name = it.name,
-                    createdAt = it.createdAt,
-                    onEditClick = { component.onEditClick(it) },
-                    onDeleteClick = { component.onDeleteClick(it) }
+            items(data.solutionInfoList) {
+                SolutionListItem(
+                    studentName = it.student.name,
+                    sentAt = it.sentAt,
+                    onClick = { component.onSolutionClick(it.id) }
                 )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {

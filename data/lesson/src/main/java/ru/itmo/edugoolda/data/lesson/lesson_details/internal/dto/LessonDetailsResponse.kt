@@ -1,7 +1,9 @@
 package ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,6 +20,7 @@ import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionMessageId
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.internal.dto.UserInfoDTO
 import ru.itmo.edugoolda.data.user.internal.dto.toDomain
+import java.time.format.DateTimeFormatter
 
 @Serializable
 internal data class LessonStudentDetailsDTO(
@@ -37,7 +40,7 @@ internal fun LessonStudentDetailsDTO.toDomain(): LessonStudentDetails = LessonSt
     name = name,
     description = description,
     teacher = teacher.toDomain(),
-    deadline = deadline,
+    deadline = deadline.toCurrentLocalDateTime().defaultFormat(),
     groups = groups.map { it.toDomain() },
     messages = messages.map { it.toDomain() },
     status = when (status) {
@@ -47,14 +50,11 @@ internal fun LessonStudentDetailsDTO.toDomain(): LessonStudentDetails = LessonSt
     isEstimatable = isEstimatable,
 )
 
-fun formatInstantToDateTimeString(instant: Instant): String {
-    val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-    val date = localDateTime.date
-    val dateString = "${date.dayOfMonth.toString().padStart(2,'0')}.${date.monthNumber.toString().padStart(2,'0')}.${date.year}"
-    val time = localDateTime.time
-    val timeString = "${time.hour.toString().padStart(2,'0')}:${time.minute.toString().padStart(2,'0')}"
-    return "$timeString $dateString"
-}
+fun Instant.toCurrentLocalDateTime() = toLocalDateTime(TimeZone.currentSystemDefault())
+
+fun LocalDateTime.defaultFormat() = toJavaLocalDateTime().format(
+    DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy")
+)
 
 @Serializable
 internal data class SolutionMessageDTO(

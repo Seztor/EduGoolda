@@ -7,6 +7,7 @@ import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
 import me.aartikov.replica.paged.PagedData
+import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
 import ru.itmo.edugoolda.data.lesson.lesson_info.internal.dto.toDomain
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
@@ -21,8 +22,8 @@ class LessonInfoRepositoryImpl(
         private const val PAGE_SIZE = 20
     }
 
-    override suspend fun deleteLesson(lessonInfo: LessonInfo) {
-        api.deleteLesson(lessonInfo.id.value)
+    override suspend fun deleteLesson(lessonId: LessonId) {
+        api.deleteLesson(lessonId.value)
     }
 
     override val lessonInfoListReplica = replicaClient.createPagedReplica(
