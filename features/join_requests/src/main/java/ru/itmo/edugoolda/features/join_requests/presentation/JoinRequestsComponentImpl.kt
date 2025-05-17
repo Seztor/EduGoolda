@@ -12,12 +12,12 @@ import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 class JoinRequestsComponentImpl(
     componentContext: ComponentContext,
     private val errorHandler: ErrorHandler,
-    private val joinRequestRepository: JoinRequestRepository,
-
-    ) : JoinRequestsComponent, ComponentContext by componentContext {
+    private val joinRequestRepository: JoinRequestRepository
+) : JoinRequestsComponent, ComponentContext by componentContext {
 
     private val invitationReplica = joinRequestRepository.joinRequestListReplica
     override val joinRequestState = invitationReplica.observe(this, errorHandler)
+
     override fun onAcceptClick(joinRequest: JoinRequest) {
         componentScope.safeLaunch(errorHandler) {
             joinRequestRepository.respondToJoinRequest(joinRequest.id, JoinRequestAction.Accept)

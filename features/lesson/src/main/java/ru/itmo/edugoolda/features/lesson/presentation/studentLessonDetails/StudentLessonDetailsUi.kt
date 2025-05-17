@@ -183,9 +183,10 @@ fun MessageItem(
     authorName: String,
     text: String,
     alignType: Arrangement.Horizontal,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 6.dp, start = 10.dp, end = 10.dp),
         horizontalArrangement = alignType
@@ -222,7 +223,7 @@ fun MessageItem(
 
 @Preview(showBackground = true)
 @Composable
-fun MessageItemPreview() {
+private fun MessageItemPreview() {
     AppTheme {
         MessageItem(authorName = "Pavel", text = "Привет, меня зовут Паша!", Arrangement.Start)
     }
@@ -230,7 +231,7 @@ fun MessageItemPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun StudentLessonDetailsUiPreview() {
+private fun StudentLessonDetailsUiPreview() {
     AppTheme {
         StudentLessonDetailsUi(component = FakeStudentLessonDetailsComponent())
     }

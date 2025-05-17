@@ -41,7 +41,7 @@ import ru.itmo.edugoolda.features.group.R
 
 @Composable
 fun TeacherGroupsUi(
-    component: TeacherGroupComponent,
+    component: TeacherGroupsComponent,
     modifier: Modifier = Modifier,
 ) {
     val state by component.teacherGroupState.collectAsState()
@@ -49,7 +49,9 @@ fun TeacherGroupsUi(
         AppTextField(
             inputControl = component.groupSearchInputControl,
             placeholder = stringResource(R.string.search_students_group),
-            modifier = Modifier.padding(horizontal = 20.dp).padding(top = 35.dp, bottom = 15.dp),
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .padding(top = 35.dp, bottom = 15.dp),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -111,14 +113,18 @@ fun TeacherGroupItem(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Group Icon",
-                modifier = Modifier.padding(start = 15.dp, end = 10.dp).size(27.dp)
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 10.dp)
+                    .size(27.dp)
             )
 
             Text(
                 text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically).width(150.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .width(150.dp),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 softWrap = false
@@ -128,7 +134,9 @@ fun TeacherGroupItem(
                 text = ", $subjectName",
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically).width(100.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .width(100.dp),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 softWrap = false
@@ -152,7 +160,9 @@ fun TeacherGroupItem(
 
             IconButton(
                 onClick = { onGroupItemClick() },
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp).size(35.dp)
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+                    .size(35.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_forward),
@@ -172,7 +182,7 @@ fun TeacherGroupItem(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGroupItem() {
+private fun PreviewGroupItem() {
     AppTheme {
         TeacherGroupItem(
             {}, {},"Группа 1", "Math", true
@@ -182,8 +192,8 @@ fun PreviewGroupItem() {
 
 @Preview(showBackground = true)
 @Composable
-fun TeacherGroupsUIPreview() {
+private fun TeacherGroupsUIPreview() {
     AppTheme {
-        TeacherGroupsUi(component = FakeTeacherGroupComponent())
+        TeacherGroupsUi(component = FakeTeacherGroupsComponent())
     }
 }

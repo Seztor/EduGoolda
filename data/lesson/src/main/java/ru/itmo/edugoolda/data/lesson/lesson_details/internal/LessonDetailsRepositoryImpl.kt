@@ -7,10 +7,10 @@ import me.aartikov.replica.single.ReplicaSettings
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonDetailsRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonStatus
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.SolutionId
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.SendMessageRequest
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.SetSolutionStatusRequest
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.dto.toDomain
+import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import kotlin.time.Duration.Companion.minutes
 
 internal class LessonDetailsRepositoryImpl(
@@ -49,7 +49,6 @@ internal class LessonDetailsRepositoryImpl(
     )
 
     override val lessonStudentDetailsReplica = _lessonStudentDetailsReplica.map { _, data -> data.toDomain() }
-
 
     private val _solutionTeacherDetailsReplica = replicaClient.createKeyedReplica(
         name = "teacher solution details replica",

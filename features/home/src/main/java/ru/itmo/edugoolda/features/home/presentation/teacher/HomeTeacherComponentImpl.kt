@@ -44,7 +44,7 @@ class HomeTeacherComponentImpl(
     }
 
     override fun onSolutionClick(solution: Solution) {
-        communication.onSolutionDetailsRequested(solution)
+        communication.onSolutionDetailsRequested(solution.id)
     }
 
     override fun onAllSolutionsClick() {

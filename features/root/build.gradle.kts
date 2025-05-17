@@ -11,11 +11,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:group"))
+    implementation(project(":data:lesson"))
+    implementation(project(":data:solutions"))
+    implementation(project(":data:user"))
+    implementation(project(":features:group"))
+    implementation(project(":features:join_requests"))
+    implementation(project(":features:lesson"))
     ksp(libs.ktorfit.ksp)
 
     // Modules
     implementation(project(":core"))
     implementation(project(":features:auth"))
+    implementation(project(":features:main"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)

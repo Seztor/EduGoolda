@@ -9,7 +9,7 @@ import ru.itmo.edugoolda.features.root.presentation.RealRootComponent
 import ru.itmo.edugoolda.features.root.presentation.RootComponent
 
 fun ComponentFactory.createRootComponent(componentContext: ComponentContext): RootComponent {
-    return RealRootComponent(componentContext, get())
+    return RealRootComponent(componentContext, get(), get())
 }
 
 fun ComponentFactory.createAuthComponent(
