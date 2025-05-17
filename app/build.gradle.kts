@@ -57,7 +57,8 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"https://edugoolda.ru.tuna.am/\""
+                "\"http://10.0.2.2:8080/\""
+//                 "\"https://edugoolda.ru.tuna.am/\""
             )
         }
 
@@ -67,7 +68,8 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"https://edugoolda.ru.tuna.am/\""
+                "\"http://10.0.2.2:8080/\""
+//                 "\"https://edugoolda.ru.tuna.am/\""
             )
         }
     }
