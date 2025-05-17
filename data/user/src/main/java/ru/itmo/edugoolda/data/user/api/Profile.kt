@@ -6,4 +6,14 @@ data class Profile(
     val bio: String,
     val role: UserRole,
     val id: UserId,
-)
+) {
+    companion object {
+        val MOCK = Profile(
+            name = "Pavel",
+            email = "pavel@mail.ru",
+            bio = "I'm pavel, student",
+            role = UserRole.Student,
+            id = UserId("123")
+        )
+    }
+}

@@ -15,5 +15,7 @@
     <string name="edit_password_old_password_label">Current password</string>
     <string name="edit_password_new_password_label">New password</string>
     <string name="edit_password_repeat_password_label">Repeat password</string>
-
+    <string name="profile_role_header">Role</string>
+    <string name="profile_role_teacher">Teacher</string>
+    <string name="profile_role_student">Student</string>
 </resources>

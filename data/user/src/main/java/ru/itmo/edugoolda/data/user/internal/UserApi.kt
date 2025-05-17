@@ -7,5 +7,4 @@ import ru.itmo.edugoolda.data.user.internal.dto.ProfileResponse
 interface UserApi {
     @GET("api/v1/user/{userId}")
     suspend fun getUserProfile(@Path("userId") id: String): ProfileResponse
-
 }
