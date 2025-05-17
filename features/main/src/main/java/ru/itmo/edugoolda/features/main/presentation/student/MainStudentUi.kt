@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.main.presentation.student
 
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -42,7 +43,8 @@ fun MainStudentUi(
                 getString = { it.titleResId.strResDesc() },
                 getIcon = { it.iconResId },
                 onItemClick = component::onTabClick,
-                selectedItem = selectedTab
+                selectedItem = selectedTab,
+                modifier = Modifier.navigationBarsPadding()
             )
         }
     )
