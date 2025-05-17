@@ -228,7 +228,7 @@ fun MessageItemPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun GroupAddUiPreview() {
+fun TeacherSolutionDetailsUiPreview() {
     AppTheme {
         TeacherSolutionDetailsUi(component = FakeTeacherSolutionDetailsComponent())
     }
