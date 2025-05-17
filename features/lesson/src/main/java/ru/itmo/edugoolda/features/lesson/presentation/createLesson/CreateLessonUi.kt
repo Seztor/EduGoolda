@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.RadioButton
@@ -96,7 +97,7 @@ fun CreateLessonUi(
             modifier = Modifier.padding(start = 8.dp, top = 8.dp),
         ) {
             LessonType.entries.forEach {
-                LessonTypeItem(
+                LessonType(
                     isSelected = it == selectedType,
                     selectedRole = it,
                     onClick = { component.onLessonTypeSelect(it) }
@@ -119,7 +120,8 @@ fun CreateLessonUi(
         ) {
             items(groupListState) { item ->
                 GroupItem(
-                    item.name,
+                    { component.onGroupDeleteClick(item.id) },
+                    item.name
                 )
             }
         }
@@ -143,7 +145,7 @@ fun CreateLessonUi(
 }
 
 @Composable
-fun LessonTypeItem(
+fun LessonType(
     isSelected: Boolean,
     selectedRole: LessonType,
     onClick: () -> Unit,
@@ -170,6 +172,7 @@ fun LessonTypeItem(
 
 @Composable
 fun GroupItem(
+    onGroupDelete: () -> Unit,
     name: String,
     modifier: Modifier = Modifier,
 ) {
@@ -192,6 +195,17 @@ fun GroupItem(
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            IconButton(
+                onClick = { onGroupDelete() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Clear,
+                    contentDescription = "Group Icon"
+                )
+            }
         }
         Spacer(
             modifier = Modifier
@@ -208,7 +222,7 @@ fun GroupItem(
 @Composable
 fun RoleItemUiPreview() {
     AppTheme {
-        LessonTypeItem(
+        LessonType(
             isSelected = true,
             onClick = {},
             modifier = Modifier,

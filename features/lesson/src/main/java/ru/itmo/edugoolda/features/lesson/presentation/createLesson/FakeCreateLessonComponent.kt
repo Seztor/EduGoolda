@@ -3,6 +3,7 @@ package ru.itmo.edugoolda.features.lesson.presentation.createLesson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonType
 import ru.mobileup.kmm_form_validation.control.InputControl
 
@@ -19,4 +20,5 @@ class FakeCreateLessonComponent : CreateLessonComponent {
     override fun onLessonTypeSelect(newType: LessonType) = Unit
     override fun onGroupAdded(groupInfo: GroupInfo) = Unit
     override fun onAddGroupButtonClick() = Unit
+    override fun onGroupDeleteClick(groupId: GroupId) = Unit
 }

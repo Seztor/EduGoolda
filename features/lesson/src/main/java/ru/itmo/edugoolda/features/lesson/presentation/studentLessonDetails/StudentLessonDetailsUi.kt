@@ -106,12 +106,12 @@ fun StudentLessonDetailsUi(
                         }
                     }
 
-                    Text(
-                        text = "${stringResource(R.string.lesson_deadline_title)}:\n${formatInstantToDateTimeString(data.deadline)}",
-                        fontWeight = CustomTheme.typography.body.bold.fontWeight,
-                        fontSize = CustomTheme.typography.body.bold.fontSize,
-                        modifier = Modifier.width(100.dp),
-                    )
+//                    Text(
+//                        text = "${stringResource(R.string.lesson_deadline_title)}:\n${formatInstantToDateTimeString(data.deadline)}",
+//                        fontWeight = CustomTheme.typography.body.bold.fontWeight,
+//                        fontSize = CustomTheme.typography.body.bold.fontSize,
+//                        modifier = Modifier.width(100.dp),
+//                    )
                 }
 
                 Text(

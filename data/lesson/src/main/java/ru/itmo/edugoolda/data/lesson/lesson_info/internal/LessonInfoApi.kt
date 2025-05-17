@@ -9,7 +9,7 @@ import ru.itmo.edugoolda.data.lesson.lesson_info.internal.dto.LessonInfoListResp
 
 interface LessonInfoApi {
 
-    @GET("/api/v1/lessons")
+    @GET("api/v1/lessons")
     suspend fun getLessonInfoList(
         @Query("page_size") pageSize: Int,
         @Query("page") page: Int,
@@ -17,7 +17,7 @@ interface LessonInfoApi {
         @Query("page") query: String? = null,
     ): LessonInfoListResponse
 
-    @DELETE("/api/v1/lesson/{lessonUuid}")
+    @DELETE("api/v1/lesson/{lessonUuid}")
     suspend fun deleteLesson(
         @Path("lessonUuid") lessonId: String,
     )

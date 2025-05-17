@@ -9,7 +9,7 @@ data class LessonGeneralDetails(
     val name: String,
     val description: String?,
     val teacher: UserInfo,
-    val deadline: Instant,
+    val deadline: Instant?,
     val groups: List<GroupInfo>,
     val isEstimatable: Boolean,
 )

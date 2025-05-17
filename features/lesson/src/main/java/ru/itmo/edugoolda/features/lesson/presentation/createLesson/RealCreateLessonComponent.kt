@@ -2,12 +2,14 @@ package ru.itmo.edugoolda.features.lesson.presentation.createLesson
 
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
+import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.computed
+import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
-import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonDetailsRepository
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
+import ru.itmo.edugoolda.data.lesson.lesson_create.api.LessonCreateRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonType
 import ru.mobileup.kmm_form_validation.control.InputControl
 
@@ -15,13 +17,13 @@ class RealCreateLessonComponent(
     componentContext: ComponentContext,
     private val communication: CreateLessonComponent.Communication,
     private val errorHandler: ErrorHandler,
-    private val lessonDetailsRepository: LessonDetailsRepository,
+    private val lessonCreateRepository: LessonCreateRepository
 ) : CreateLessonComponent, ComponentContext by componentContext {
     override val lessonNameInputControl = InputControl(componentScope)
     override val descriptionInputControl = InputControl(componentScope)
     override val selectedLessonType = MutableStateFlow(LessonType.Informational)
     override val isCreatingLessonProgress = MutableStateFlow(false)
-    override val groupListState: StateFlow<List<GroupInfo>> = TODO()
+    override val groupListState = MutableStateFlow(listOf<GroupInfo>())
     override val isCreateLessonButtonEnabled =
         computed(lessonNameInputControl.text, descriptionInputControl.text, groupListState) { text, description, groupList ->
             text.isNotBlank() && description.isNotBlank() && groupList.isNotEmpty()
@@ -29,7 +31,24 @@ class RealCreateLessonComponent(
 
 
     override fun onCreateLesson() {
-        TODO("Not yet implemented")
+        if (isCreatingLessonProgress.value) return
+
+        componentScope.safeLaunch(errorHandler) {
+            withProgress(isCreatingLessonProgress) {
+                val lessonFullDefault = lessonCreateRepository.createLesson(
+                    name = lessonNameInputControl.text.value,
+                    description = descriptionInputControl.text.value,
+                    groupIdList = groupListState.value.map { it.id },
+                    isEstimatable = when(selectedLessonType.value) {
+                        LessonType.Informational -> false
+                        LessonType.Practical -> true
+                    },
+                    deadline = null,
+                    opensAt = null
+                )
+                communication.onLessonCreated()
+            }
+        }
     }
 
     override fun onReturnBackClick() {
@@ -41,10 +60,18 @@ class RealCreateLessonComponent(
     }
 
     override fun onGroupAdded(groupInfo: GroupInfo) {
-        TODO("Not yet implemented")
+        if (!groupListState.value.any { it.id == groupInfo.id}) {
+            groupListState.value += listOf(groupInfo)
+        }
     }
 
     override fun onAddGroupButtonClick() {
         communication.onGroupAddRequested()
+    }
+
+    override fun onGroupDeleteClick(groupId: GroupId) {
+        groupListState.value = groupListState.value.filter {
+            it.id != groupId
+        }
     }
 }

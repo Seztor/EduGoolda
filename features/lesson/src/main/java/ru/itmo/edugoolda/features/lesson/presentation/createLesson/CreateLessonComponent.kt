@@ -2,6 +2,7 @@ package ru.itmo.edugoolda.features.lesson.presentation.createLesson
 
 import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
+import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonType
 import ru.mobileup.kmm_form_validation.control.InputControl
 
@@ -19,6 +20,7 @@ interface CreateLessonComponent {
     fun onLessonTypeSelect(newType: LessonType)
     fun onGroupAdded(groupInfo: GroupInfo)
     fun onAddGroupButtonClick()
+    fun onGroupDeleteClick(groupId: GroupId)
 
     interface Communication {
         fun onCancelLessonCreation()
