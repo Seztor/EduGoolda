@@ -22,9 +22,8 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
 fun SolutionListItem(
-    lessonName: String,
     studentName: String,
-    date: String,
+    sentAt: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -37,17 +36,12 @@ fun SolutionListItem(
     ) {
         Column {
             Text(
-                text = lessonName,
-                style = CustomTheme.typography.body.regular
-            )
-            Spacer(modifier = Modifier.size(10.dp))
-            Text(
                 text = studentName,
                 style = CustomTheme.typography.body.regular
             )
             Spacer(modifier = Modifier.size(10.dp))
             Text(
-                text = date,
+                text = sentAt,
                 style = CustomTheme.typography.caption.regular
             )
         }
@@ -71,9 +65,8 @@ fun SolutionListItem(
 private fun StudentHeaderPreview() {
     AppTheme {
         SolutionListItem(
-            lessonName = "Введение в геометрию",
             studentName = "Иванов Василий",
-            date = "19:47 15.04.24",
+            sentAt = "19:47 15.04.24",
             onClick = { },
         )
     }

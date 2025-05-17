@@ -7,7 +7,7 @@ import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
-import ru.itmo.edugoolda.data.solutions.api.Solution
+import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 
 class HomeStudentComponentImpl(
@@ -27,13 +27,13 @@ class HomeStudentComponentImpl(
     ) { joinRequests, solutions ->
         HomeStudentViewData(
             joinRequests.joinRequestList,
-            solutions.solutionList
+            solutions.solutionInfoList
         )
     }
     override val mainState = mainStateReplica.observe(this, errorHandler)
 
-    override fun onSolutionClick(solution: Solution) {
-        communication.onSolutionDetailsRequested(solution)
+    override fun onSolutionClick(solutionInfo: SolutionInfo) {
+        communication.onSolutionDetailsRequested(solutionInfo)
     }
 
     override fun onAllSolutionsClick() {

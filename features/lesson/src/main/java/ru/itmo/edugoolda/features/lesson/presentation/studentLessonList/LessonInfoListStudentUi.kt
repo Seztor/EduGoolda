@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList
+package ru.itmo.edugoolda.features.lesson.presentation.studentLessonList
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,11 +12,11 @@ import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
-import ru.itmo.edugoolda.core.widget.lesson.LessonInfoTeacherListItem
+import ru.itmo.edugoolda.core.widget.lesson.LessonInfoStudentListItem
 
 @Composable
-fun LessonInfoListUi(
-    component: LessonInfoListComponent,
+fun LessonInfoListStudentUi(
+    component: LessonInfoListStudentComponent,
     modifier: Modifier = Modifier
 ) {
     val state by component.lessonInfoState.collectAsState()
@@ -37,11 +37,10 @@ fun LessonInfoListUi(
 
             ) {
             items(data.lessonInfoList) {
-                LessonInfoTeacherListItem(
+                LessonInfoStudentListItem(
                     name = it.name,
                     createdAt = it.createdAt,
-                    onEditClick = { component.onEditClick(it) },
-                    onDeleteClick = { component.onDeleteClick(it) }
+                    onClick = { component.onLessonClick(it) }
                 )
             }
             if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {

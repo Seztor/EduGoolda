@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.StateFlow
 import ru.itmo.edugoolda.core.utils.LoadableState
 import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
-import ru.itmo.edugoolda.data.solutions.api.Solution
+import ru.itmo.edugoolda.data.solutions.api.SolutionInfo
 
 interface HomeTeacherComponent {
     val mainState: StateFlow<LoadableState<HomeTeacherViewData>>
@@ -13,12 +13,12 @@ interface HomeTeacherComponent {
     fun onDeclineClick(joinRequest: JoinRequest)
     fun onRefresh()
     fun onRetryClick()
-    fun onSolutionClick(solution: Solution)
+    fun onSolutionClick(solutionInfo: SolutionInfo)
     fun onAllSolutionsClick()
     fun onAllJoinRequestsClick()
 
     interface Communication {
-        fun onSolutionDetailsRequested(solution: Solution)
+        fun onSolutionDetailsRequested(solutionInfo: SolutionInfo)
         fun onAllSolutionsRequested()
         fun onAllJoinRequestsRequested()
     }

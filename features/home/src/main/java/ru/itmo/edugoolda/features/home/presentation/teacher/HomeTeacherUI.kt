@@ -88,11 +88,10 @@ fun HomeTeacherUi(
 
             // Solutions List
             LazyColumn {
-                items(data.solutions.take(3)) {
+                items(data.solutionInfos.take(3)) {
                     SolutionListItem(
-                        lessonName = it.lessonName,
-                        studentName = it.sender.name,
-                        date = it.date,
+                        studentName = it.student.name,
+                        sentAt = it.status,
                         onClick = { component.onSolutionClick(it) }
                     )
                 }
