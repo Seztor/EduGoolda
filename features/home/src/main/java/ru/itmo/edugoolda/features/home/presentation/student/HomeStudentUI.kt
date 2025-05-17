@@ -92,7 +92,7 @@ fun HomeStudentUi(
                     LessonInfoStudentListItem(
                         name = it.name,
                         createdAt = it.createdAt,
-                        onClick = { component.onLessonClick(it) }
+                        onClick = { component.onLessonClick(it.id) }
                     )
                 }
             }
