@@ -12,11 +12,12 @@ import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.user.api.UserId
 
 class RealProfileComponent(
+    userId: UserId,
     componentContext: ComponentContext,
     repository: UserRepository,
     errorHandler: ErrorHandler
 ) : ProfileComponent, ComponentContext by componentContext {
-    private val profileReplica = repository.profileReplica.withKey(UserId("text"))
+    private val profileReplica = repository.profileReplica.withKey(userId)
     override val profileState = profileReplica.observe(this, errorHandler)
 
 
