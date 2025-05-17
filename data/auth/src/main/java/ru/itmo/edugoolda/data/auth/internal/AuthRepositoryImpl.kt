@@ -72,6 +72,14 @@ internal class AuthRepositoryImpl(
                 userInfoStore.setUserId(UserId(response.userId))
             }
             launch {
+                userInfoStore.setUserRole(
+                    when (response.userRole) {
+                        "student" -> UserRole.Student
+                        else -> UserRole.Teacher
+                    }
+                )
+            }
+            launch {
                 tokensStorage.save(
                     AuthTokens(
                         accessToken = response.accessToken,

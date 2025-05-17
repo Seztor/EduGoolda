@@ -16,7 +16,7 @@ import ru.itmo.edugoolda.features.profile.presentation.editProfile.EditProfileCo
 @Composable
 fun EditPasswordUI(
     component: EditProfileComponent,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -31,7 +31,6 @@ fun EditPasswordUI(
             placeholder = stringResource(id = R.string.edit_password_old_password_label),
             inputControl = component.nameInputControl,
             // visualTransformation = ,
-            modifier = modifier,
         )
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -41,7 +40,6 @@ fun EditPasswordUI(
             placeholder = stringResource(id = R.string.edit_password_new_password_label),
             inputControl = component.nameInputControl,
             // visualTransformation = ,
-            modifier = modifier,
         )
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -51,8 +49,6 @@ fun EditPasswordUI(
             placeholder = stringResource(id = R.string.edit_password_repeat_password_label),
             inputControl = component.nameInputControl,
             // visualTransformation = ,
-            modifier = modifier,
         )
-
     }
 }

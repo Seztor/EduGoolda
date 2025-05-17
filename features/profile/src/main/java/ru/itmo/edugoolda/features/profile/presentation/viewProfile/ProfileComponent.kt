@@ -9,6 +9,4 @@ interface ProfileComponent {
 
     fun onRefresh()
     fun onRetryClick()
-
-
 }

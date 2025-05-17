@@ -1,6 +1,5 @@
 package ru.itmo.edugoolda.data.lesson.lesson_info.internal
 
-import de.jensklingenberg.ktorfit.http.Body
 import de.jensklingenberg.ktorfit.http.DELETE
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Path

@@ -15,7 +15,7 @@ interface GroupCreateComponent {
     fun onCancelClick()
 
     interface Communication {
-        fun onGroupCreated()
+        fun onGroupCreated(id: GroupId)
         fun onCancelGroupCreation()
     }
 }

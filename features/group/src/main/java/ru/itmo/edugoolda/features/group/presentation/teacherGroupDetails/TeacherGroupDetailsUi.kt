@@ -106,7 +106,9 @@ fun TeacherGroupDetailsUi(
                     fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
                     fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
                     color = CustomTheme.colors.text.primary,
-                    modifier = Modifier.padding(top = 5.dp).width(270.dp),
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                        .width(270.dp),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     softWrap = false
@@ -229,7 +231,9 @@ fun GroupItem(
                 text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically).width(260.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .width(260.dp),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 softWrap = false
@@ -260,7 +264,7 @@ fun GroupItem(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGroupItem() {
+private fun PreviewGroupItem() {
     AppTheme {
         GroupItem(
             {}, "Павел"
@@ -270,7 +274,7 @@ fun PreviewGroupItem() {
 
 @Preview(showBackground = true)
 @Composable
-fun TeacherGroupDetailsUiPreview() {
+private fun TeacherGroupDetailsUiPreview() {
     AppTheme {
         TeacherGroupDetailsUi(component = FakeTeacherGroupDetailsComponent())
     }
