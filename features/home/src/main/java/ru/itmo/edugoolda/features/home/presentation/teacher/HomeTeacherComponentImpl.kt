@@ -8,9 +8,9 @@ import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
-import ru.itmo.edugoolda.data.invitations.api.JoinRequest
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestAction
-import ru.itmo.edugoolda.data.invitations.api.JoinRequestRepository
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 import ru.itmo.edugoolda.data.solutions.api.Solution
 import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 

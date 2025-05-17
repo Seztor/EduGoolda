@@ -7,6 +7,9 @@ import ru.itmo.edugoolda.core.network.NetworkApiFactory
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonDetailsRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.LessonDetailsApi
 import ru.itmo.edugoolda.data.lesson.lesson_details.internal.LessonDetailsRepositoryImpl
+import ru.itmo.edugoolda.data.lesson.lesson_info.internal.LessonInfoApi
+import ru.itmo.edugoolda.data.lesson.lesson_info.internal.LessonInfoRepositoryImpl
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
 
 val dataLessonModule = module {
     single<LessonDetailsApi> {
@@ -14,4 +17,10 @@ val dataLessonModule = module {
     }
 
     singleOf(::LessonDetailsRepositoryImpl) bind LessonDetailsRepository::class
+
+    single<LessonInfoApi> {
+        get<NetworkApiFactory>().authorizedKtorfit.create()
+    }
+
+    singleOf(::LessonInfoRepositoryImpl) bind LessonInfoRepository::class
 }
