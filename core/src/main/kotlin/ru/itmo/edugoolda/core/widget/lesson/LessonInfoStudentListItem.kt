@@ -21,10 +21,9 @@ import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
-fun LessonInfoListItem(
-    lessonName: String,
-    studentName: String,
-    date: String,
+fun LessonInfoStudentListItem(
+    name: String,
+    createdAt: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -37,17 +36,12 @@ fun LessonInfoListItem(
     ) {
         Column {
             Text(
-                text = lessonName,
+                text = name,
                 style = CustomTheme.typography.body.regular
             )
             Spacer(modifier = Modifier.size(10.dp))
             Text(
-                text = studentName,
-                style = CustomTheme.typography.body.regular
-            )
-            Spacer(modifier = Modifier.size(10.dp))
-            Text(
-                text = date,
+                text = createdAt,
                 style = CustomTheme.typography.caption.regular
             )
         }
@@ -68,10 +62,9 @@ fun LessonInfoListItem(
 @Composable
 private fun StudentHeaderPreview() {
     AppTheme {
-        LessonInfoListItem(
-            lessonName = "Введение в геометрию",
-            studentName = "Иванов Василий",
-            date = "19:47 15.04.24",
+        LessonInfoStudentListItem(
+            name = "Введение в геометрию",
+            createdAt = "19:47 15.04.24",
             onClick = { },
         )
     }

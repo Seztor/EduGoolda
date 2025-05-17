@@ -10,10 +10,10 @@ import ru.itmo.edugoolda.features.lesson.presentation.createLesson.RealCreateLes
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealStudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.RealTeacherLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.TeacherLessonDetailsComponent
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponent
-import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListComponentImpl
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.RealTeacherSolutionDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.TeacherSolutionDetailsComponent
 
@@ -60,9 +60,9 @@ fun ComponentFactory.createTeacherSolutionDetailsComponent(
 
 fun ComponentFactory.createTeacherLessonListInfoComponent(
     componentContext: ComponentContext,
-    communication: LessonInfoListComponent.Communication,
-): LessonInfoListComponent {
-    return LessonInfoListComponentImpl(componentContext, communication,  get(), get())
+    communication: LessonInfoListTeacherComponent.Communication,
+): LessonInfoListTeacherComponent {
+    return LessonInfoListTeacherComponentImpl(componentContext, communication,  get(), get())
 }
 
 fun ComponentFactory.createTeacherLessonDetailsComponent(

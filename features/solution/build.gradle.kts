@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.itmo.edugoolda.features.home"
+    namespace = "ru.itmo.edugoolda.features.solution"
 }
 
 dependencies {
@@ -15,11 +15,7 @@ dependencies {
 
     // Modules
     implementation(project(":core"))
-    implementation(project(":data:home"))
-    implementation(project(":data:join_requests"))
     implementation(project(":data:solutions"))
-    implementation(project(":data:lesson"))
-    implementation(project(":data:user"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
