@@ -9,6 +9,6 @@ interface ProfileComponent {
 
     fun onRefresh()
     fun onRetryClick()
-    // TODO 3 dot button in topbar, где будет выпадающее меню и кнопки "эдит, делит, логаут"
+
 
 }

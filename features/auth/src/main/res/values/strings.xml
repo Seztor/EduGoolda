@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_title">Вход EduGoolda</string>
-    <string name="login_email_hint">Почта</string>
-    <string name="login_password_hint">Пароль</string>
-    <string name="login_button_enter">Войти</string>
-    <string name="login_button_register">Зарегистрироваться</string>
-    <string name="register_email_header_hint">Почта</string>
-    <string name="register_password_hint">Пароль</string>
-    <string name="register_username_header_hint">Имя пользователя</string>
-    <string name="register_title">Давайте знакомиться!</string>
-    <string name="register_title_role">Ваша роль</string>
-    <string name="register_button_register">Зарегистрироваться</string>
-    <string name="register_enum_string_teacher">Преподаватель</string>
-    <string name="register_enum_string_student">Студент</string>
-    <string name="register_incorrect_email_error">Введен неверный формат email</string>
+    <string name="login_title">Entering EduGoolda</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_button_enter">Sign In</string>
+    <string name="login_button_register">Register</string>
+    <string name="register_email_header_hint">Email</string>
+    <string name="register_password_hint">Password</string>
+    <string name="register_username_header_hint">Username</string>
+    <string name="register_title">Let\'s get acquainted!</string>
+    <string name="register_title_role">Your role</string>
+    <string name="register_button_register">Sign up</string>
+    <string name="register_enum_string_teacher">Teacher</string>
+    <string name="register_enum_string_student">Student</string>
+    <string name="register_incorrect_email_error">Incorrect email format entered</string>
+    <string name="login_password_hint">Password</string>
 
 </resources>
