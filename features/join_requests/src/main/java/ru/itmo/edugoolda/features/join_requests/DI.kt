@@ -8,6 +8,7 @@ import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsCompone
 
 fun ComponentFactory.createJoinRequestsComponent(
     componentContext: ComponentContext,
+    communication: JoinRequestsComponent.Communication
 ): JoinRequestsComponent {
-    return JoinRequestsComponentImpl(componentContext, get(), get())
+    return JoinRequestsComponentImpl(componentContext, communication, get(), get())
 }

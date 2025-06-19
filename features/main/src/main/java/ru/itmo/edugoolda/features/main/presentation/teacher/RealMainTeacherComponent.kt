@@ -57,9 +57,16 @@ class RealMainTeacherComponent(
         selectedTab.value = tab
     }
 
-    override fun onCreateLessonClick() = communication.createLessonRequested()
+    override fun onCreateLessonClick() {
+        simpleDialogControl.dismiss()
+        communication.createLessonRequested()
+    }
 
-    override fun onCreateGroupClick() = communication.createGroupRequested()
+
+    override fun onCreateGroupClick() {
+        simpleDialogControl.dismiss()
+        communication.createGroupRequested()
+    }
 
     private inner class ChildCommunication :
         TeacherGroupsComponent.Communication,

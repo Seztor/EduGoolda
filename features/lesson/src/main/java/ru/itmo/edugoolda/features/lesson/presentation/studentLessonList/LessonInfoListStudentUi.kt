@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.lesson.presentation.studentLessonList
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -34,7 +35,7 @@ fun LessonInfoListStudentUi(
         )
         LazyColumn(
             state = lazyListState,
-
+            modifier = Modifier.fillMaxSize()
             ) {
             items(data.lessonInfoList) {
                 LessonInfoStudentListItem(

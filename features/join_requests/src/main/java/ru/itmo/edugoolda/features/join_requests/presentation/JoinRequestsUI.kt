@@ -1,53 +1,98 @@
 package ru.itmo.edugoolda.features.join_requests.presentation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import me.aartikov.replica.paged.PagedLoadingStatus
+import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestTeacherListItem
+import ru.itmo.edugoolda.features.join_requests.R
 
 @Composable
 fun JoinRequestsUi(
     component: JoinRequestsComponent,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val state by component.joinRequestState.collectAsState()
-    PullRefreshLceWidget(
-        state = state,
-        onRefresh = component::onRefresh,
-        onRetryClick = component::onRetryClick,
-        modifier = modifier
-    ) { data: JoinRequestList, _: Boolean ->
-        val lazyListState = rememberLazyListState()
-        lazyListState.TriggerLoadNext(
-            pagedState = state,
-            hasNextPage = state.data?.hasNextPage == true,
-            callback = component::onLoadNext
-        )
-        LazyColumn(
-            state = lazyListState,
-
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .height(70.dp)
+                .background(CustomTheme.colors.content.contentActive)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { component.onReturnBackClickRequest() },
+                Modifier.padding(top = 15.dp)
             ) {
-            items(data.joinRequestList) {
-                JoinRequestTeacherListItem(
-                    groupName = it.groupName,
-                    studentName = it.sender.name,
-                    date = it.date,
-                    onAcceptClick = { component.onAcceptClick(it) },
-                    onDeclineClick = { component.onDeclineClick(it) }
+                Icon(
+                    painter = painterResource(R.drawable.arrow_left_white),
+                    contentDescription = "Arrow Left",
+                    tint = Color.Unspecified
                 )
             }
-            if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
-                item {
-                    CircularProgressIndicator()
+
+            Text(
+                text = stringResource(R.string.join_request),
+                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
+                fontWeight = CustomTheme.typography.title.bold.fontWeight,
+                fontSize = CustomTheme.typography.body.regular.fontSize,
+                color = CustomTheme.colors.text.invert
+            )
+        }
+
+        PullRefreshLceWidget(
+            state = state,
+            onRefresh = component::onRefresh,
+            onRetryClick = component::onRetryClick
+        ) { data: JoinRequestList, _: Boolean ->
+            val lazyListState = rememberLazyListState()
+            lazyListState.TriggerLoadNext(
+                pagedState = state,
+                hasNextPage = state.data?.hasNextPage == true,
+                callback = component::onLoadNext
+            )
+            LazyColumn(
+                state = lazyListState,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(data.joinRequestList) {
+                    JoinRequestTeacherListItem(
+                        groupName = it.groupName,
+                        studentName = it.sender.name,
+                        date = it.date,
+                        onAcceptClick = { component.onAcceptClick(it) },
+                        onDeclineClick = { component.onDeclineClick(it) }
+                    )
+                }
+                if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
+                    item {
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }

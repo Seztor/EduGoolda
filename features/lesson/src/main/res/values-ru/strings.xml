@@ -20,4 +20,6 @@
     <string name="lesson_create_type_practical">Практический</string>
     <string name="lesson_create_type_title">Тип урока</string>
     <string name="lesson_add_group_button">Добавить группу</string>
+    <string name="search_group">Найти</string>
+    <string name="lesson_adding_group_title">Добавление группы</string>
 </resources>

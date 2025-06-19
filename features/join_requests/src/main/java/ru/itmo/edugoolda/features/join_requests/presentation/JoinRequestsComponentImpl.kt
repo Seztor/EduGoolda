@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.join_requests.presentation
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
@@ -11,6 +12,7 @@ import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 
 class JoinRequestsComponentImpl(
     componentContext: ComponentContext,
+    private val communication: JoinRequestsComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val joinRequestRepository: JoinRequestRepository
 ) : JoinRequestsComponent, ComponentContext by componentContext {
@@ -40,5 +42,9 @@ class JoinRequestsComponentImpl(
 
     override fun onLoadNext() {
         invitationReplica.loadNext()
+    }
+
+    override fun onReturnBackClickRequest() {
+        communication.onReturnBackFromJoinRequestsRequested()
     }
 }

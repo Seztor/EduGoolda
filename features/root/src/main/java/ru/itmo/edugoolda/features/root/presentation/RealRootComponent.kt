@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.replaceAll
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -31,6 +32,7 @@ import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
 import ru.itmo.edugoolda.features.group.createGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.GroupComponent
 import ru.itmo.edugoolda.features.join_requests.createJoinRequestsComponent
+import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsComponent
 import ru.itmo.edugoolda.features.lesson.LessonsComponent
 import ru.itmo.edugoolda.features.lesson.createLessonsComponent
 import ru.itmo.edugoolda.features.main.createMainStudentComponent
@@ -40,6 +42,7 @@ import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherComponent
 import ru.itmo.edugoolda.features.root.createAuthComponent
 import ru.itmo.edugoolda.features.root.createStartComponent
 import ru.itmo.edugoolda.features.root.presentation.start.StartComponent
+import ru.itmo.edugoolda.features.solution.presentation.SolutionListComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
@@ -78,7 +81,7 @@ class RealRootComponent(
 
     private fun createChild(
         config: Config,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): RootComponent.Child = when (config) {
         Config.Auth -> RootComponent.Child.Auth(
             componentFactory.createAuthComponent(
@@ -110,7 +113,10 @@ class RealRootComponent(
         )
 
         Config.JoinRequests -> RootComponent.Child.JoinRequests(
-            componentFactory.createJoinRequestsComponent(componentContext)
+            componentFactory.createJoinRequestsComponent(
+                componentContext,
+                TeacherCommunicationResolver()
+            )
         )
 
         is Config.Lessons -> RootComponent.Child.Lessons(
@@ -154,6 +160,10 @@ class RealRootComponent(
 
         }
 
+        override fun onReturnBackFromSolutionListRequested() {
+            navigation.pop()
+        }
+
         override fun authRequired() {
             navigation.replaceAll(Config.Auth)
         }
@@ -167,7 +177,10 @@ class RealRootComponent(
         }
     }
 
-    private inner class TeacherCommunicationResolver : MainTeacherComponent.Communication {
+    private inner class TeacherCommunicationResolver :
+        MainTeacherComponent.Communication,
+        JoinRequestsComponent.Communication
+    {
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(
                 Config.Group(
@@ -210,6 +223,10 @@ class RealRootComponent(
                     GroupComponent.InitialConfiguration.CreateGroup
                 )
             )
+        }
+
+        override fun onReturnBackFromJoinRequestsRequested() {
+            navigation.pop()
         }
     }
 
@@ -256,12 +273,12 @@ class RealRootComponent(
 
         @Serializable
         data class Group(
-            val configuration: GroupComponent.InitialConfiguration
+            val configuration: GroupComponent.InitialConfiguration,
         ) : Config
 
         @Serializable
         data class Lessons(
-            val configuration: LessonsComponent.InitialConfiguration
+            val configuration: LessonsComponent.InitialConfiguration,
         ) : Config
 
         @Serializable

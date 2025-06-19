@@ -13,4 +13,9 @@ interface JoinRequestsComponent {
     fun onRefresh()
     fun onRetryClick()
     fun onLoadNext()
+    fun onReturnBackClickRequest()
+
+    interface Communication {
+        fun onReturnBackFromJoinRequestsRequested()
+    }
 }

@@ -1,22 +1,22 @@
-package ru.itmo.edugoolda.features.group.presentation.teacherGroups
+package ru.itmo.edugoolda.features.lesson.presentation.createLesson.groupsListForLessonCreating
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -40,21 +40,48 @@ import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
 import ru.itmo.edugoolda.core.widget.text_field.AppTextField
 import ru.itmo.edugoolda.data.group.group_list.api.GroupInfoList
-import ru.itmo.edugoolda.features.group.R
+import ru.itmo.edugoolda.features.lesson.R
 
 @Composable
-fun TeacherGroupsUi(
-    component: TeacherGroupsComponent,
+fun AddingGroupUi(
+    component: AddingGroupComponent,
     modifier: Modifier = Modifier,
 ) {
     val state by component.teacherGroupState.collectAsState()
     Column(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .height(70.dp)
+                .background(CustomTheme.colors.content.contentActive)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { component.onCancelGroupAddingForLessonRequestClick() },
+                Modifier.padding(top = 15.dp)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.arrow_left_white),
+                    contentDescription = "Arrow Left",
+                    tint = Color.Unspecified
+                )
+            }
+
+            Text(
+                text = stringResource(R.string.lesson_adding_group_title),
+                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
+                fontWeight = CustomTheme.typography.title.bold.fontWeight,
+                fontSize = CustomTheme.typography.body.regular.fontSize,
+                color = CustomTheme.colors.text.invert
+            )
+        }
+
         AppTextField(
             inputControl = component.groupSearchInputControl,
-            placeholder = stringResource(R.string.search_students_group),
+            placeholder = stringResource(R.string.search_group),
             modifier = Modifier
                 .padding(horizontal = 20.dp)
-                .padding(top = 35.dp, bottom = 15.dp),
+                .padding(top = 30.dp, bottom = 15.dp),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -82,8 +109,7 @@ fun TeacherGroupsUi(
                 ) {
                 items(data.groups) { item ->
                     TeacherGroupItem(
-                        { component.onGroupDetailsRequestClick(item.id) },
-                        { component.onGroupChangeFavouriteStatusRequestClick(item.id, !item.isFavourite) },
+                        { component.onGroupAddRequestClick(item) },
                         item.name,
                         item.subjectName,
                         item.isFavourite
@@ -101,8 +127,7 @@ fun TeacherGroupsUi(
 
 @Composable
 fun TeacherGroupItem(
-    onGroupItemClick: () -> Unit,
-    onChangeFavourite: () -> Unit,
+    onGroupAddClick: () -> Unit,
     name: String,
     subjectName: String,
     isFavourite: Boolean,
@@ -147,29 +172,16 @@ fun TeacherGroupItem(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            IconButton(
-                onClick = { onChangeFavourite() },
-                modifier = Modifier.size(35.dp)
-            ) {
-                Icon(
-                    painter = when (isFavourite) {
-                        true -> painterResource(R.drawable.favourite_pressed)
-                        false -> painterResource(R.drawable.favourite_unpressed)
-                    },
-                    contentDescription = "Group Icon Favorite",
-                    modifier = Modifier.size(width = 20.dp, height = 23.dp)
-                )
-            }
 
             IconButton(
-                onClick = { onGroupItemClick() },
+                onClick = { onGroupAddClick() },
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)
                     .size(35.dp)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.arrow_forward),
-                    contentDescription = "Group Icon"
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add Group"
                 )
             }
         }
@@ -188,7 +200,7 @@ fun TeacherGroupItem(
 private fun PreviewGroupItem() {
     AppTheme {
         TeacherGroupItem(
-            {}, {},"Группа 1 34234324 ", "Math 134324324234324", true
+            {},"Группа 1 34234324 ", "Math 134324324234324", true
         )
     }
 }
@@ -197,6 +209,6 @@ private fun PreviewGroupItem() {
 @Composable
 private fun TeacherGroupsUIPreview() {
     AppTheme {
-        TeacherGroupsUi(component = FakeTeacherGroupsComponent())
+        AddingGroupUi(component = FakeAddingGroupComponent())
     }
 }

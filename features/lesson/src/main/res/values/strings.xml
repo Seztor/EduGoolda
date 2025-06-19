@@ -20,4 +20,6 @@
     <string name="lesson_create_type_practical">Practical</string>
     <string name="lesson_create_type_title">Lesson type</string>
     <string name="lesson_add_group_button">Add group</string>
+    <string name="search_group">Search</string>
+    <string name="lesson_adding_group_title">Group adding</string>
 </resources>

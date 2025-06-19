@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -177,7 +178,7 @@ fun TeacherGroupDetailsUi(
         PullRefreshLceWidget(
             state = groupOfStudentsState,
             onRefresh = component::onRefresh,
-            onRetryClick = component::onRetryClick
+            onRetryClick = component::onRetryClick,
         ) { data: GroupStudentsList, _: Boolean ->
             val lazyListState = rememberLazyListState()
             lazyListState.TriggerLoadNext(
@@ -188,7 +189,7 @@ fun TeacherGroupDetailsUi(
 
             LazyColumn(
                 state = lazyListState,
-
+                modifier = Modifier.fillMaxSize()
                 ) {
                 items(data.users) { item ->
                     GroupItem(
