@@ -14,4 +14,5 @@
     <string name="register_enum_string_teacher">Преподаватель</string>
     <string name="register_enum_string_student">Студент</string>
     <string name="register_incorrect_email_error">Введен неверный формат email</string>
+    <string name="message_login_error">Неверный логин или пароль. Пожалуйста, попробуйте еще раз</string>
 </resources>

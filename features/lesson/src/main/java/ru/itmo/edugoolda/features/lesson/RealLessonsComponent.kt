@@ -1,24 +1,30 @@
 package ru.itmo.edugoolda.features.lesson
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.replaceCurrent
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.utils.componentScope
+import ru.itmo.edugoolda.core.utils.getChild
 import ru.itmo.edugoolda.core.utils.safePush
 import ru.itmo.edugoolda.core.utils.toStateFlow
+import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
 import ru.itmo.edugoolda.data.user.api.UserInfoStore
 import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.itmo.edugoolda.features.lesson.LessonsComponent.InitialConfiguration
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.CreateLessonComponent
+import ru.itmo.edugoolda.features.lesson.presentation.createLesson.groupsListForLessonCreating.AddingGroupComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonDetails.TeacherLessonDetailsComponent
@@ -56,6 +62,7 @@ class RealLessonsComponent(
             InitialConfiguration.TeacherLessonInfoList -> Config.TeacherLessonInfoList
             InitialConfiguration.TeacherSolutionsInfoList -> Config.TeacherSolutionsInfoList
             InitialConfiguration.TeacherLessonCreate -> Config.TeacherLessonCreate
+            InitialConfiguration.TeacherAddGroupForLesson -> Config.TeacherAddGroupForLesson
         },
         serializer = Config.serializer(),
         childFactory = ::createChild
@@ -92,29 +99,36 @@ class RealLessonsComponent(
             )
         )
 
-        Config.StudentLessonInfoList -> LessonsComponent.Child.StudentLessonInfoList(
+        is Config.StudentLessonInfoList -> LessonsComponent.Child.StudentLessonInfoList(
             componentFactory.createLessonInfoListStudentComponent(
                 componentContext,
                 CommunicationResolver()
             )
         )
 
-        Config.TeacherLessonInfoList -> LessonsComponent.Child.TeacherLessonInfoList(
+        is Config.TeacherLessonInfoList -> LessonsComponent.Child.TeacherLessonInfoList(
             componentFactory.createTeacherLessonListInfoComponent(
                 componentContext,
                 CommunicationResolver()
             )
         )
 
-        Config.TeacherSolutionsInfoList -> LessonsComponent.Child.TeacherSolutionsInfoList(
+        is Config.TeacherSolutionsInfoList -> LessonsComponent.Child.TeacherSolutionsInfoList(
             componentFactory.createSolutionListComponent(
                 componentContext,
                 CommunicationResolver()
             )
         )
 
-        Config.TeacherLessonCreate -> LessonsComponent.Child.TeacherLessonCreate(
+        is Config.TeacherLessonCreate -> LessonsComponent.Child.TeacherLessonCreate(
             componentFactory.createLessonCreateComponent(
+                componentContext,
+                CommunicationResolver()
+            )
+        )
+
+        is Config.TeacherAddGroupForLesson -> LessonsComponent.Child.TeacherAddGroupForLesson(
+            componentFactory.createAddingGroupComponent(
                 componentContext,
                 CommunicationResolver()
             )
@@ -128,16 +142,14 @@ class RealLessonsComponent(
         LessonInfoListStudentComponent.Communication,
         SolutionListComponent.Communication,
         CreateLessonComponent.Communication,
-        TeacherSolutionDetailsComponent.Communication {
+        TeacherSolutionDetailsComponent.Communication,
+        AddingGroupComponent.Communication
+    {
 
         override fun onReturnBackStudentLessonDetails() = goBack()
         override fun onReturnBackTeacherLessonDetails() = goBack()
         override fun onTeacherLessonDeleted() = goBack()
         override fun onReturnBackTeacherSolutionDetails() = goBack()
-
-        override fun onEditLessonRequested(lessonId: LessonId) {
-            // TOOD
-        }
 
         override fun onLessonDetailsRequested(lessonId: LessonId) {
             navigation.safePush(
@@ -152,18 +164,36 @@ class RealLessonsComponent(
             communication.onSolutionDetails(solutionId)
         }
 
+        override fun onReturnBackFromSolutionListRequested() {
+            communication.onReturnBackFromSolutionListRequested()
+        }
+
         override fun onCancelLessonCreation() {
             goBack()
         }
 
         override fun onLessonCreated(lessonId: LessonId) {
-            navigation.safePush(
+            navigation.replaceCurrent(
                 Config.TeacherLessonDetails(lessonId)
             )
         }
 
         override fun onGroupAddRequested() {
+            navigation.safePush(
+                Config.TeacherAddGroupForLesson
+            )
+        }
 
+        override fun onGroupAddedRequested(groupInfo: GroupInfo) {
+            stack.value
+                .getChild<LessonsComponent.Child.TeacherLessonCreate>()
+                ?.component
+                ?.onGroupAdded(groupInfo)
+            goBack()
+        }
+
+        override fun onCancelGroupAddingForLessonRequested() {
+            goBack()
         }
     }
 
@@ -195,5 +225,8 @@ class RealLessonsComponent(
 
         @Serializable
         data object TeacherLessonCreate : Config
+
+        @Serializable
+        data object TeacherAddGroupForLesson : Config
     }
 }

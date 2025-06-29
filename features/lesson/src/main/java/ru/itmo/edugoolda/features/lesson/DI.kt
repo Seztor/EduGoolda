@@ -7,6 +7,8 @@ import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.CreateLessonComponent
 import ru.itmo.edugoolda.features.lesson.presentation.createLesson.RealCreateLessonComponent
 import ru.itmo.edugoolda.data.solutions.api.SolutionId
+import ru.itmo.edugoolda.features.lesson.presentation.createLesson.groupsListForLessonCreating.AddingGroupComponent
+import ru.itmo.edugoolda.features.lesson.presentation.createLesson.groupsListForLessonCreating.RealAddingGroupComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.RealStudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonDetails.StudentLessonDetailsComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponent
@@ -21,7 +23,7 @@ import ru.itmo.edugoolda.features.lesson.presentation.teacherSolutionDetails.Tea
 fun ComponentFactory.createLessonsComponent(
     componentContext: ComponentContext,
     initialConfiguration: LessonsComponent.InitialConfiguration,
-    communication: LessonsComponent.Communication
+    communication: LessonsComponent.Communication,
 ): LessonsComponent {
     return RealLessonsComponent(
         componentContext,
@@ -46,6 +48,8 @@ fun ComponentFactory.createStudentLessonDetailsComponent(
     )
 }
 
+
+
 fun ComponentFactory.createTeacherSolutionDetailsComponent(
     componentContext: ComponentContext,
     solutionId: SolutionId,
@@ -56,6 +60,7 @@ fun ComponentFactory.createTeacherSolutionDetailsComponent(
         componentContext,
         communication,
         get(),
+        get(),
         get()
     )
 }
@@ -64,7 +69,7 @@ fun ComponentFactory.createTeacherLessonListInfoComponent(
     componentContext: ComponentContext,
     communication: LessonInfoListTeacherComponent.Communication,
 ): LessonInfoListTeacherComponent {
-    return LessonInfoListTeacherComponentImpl(componentContext, communication,  get(), get())
+    return LessonInfoListTeacherComponentImpl(componentContext, communication, get(), get())
 }
 
 fun ComponentFactory.createTeacherLessonDetailsComponent(
@@ -76,6 +81,7 @@ fun ComponentFactory.createTeacherLessonDetailsComponent(
         lessonId,
         componentContext,
         communication,
+        get(),
         get(),
         get()
     )
@@ -90,7 +96,7 @@ fun ComponentFactory.createLessonCreateComponent(
 
 fun ComponentFactory.createLessonInfoListStudentComponent(
     componentContext: ComponentContext,
-    communication: LessonInfoListStudentComponent.Communication
+    communication: LessonInfoListStudentComponent.Communication,
 ): LessonInfoListStudentComponent {
     return LessonInfoListStudentComponentImpl(
         componentContext,
@@ -98,4 +104,11 @@ fun ComponentFactory.createLessonInfoListStudentComponent(
         get(),
         get(),
     )
+}
+
+fun ComponentFactory.createAddingGroupComponent(
+    componentContext: ComponentContext,
+    communication: AddingGroupComponent.Communication,
+): RealAddingGroupComponent {
+    return RealAddingGroupComponent(componentContext, communication, get(), get())
 }

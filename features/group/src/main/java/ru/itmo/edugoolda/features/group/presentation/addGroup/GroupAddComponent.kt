@@ -13,7 +13,7 @@ interface GroupAddComponent {
     fun onCancelClick()
 
     interface Communication {
-        fun onGroupAdded(groupId: GroupId)
+        fun onGroupAdded()
         fun onCancelGroupAdding()
     }
 }

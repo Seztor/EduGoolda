@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Icon
@@ -15,6 +16,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
@@ -38,12 +41,13 @@ fun LoginUi(
         Spacer(modifier = Modifier.height(164.dp))
 
         Icon(
-            imageVector = Icons.Default.AccountBox,
-            modifier = Modifier.size(100.dp),
-            contentDescription = "LoginIcon",
+            painter = painterResource(R.drawable.app_icon),
+            modifier = Modifier.size(110.dp).clip(RoundedCornerShape(5.dp)),
+            contentDescription = "App Icon",
+            tint = CustomTheme.colors.content.contentActive
         )
 
-        Spacer(modifier = Modifier.height(35.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         Text(
             text = stringResource(id = R.string.login_title),

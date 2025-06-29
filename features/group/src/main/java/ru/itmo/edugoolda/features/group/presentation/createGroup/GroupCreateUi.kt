@@ -78,7 +78,8 @@ fun GroupCreateUi(
             modifier = Modifier
                 .padding(horizontal = 22.dp)
                 .padding(bottom = 30.dp),
-            minLines = 6
+            minLines = 7,
+            maxLines = 7
         )
 
         AppTextField(

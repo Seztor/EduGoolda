@@ -39,7 +39,7 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
                 dismissOnBackPress = dismissableByUser,
                 dismissOnClickOutside = dismissableByUser
             ),
-            shape = RoundedCornerShape(4.dp),
+            shape = RoundedCornerShape(8.dp),
 
             title = {
                 Text(
@@ -93,10 +93,11 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
 }
 
 @Composable
-private fun DialogButton(
+fun DialogButton(
     text: String,
     onClick: () -> Unit,
     onDismiss: () -> Unit,
+    isEnabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Text(
@@ -107,10 +108,13 @@ private fun DialogButton(
             fontSize = 15.sp,
             lineHeight = 18.sp
         ),
-        color = CustomTheme.colors.button.primary,
+        color = when (isEnabled) {
+            true -> CustomTheme.colors.button.primary
+            false -> CustomTheme.colors.button.primaryDisabled
+        },
         textAlign = TextAlign.Center,
         modifier = modifier
-            .clickable {
+            .clickable(enabled = isEnabled) {
                 onClick()
                 onDismiss()
             }

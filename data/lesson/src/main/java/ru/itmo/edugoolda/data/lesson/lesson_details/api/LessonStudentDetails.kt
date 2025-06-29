@@ -81,7 +81,7 @@ data class LessonStudentDetails(
                     ),
                 )
             ),
-            status = LessonStatus.Reviewed,
+            status = LessonStatus.Pending,
             isEstimatable = true
         )
     }

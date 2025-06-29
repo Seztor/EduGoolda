@@ -81,18 +81,18 @@ fun HomeStudentUi(
                 )
                 Text(
                     text = stringResource(id = homeR.string.lessons),
-                    style = CustomTheme.typography.caption.regular,
+                    style = CustomTheme.typography.body.regular15,
                     fontWeight = FontWeight.Bold,
                 )
             }
 
             // Solutions List
             LazyColumn {
-                items(data.lessonInfoList.take(3)) {
+                items(data.lessonInfoList.take(2)) {
                     LessonInfoStudentListItem(
                         name = it.name,
                         createdAt = it.createdAt,
-                        onClick = { component.onLessonClick(it.id) }
+                        onLessonItemClick = { component.onLessonClick(it.id) }
                     )
                 }
             }
@@ -135,17 +135,18 @@ fun HomeStudentUi(
                 )
                 Text(
                     text = stringResource(id = homeR.string.join_requests),
-                    style = CustomTheme.typography.caption.regular,
+                    style = CustomTheme.typography.body.regular15,
                     fontWeight = FontWeight.Bold
                 )
             }
 
             // Request list
             LazyColumn {
-                items(data.joinRequests.take(3)) {
+                items(data.joinRequests.take(2)) {
                     JoinRequestStudentListItem(
-                        groupName = it.groupName,
-                        date = it.date
+                        groupName = it.groupInfo.name,
+                        date = it.createAt,
+                        { component.onCancelJoinRequestClick(it.id) }
                     )
                 }
             }

@@ -2,6 +2,7 @@ package ru.itmo.edugoolda.features.auth.presentation.register
 
 import com.arkivanov.decompose.ComponentContext
 import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
@@ -44,7 +45,7 @@ class RealRegisterComponent(
                 }
             }
         } else {
-            emailInputControl.error.value = StringDesc.Resource(R.string.register_incorrect_email_error)
+            emailInputControl.error.value = R.string.register_incorrect_email_error.strResDesc()
         }
     }
 

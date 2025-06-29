@@ -18,14 +18,8 @@ class LessonInfoListTeacherComponentImpl(
 
     private val lessonInfoReplica = lessonInfoRepository.lessonInfoListReplica
     override val lessonInfoState = lessonInfoReplica.observe(this, errorHandler)
-    override fun onEditClick(lessonId: LessonId) {
-        communication.onEditLessonRequested(lessonId)
-    }
-
-    override fun onDeleteClick(lessonId: LessonId) {
-        componentScope.safeLaunch(errorHandler) {
-            lessonInfoRepository.deleteLesson(lessonId)
-        }
+    override fun onLessonDetailsClick(lessonId: LessonId) {
+        communication.onLessonDetailsRequested(lessonId)
     }
 
     override fun onRefresh() {

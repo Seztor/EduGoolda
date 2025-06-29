@@ -60,7 +60,7 @@ class RealCreateLessonComponent(
     }
 
     override fun onGroupAdded(groupInfo: GroupInfo) {
-        if (!groupListState.value.any { it.id == groupInfo.id}) {
+        if (!groupListState.value.any { it.id == groupInfo.id }) {
             groupListState.value += listOf(groupInfo)
         }
     }
