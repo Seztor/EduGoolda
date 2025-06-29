@@ -33,6 +33,7 @@ import ru.itmo.edugoolda.core.widget.solutions.SolutionListItem
 import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
 import ru.itmo.edugoolda.features.home.R as homeR
 
+
 @Composable
 fun HomeTeacherUi(
     component: HomeTeacherComponent,
@@ -50,7 +51,7 @@ fun HomeTeacherUi(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, top = 30.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             // Header
             Row(
@@ -81,17 +82,17 @@ fun HomeTeacherUi(
                 )
                 Text(
                     text = stringResource(id = homeR.string.solutions),
-                    style = CustomTheme.typography.caption.regular,
+                    style = CustomTheme.typography.body.regular15,
                     fontWeight = FontWeight.Bold,
                 )
             }
 
             // Solutions List
             LazyColumn {
-                items(data.solutionInfos.take(3)) {
+                items(data.solutionInfos.take(2)) {
                     SolutionListItem(
                         studentName = it.student.name,
-                        sentAt = it.status,
+                        sentAt = it.sentAt,
                         onClick = { component.onSolutionClick(it.id) }
                     )
                 }
@@ -135,20 +136,20 @@ fun HomeTeacherUi(
                 )
                 Text(
                     text = stringResource(id = homeR.string.join_requests),
-                    style = CustomTheme.typography.caption.regular,
+                    style = CustomTheme.typography.body.regular15,
                     fontWeight = FontWeight.Bold
                 )
             }
 
-            // Request list
+             //Request list
             LazyColumn {
-                items(data.joinRequests.take(3)) {
+                items(data.joinRequests.take(2)) {
                     JoinRequestTeacherListItem(
-                        groupName = it.groupName,
+                        groupName = it.groupInfo.name,
                         studentName = it.sender.name,
-                        date = it.date,
-                        onAcceptClick = { component.onAcceptClick(it) },
-                        onDeclineClick = { component.onDeclineClick(it) }
+                        createAt = it.createAt,
+                        onAcceptClick = { component.onAcceptJoinRequestClick(it.id) },
+                        onDeclineClick = { component.onDeclineJoinRequestClick(it.id) }
                     )
                 }
             }

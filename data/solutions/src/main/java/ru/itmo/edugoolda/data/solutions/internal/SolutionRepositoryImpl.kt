@@ -4,6 +4,7 @@ import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
 import me.aartikov.replica.paged.PagedData
 import me.aartikov.replica.paged.PagedFetcher
+import me.aartikov.replica.paged.PagedReplica
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.solutions.api.SolutionInfo

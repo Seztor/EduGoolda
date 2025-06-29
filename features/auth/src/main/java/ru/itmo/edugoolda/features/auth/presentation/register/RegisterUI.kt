@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.auth.presentation.register
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -65,8 +66,11 @@ fun RegisterUi(
         AppTextField(
             placeholder = stringResource(id = R.string.register_email_header_hint),
             inputControl = component.emailInputControl,
-            modifier = Modifier.padding(horizontal = 21.dp)
-            )
+            modifier = Modifier.padding(horizontal = 21.dp),
+            onTextChanging = {
+                component.emailInputControl.error.value = null
+            }
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -90,7 +94,9 @@ fun RegisterUi(
             text = stringResource(id = R.string.register_title_role),
             fontWeight = CustomTheme.typography.title.bold.fontWeight,
             fontSize = CustomTheme.typography.title.bold.fontSize,
-            modifier = Modifier.align(Alignment.Start).padding(start = 21.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 21.dp)
         )
 
         Column(
@@ -112,7 +118,10 @@ fun RegisterUi(
             buttonType = ButtonType.Primary,
             onClick = { component.onRegisterClick() },
             isLoading = isRegisterProgress,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 60.dp)
         )
     }
 }
@@ -139,6 +148,9 @@ fun RoleItem(
             selected = isSelected,
             onClick = onClick,
         )
-        Text(text = text)
+        Text(text = text,
+            modifier = Modifier.clickable {
+                onClick()
+            })
     }
 }

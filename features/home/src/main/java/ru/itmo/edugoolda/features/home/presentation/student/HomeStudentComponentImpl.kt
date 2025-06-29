@@ -4,8 +4,12 @@ import com.arkivanov.decompose.ComponentContext
 import me.aartikov.replica.algebra.normal.combine
 import me.aartikov.replica.algebra.paged.toReplica
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
+import ru.itmo.edugoolda.core.error_handling.safeLaunch
+import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.home.api.HomeStudentViewData
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
@@ -51,5 +55,11 @@ class HomeStudentComponentImpl(
 
     override fun onRetryClick() {
         mainStateReplica.revalidate()
+    }
+
+    override fun onCancelJoinRequestClick(joinRequestId: JoinRequestId) {
+        componentScope.safeLaunch(errorHandler) {
+            joinRequestRepository.respondToJoinRequest(joinRequestId, JoinRequestAction.Cancel)
+        }
     }
 }

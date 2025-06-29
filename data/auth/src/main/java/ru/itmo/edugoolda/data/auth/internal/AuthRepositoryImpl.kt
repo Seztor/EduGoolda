@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.data.auth.internal
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -14,6 +15,7 @@ import ru.itmo.edugoolda.data.auth.api.domain.Password
 import ru.itmo.edugoolda.data.auth.internal.domain.AuthTokens
 import ru.itmo.edugoolda.data.auth.internal.dto.AuthResponse
 import ru.itmo.edugoolda.data.auth.internal.dto.LoginRequest
+import ru.itmo.edugoolda.data.auth.internal.dto.LogoutRequest
 import ru.itmo.edugoolda.data.auth.internal.dto.RefreshRequest
 import ru.itmo.edugoolda.data.auth.internal.dto.RegisterRequest
 import ru.itmo.edugoolda.data.auth.internal.dto.toDomain
@@ -27,7 +29,7 @@ import ru.itmo.edugoolda.data.user.api.UserRole
 internal class AuthRepositoryImpl(
     private val api: AuthApi,
     private val tokensStorage: AuthTokensStorage,
-    authTokensProvider: AuthTokensProvider,
+    private val authTokensProvider: AuthTokensProvider,
     private val userInfoStore: UserInfoStore
 ) : AuthRepository, AuthTokensRefresher, AuthStatusProvider {
 
@@ -66,6 +68,16 @@ internal class AuthRepositoryImpl(
             )
         )
         saveAuthData(response)
+    }
+
+    override suspend fun logout() {
+        val tokens = authTokensProvider.tokens.value ?: return
+        api.logout(
+            LogoutRequest(
+                refreshToken = tokens.refreshToken
+            )
+        )
+        tokensStorage.clear()
     }
 
     private suspend fun saveAuthData(response: AuthResponse) {

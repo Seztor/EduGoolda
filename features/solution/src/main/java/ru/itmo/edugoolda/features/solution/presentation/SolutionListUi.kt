@@ -79,7 +79,7 @@ fun SolutionListUi(
             )
             LazyColumn(
                 state = lazyListState,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).fillMaxSize()
             ) {
                 items(data.solutionInfoList) {
                     SolutionListItem(

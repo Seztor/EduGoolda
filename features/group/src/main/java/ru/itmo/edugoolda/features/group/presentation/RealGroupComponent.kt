@@ -84,13 +84,10 @@ class RealGroupComponent(
             navigation.safePush(Config.AddGroup)
         }
 
-        override fun onGroupAdded(groupId: GroupId) {
-            navigation.safePush(Config.StudentGroupDetails(groupId))
-        }
-
+        override fun onGroupAdded() = goBack()
         override fun onReturnBackRequested() = goBack()
         override fun onGroupQuited() = goBack()
-        override fun onCancelGroupAdding() = navigation.pop()
+        override fun onCancelGroupAdding() = goBack()
     }
 
     private fun goBack() = when {

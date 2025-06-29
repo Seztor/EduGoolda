@@ -1,6 +1,5 @@
-package ru.itmo.edugoolda.features.join_requests.presentation
+package ru.itmo.edugoolda.features.join_requests.presentation.teacher
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
@@ -8,27 +7,28 @@ import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 
-class JoinRequestsComponentImpl(
+class JoinRequestsTeacherComponentImpl(
     componentContext: ComponentContext,
-    private val communication: JoinRequestsComponent.Communication,
+    private val communication: JoinRequestsTeacherComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val joinRequestRepository: JoinRequestRepository
-) : JoinRequestsComponent, ComponentContext by componentContext {
+) : JoinRequestsTeacherComponent, ComponentContext by componentContext {
 
     private val invitationReplica = joinRequestRepository.joinRequestListReplica
     override val joinRequestState = invitationReplica.observe(this, errorHandler)
 
-    override fun onAcceptClick(joinRequest: JoinRequest) {
+    override fun onAcceptJoinRequestClick(joinRequestId: JoinRequestId) {
         componentScope.safeLaunch(errorHandler) {
-            joinRequestRepository.respondToJoinRequest(joinRequest.id, JoinRequestAction.Accept)
+            joinRequestRepository.respondToJoinRequest(joinRequestId, JoinRequestAction.Accept)
         }
     }
 
-    override fun onDeclineClick(joinRequest: JoinRequest) {
+    override fun onDeclineJoinRequestClick(joinRequestId: JoinRequestId) {
         componentScope.safeLaunch(errorHandler) {
-            joinRequestRepository.respondToJoinRequest(joinRequest.id, JoinRequestAction.Decline)
+            joinRequestRepository.respondToJoinRequest(joinRequestId, JoinRequestAction.Decline)
         }
     }
 

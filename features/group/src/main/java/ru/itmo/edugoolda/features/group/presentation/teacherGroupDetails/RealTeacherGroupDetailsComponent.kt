@@ -11,8 +11,11 @@ import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
 import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
+import ru.itmo.edugoolda.core.message.data.MessageService
+import ru.itmo.edugoolda.core.message.domain.Message
 import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
+import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfoRepository
@@ -34,6 +37,7 @@ class RealTeacherGroupDetailsComponent(
     private val repositoryGroupFullInfo: GroupFullInfoRepository,
     private val repositoryGroupInvitationData: GroupInvitationDataRepository,
     private val repositoryGroupList: GroupListRepository,
+    private val messageService: MessageService
 ) : TeacherGroupDetailsComponent, ComponentContext by componentContext {
     private val groupOfStudentsReplica =
         repositoryGroupOfStudents.groupOfStudentsReplica.withKey(groupId)
@@ -49,6 +53,7 @@ class RealTeacherGroupDetailsComponent(
     override val isDeletingGroupProgress = MutableStateFlow(false)
     override val dialogDeleteGroup = standardDialogControl("delete group")
     override val dialogKickMember = standardDialogControl("kick member")
+
 
     override fun onRefresh() {
         groupOfStudentsReplica.refresh()
@@ -89,7 +94,7 @@ class RealTeacherGroupDetailsComponent(
         }
     }
 
-    override fun onGroupCodeGenerateRequestClick() {
+    override fun onGroupCodeGenerateRequestClick(onCodeGenerated: (String) -> Unit) {
         if (isGettingCodeProgress.value) return
 
         componentScope.safeLaunch(errorHandler) {
@@ -97,9 +102,12 @@ class RealTeacherGroupDetailsComponent(
                 val groupInvitationData =
                     repositoryGroupInvitationData.getGroupInvitationData(groupId)
                 groupInvitationDataState.value = groupInvitationData
+                onCodeGenerated(groupInvitationData.code.value)
             }
         }
     }
+
+
 
     override fun onDialogDeleteGroup() {
         val data = groupInfoState.value.data ?: return
@@ -152,6 +160,15 @@ class RealTeacherGroupDetailsComponent(
                 ),
                 dismissableByUser = true
             )
+        )
+    }
+
+    override fun onShowMessageCodeCopied(code: String) {
+        messageService.showMessage(
+            Message(text = StringDesc.ResourceFormatted(
+                R.string.group_message_code_copied,
+                code
+            ))
         )
     }
 }

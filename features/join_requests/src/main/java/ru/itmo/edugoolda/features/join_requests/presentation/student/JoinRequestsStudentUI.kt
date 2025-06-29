@@ -1,4 +1,4 @@
-package ru.itmo.edugoolda.features.join_requests.presentation
+package ru.itmo.edugoolda.features.join_requests.presentation.student
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -23,17 +22,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
+import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestStudentListItem
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
-import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestTeacherListItem
 import ru.itmo.edugoolda.features.join_requests.R
 
 @Composable
-fun JoinRequestsUi(
-    component: JoinRequestsComponent,
+fun JoinRequestsStudentUi(
+    component: JoinRequestsStudentComponent,
     modifier: Modifier = Modifier,
 ) {
     val state by component.joinRequestState.collectAsState()
@@ -78,21 +76,16 @@ fun JoinRequestsUi(
             )
             LazyColumn(
                 state = lazyListState,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .padding(horizontal = 10.dp, vertical = 8.dp)
+                    .fillMaxSize()
             ) {
                 items(data.joinRequestList) {
-                    JoinRequestTeacherListItem(
-                        groupName = it.groupName,
-                        studentName = it.sender.name,
-                        date = it.date,
-                        onAcceptClick = { component.onAcceptClick(it) },
-                        onDeclineClick = { component.onDeclineClick(it) }
+                    JoinRequestStudentListItem(
+                        groupName = it.groupInfo.name,
+                        date = it.createAt,
+                        { component.onCancelJoinRequestClick(it.id) }
                     )
-                }
-                if (state.loadingStatus == PagedLoadingStatus.LoadingNextPage) {
-                    item {
-                        CircularProgressIndicator()
-                    }
                 }
             }
         }

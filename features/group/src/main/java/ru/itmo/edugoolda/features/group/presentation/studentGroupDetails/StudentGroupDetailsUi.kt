@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.features.group.presentation.studentGroupDetails
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -27,6 +31,7 @@ import ru.itmo.edugoolda.core.dialog.standard.StandardDialog
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
+import ru.itmo.edugoolda.core.widget.text.FadingEdgeScrollableText
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
 import ru.itmo.edugoolda.features.group.R
 
@@ -72,11 +77,12 @@ fun StudentGroupDetailsUi(
                 component.onRetryClick()
             },
         ) { data: GroupFullInfo, _: Boolean ->
-            Column {
+            Column(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .padding(horizontal = 20.dp)
+            ) {
                 Row(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .padding(horizontal = 20.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
@@ -86,21 +92,20 @@ fun StudentGroupDetailsUi(
                         fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
                         color = CustomTheme.colors.text.primary,
                         modifier = Modifier
-                            .padding(top = 5.dp)
-                            .width(270.dp),
+                            .padding(top = 5.dp, end = 30.dp)
+                            .weight(1f)
+                            .basicMarquee(),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
                         softWrap = false
                     )
 
-                    Spacer(modifier = Modifier.weight(1f))
 
                     IconButton(
                         onClick = { component.onDialogQuitRequest() },
                         modifier = Modifier.size(37.dp)
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.rubbish_bin_icon),
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Rubbish bin",
                             modifier = Modifier.size(27.dp)
                         )
@@ -110,7 +115,6 @@ fun StudentGroupDetailsUi(
                 Row(
                     modifier = Modifier
                         .padding(top = 20.dp)
-                        .padding(horizontal = 20.dp)
                 ) {
                     Text(
                         text = "${stringResource(R.string.group_subject_title)}: ",
@@ -123,9 +127,11 @@ fun StudentGroupDetailsUi(
                         fontWeight = CustomTheme.typography.body.regular.fontWeight,
                         fontSize = CustomTheme.typography.body.regular.fontSize,
                         color = CustomTheme.colors.text.primary,
-                        modifier = Modifier.width(270.dp),
+                        modifier = Modifier
+                            .padding(end = 30.dp)
+                            .weight(1f)
+                            .basicMarquee(),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
                         softWrap = false
                     )
                 }
@@ -133,7 +139,6 @@ fun StudentGroupDetailsUi(
                 Row(
                     modifier = Modifier
                         .padding(top = 15.dp)
-                        .padding(horizontal = 20.dp)
                 ) {
                     Text(
                         text = "${stringResource(R.string.group_owner_title)}: ",
@@ -146,9 +151,11 @@ fun StudentGroupDetailsUi(
                         fontWeight = CustomTheme.typography.body.regular.fontWeight,
                         fontSize = CustomTheme.typography.body.regular.fontSize,
                         color = CustomTheme.colors.text.primary,
-                        modifier = Modifier.width(270.dp),
+                        modifier = Modifier
+                            .padding(end = 30.dp)
+                            .weight(1f)
+                            .basicMarquee(),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
                         softWrap = false
                     )
                 }
@@ -156,7 +163,6 @@ fun StudentGroupDetailsUi(
                 Row(
                     modifier = Modifier
                         .padding(top = 15.dp)
-                        .padding(horizontal = 20.dp)
                 ) {
                     Text(
                         text = "${stringResource(R.string.group_count_members_title)}: ",
@@ -169,31 +175,20 @@ fun StudentGroupDetailsUi(
                         fontWeight = CustomTheme.typography.body.regular.fontWeight,
                         fontSize = CustomTheme.typography.body.regular.fontSize,
                         color = CustomTheme.colors.text.primary,
-                        maxLines = 8,
-                        overflow = TextOverflow.Ellipsis,
                     )
                 }
 
-                Row(
-                    modifier = Modifier
-                        .padding(top = 15.dp)
-                        .padding(horizontal = 20.dp)
-                ) {
-                    Text(
+                Text(
                         text = "${stringResource(R.string.group_description_title)}: ",
                         fontWeight = CustomTheme.typography.body.bold.fontWeight,
                         fontSize = CustomTheme.typography.body.bold.fontSize,
                         color = CustomTheme.colors.text.primary,
+                        modifier = Modifier.padding(top = 20.dp, bottom = 3.dp)
                     )
-                    Text(
-                        text = data.description ?: stringResource(R.string.group_description_null),
-                        fontWeight = CustomTheme.typography.body.regular.fontWeight,
-                        fontSize = CustomTheme.typography.body.regular.fontSize,
-                        color = CustomTheme.colors.text.primary,
-                        maxLines = 8,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
+                FadingEdgeScrollableText(
+                    data.description ?: stringResource(R.string.group_description_null),
+                    horizontalPadding = 0.dp
+                )
             }
         }
     }

@@ -1,6 +1,8 @@
 package ru.itmo.edugoolda.features.lesson.presentation.createLesson
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Clear
@@ -23,6 +26,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -76,14 +81,17 @@ fun CreateLessonUi(
         AppTextField(
             inputControl = component.lessonNameInputControl,
             placeholder = stringResource(id = R.string.lesson_placeholder_lesson_name),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(top = 25.dp, bottom = 20.dp)
+            modifier = Modifier.padding(horizontal = 22.dp).padding(top = 25.dp, bottom = 20.dp),
+            minLines = 1,
+            maxLines = 1
         )
 
         AppTextField(
             inputControl = component.descriptionInputControl,
             placeholder = stringResource(id = R.string.lesson_placeholder_lesson_description),
             modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 20.dp),
-            minLines = 5
+            minLines = 7,
+            maxLines = 7
         )
 
         Text(
@@ -116,7 +124,7 @@ fun CreateLessonUi(
         )
 
         LazyColumn(
-            modifier = Modifier.height(200.dp)
+            modifier = Modifier.padding(bottom = 10.dp).padding(horizontal = 10.dp).weight(1f)
         ) {
             items(groupListState) { item ->
                 GroupItem(
@@ -125,8 +133,6 @@ fun CreateLessonUi(
                 )
             }
         }
-
-        Spacer(modifier = Modifier.weight(1f))
 
         AppButton(
             onClick = { component.onCreateLesson() },
@@ -166,7 +172,10 @@ fun LessonTypeItem(
             selected = isSelected,
             onClick = onClick,
         )
-        Text(text = text)
+        Text(text = text, 
+            modifier = Modifier.clickable {
+                onClick()
+            })
     }
 }
 
@@ -176,7 +185,17 @@ fun GroupItem(
     name: String,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+        .padding(vertical = 5.dp, horizontal = 4.dp)
+        .shadow(
+            elevation = 4.dp,
+            shape = RoundedCornerShape(8.dp),
+            clip = true
+        )
+        .clip(RoundedCornerShape(8.dp))
+        .background(CustomTheme.colors.background.backgroundPrimary)
+    ) {
         Row(
             modifier = Modifier.height(50.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -193,10 +212,12 @@ fun GroupItem(
                 text = name,
                 fontWeight = CustomTheme.typography.body.regular.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+                modifier = Modifier
+                    .padding(end = 30.dp)
+                    .weight(1f)
+                    .basicMarquee()
 
-            Spacer(modifier = Modifier.weight(1f))
+            )
 
             IconButton(
                 onClick = { onGroupDelete() }
@@ -207,13 +228,6 @@ fun GroupItem(
                 )
             }
         }
-        Spacer(
-            modifier = Modifier
-                .padding(start = 40.dp, bottom = 5.dp)
-                .height(1.5.dp)
-                .background(Color.Gray)
-                .fillMaxWidth()
-        )
     }
 }
 

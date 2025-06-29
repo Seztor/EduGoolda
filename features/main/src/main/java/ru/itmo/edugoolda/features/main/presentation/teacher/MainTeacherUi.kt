@@ -26,6 +26,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.bottom_bar.CustomBottomBar
 import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupsUi
 import ru.itmo.edugoolda.features.home.presentation.teacher.HomeTeacherUi
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherUi
 import ru.itmo.edugoolda.features.main.R
 import ru.itmo.edugoolda.features.profile.presentation.viewProfile.ProfileUI
 import ru.itmo.edugoolda.core.R as CoreR
@@ -46,6 +47,7 @@ fun MainTeacherUi(
                     is MainTeacherComponent.Child.Groups -> TeacherGroupsUi(instance.component)
                     is MainTeacherComponent.Child.Home -> HomeTeacherUi(instance.component)
                     is MainTeacherComponent.Child.Profile -> ProfileUI(instance.component)
+                    is MainTeacherComponent.Child.Lessons -> LessonInfoListTeacherUi(instance.component)
                 }
             }
         },

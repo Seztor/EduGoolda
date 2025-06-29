@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.lesson
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -149,10 +150,6 @@ class RealLessonsComponent(
         override fun onReturnBackTeacherLessonDetails() = goBack()
         override fun onTeacherLessonDeleted() = goBack()
         override fun onReturnBackTeacherSolutionDetails() = goBack()
-
-        override fun onEditLessonRequested(lessonId: LessonId) {
-            // TOOD
-        }
 
         override fun onLessonDetailsRequested(lessonId: LessonId) {
             navigation.safePush(

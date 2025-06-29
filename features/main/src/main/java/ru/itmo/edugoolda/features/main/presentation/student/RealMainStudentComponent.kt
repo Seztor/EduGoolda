@@ -19,6 +19,7 @@ import ru.itmo.edugoolda.features.lesson.createLessonInfoListStudentComponent
 import ru.itmo.edugoolda.features.lesson.presentation.studentLessonList.LessonInfoListStudentComponent
 import ru.itmo.edugoolda.features.main.presentation.student.MainStudentComponent.Tab
 import ru.itmo.edugoolda.features.profile.createProfileComponent
+import ru.itmo.edugoolda.features.profile.presentation.viewProfile.ProfileComponent
 
 class RealMainStudentComponent(
     componentContext: ComponentContext,
@@ -53,9 +54,10 @@ class RealMainStudentComponent(
     private inner class ChildCommunication : MainStudentComponent.Communication by communication,
         StudentGroupsComponent.Communication,
         HomeStudentComponent.Communication,
-        LessonInfoListStudentComponent.Communication {
+        LessonInfoListStudentComponent.Communication,
+        ProfileComponent.Communication
+    {
         override fun onAllSolutionsRequested() = onTabClick(Tab.Lessons)
-
     }
 
     private fun createChild(
@@ -87,6 +89,7 @@ class RealMainStudentComponent(
             componentFactory.createProfileComponent(
                 componentContext,
                 null,
+                ChildCommunication()
             )
         )
     }

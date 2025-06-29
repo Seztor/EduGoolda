@@ -1,6 +1,5 @@
 package ru.itmo.edugoolda.features.root.presentation
 
-import android.provider.DocumentsContract.Root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import ru.itmo.edugoolda.core.ComponentFactory
 import ru.itmo.edugoolda.core.createMessageComponent
@@ -31,10 +29,13 @@ import ru.itmo.edugoolda.data.user.api.UserRole
 import ru.itmo.edugoolda.features.auth.presentation.auth.AuthComponent
 import ru.itmo.edugoolda.features.group.createGroupComponent
 import ru.itmo.edugoolda.features.group.presentation.GroupComponent
-import ru.itmo.edugoolda.features.join_requests.createJoinRequestsComponent
-import ru.itmo.edugoolda.features.join_requests.presentation.JoinRequestsComponent
+import ru.itmo.edugoolda.features.join_requests.createJoinRequestsStudentComponent
+import ru.itmo.edugoolda.features.join_requests.createJoinRequestsTeacherComponent
+import ru.itmo.edugoolda.features.join_requests.presentation.student.JoinRequestsStudentComponent
+import ru.itmo.edugoolda.features.join_requests.presentation.teacher.JoinRequestsTeacherComponent
 import ru.itmo.edugoolda.features.lesson.LessonsComponent
 import ru.itmo.edugoolda.features.lesson.createLessonsComponent
+import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponent
 import ru.itmo.edugoolda.features.main.createMainStudentComponent
 import ru.itmo.edugoolda.features.main.createMainTeacherComponent
 import ru.itmo.edugoolda.features.main.presentation.student.MainStudentComponent
@@ -42,7 +43,6 @@ import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherComponent
 import ru.itmo.edugoolda.features.root.createAuthComponent
 import ru.itmo.edugoolda.features.root.createStartComponent
 import ru.itmo.edugoolda.features.root.presentation.start.StartComponent
-import ru.itmo.edugoolda.features.solution.presentation.SolutionListComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
@@ -112,10 +112,17 @@ class RealRootComponent(
             )
         )
 
-        Config.JoinRequests -> RootComponent.Child.JoinRequests(
-            componentFactory.createJoinRequestsComponent(
+        Config.JoinRequestsTeacher -> RootComponent.Child.JoinRequestsTeacher(
+            componentFactory.createJoinRequestsTeacherComponent(
                 componentContext,
                 TeacherCommunicationResolver()
+            )
+        )
+
+        Config.JoinRequestsStudent -> RootComponent.Child.JoinRequestsStudent(
+            componentFactory.createJoinRequestsStudentComponent(
+                componentContext,
+                StudentCommunicationResolver()
             )
         )
 
@@ -157,7 +164,9 @@ class RealRootComponent(
         }
 
         override fun onSolutionDetails(solutionId: SolutionId) {
-
+            navigation.safePush(Config.Lessons(
+                LessonsComponent.InitialConfiguration.TeacherSolutionDetails(solutionId)
+            ))
         }
 
         override fun onReturnBackFromSolutionListRequested() {
@@ -169,17 +178,18 @@ class RealRootComponent(
         }
 
         override fun teacherDetailsRequired() {
-            navigation.safePush(Config.MainTeacher)
+            navigation.replaceCurrent(Config.MainTeacher)
         }
 
         override fun studentDetailsRequired() {
-            navigation.safePush(Config.MainStudent)
+            navigation.replaceCurrent(Config.MainStudent)
         }
     }
 
     private inner class TeacherCommunicationResolver :
         MainTeacherComponent.Communication,
-        JoinRequestsComponent.Communication
+        JoinRequestsTeacherComponent.Communication,
+            LessonInfoListTeacherComponent.Communication
     {
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(
@@ -206,7 +216,7 @@ class RealRootComponent(
         }
 
         override fun onAllJoinRequestsRequested() {
-            navigation.safePush(Config.JoinRequests)
+            navigation.safePush(Config.JoinRequestsTeacher)
         }
 
         override fun createLessonRequested() {
@@ -228,9 +238,33 @@ class RealRootComponent(
         override fun onReturnBackFromJoinRequestsRequested() {
             navigation.pop()
         }
+
+        override fun onLessonDetailsRequested(lessonId: LessonId) {
+            navigation.safePush(
+                Config.Lessons(
+                    LessonsComponent.InitialConfiguration.TeacherLessonDetails(lessonId)
+                )
+            )
+        }
+
+        override fun onLogoutRequested() {
+            navigation.replaceAll(Config.Auth)
+        }
     }
 
-    private inner class StudentCommunicationResolver : MainStudentComponent.Communication {
+    private inner class StudentCommunicationResolver : MainStudentComponent.Communication, JoinRequestsStudentComponent.Communication {
+        override fun onLessonDetailsRequested(lessonId: LessonId) {
+            navigation.safePush(
+                Config.Lessons(
+                    LessonsComponent.InitialConfiguration.StudentLessonDetails(lessonId)
+                )
+            )
+        }
+
+        override fun onLogoutRequested() {
+            navigation.replaceAll(Config.Auth)
+        }
+
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(
                 Config.Group(
@@ -248,15 +282,11 @@ class RealRootComponent(
         }
 
         override fun onAllJoinRequestsRequested() {
-            navigation.safePush(Config.JoinRequests)
+            navigation.safePush(Config.JoinRequestsStudent)
         }
 
-        override fun onEditLessonRequested() {
-            // TODO: in future
-        }
-
-        override fun onLessonDetailsRequested(lessonId: LessonId) {
-
+        override fun onReturnBackFromJoinRequestsRequested() {
+            navigation.pop()
         }
     }
 
@@ -282,7 +312,10 @@ class RealRootComponent(
         ) : Config
 
         @Serializable
-        data object JoinRequests : Config
+        data object JoinRequestsTeacher : Config
+
+        @Serializable
+        data object JoinRequestsStudent : Config
 
         @Serializable
         data object Start : Config

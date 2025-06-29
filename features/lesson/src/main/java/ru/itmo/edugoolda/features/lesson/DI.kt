@@ -48,6 +48,8 @@ fun ComponentFactory.createStudentLessonDetailsComponent(
     )
 }
 
+
+
 fun ComponentFactory.createTeacherSolutionDetailsComponent(
     componentContext: ComponentContext,
     solutionId: SolutionId,
@@ -57,6 +59,7 @@ fun ComponentFactory.createTeacherSolutionDetailsComponent(
         solutionId,
         componentContext,
         communication,
+        get(),
         get(),
         get()
     )
@@ -78,6 +81,7 @@ fun ComponentFactory.createTeacherLessonDetailsComponent(
         lessonId,
         componentContext,
         communication,
+        get(),
         get(),
         get()
     )
