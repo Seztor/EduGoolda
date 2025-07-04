@@ -164,9 +164,11 @@ class RealRootComponent(
         }
 
         override fun onSolutionDetails(solutionId: SolutionId) {
-            navigation.safePush(Config.Lessons(
-                LessonsComponent.InitialConfiguration.TeacherSolutionDetails(solutionId)
-            ))
+            navigation.safePush(
+                Config.Lessons(
+                    LessonsComponent.InitialConfiguration.TeacherSolutionDetails(solutionId)
+                )
+            )
         }
 
         override fun onReturnBackFromSolutionListRequested() {
@@ -189,8 +191,7 @@ class RealRootComponent(
     private inner class TeacherCommunicationResolver :
         MainTeacherComponent.Communication,
         JoinRequestsTeacherComponent.Communication,
-            LessonInfoListTeacherComponent.Communication
-    {
+        LessonInfoListTeacherComponent.Communication {
         override fun onGroupDetailsRequested(id: GroupId) {
             navigation.safePush(
                 Config.Group(
@@ -252,7 +253,8 @@ class RealRootComponent(
         }
     }
 
-    private inner class StudentCommunicationResolver : MainStudentComponent.Communication, JoinRequestsStudentComponent.Communication {
+    private inner class StudentCommunicationResolver : MainStudentComponent.Communication,
+        JoinRequestsStudentComponent.Communication {
         override fun onLessonDetailsRequested(lessonId: LessonId) {
             navigation.safePush(
                 Config.Lessons(

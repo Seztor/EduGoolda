@@ -48,8 +48,6 @@ fun ComponentFactory.createStudentLessonDetailsComponent(
     )
 }
 
-
-
 fun ComponentFactory.createTeacherSolutionDetailsComponent(
     componentContext: ComponentContext,
     solutionId: SolutionId,

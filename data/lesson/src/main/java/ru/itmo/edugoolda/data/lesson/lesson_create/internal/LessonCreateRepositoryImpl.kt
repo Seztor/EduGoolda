@@ -18,7 +18,7 @@ internal class LessonCreateRepositoryImpl(
         isEstimatable: Boolean,
         deadline: Long?,
         opensAt: Long?,
-    ) : LessonFullDetails {
+    ): LessonFullDetails {
         val actionRequest = CreateLessonRequest(
             name = name,
             description = description,

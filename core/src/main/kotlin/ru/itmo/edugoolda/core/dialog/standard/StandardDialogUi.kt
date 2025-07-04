@@ -73,18 +73,18 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
 
             confirmButton = {
                 DialogButton(
-                    text = data.confirmButton.text.localized(),
                     onClick = data.confirmButton.action,
-                    onDismiss = dialogControl::dismiss
+                    onDismiss = dialogControl::dismiss,
+                    text = data.confirmButton.text.localized()
                 )
             },
 
             dismissButton = data.dismissButton?.let { dismissButton ->
                 {
                     DialogButton(
-                        text = dismissButton.text.localized(),
                         onClick = dismissButton.action,
-                        onDismiss = dialogControl::dismiss
+                        onDismiss = dialogControl::dismiss,
+                        text = dismissButton.text.localized()
                     )
                 }
             }
@@ -94,11 +94,11 @@ fun StandardDialog(dialogControl: StandardDialogControl) {
 
 @Composable
 fun DialogButton(
-    text: String,
     onClick: () -> Unit,
     onDismiss: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    modifier: Modifier = Modifier
 ) {
     Text(
         text = text,

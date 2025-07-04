@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -29,7 +28,7 @@ import ru.itmo.edugoolda.features.lesson.R
 @Composable
 fun LessonInfoListTeacherUi(
     component: LessonInfoListTeacherComponent,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val state by component.lessonInfoState.collectAsState()
     PullRefreshLceWidget(
@@ -47,7 +46,9 @@ fun LessonInfoListTeacherUi(
         if (data.lessonInfoList.isNotEmpty()) {
             LazyColumn(
                 state = lazyListState,
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).fillMaxSize()
+                modifier = Modifier
+                    .padding(horizontal = 10.dp, vertical = 8.dp)
+                    .fillMaxSize()
             ) {
                 items(data.lessonInfoList) {
                     LessonInfoTeacherListItem(
@@ -62,8 +63,7 @@ fun LessonInfoListTeacherUi(
                     }
                 }
             }
-        }
-        else {
+        } else {
             LazyColumn(
                 state = lazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,

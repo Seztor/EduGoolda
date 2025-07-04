@@ -1,12 +1,10 @@
 package ru.itmo.edugoolda.features.auth.presentation.register
 
 import com.arkivanov.decompose.ComponentContext
-import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
-import ru.itmo.edugoolda.core.utils.Resource
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.auth.api.AuthRepository

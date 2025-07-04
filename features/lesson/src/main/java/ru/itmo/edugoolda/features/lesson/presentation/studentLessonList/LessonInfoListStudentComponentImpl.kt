@@ -1,12 +1,10 @@
 package ru.itmo.edugoolda.features.lesson.presentation.studentLessonList
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
-
 
 class LessonInfoListStudentComponentImpl(
     componentContext: ComponentContext,

@@ -11,11 +11,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -42,12 +40,12 @@ import ru.mobileup.kmm_form_validation.control.InputControl
 
 @Composable
 fun MessageTextField(
+    onSendClick: () -> Unit,
     inputControl: InputControl,
+    modifier: Modifier = Modifier,
     placeholder: String? = null,
     textStyle: TextStyle = AppTextFieldDefaults.textStyle,
-    onSendClick: () -> Unit,
     onFocusChange: (Boolean) -> Unit = {},
-    modifier: Modifier = Modifier,
 ) {
     val text by inputControl.text.collectAsState()
 
@@ -63,7 +61,6 @@ fun MessageTextField(
             TextFieldValue(currentValue, currentSelection, currentComposition)
         }
     }
-
 
     val focusRequester = remember { FocusRequester() }
 
@@ -126,17 +123,16 @@ fun MessageTextField(
                     imageVector = Icons.AutoMirrored.Filled.Send,
                     contentDescription = "Отправить",
                     tint =
-                    if (currentTextFieldValue.text.isNotEmpty())
+                    if (currentTextFieldValue.text.isNotEmpty()) {
                         CustomTheme.colors.content.contentActive
-                    else
+                    } else {
                         CustomTheme.colors.icon.secondary
+                    }
                 )
             }
         }
     }
-
 }
-
 
 private val TextRangeSaver = listSaver(
     save = { listOf(it.start, it.end) },

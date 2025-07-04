@@ -1,8 +1,6 @@
 package ru.itmo.edugoolda.features.profile.presentation.viewProfile
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
-import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import me.aartikov.replica.algebra.normal.withKey
@@ -10,9 +8,7 @@ import ru.itmo.edugoolda.core.dialog.standard.DialogButton
 import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
 import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
-import ru.itmo.edugoolda.core.error_handling.errorMessage
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
-import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
@@ -31,7 +27,6 @@ class RealProfileComponent(
 ) : ProfileComponent, ComponentContext by componentContext {
     override val isLoggingOutProgress = MutableStateFlow(false)
     override val dialogLogout = standardDialogControl("logout")
-
 
     private val profileReplica = when (userId) {
         null -> userRepository.currentProfileReplica

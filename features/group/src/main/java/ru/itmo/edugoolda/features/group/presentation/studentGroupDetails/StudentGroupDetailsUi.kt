@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.Icon
@@ -45,7 +44,6 @@ fun StudentGroupDetailsUi(
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
     StandardDialog(component.dialogQuit)
-
 
     Column(modifier = modifier.navigationBarsPadding()) {
         Row(
@@ -90,7 +88,6 @@ fun StudentGroupDetailsUi(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Text(
                         text = data.name,
                         fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
@@ -103,7 +100,6 @@ fun StudentGroupDetailsUi(
                         maxLines = 1,
                         softWrap = false
                     )
-
 
                     IconButton(
                         onClick = { component.onDialogQuitRequest() },

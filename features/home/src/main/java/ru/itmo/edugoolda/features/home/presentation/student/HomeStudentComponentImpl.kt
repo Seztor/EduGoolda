@@ -12,7 +12,6 @@ import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
 
 class HomeStudentComponentImpl(

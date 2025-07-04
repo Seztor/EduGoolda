@@ -3,7 +3,6 @@ package ru.itmo.edugoolda.features.auth.presentation.login
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -19,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
@@ -37,9 +35,9 @@ fun LoginUi(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.systemBarsPadding()
     ) {
-        
+
         Spacer(Modifier.weight(0.55f))
-        
+
         Icon(
             painter = painterResource(R.drawable.app_icon),
             modifier = Modifier

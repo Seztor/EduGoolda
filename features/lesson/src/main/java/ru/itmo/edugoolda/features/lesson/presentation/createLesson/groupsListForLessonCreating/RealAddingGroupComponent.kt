@@ -1,15 +1,11 @@
 package ru.itmo.edugoolda.features.lesson.presentation.createLesson.groupsListForLessonCreating
 
 import com.arkivanov.decompose.ComponentContext
-import kotlinx.coroutines.flow.MutableStateFlow
 import me.aartikov.replica.algebra.paged.withKey
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
-import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
-import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
-import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.api.GroupListRepository
 import ru.mobileup.kmm_form_validation.control.InputControl
 

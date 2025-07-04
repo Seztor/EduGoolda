@@ -16,7 +16,6 @@ import ru.itmo.edugoolda.features.group.createTeacherGroupsComponent
 import ru.itmo.edugoolda.features.group.presentation.teacherGroups.TeacherGroupsComponent
 import ru.itmo.edugoolda.features.home.createHomeTeacherComponent
 import ru.itmo.edugoolda.features.home.presentation.teacher.HomeTeacherComponent
-import ru.itmo.edugoolda.features.lesson.createLessonsComponent
 import ru.itmo.edugoolda.features.lesson.createTeacherLessonListInfoComponent
 import ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList.LessonInfoListTeacherComponent
 import ru.itmo.edugoolda.features.main.presentation.teacher.MainTeacherComponent.Tab
@@ -66,7 +65,6 @@ class RealMainTeacherComponent(
         simpleDialogControl.dismiss()
         communication.createLessonRequested()
     }
-
 
     override fun onCreateGroupClick() {
         simpleDialogControl.dismiss()

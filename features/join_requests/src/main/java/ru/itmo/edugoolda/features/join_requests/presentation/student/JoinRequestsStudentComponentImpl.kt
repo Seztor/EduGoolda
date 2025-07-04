@@ -5,7 +5,6 @@ import ru.itmo.edugoolda.core.error_handling.ErrorHandler
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.componentScope
 import ru.itmo.edugoolda.core.utils.observe
-import ru.itmo.edugoolda.data.join_requests.api.JoinRequest
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestAction
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestId
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequestRepository

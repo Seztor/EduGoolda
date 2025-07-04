@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -32,8 +31,8 @@ import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
-import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestTeacherListItem
+import ru.itmo.edugoolda.data.join_requests.api.JoinRequestList
 import ru.itmo.edugoolda.features.join_requests.R
 
 @Composable

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -37,7 +36,6 @@ import ru.itmo.edugoolda.core.widget.join_requests.JoinRequestTeacherListItem
 import ru.itmo.edugoolda.core.widget.solutions.SolutionListItem
 import ru.itmo.edugoolda.data.home.api.HomeTeacherViewData
 import ru.itmo.edugoolda.features.home.R as homeR
-
 
 @Composable
 fun HomeTeacherUi(
@@ -151,7 +149,7 @@ fun HomeTeacherUi(
                 )
             }
 
-             //Request list
+            // Request list
             LazyColumn(
                 modifier = Modifier.heightIn(max = 300.dp)
             ) {

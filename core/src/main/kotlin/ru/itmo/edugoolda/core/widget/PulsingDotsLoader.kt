@@ -23,15 +23,17 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
 fun PulsingDotsLoader(
+    modifier: Modifier = Modifier,
     color: Color = CustomTheme.colors.content.contentActive,
-    size: Dp = 16.dp
+    size: Dp = 16.dp,
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val delays = listOf(0, 200, 400)
 
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
     ) {
         delays.forEach { delay ->
             val scale by infiniteTransition.animateFloat(
