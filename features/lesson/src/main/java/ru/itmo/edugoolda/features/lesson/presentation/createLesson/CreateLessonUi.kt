@@ -4,16 +4,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Clear
@@ -24,14 +34,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.theme.AppTheme
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
@@ -50,17 +66,22 @@ fun CreateLessonUi(
     val selectedType by component.selectedLessonType.collectAsState()
     val isCreateLessonButtonEnabled by component.isCreateLessonButtonEnabled.collectAsState()
 
-    Column(modifier = modifier) {
+    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+    Column(modifier = modifier
+        .navigationBarsPadding()
+        .fillMaxSize()
+    ) {
         Row(
             modifier = Modifier
-                .height(70.dp)
+                .height(50.dp + statusBarHeight)
                 .background(CustomTheme.colors.content.contentActive)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
                 onClick = { component.onReturnBackClick() },
-                Modifier.padding(top = 15.dp)
+                Modifier.padding(top = 3.dp + statusBarHeight, bottom = 6.dp, start = 5.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_left_white),
@@ -71,7 +92,11 @@ fun CreateLessonUi(
 
             Text(
                 text = stringResource(R.string.lesson_create_title),
-                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
+                modifier = Modifier.padding(
+                    start = 30.dp,
+                    top = 3.dp + statusBarHeight,
+                    bottom = 6.dp
+                ),
                 fontWeight = CustomTheme.typography.title.bold.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 color = CustomTheme.colors.text.invert
@@ -81,7 +106,9 @@ fun CreateLessonUi(
         AppTextField(
             inputControl = component.lessonNameInputControl,
             placeholder = stringResource(id = R.string.lesson_placeholder_lesson_name),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(top = 25.dp, bottom = 20.dp),
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(top = 25.dp, bottom = 16.dp),
             minLines = 1,
             maxLines = 1
         )
@@ -89,20 +116,24 @@ fun CreateLessonUi(
         AppTextField(
             inputControl = component.descriptionInputControl,
             placeholder = stringResource(id = R.string.lesson_placeholder_lesson_description),
-            modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 20.dp),
-            minLines = 7,
-            maxLines = 7
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 15.dp),
+            minLines = 5,
+            maxLines = 5
         )
 
         Text(
             text = stringResource(id = R.string.lesson_create_type_title),
             fontWeight = CustomTheme.typography.title.boldSmallerSize.fontWeight,
             fontSize = CustomTheme.typography.title.boldSmallerSize.fontSize,
-            modifier = Modifier.align(Alignment.Start).padding(start = 21.dp)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 21.dp)
         )
 
         Column(
-            modifier = Modifier.padding(start = 8.dp, top = 8.dp),
+            modifier = Modifier.padding(start = 8.dp, top = 6.dp),
         ) {
             LessonType.entries.forEach {
                 LessonTypeItem(
@@ -119,12 +150,17 @@ fun CreateLessonUi(
             buttonType = ButtonType.Primary,
             modifier = Modifier
                 .padding(bottom = 10.dp, top = 10.dp)
-                .width(140.dp)
-                .align(Alignment.CenterHorizontally)
+                .padding(horizontal = 105.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+            contentPadding = PaddingValues(vertical = 12.dp, horizontal = 18.dp)
         )
 
         LazyColumn(
-            modifier = Modifier.padding(bottom = 10.dp).padding(horizontal = 10.dp).weight(1f)
+            modifier = Modifier
+                .padding(bottom = 20.dp)
+                .padding(horizontal = 10.dp)
+                .weight(1f)
         ) {
             items(groupListState) { item ->
                 GroupItem(
@@ -139,14 +175,13 @@ fun CreateLessonUi(
             text = stringResource(R.string.lesson_create_button),
             buttonType = ButtonType.Primary,
             modifier = Modifier
-                .padding(bottom = 30.dp, top = 20.dp)
-                .width(180.dp)
+                .padding(bottom = 15.dp)
+                .padding(horizontal = 100.dp)
+                .fillMaxWidth()
                 .align(Alignment.CenterHorizontally),
-            isEnabled = isCreateLessonButtonEnabled
+            isEnabled = isCreateLessonButtonEnabled,
+            contentPadding = PaddingValues(vertical = 14.dp, horizontal = 18.dp)
         )
-
-
-
     }
 }
 
@@ -166,13 +201,15 @@ fun LessonTypeItem(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().height(35.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(35.dp),
     ) {
         RadioButton(
             selected = isSelected,
             onClick = onClick,
         )
-        Text(text = text, 
+        Text(text = text,
             modifier = Modifier.clickable {
                 onClick()
             })
@@ -187,14 +224,14 @@ fun GroupItem(
 ) {
     Column(
         modifier = modifier
-        .padding(vertical = 5.dp, horizontal = 4.dp)
-        .shadow(
-            elevation = 4.dp,
-            shape = RoundedCornerShape(8.dp),
-            clip = true
-        )
-        .clip(RoundedCornerShape(8.dp))
-        .background(CustomTheme.colors.background.backgroundPrimary)
+            .padding(vertical = 5.dp, horizontal = 4.dp)
+            .shadow(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(8.dp),
+                clip = true
+            )
+            .clip(RoundedCornerShape(8.dp))
+            .background(CustomTheme.colors.background.backgroundPrimary)
     ) {
         Row(
             modifier = Modifier.height(50.dp),

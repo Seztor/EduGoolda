@@ -77,7 +77,7 @@ fun JoinRequestTeacherListItem(
                     text = groupName,
                     style = CustomTheme.typography.body.regular15,
                     modifier = Modifier
-                        .padding(top = 7.dp, start = 5.dp)
+                        .padding(top = 7.dp, start = 6.dp)
                         .basicMarquee(),
                     maxLines = 1,
                     softWrap = false
@@ -86,7 +86,7 @@ fun JoinRequestTeacherListItem(
                     text = createAt,
                     style = CustomTheme.typography.caption.regular,
                     modifier = Modifier
-                        .padding(top = 5.dp, start = 5.dp)
+                        .padding(top = 5.dp, start = 6.dp)
                 )
             }
             Row {

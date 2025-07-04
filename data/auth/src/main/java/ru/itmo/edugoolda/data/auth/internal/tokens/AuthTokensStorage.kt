@@ -2,6 +2,7 @@ package ru.itmo.edugoolda.data.auth.internal.tokens
 
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.runBlocking
 import ru.itmo.edugoolda.core.settings.SettingsFactory
 import ru.itmo.edugoolda.data.auth.internal.domain.AuthTokens

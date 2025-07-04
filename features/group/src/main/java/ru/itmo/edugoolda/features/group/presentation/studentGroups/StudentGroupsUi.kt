@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -56,13 +55,14 @@ fun StudentGroupsUi(
     DialogAddGroup(component.dialogAddGroup, component.groupEnteringCodeInputControl)
 
     val state by component.studentGroupState.collectAsState()
-    Column(modifier = modifier) {
+    
+    Column(modifier = modifier.statusBarsPadding()) {
         AppTextField(
             inputControl = component.groupSearchInputControl,
             placeholder = stringResource(R.string.search_students_group),
             modifier = Modifier
                 .padding(horizontal = 20.dp)
-                .padding(top = 35.dp, bottom = 5.dp),
+                .padding(top = 20.dp, bottom = 5.dp),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -137,12 +137,13 @@ fun StudentGroupsUi(
             onClick = { component.onDialogAddGroup() },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .size(80.dp)
+                .padding(vertical = 5.dp)
+                .size(60.dp)
         ) {
             Icon(
-                painter = painterResource(R.drawable.add_group),
+                painter = painterResource(R.drawable.add_group_button),
                 contentDescription = "Add Group Icon",
-                modifier = Modifier.size(80.dp),
+                modifier = Modifier.size(70.dp),
                 tint = Color.Unspecified
 
             )

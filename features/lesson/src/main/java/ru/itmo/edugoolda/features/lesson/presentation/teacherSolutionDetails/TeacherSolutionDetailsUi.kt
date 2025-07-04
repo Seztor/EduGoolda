@@ -5,10 +5,15 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -49,17 +54,19 @@ fun TeacherSolutionDetailsUi(
 ) {
     val solutionTeacherDetailsState by component.solutionTeacherDetailsState.collectAsState()
 
-    Column(modifier = modifier) {
+    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+    Column(modifier = modifier.navigationBarsPadding()) {
         Row(
             modifier = Modifier
-                .height(70.dp)
+                .height(50.dp + statusBarHeight)
                 .background(CustomTheme.colors.content.contentActive)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
                 onClick = { component.onReturnBackClick() },
-                Modifier.padding(top = 15.dp)
+                Modifier.padding(top = 3.dp + statusBarHeight, bottom = 6.dp, start = 5.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_left_white),
@@ -70,7 +77,7 @@ fun TeacherSolutionDetailsUi(
 
             Text(
                 text = stringResource(R.string.teacher_solution_details_title),
-                modifier = Modifier.padding(start = 30.dp, top = 15.dp),
+                modifier = Modifier.padding(start = 30.dp, top = 3.dp + statusBarHeight, bottom = 6.dp),
                 fontWeight = CustomTheme.typography.title.bold.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 color = CustomTheme.colors.text.invert
@@ -158,10 +165,10 @@ fun TeacherSolutionDetailsUi(
         ) { data: SolutionDetails, _: Boolean ->
             LazyColumn(
                 modifier = Modifier
-                    .padding(top = 10.dp, bottom = 20.dp)
+                    .padding(top = 10.dp, bottom = 10.dp)
                     .fillMaxSize()
             ) {
-                items(data.messages) { item ->
+                items(data.messages.reversed()) { item ->
                     MessageItem(
                         item.author.name,
                         item.message,

@@ -1,9 +1,10 @@
 package ru.itmo.edugoolda.features.lesson.presentation.studentLessonList
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -31,11 +32,12 @@ fun LessonInfoListStudentUi(
     modifier: Modifier = Modifier,
 ) {
     val state by component.lessonInfoState.collectAsState()
+    
     PullRefreshLceWidget(
         state = state,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.statusBarsPadding().fillMaxSize()
     ) { data: LessonInfoList, _: Boolean ->
         val lazyListState = rememberLazyListState()
         lazyListState.TriggerLoadNext(

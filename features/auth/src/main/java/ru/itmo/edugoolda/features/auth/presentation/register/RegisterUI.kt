@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -37,58 +38,57 @@ fun RegisterUi(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier.systemBarsPadding()
     ) {
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         IconButton(
             onClick = { component.onBackButtonClick() },
             enabled = !isRegisterProgress,
-            modifier = Modifier.align(Alignment.Start)
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(top = 7.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "ArrowBack"
             )
         }
-
-        Spacer(modifier = Modifier.height(37.dp))
+        Spacer(Modifier.weight(0.15f))
 
         Text(
             text = stringResource(id = R.string.register_title),
             fontWeight = CustomTheme.typography.title.bold.fontWeight,
-            fontSize = CustomTheme.typography.title.bold.fontSize
+            fontSize = CustomTheme.typography.title.bold.fontSize,
         )
 
-        Spacer(modifier = Modifier.height(75.dp))
+        Spacer(Modifier.weight(0.2f))
 
         AppTextField(
             placeholder = stringResource(id = R.string.register_email_header_hint),
             inputControl = component.emailInputControl,
-            modifier = Modifier.padding(horizontal = 21.dp),
+            modifier = Modifier
+                .padding(horizontal = 21.dp)
+                .padding(bottom = 12.dp),
             onTextChanging = {
                 component.emailInputControl.error.value = null
             }
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
-
         AppTextField(
             placeholder = stringResource(id = R.string.register_password_hint),
             inputControl = component.passwordInputControl,
-            modifier = Modifier.padding(horizontal = 21.dp)
+            modifier = Modifier
+                .padding(horizontal = 21.dp)
+                .padding(bottom = 12.dp)
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             placeholder = stringResource(id = R.string.register_username_header_hint),
             inputControl = component.userNameInputControl,
-            modifier = Modifier.padding(horizontal = 21.dp)
+            modifier = Modifier
+                .padding(horizontal = 21.dp)
+                .padding(bottom = 19.dp)
         )
-
-        Spacer(modifier = Modifier.height(19.dp))
 
         Text(
             text = stringResource(id = R.string.register_title_role),
@@ -111,7 +111,7 @@ fun RegisterUi(
             }
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.65f))
 
         AppButton(
             text = stringResource(id = R.string.register_button_register),
@@ -121,7 +121,7 @@ fun RegisterUi(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 22.dp)
-                .padding(bottom = 60.dp)
+                .padding(bottom = 30.dp)
         )
     }
 }
