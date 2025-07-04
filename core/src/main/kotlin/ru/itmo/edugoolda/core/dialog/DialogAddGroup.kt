@@ -73,9 +73,9 @@ fun DialogAddGroup(
 
             confirmButton = {
                 DialogButton(
-                    text = data.confirmButton.text.localized(),
                     onClick = data.confirmButton.action,
                     onDismiss = {},
+                    text = data.confirmButton.text.localized(),
                     isEnabled = codeText.isNotBlank(),
                 )
             },
@@ -83,9 +83,9 @@ fun DialogAddGroup(
             dismissButton = data.dismissButton?.let { dismissButton ->
                 {
                     DialogButton(
-                        text = dismissButton.text.localized(),
                         onClick = dismissButton.action,
-                        onDismiss = dialogControl::dismiss
+                        onDismiss = dialogControl::dismiss,
+                        text = dismissButton.text.localized()
                     )
                 }
             }

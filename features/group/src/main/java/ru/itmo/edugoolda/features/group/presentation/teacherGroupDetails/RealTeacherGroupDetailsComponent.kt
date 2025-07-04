@@ -15,7 +15,6 @@ import ru.itmo.edugoolda.core.message.data.MessageService
 import ru.itmo.edugoolda.core.message.domain.Message
 import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
-import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfoRepository
@@ -53,7 +52,6 @@ class RealTeacherGroupDetailsComponent(
     override val isDeletingGroupProgress = MutableStateFlow(false)
     override val dialogDeleteGroup = standardDialogControl("delete group")
     override val dialogKickMember = standardDialogControl("kick member")
-
 
     override fun onRefresh() {
         groupOfStudentsReplica.refresh()
@@ -106,8 +104,6 @@ class RealTeacherGroupDetailsComponent(
             }
         }
     }
-
-
 
     override fun onDialogDeleteGroup() {
         val data = groupInfoState.value.data ?: return

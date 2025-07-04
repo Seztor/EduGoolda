@@ -26,8 +26,8 @@ fun <T : Any> PullRefreshLceWidget(
     state: AbstractLoadableState<T>,
     onRefresh: () -> Unit,
     onRetryClick: () -> Unit,
-    isShowCircularProgressIndicator: Boolean = true,
     modifier: Modifier = Modifier,
+    isShowCircularProgressIndicator: Boolean = true,
     content: @Composable (data: T, refreshing: Boolean) -> Unit
 ) {
     LceWidget(

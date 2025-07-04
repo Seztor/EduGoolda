@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -132,7 +131,6 @@ fun StudentLessonDetailsUi(
                         .padding(top = 15.dp, bottom = 4.dp)
                 )
 
-
                 FadingEdgeScrollableText(
                     data.description
                         ?: stringResource(R.string.lesson_description_null),
@@ -141,12 +139,12 @@ fun StudentLessonDetailsUi(
 
                 if (data.isEstimatable && data.status == LessonStatus.Pending) {
                     MessageTextField(
-                        inputControl = component.replyInputControl,
-                        placeholder = "${stringResource(id = R.string.lesson_placeholder_reply)}...",
                         onSendClick = { component.onSendCommentClick() },
+                        inputControl = component.replyInputControl,
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
-                            .padding(top = 15.dp, bottom = 5.dp)
+                            .padding(top = 15.dp, bottom = 5.dp),
+                        placeholder = "${stringResource(id = R.string.lesson_placeholder_reply)}..."
                     )
                 }
             }

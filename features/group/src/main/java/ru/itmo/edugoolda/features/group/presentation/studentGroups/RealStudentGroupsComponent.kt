@@ -1,25 +1,17 @@
 package ru.itmo.edugoolda.features.group.presentation.studentGroups
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
-import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import me.aartikov.replica.algebra.paged.withKey
 import ru.itmo.edugoolda.core.dialog.standard.DialogButton
-import ru.itmo.edugoolda.core.dialog.standard.StandardDialogControl
 import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
 import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
-import ru.itmo.edugoolda.core.error_handling.ApplicationException
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
-import ru.itmo.edugoolda.core.error_handling.ServerException
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.message.data.MessageService
 import ru.itmo.edugoolda.core.message.domain.Message
-import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
-import ru.itmo.edugoolda.core.utils.computed
 import ru.itmo.edugoolda.core.utils.observe
 import ru.itmo.edugoolda.core.utils.withProgress
 import ru.itmo.edugoolda.data.group.group_invitation_data.api.GroupInvitationCode

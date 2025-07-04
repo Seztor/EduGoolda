@@ -1,13 +1,11 @@
 package ru.itmo.edugoolda.features.lesson
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.replaceCurrent
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -38,7 +36,7 @@ class RealLessonsComponent(
     initialConfiguration: InitialConfiguration,
     private val communication: LessonsComponent.Communication,
     private val componentFactory: ComponentFactory,
-    private val userInfoStore: UserInfoStore
+    private val userInfoStore: UserInfoStore,
 ) : ComponentContext by componentContext, LessonsComponent {
 
     private val navigation = StackNavigation<Config>()
@@ -73,7 +71,7 @@ class RealLessonsComponent(
 
     private fun createChild(
         config: Config,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ) = when (config) {
         is Config.StudentLessonDetails -> LessonsComponent.Child.StudentLessonDetails(
             componentFactory.createStudentLessonDetailsComponent(
@@ -143,8 +141,7 @@ class RealLessonsComponent(
         SolutionListComponent.Communication,
         CreateLessonComponent.Communication,
         TeacherSolutionDetailsComponent.Communication,
-        AddingGroupComponent.Communication
-    {
+        AddingGroupComponent.Communication {
 
         override fun onReturnBackStudentLessonDetails() = goBack()
         override fun onReturnBackTeacherLessonDetails() = goBack()

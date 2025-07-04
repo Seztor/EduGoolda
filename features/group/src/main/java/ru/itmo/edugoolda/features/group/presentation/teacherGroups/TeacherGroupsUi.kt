@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -82,7 +81,9 @@ fun TeacherGroupsUi(
             if (data.groups.isNotEmpty()) {
                 LazyColumn(
                     state = lazyListState,
-                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).fillMaxSize()
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp, vertical = 8.dp)
+                        .fillMaxSize()
                 ) {
                     items(data.groups) { item ->
                         TeacherGroupItem(
@@ -99,8 +100,7 @@ fun TeacherGroupsUi(
                         )
                     }
                 }
-            }
-            else {
+            } else {
                 LazyColumn(
                     state = lazyListState,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -205,7 +205,7 @@ fun TeacherGroupItem(
 private fun PreviewGroupItem() {
     AppTheme {
         TeacherGroupItem(
-            {}, {},"Группа 1 34234324 ", "Math 134324324234324", true
+            {}, {}, "Группа 1 34234324 ", "Math 134324324234324", true
         )
     }
 }

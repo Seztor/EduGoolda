@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -31,13 +30,16 @@ fun LessonInfoListStudentUi(
     component: LessonInfoListStudentComponent,
     modifier: Modifier = Modifier,
 ) {
+
     val state by component.lessonInfoState.collectAsState()
-    
+
     PullRefreshLceWidget(
         state = state,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick,
-        modifier = modifier.statusBarsPadding().fillMaxSize()
+        modifier = modifier
+            .statusBarsPadding()
+            .fillMaxSize()
     ) { data: LessonInfoList, _: Boolean ->
         val lazyListState = rememberLazyListState()
         lazyListState.TriggerLoadNext(
@@ -48,7 +50,9 @@ fun LessonInfoListStudentUi(
         if (data.lessonInfoList.isNotEmpty()) {
             LazyColumn(
                 state = lazyListState,
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).fillMaxSize()
+                modifier = Modifier
+                    .padding(horizontal = 10.dp, vertical = 8.dp)
+                    .fillMaxSize()
             ) {
                 items(data.lessonInfoList) {
                     LessonInfoStudentListItem(

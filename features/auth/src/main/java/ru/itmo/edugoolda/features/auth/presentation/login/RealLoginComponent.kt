@@ -1,12 +1,9 @@
 package ru.itmo.edugoolda.features.auth.presentation.login
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
-import ru.itmo.edugoolda.core.error_handling.ServerException
-import ru.itmo.edugoolda.core.error_handling.ServerUnavailableException
 import ru.itmo.edugoolda.core.error_handling.UnauthorizedException
 import ru.itmo.edugoolda.core.error_handling.errorMessage
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
@@ -25,7 +22,7 @@ class RealLoginComponent(
     private val communication: LoginComponent.Communication,
     private val errorHandler: ErrorHandler,
     private val authRepository: AuthRepository,
-    private val messageService: MessageService
+    private val messageService: MessageService,
 ) : LoginComponent, ComponentContext by componentContext {
     override val emailInputControl = InputControl(componentScope)
     override val passwordInputControl = InputControl(componentScope)
@@ -34,12 +31,13 @@ class RealLoginComponent(
     override fun onLoginClick() {
         if (isLoginProgress.value) return
 
-        componentScope.safeLaunch(errorHandler, onErrorHandled = {error ->
-            when (error) {
-                is UnauthorizedException -> showMessageInvalidEmailOrPassword()
-                else -> showMessageOtherError(error)
-            }
-        },
+        componentScope.safeLaunch(
+            errorHandler, onErrorHandled = { error ->
+                when (error) {
+                    is UnauthorizedException -> showMessageInvalidEmailOrPassword()
+                    else -> showMessageOtherError(error)
+                }
+            },
             showError = false
         ) {
             withProgress(isLoginProgress) {

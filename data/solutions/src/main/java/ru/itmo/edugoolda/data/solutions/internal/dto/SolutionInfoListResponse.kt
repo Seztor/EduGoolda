@@ -42,7 +42,6 @@ fun LocalDateTime.defaultFormat() = toJavaLocalDateTime().format(
     DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy")
 )
 
-
 fun SolutionInfoDTO.toDomain(): SolutionInfo = SolutionInfo(
     id = SolutionId(id),
     sentAt = sentAt.toCurrentLocalDateTime().defaultFormat(),

@@ -2,17 +2,15 @@ package ru.itmo.edugoolda.data.lesson.lesson_info.internal
 
 import me.aartikov.replica.algebra.paged.map
 import me.aartikov.replica.client.ReplicaClient
+import me.aartikov.replica.paged.PagedData
 import me.aartikov.replica.paged.PagedFetcher
 import me.aartikov.replica.paged.PagedReplicaSettings
 import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
-import me.aartikov.replica.paged.PagedData
-import me.aartikov.replica.paged.PagedReplica
 import ru.itmo.edugoolda.data.lesson.lesson_details.api.LessonId
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
 import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoRepository
 import ru.itmo.edugoolda.data.lesson.lesson_info.internal.dto.toDomain
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfo
-import ru.itmo.edugoolda.data.solutions.api.SolutionRepository
 import ru.itmo.edugoolda.data.solutions.internal.SolutionRepositoryImpl
 import kotlin.time.Duration.Companion.minutes
 

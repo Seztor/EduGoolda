@@ -2,7 +2,6 @@ package ru.itmo.edugoolda.data.auth.internal.tokens
 
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.runBlocking
 import ru.itmo.edugoolda.core.settings.SettingsFactory
 import ru.itmo.edugoolda.data.auth.internal.domain.AuthTokens
@@ -24,7 +23,7 @@ internal interface AuthTokensStorage {
 
         private val storage = settingsFactory.createEncryptedSettings(STORAGE_NAME)
 
-        override suspend fun clear()  {
+        override suspend fun clear() {
             storage.clear()
             tokens.value = null
         }
@@ -50,6 +49,5 @@ internal interface AuthTokensStorage {
                 }
             }
         )
-
     }
 }

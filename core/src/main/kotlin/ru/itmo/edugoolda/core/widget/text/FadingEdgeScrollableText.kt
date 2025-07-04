@@ -2,8 +2,6 @@ package ru.itmo.edugoolda.core.widget.text
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -25,9 +23,13 @@ import androidx.compose.ui.unit.dp
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 
 @Composable
-fun FadingEdgeScrollableText(text: String, maxHeight: Dp = 200.dp, horizontalPadding: Dp = 16.dp) {
+fun FadingEdgeScrollableText(
+    text: String,
+    modifier: Modifier = Modifier,
+    maxHeight: Dp = 200.dp,
+    horizontalPadding: Dp = 16.dp,
+) {
     val scrollState = rememberScrollState()
-
 
     val showTopFade by remember {
         derivedStateOf { scrollState.value > 0 }
@@ -37,7 +39,7 @@ fun FadingEdgeScrollableText(text: String, maxHeight: Dp = 200.dp, horizontalPad
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .heightIn(max = maxHeight)
             .fillMaxWidth()
     ) {

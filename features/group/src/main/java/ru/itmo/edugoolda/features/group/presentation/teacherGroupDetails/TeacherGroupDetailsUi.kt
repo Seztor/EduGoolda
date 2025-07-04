@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -107,7 +106,11 @@ fun TeacherGroupDetailsUi(
 
             Text(
                 text = stringResource(R.string.group_info_title),
-                modifier = Modifier.padding(start = 30.dp, top = 3.dp + statusBarHeight, bottom = 6.dp),
+                modifier = Modifier.padding(
+                    start = 30.dp,
+                    top = 3.dp + statusBarHeight,
+                    bottom = 6.dp
+                ),
                 fontWeight = CustomTheme.typography.title.bold.fontWeight,
                 fontSize = CustomTheme.typography.body.regular.fontSize,
                 color = CustomTheme.colors.text.invert
@@ -207,8 +210,7 @@ fun TeacherGroupDetailsUi(
                     if (groupInvitationDataState != null) {
                         copyText(groupInvitationDataState!!.code.value)
                         component.onShowMessageCodeCopied(groupInvitationDataState!!.code.value)
-                    }
-                    else {
+                    } else {
                         component.onGroupCodeGenerateRequestClick() { code ->
                             copyText(code)
                             component.onShowMessageCodeCopied(code)
@@ -223,9 +225,8 @@ fun TeacherGroupDetailsUi(
                 modifier = Modifier.size(height = 30.dp, width = 94.dp),
                 contentPadding = PaddingValues(3.dp),
 
-            )
+                )
         }
-
 
         Text(
             text = "${stringResource(R.string.group_members_title)}:",
@@ -248,7 +249,9 @@ fun TeacherGroupDetailsUi(
             if (data.users.isNotEmpty()) {
                 LazyColumn(
                     state = lazyListState,
-                    modifier = Modifier.padding(horizontal = 15.dp).fillMaxSize()
+                    modifier = Modifier
+                        .padding(horizontal = 15.dp)
+                        .fillMaxSize()
                 ) {
                     items(data.users) { item ->
                         GroupItem(
@@ -262,11 +265,12 @@ fun TeacherGroupDetailsUi(
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 LazyColumn(
                     state = lazyListState,
-                    modifier = Modifier.padding(horizontal = 20.dp).fillMaxSize()
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                        .fillMaxSize()
                 ) {
                     item {
                         Text(

@@ -3,7 +3,6 @@ package ru.itmo.edugoolda.data.join_requests.internal.dto
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ru.itmo.edugoolda.data.group.group_list.api.GroupId
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.GroupInfoDTO
 import ru.itmo.edugoolda.data.group.group_list.internal.dto.toDomain
 import ru.itmo.edugoolda.data.join_requests.api.JoinRequest

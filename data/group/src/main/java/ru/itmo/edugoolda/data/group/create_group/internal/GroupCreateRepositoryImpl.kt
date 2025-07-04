@@ -1,11 +1,9 @@
 package ru.itmo.edugoolda.data.group.create_group.internal
 
-import ru.itmo.edugoolda.core.utils.PageWithTotalAmount
 import ru.itmo.edugoolda.data.group.create_group.api.GroupCreateRepository
 import ru.itmo.edugoolda.data.group.create_group.internal.dto.CreateGroupRequest
 import ru.itmo.edugoolda.data.group.create_group.internal.dto.CreateSubjectRequest
 import ru.itmo.edugoolda.data.group.group_info.api.GroupFullInfo
-import ru.itmo.edugoolda.data.group.group_info.api.GroupInfo
 import ru.itmo.edugoolda.data.group.group_info.api.GroupSubject
 import ru.itmo.edugoolda.data.group.group_info.api.SubjectId
 import ru.itmo.edugoolda.data.group.group_info.internal.dto.toDomain
