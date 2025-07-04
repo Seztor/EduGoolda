@@ -1,9 +1,14 @@
 package ru.itmo.edugoolda.features.auth.presentation.login
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import dev.icerock.moko.resources.desc.strResDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
+import ru.itmo.edugoolda.core.error_handling.ServerException
+import ru.itmo.edugoolda.core.error_handling.ServerUnavailableException
+import ru.itmo.edugoolda.core.error_handling.UnauthorizedException
+import ru.itmo.edugoolda.core.error_handling.errorMessage
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.message.data.MessageService
 import ru.itmo.edugoolda.core.message.domain.Message
@@ -29,7 +34,14 @@ class RealLoginComponent(
     override fun onLoginClick() {
         if (isLoginProgress.value) return
 
-        componentScope.safeLaunch(errorHandler, onErrorHandled = { showLoginMessageError() }) {
+        componentScope.safeLaunch(errorHandler, onErrorHandled = {error ->
+            when (error) {
+                is UnauthorizedException -> showMessageInvalidEmailOrPassword()
+                else -> showMessageOtherError(error)
+            }
+        },
+            showError = false
+        ) {
             withProgress(isLoginProgress) {
                 authRepository.login(
                     email = Email(emailInputControl.text.value),
@@ -40,10 +52,14 @@ class RealLoginComponent(
         }
     }
 
-    private fun showLoginMessageError() {
+    private fun showMessageInvalidEmailOrPassword() {
         messageService.showMessage(
             Message(text = R.string.message_login_error.strResDesc())
         )
+    }
+
+    private fun showMessageOtherError(error: Exception) {
+        messageService.showMessage(Message(text = error.errorMessage))
     }
 
     override fun onRegisterRequestClick() {

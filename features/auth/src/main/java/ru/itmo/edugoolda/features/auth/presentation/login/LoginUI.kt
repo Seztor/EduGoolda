@@ -6,9 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.widget.button.AppButton
 import ru.itmo.edugoolda.core.widget.button.ButtonType
@@ -35,35 +35,35 @@ fun LoginUi(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier.systemBarsPadding()
     ) {
-
-        Spacer(modifier = Modifier.height(164.dp))
-
+        
+        Spacer(Modifier.weight(0.55f))
+        
         Icon(
             painter = painterResource(R.drawable.app_icon),
-            modifier = Modifier.size(110.dp).clip(RoundedCornerShape(5.dp)),
+            modifier = Modifier
+                .padding(bottom = 25.dp)
+                .size(110.dp)
+                .clip(RoundedCornerShape(5.dp)),
             contentDescription = "App Icon",
             tint = CustomTheme.colors.content.contentActive
         )
 
-        Spacer(modifier = Modifier.height(25.dp))
-
         Text(
             text = stringResource(id = R.string.login_title),
             fontWeight = CustomTheme.typography.title.bold.fontWeight,
-            fontSize = CustomTheme.typography.title.bold.fontSize
+            fontSize = CustomTheme.typography.title.bold.fontSize,
+            modifier = Modifier.padding(bottom = 60.dp)
         )
-
-        Spacer(modifier = Modifier.height(60.dp))
 
         AppTextField(
             inputControl = component.emailInputControl,
             placeholder = stringResource(id = R.string.login_email_hint),
-            modifier = Modifier.padding(horizontal = 22.dp)
+            modifier = Modifier
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 12.dp)
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
 
         AppTextField(
             inputControl = component.passwordInputControl,
@@ -71,24 +71,28 @@ fun LoginUi(
             modifier = Modifier.padding(horizontal = 22.dp)
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.45f))
 
         AppButton(
             text = stringResource(id = R.string.login_button_enter),
             buttonType = ButtonType.Primary,
             onClick = { component.onLoginClick() },
             isLoading = isLoginProgress,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 12.dp)
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
 
         AppButton(
             text = stringResource(id = R.string.login_button_register),
             buttonType = ButtonType.Secondary,
             onClick = { component.onRegisterRequestClick() },
             isEnabled = !isLoginProgress,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp).padding(bottom = 60.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 22.dp)
+                .padding(bottom = 30.dp)
         )
     }
 }

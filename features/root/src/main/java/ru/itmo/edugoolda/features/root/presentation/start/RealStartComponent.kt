@@ -23,7 +23,7 @@ class RealStartComponent(
                 communication.authRequired()
             }
         ) {
-            delay(2000)
+            delay(1000)
             if (!authStatusProvider.isAuthorized.value) {
                 communication.authRequired()
                 return@safeLaunch

@@ -3,6 +3,8 @@ package ru.itmo.edugoolda.features.lesson.presentation.teacherLessonList
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -20,8 +22,8 @@ import me.aartikov.replica.paged.PagedLoadingStatus
 import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 import ru.itmo.edugoolda.core.utils.TriggerLoadNext
 import ru.itmo.edugoolda.core.widget.PullRefreshLceWidget
-import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
 import ru.itmo.edugoolda.core.widget.lesson.LessonInfoTeacherListItem
+import ru.itmo.edugoolda.data.lesson.lesson_info.api.LessonInfoList
 import ru.itmo.edugoolda.features.lesson.R
 
 @Composable
@@ -34,7 +36,7 @@ fun LessonInfoListTeacherUi(
         state = state,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick,
-        modifier = modifier
+        modifier = modifier.statusBarsPadding()
     ) { data: LessonInfoList, _: Boolean ->
         val lazyListState = rememberLazyListState()
         lazyListState.TriggerLoadNext(

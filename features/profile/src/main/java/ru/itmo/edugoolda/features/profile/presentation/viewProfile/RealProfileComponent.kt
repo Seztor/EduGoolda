@@ -1,5 +1,6 @@
 package ru.itmo.edugoolda.features.profile.presentation.viewProfile
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.strResDesc
@@ -9,6 +10,7 @@ import ru.itmo.edugoolda.core.dialog.standard.DialogButton
 import ru.itmo.edugoolda.core.dialog.standard.StandardDialogData
 import ru.itmo.edugoolda.core.dialog.standard.standardDialogControl
 import ru.itmo.edugoolda.core.error_handling.ErrorHandler
+import ru.itmo.edugoolda.core.error_handling.errorMessage
 import ru.itmo.edugoolda.core.error_handling.safeLaunch
 import ru.itmo.edugoolda.core.utils.ResourceFormatted
 import ru.itmo.edugoolda.core.utils.componentScope
@@ -53,8 +55,8 @@ class RealProfileComponent(
             withProgress(isLoggingOutProgress) {
                 authRepository.logout()
             }
+            communication.onLogoutRequested()
         }
-        communication.onLogoutRequested()
     }
 
     override fun onDialogLogoutRequest() {

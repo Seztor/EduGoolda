@@ -1,6 +1,7 @@
 package ru.itmo.edugoolda.core.widget.solutions
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import ru.itmo.edugoolda.core.theme.custom.CustomTheme
 fun SolutionListItem(
     studentName: String,
     sentAt: String,
+    lessonName: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -45,22 +47,32 @@ fun SolutionListItem(
             .background(CustomTheme.colors.background.backgroundPrimary)
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 14.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            Column(
+                modifier = Modifier.weight(1f).padding(end = 30.dp)
+            ) {
                 Text(
                     text = studentName,
-                    style = CustomTheme.typography.body.regular
+                    style = CustomTheme.typography.body.regular,
+                    modifier = Modifier.basicMarquee()
+                )
+                Text(
+                    text = lessonName,
+                    style = CustomTheme.typography.body.regular15,
+                    modifier = Modifier
+                        .padding(top = 8.dp, start = 6.dp)
+                        .basicMarquee()
                 )
                 Text(
                     text = sentAt,
                     style = CustomTheme.typography.caption.regular,
                     modifier = Modifier
-                        .padding(top = 10.dp)
+                        .padding(top = 5.dp, start = 6.dp)
                 )
             }
             Row {
@@ -86,6 +98,7 @@ private fun StudentHeaderPreview() {
         SolutionListItem(
             studentName = "Иванов Василий",
             sentAt = "19:47 15.04.24",
+            lessonName = "Lesson 1",
             onClick = { },
         )
     }

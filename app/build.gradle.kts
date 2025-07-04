@@ -10,6 +10,8 @@ android {
     val minSdkVersion = libs.versions.minSdk.get().toInt()
     val targetSdkVersion = libs.versions.targetSdk.get().toInt()
     val compileSdkVersion = libs.versions.compileSdk.get().toInt()
+    val linkServer = "\"https://s75flu-178-252-127-225.ru.tuna.am/\""
+    //                "\"http://10.0.2.2:8080/\""
 
     namespace = "ru.itmo.edugoolda"
     compileSdk = compileSdkVersion
@@ -57,8 +59,7 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"http://10.0.2.2:8080/\""
-//                 "\"https://edugoolda.ru.tuna.am/\""
+                linkServer
             )
         }
 
@@ -68,8 +69,7 @@ android {
             buildConfigField(
                 "String",
                 "BACKEND_URL",
-                "\"http://10.0.2.2:8080/\""
-//                 "\"https://edugoolda.ru.tuna.am/\""
+                linkServer
             )
         }
     }

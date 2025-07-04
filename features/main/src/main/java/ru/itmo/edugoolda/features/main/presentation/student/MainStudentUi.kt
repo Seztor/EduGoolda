@@ -1,13 +1,18 @@
 package ru.itmo.edugoolda.features.main.presentation.student
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import dev.icerock.moko.resources.desc.strResDesc
 import ru.itmo.edugoolda.core.theme.AppTheme
@@ -27,6 +32,7 @@ fun MainStudentUi(
 
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets.navigationBars,
         content = {
             Children(stack, Modifier.padding(it)) {
                 when (val instance = it.instance) {

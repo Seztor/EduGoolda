@@ -7,10 +7,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -44,13 +49,15 @@ fun HomeTeacherUi(
         state = mainState,
         onRefresh = component::onRefresh,
         onRetryClick = component::onRetryClick,
-        modifier = modifier
+        modifier = modifier.statusBarsPadding(),
+        isShowCircularProgressIndicator = false
     ) { data: HomeTeacherViewData, _: Boolean ->
 
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp, top = 30.dp),
+                .padding(start = 24.dp, end = 24.dp, top = 25.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             // Header
@@ -88,11 +95,14 @@ fun HomeTeacherUi(
             }
 
             // Solutions List
-            LazyColumn {
+            LazyColumn(
+                modifier = Modifier.heightIn(max = 300.dp)
+            ) {
                 items(data.solutionInfos.take(2)) {
                     SolutionListItem(
                         studentName = it.student.name,
                         sentAt = it.sentAt,
+                        lessonName = it.lessonInfo.name,
                         onClick = { component.onSolutionClick(it.id) }
                     )
                 }
@@ -142,7 +152,9 @@ fun HomeTeacherUi(
             }
 
              //Request list
-            LazyColumn {
+            LazyColumn(
+                modifier = Modifier.heightIn(max = 300.dp)
+            ) {
                 items(data.joinRequests.take(2)) {
                     JoinRequestTeacherListItem(
                         groupName = it.groupInfo.name,
@@ -157,7 +169,7 @@ fun HomeTeacherUi(
             // All requests button
             AppButton(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth().padding(bottom = 10.dp),
 
                 buttonType = ButtonType.Secondary,
                 onClick = { component.onAllJoinRequestsClick() },
