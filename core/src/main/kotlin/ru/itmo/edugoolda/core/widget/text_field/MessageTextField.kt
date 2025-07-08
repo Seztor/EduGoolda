@@ -90,6 +90,7 @@ fun MessageTextField(
                     currentSelection = it.selection
                     currentComposition = it.composition
                 },
+                maxLines = 1,
                 textStyle = textStyle,
                 modifier = Modifier
                     .weight(1f)

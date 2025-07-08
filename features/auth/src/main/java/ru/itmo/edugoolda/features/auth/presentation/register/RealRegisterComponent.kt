@@ -65,7 +65,7 @@ class RealRegisterComponent(
     }
 
     private fun isValidPassword(password: String): Boolean {
-        val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$")
+        val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{6,32}$")
         return regex.matches(password)
     }
 }
