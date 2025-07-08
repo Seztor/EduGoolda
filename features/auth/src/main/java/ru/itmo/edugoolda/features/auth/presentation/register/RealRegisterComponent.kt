@@ -29,7 +29,7 @@ class RealRegisterComponent(
     override fun onRegisterClick() {
         if (isRegisterProgress.value) return
 
-        if (isValidEmail(emailInputControl.text.value)) {
+        if (isValidEmail(emailInputControl.text.value) && isValidPassword(passwordInputControl.text.value)) {
             emailInputControl.error.value = null
             componentScope.safeLaunch(errorHandler) {
                 withProgress(isRegisterProgress) {
@@ -42,8 +42,10 @@ class RealRegisterComponent(
                     communication.onRegistered()
                 }
             }
-        } else {
+        } else if (!isValidEmail(emailInputControl.text.value)) {
             emailInputControl.error.value = R.string.register_incorrect_email_error.strResDesc()
+        } else if (!isValidPassword(passwordInputControl.text.value)) {
+            passwordInputControl.error.value = R.string.register_incorrect_password_error.strResDesc()
         }
     }
 
@@ -60,5 +62,10 @@ class RealRegisterComponent(
             "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"
         )
         return email.matches(emailRegex)
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{6,32}$")
+        return regex.matches(password)
     }
 }
